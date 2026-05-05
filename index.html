@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boris Dracka — CFO Insights</title>
+  <meta name="description" content="30 years as CFO. Now writing what no one tells you about running numbers at the top. Weekly insights for finance leaders." />
+  <meta property="og:title" content="Boris Dracka — CFO Insights" />
+  <meta property="og:description" content="30 years as CFO. Now writing what no one tells you about running numbers at the top." />
+  <meta property="og:image" content="luli_profile.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #ECEAE6;
+      --card:     #FAFAF8;
+      --dark:     #1A1A2E;
+      --mid:      #4A4A5A;
+      --gold:     #C9A84C;
+      --gold-lt:  #F0D98A;
+      --white:    #FFFFFF;
+      --radius:   16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nav-name {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-x {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-x:hover { color: var(--dark); }
+    .nav-x svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 40px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text {}
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--mid);
+      max-width: 440px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    /* ── FORM ── */
+    .form-wrap {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .btn-subscribe {
+      display: inline-block;
+      width: 100%;
+      padding: 16px 28px;
+      background: var(--dark);
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-subscribe:hover { background: #2d2d4a; transform: translateY(-1px); }
+    .form-privacy {
+      font-size: 0.78rem;
+      color: #9A9898;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* ── LULI IMAGE ── */
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .hero-image img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 24px;
+      filter: drop-shadow(0 12px 32px rgba(0,0,0,0.12));
+    }
+
+    /* ── WHAT YOU GET ── */
+    .section-what {
+      background: var(--white);
+      padding: 80px 40px;
+    }
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-what h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ── ABOUT ── */
+    .section-about {
+      padding: 80px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-img img {
+      width: 100%;
+      max-width: 260px;
+      border-radius: 50%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    .about-text .section-label { margin-bottom: 12px; }
+    .about-text h2 {
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .about-text p {
+      color: var(--mid);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    /* ── BOTTOM CTA ── */
+    .section-cta {
+      background: var(--dark);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .section-cta h2 {
+      color: var(--white);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .section-cta p {
+      color: #A8A8C0;
+      margin-bottom: 36px;
+      font-size: 1.05rem;
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 1.05rem;
+      font-weight: 800;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .cta-privacy {
+      color: #6B6B80;
+      font-size: 0.78rem;
+    }
+    .x-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      color: #A8A8C0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .x-link:hover { color: var(--white); }
+    .x-link svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 40px;
+      color: #9A9898;
+      font-size: 0.82rem;
+    }
+    footer a { color: inherit; text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 20px 24px 48px;
+        gap: 40px;
+      }
+      .hero-image { order: -1; }
+      .hero-image img { max-width: 280px; }
+      .section-what { padding: 60px 24px; }
+      .section-about {
+        grid-template-columns: 1fr;
+        padding: 60px 24px;
+        text-align: center;
+        gap: 32px;
+      }
+      .about-img { display: flex; justify-content: center; }
+      .section-cta { padding: 60px 24px; }
+      footer { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-name" href="/">Boris Dracka</a>
+  <a class="nav-x" href="https://x.com/BorisDracka" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+    </svg>
+    @BorisDracka
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-tag">Weekly CFO Insights</span>
+    <h1>What no one tells you about <em>running numbers</em> at the top</h1>
+    <p class="hero-sub">
+      30 years as CFO. Now writing the things I wish someone had told me on day one.
+      Raw. Practical. No corporate buzzwords.
+    </p>
+
+    <div class="form-wrap">
+      <span class="form-label">Get it in your inbox every week</span>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener" class="btn-subscribe">
+        Subscribe → It's free
+      </a>
+      <p class="form-privacy">No spam. Unsubscribe anytime. Free forever.</p>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <!-- Place your LULI full-body image here — rename to luli_hero.png -->
+    <img src="luli_profile.png" alt="Boris Dracka — CFO character LULI" />
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="section-what">
+  <div class="section-inner">
+    <p class="section-label">What you'll get</p>
+    <h2>CFO thinking, delivered straight to your inbox</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <h3>The hard truths</h3>
+        <p>What CFOs actually think about AI, reporting, and the decisions no one wants to make — written plainly, without the corporate filter.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Real patterns from the field</h3>
+        <p>30 years of watching companies succeed and fail. The patterns repeat. I'll show you which ones to watch for in your own numbers.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>One insight, once a week</h3>
+        <p>Short. Actionable. Written for CFOs, founders, and finance leaders who don't have time for newsletters that bury the point on page 4.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section-about">
+  <div class="about-img">
+    <img src="luli_profile.png" alt="Boris Dracka" />
+  </div>
+  <div class="about-text">
+    <p class="section-label">About Boris</p>
+    <h2>30 years of CFO experience. Still learning.</h2>
+    <p>
+      I've spent three decades in the CFO seat — across industries, company sizes, and economic cycles. I've seen what good financial leadership looks like, and more importantly, what it doesn't.
+    </p>
+    <p>
+      Now I'm building AI tools that give smaller companies access to CFO-level thinking without the full-time CFO price tag. And I'm writing about everything I've learned along the way.
+    </p>
+    <p>
+      This newsletter is where I put it all down — the things I wish I'd known earlier, the mistakes I've seen repeated too many times, and the shifts that are quietly changing how finance teams operate.
+    </p>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="section-cta">
+  <h2>Ready to think like a CFO?</h2>
+  <p>Join finance leaders getting one sharp insight every week.</p>
+
+  <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener" class="btn-cta">
+    Subscribe → It's free
+  </a>
+  <p class="cta-privacy">No spam. Unsubscribe anytime. Free forever.</p>
+
+  <a class="x-link" href="https://x.com/BorisDracka" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+    Follow @BorisDracka on X
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Boris Dracka · <a href="mailto:boris@borisdracka.com">boris@borisdracka.com</a></p>
+</footer>
+
+</body>
+</html>
