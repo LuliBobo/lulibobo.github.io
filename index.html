@@ -3,36 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Boris Dracka — CFO Insights</title>
+  <title>Boris Dracka — CFO Unfiltered</title>
   <meta name="description" content="30 years as CFO. Now writing what no one tells you about running numbers at the top. Weekly insights for finance leaders." />
-  <meta property="og:title" content="Boris Dracka — CFO Insights" />
+  <meta property="og:title" content="Boris Dracka — CFO Unfiltered" />
   <meta property="og:description" content="30 years as CFO. Now writing what no one tells you about running numbers at the top." />
   <meta property="og:image" content="luli_profile.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #ECEAE6;
-      --card:     #FAFAF8;
-      --dark:     #1A1A2E;
-      --mid:      #4A4A5A;
-      --gold:     #C9A84C;
-      --gold-lt:  #F0D98A;
+      --orange:   #E8562A;
+      --orange-d: #C44420;
+      --dark:     #111111;
+      --mid:      #555555;
+      --light:    #F7F5F2;
       --white:    #FFFFFF;
-      --radius:   16px;
+      --border:   #E8E5E0;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      background: var(--white);
       color: var(--dark);
-      min-height: 100vh;
       line-height: 1.6;
     }
 
@@ -41,287 +39,364 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      max-width: 1100px;
-      margin: 0 auto;
+      padding: 20px 48px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
     }
     .nav-name {
       font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
+      font-size: 1rem;
       color: var(--dark);
-      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
     .nav-x {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
+      gap: 6px;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--mid);
       text-decoration: none;
       transition: color 0.2s;
     }
     .nav-x:hover { color: var(--dark); }
-    .nav-x svg { width: 18px; height: 18px; fill: currentColor; }
+    .nav-x svg { width: 16px; height: 16px; fill: currentColor; }
+    .nav-subscribe {
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-subscribe:hover { background: var(--orange-d); }
 
     /* ── HERO ── */
     .hero {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px 40px 60px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+      min-height: calc(100vh - 73px);
+      max-height: 780px;
     }
 
-    .hero-text {}
-
-    .hero-tag {
-      display: inline-block;
-      background: var(--gold);
+    .hero-visual {
+      background: var(--light);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-visual img {
+      width: 85%;
+      max-width: 460px;
+      display: block;
+      margin-bottom: -4px;
+    }
+    .hero-badge {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      background: var(--orange);
       color: var(--white);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 5px 14px;
+      padding: 6px 14px;
       border-radius: 100px;
-      margin-bottom: 24px;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 64px;
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-size: clamp(2.4rem, 3.5vw, 3.6rem);
       font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 20px;
-    }
-    h1 em {
-      font-style: normal;
-      color: var(--gold);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
     }
 
     .hero-sub {
       font-size: 1.1rem;
       color: var(--mid);
-      max-width: 440px;
-      margin-bottom: 36px;
-      line-height: 1.7;
+      line-height: 1.75;
+      margin-bottom: 40px;
+      max-width: 420px;
     }
 
-    /* ── FORM ── */
-    .form-wrap {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    .subscribe-box {
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      background: var(--light);
+      max-width: 420px;
     }
-    .form-label {
-      font-size: 0.8rem;
+    .subscribe-box p {
+      font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--mid);
-      margin-bottom: 16px;
-      display: block;
+      margin-bottom: 14px;
     }
-    .btn-subscribe {
-      display: inline-block;
+    .btn-main {
+      display: block;
       width: 100%;
-      padding: 16px 28px;
-      background: var(--dark);
+      padding: 16px;
+      background: var(--orange);
       color: var(--white);
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 800;
       font-family: inherit;
       border: none;
-      border-radius: 10px;
+      border-radius: 9px;
       cursor: pointer;
       text-align: center;
       text-decoration: none;
+      letter-spacing: -0.01em;
       transition: background 0.2s, transform 0.1s;
+      margin-bottom: 10px;
     }
-    .btn-subscribe:hover { background: #2d2d4a; transform: translateY(-1px); }
-    .form-privacy {
-      font-size: 0.78rem;
-      color: #9A9898;
-      margin-top: 12px;
+    .btn-main:hover { background: var(--orange-d); transform: translateY(-1px); }
+    .subscribe-note {
+      font-size: 0.76rem !important;
+      color: #999 !important;
       text-align: center;
+      font-weight: 400 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      margin-bottom: 0 !important;
     }
 
-    /* ── LULI IMAGE ── */
-    .hero-image {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-    }
-    .hero-image img {
-      width: 100%;
-      max-width: 420px;
-      border-radius: 24px;
-      filter: drop-shadow(0 12px 32px rgba(0,0,0,0.12));
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
     }
 
     /* ── WHAT YOU GET ── */
-    .section-what {
-      background: var(--white);
-      padding: 80px 40px;
-    }
-    .section-inner {
+    .section-get {
+      padding: 80px 48px;
       max-width: 1100px;
       margin: 0 auto;
     }
-    .section-label {
+    .section-get .kicker {
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--orange);
       margin-bottom: 12px;
     }
-    .section-what h2 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
+    .section-get h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
       margin-bottom: 48px;
+      max-width: 560px;
+      line-height: 1.15;
     }
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      border: 2px solid var(--dark);
+      border-radius: 14px;
+      overflow: hidden;
     }
     .card {
-      background: var(--bg);
-      border-radius: var(--radius);
-      padding: 32px 28px;
+      padding: 36px 32px;
+      border-right: 2px solid var(--dark);
+      background: var(--white);
+      transition: background 0.2s;
     }
-    .card-icon {
+    .card:last-child { border-right: none; }
+    .card:hover { background: var(--light); }
+    .card-num {
       font-size: 2rem;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
       margin-bottom: 16px;
+      letter-spacing: -0.04em;
     }
     .card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1.05rem;
+      font-weight: 800;
       margin-bottom: 10px;
+      letter-spacing: -0.02em;
     }
     .card p {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--mid);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     /* ── ABOUT ── */
     .section-about {
-      padding: 80px 40px;
+      background: var(--dark);
+      color: var(--white);
+      padding: 80px 48px;
+    }
+    .about-inner {
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 60px;
+      grid-template-columns: 280px 1fr;
+      gap: 64px;
       align-items: center;
     }
     .about-img img {
       width: 100%;
-      max-width: 260px;
-      border-radius: 50%;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      border-radius: 14px;
+      filter: grayscale(20%);
     }
-    .about-text .section-label { margin-bottom: 12px; }
-    .about-text h2 {
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
+    .about-kicker {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
       margin-bottom: 16px;
     }
-    .about-text p {
-      color: var(--mid);
-      font-size: 1rem;
-      line-height: 1.75;
-      margin-bottom: 12px;
+    .about-inner h2 {
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
     }
-    .about-text p:last-child { margin-bottom: 0; }
+    .about-inner p {
+      color: #AAAAAA;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .about-inner p:last-of-type { margin-bottom: 0; }
 
     /* ── BOTTOM CTA ── */
     .section-cta {
-      background: var(--dark);
-      padding: 80px 40px;
+      padding: 100px 48px;
       text-align: center;
+      border-top: 1px solid var(--border);
     }
     .section-cta h2 {
-      color: var(--white);
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      margin-bottom: 16px;
     }
     .section-cta p {
-      color: #A8A8C0;
+      font-size: 1.1rem;
+      color: var(--mid);
       margin-bottom: 36px;
-      font-size: 1.05rem;
     }
     .btn-cta {
       display: inline-block;
-      padding: 16px 40px;
-      background: var(--gold);
-      color: var(--dark);
-      font-size: 1.05rem;
+      padding: 18px 48px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 1.1rem;
       font-weight: 800;
       font-family: inherit;
-      border: none;
       border-radius: 10px;
-      cursor: pointer;
       text-decoration: none;
-      margin-bottom: 20px;
+      letter-spacing: -0.01em;
       transition: background 0.2s, transform 0.1s;
+      margin-bottom: 16px;
     }
-    .btn-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
-    .cta-privacy {
-      color: #6B6B80;
+    .btn-cta:hover { background: var(--orange-d); transform: translateY(-2px); }
+    .cta-note {
+      display: block;
       font-size: 0.78rem;
+      color: #999;
+      margin-top: 12px;
     }
     .x-link {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 32px;
-      color: #A8A8C0;
+      margin-top: 28px;
+      color: var(--mid);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       transition: color 0.2s;
     }
-    .x-link:hover { color: var(--white); }
-    .x-link svg { width: 18px; height: 18px; fill: currentColor; }
+    .x-link:hover { color: var(--dark); }
+    .x-link svg { width: 16px; height: 16px; fill: currentColor; }
 
     /* ── FOOTER ── */
     footer {
       text-align: center;
-      padding: 32px 40px;
-      color: #9A9898;
-      font-size: 0.82rem;
+      padding: 28px 48px;
+      border-top: 1px solid var(--border);
+      color: #999;
+      font-size: 0.8rem;
     }
     footer a { color: inherit; text-decoration: underline; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       nav { padding: 16px 24px; }
       .hero {
         grid-template-columns: 1fr;
-        padding: 20px 24px 48px;
-        gap: 40px;
+        min-height: auto;
+        max-height: none;
       }
-      .hero-image { order: -1; }
-      .hero-image img { max-width: 280px; }
-      .section-what { padding: 60px 24px; }
-      .section-about {
-        grid-template-columns: 1fr;
-        padding: 60px 24px;
-        text-align: center;
-        gap: 32px;
+      .hero-visual {
+        height: 320px;
+        padding-top: 32px;
       }
-      .about-img { display: flex; justify-content: center; }
+      .hero-visual img { width: 60%; margin-bottom: 0; align-self: flex-end; }
+      .hero-content { padding: 40px 24px; }
+      .subscribe-box { max-width: 100%; }
+      .section-get { padding: 60px 24px; }
+      .cards { grid-template-columns: 1fr; }
+      .card { border-right: none; border-bottom: 2px solid var(--dark); }
+      .card:last-child { border-bottom: none; }
+      .section-about { padding: 60px 24px; }
+      .about-inner { grid-template-columns: 1fr; gap: 36px; }
+      .about-img img { max-width: 200px; }
       .section-cta { padding: 60px 24px; }
       footer { padding: 24px; }
     }
@@ -331,95 +406,92 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-name" href="/">Boris Dracka</a>
-  <a class="nav-x" href="https://x.com/BorisDracka" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
-    </svg>
-    @BorisDracka
+  <a class="nav-logo" href="/">
+    <img src="luli_profile.png" alt="LULI" />
+    <span class="nav-name">Boris Dracka</span>
   </a>
+  <div class="nav-right">
+    <a class="nav-x" href="https://x.com/BorisDracka" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+      @BorisDracka
+    </a>
+    <a class="nav-subscribe" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-text">
-    <span class="hero-tag">Weekly CFO Insights</span>
-    <h1>What no one tells you about <em>running numbers</em> at the top</h1>
+  <div class="hero-visual">
+    <span class="hero-badge">Weekly Newsletter</span>
+    <img src="luli_profile.png" alt="Boris Dracka — LULI" />
+  </div>
+  <div class="hero-content">
+    <p class="hero-kicker">CFO Unfiltered</p>
+    <h1>What no one tells you about running numbers at the top</h1>
     <p class="hero-sub">
       30 years as CFO. Now writing the things I wish someone had told me on day one.
       Raw. Practical. No corporate buzzwords.
     </p>
-
-    <div class="form-wrap">
-      <span class="form-label">Get it in your inbox every week</span>
-      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener" class="btn-subscribe">
-        Subscribe → It's free
+    <div class="subscribe-box">
+      <p>Get it in your inbox every week</p>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener" class="btn-main">
+        Subscribe — It's free →
       </a>
-      <p class="form-privacy">No spam. Unsubscribe anytime. Free forever.</p>
+      <p class="subscribe-note">No spam. Unsubscribe anytime.</p>
     </div>
-  </div>
-
-  <div class="hero-image">
-    <!-- Place your LULI full-body image here — rename to luli_hero.png -->
-    <img src="luli_profile.png" alt="Boris Dracka — CFO character LULI" />
   </div>
 </section>
 
+<hr class="divider" />
+
 <!-- WHAT YOU GET -->
-<section class="section-what">
-  <div class="section-inner">
-    <p class="section-label">What you'll get</p>
-    <h2>CFO thinking, delivered straight to your inbox</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="card-icon">🧠</div>
-        <h3>The hard truths</h3>
-        <p>What CFOs actually think about AI, reporting, and the decisions no one wants to make — written plainly, without the corporate filter.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">📊</div>
-        <h3>Real patterns from the field</h3>
-        <p>30 years of watching companies succeed and fail. The patterns repeat. I'll show you which ones to watch for in your own numbers.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">⚡</div>
-        <h3>One insight, once a week</h3>
-        <p>Short. Actionable. Written for CFOs, founders, and finance leaders who don't have time for newsletters that bury the point on page 4.</p>
-      </div>
+<section class="section-get">
+  <p class="kicker">What you'll get</p>
+  <h2>CFO thinking, straight to your inbox</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">01</div>
+      <h3>The hard truths</h3>
+      <p>What CFOs actually think about AI, reporting, and the decisions no one wants to make — without the corporate filter.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <h3>Real patterns from the field</h3>
+      <p>30 years of watching companies succeed and fail. The patterns repeat. I'll show you which ones to watch for in your own numbers.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <h3>One insight, once a week</h3>
+      <p>Short. Actionable. Written for CFOs, founders, and finance leaders who don't have time to waste.</p>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section class="section-about">
-  <div class="about-img">
-    <img src="luli_profile.png" alt="Boris Dracka" />
-  </div>
-  <div class="about-text">
-    <p class="section-label">About Boris</p>
-    <h2>30 years of CFO experience. Still learning.</h2>
-    <p>
-      I've spent three decades in the CFO seat — across industries, company sizes, and economic cycles. I've seen what good financial leadership looks like, and more importantly, what it doesn't.
-    </p>
-    <p>
-      Now I'm building AI tools that give smaller companies access to CFO-level thinking without the full-time CFO price tag. And I'm writing about everything I've learned along the way.
-    </p>
-    <p>
-      This newsletter is where I put it all down — the things I wish I'd known earlier, the mistakes I've seen repeated too many times, and the shifts that are quietly changing how finance teams operate.
-    </p>
+  <div class="about-inner">
+    <div class="about-img">
+      <img src="luli_profile.png" alt="Boris Dracka" />
+    </div>
+    <div>
+      <p class="about-kicker">About Boris</p>
+      <h2>30 years of CFO experience. Still learning.</h2>
+      <p>I've spent three decades in the CFO seat — across industries, company sizes, and economic cycles. I've seen what good financial leadership looks like, and more importantly, what it doesn't.</p>
+      <p>Now I'm building AI tools that give smaller companies access to CFO-level thinking. And I'm writing about everything I've learned along the way.</p>
+      <p>This newsletter is where I put it all down — the things I wish I'd known earlier, the mistakes I've seen repeated too many times, and the shifts quietly changing how finance teams operate.</p>
+    </div>
   </div>
 </section>
 
 <!-- BOTTOM CTA -->
 <section class="section-cta">
-  <h2>Ready to think like a CFO?</h2>
+  <h2>Ready to think<br>like a CFO?</h2>
   <p>Join finance leaders getting one sharp insight every week.</p>
-
   <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener" class="btn-cta">
-    Subscribe → It's free
+    Subscribe — It's free →
   </a>
-  <p class="cta-privacy">No spam. Unsubscribe anytime. Free forever.</p>
-
+  <span class="cta-note">No spam. Unsubscribe anytime. Free forever.</span>
+  <br>
   <a class="x-link" href="https://x.com/BorisDracka" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
     Follow @BorisDracka on X
