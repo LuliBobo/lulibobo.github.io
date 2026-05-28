@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>An AI CFO Agent Is Not a Chatbot. Here's What It Actually Is. | Boris Dračka</title>
+  <meta name="description" content="Most people imagine AI in finance as a chatbot you ask questions. That's not what an AI CFO agent is. Here's the real architecture — and why the difference matters." />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="Boris Dračka" />
+  <meta property="og:url"         content="https://borisdracka.com/blog/post-02" />
+  <meta property="og:title"       content="An AI CFO Agent Is Not a Chatbot. Here's What It Actually Is." />
+  <meta property="og:description" content="Most people imagine AI in finance as a chatbot you ask questions. That's not what an AI CFO agent is. Here's the real architecture — and why the difference matters." />
+  <meta property="og:image"       content="https://borisdracka.com/og/post-02.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:author"         content="Boris Dračka" />
+  <meta property="article:published_time" content="2026-05-08T14:00:00+02:00" />
+  <meta property="article:section"        content="Finance" />
+  <meta property="article:tag"            content="CFO" />
+  <meta property="article:tag"            content="AI Agents" />
+  <meta property="article:tag"            content="Finance Automation" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@BorisDracka" />
+  <meta name="twitter:creator"     content="@BorisDracka" />
+  <meta name="twitter:title"       content="An AI CFO Agent Is Not a Chatbot. Here's What It Actually Is." />
+  <meta name="twitter:description" content="Most people imagine AI in finance as a chatbot you ask questions. That's not what an AI CFO agent is. Here's the real architecture — and why the difference matters." />
+  <meta name="twitter:image"       content="https://borisdracka.com/og/post-02.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://borisdracka.com/blog/post-02" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #111111;
+      line-height: 1.75;
+    }
+
+    /* ── Site header ─────────────────────────────────────────── */
+    .site-header {
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #e8e5e0;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .site-header .logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #111111;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .site-header nav {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .site-header nav a {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #666;
+      text-decoration: none;
+    }
+
+    .site-header nav a:hover { color: #111; }
+
+    .site-header .btn-subscribe {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      background: #E8562A;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .site-header .btn-subscribe:hover { background: #cf4a22; }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      background: #111111;
+      color: #fff;
+      padding: 72px 24px 60px;
+      text-align: center;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #E8562A;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(26px, 5vw, 46px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      max-width: 780px;
+      margin: 0 auto 20px;
+    }
+
+    .hero .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      color: #aaa;
+      max-width: 580px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* ── Meta bar ────────────────────────────────────────────── */
+    .meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #999999;
+      text-align: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid #e8e5e0;
+    }
+
+    /* ── Article body ────────────────────────────────────────── */
+    .article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 52px 24px 80px;
+    }
+
+    .article p {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: #111111;
+      line-height: 1.75;
+    }
+
+    .article p.lead {
+      font-size: 21px;
+      font-weight: 400;
+      color: #111111;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .article h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 44px 0 18px;
+      color: #111111;
+      letter-spacing: -0.5px;
+    }
+
+    /* ── Pull quote ──────────────────────────────────────────── */
+    .pullquote {
+      border-left: 4px solid #E8562A;
+      padding: 16px 24px;
+      margin: 36px 0;
+      background: #f7f5f2;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .pullquote p {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px !important;
+      font-style: italic;
+      color: #333 !important;
+      margin: 0 !important;
+      line-height: 1.5;
+    }
+
+    /* ── Stat row ────────────────────────────────────────────── */
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 36px 0;
+    }
+
+    .stat-box {
+      flex: 1;
+      min-width: 140px;
+      background: #111111;
+      color: #fff;
+      padding: 24px 20px;
+      text-align: center;
+      border-radius: 14px;
+      border: 2px solid #111111;
+    }
+
+    .stat-box .num {
+      font-family: 'Inter', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: #E8562A;
+      display: block;
+    }
+
+    .stat-box .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #aaa;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* ── Pipeline visual ─────────────────────────────────────── */
+    .pipeline {
+      margin: 36px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pipeline-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 20px;
+      border: 1px solid #e8e5e0;
+      background: #fff;
+      position: relative;
+    }
+
+    .pipeline-step:first-child { border-radius: 12px 12px 0 0; }
+    .pipeline-step:last-child  { border-radius: 0 0 12px 12px; border-top: none; }
+    .pipeline-step + .pipeline-step { border-top: none; }
+
+    .pipeline-step:not(:first-child) {
+      border-top: 1px solid #e8e5e0;
+    }
+
+    .pipeline-step .step-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      background: #E8562A;
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pipeline-step .step-content {}
+
+    .pipeline-step .step-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step .step-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .pipeline-footer {
+      margin-top: 12px;
+      background: #111111;
+      color: #E8562A;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Comparison table ────────────────────────────────────── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 36px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+    }
+
+    .compare-table th {
+      background: #111111;
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    .compare-table th:first-child { border-radius: 10px 0 0 0; }
+    .compare-table th:last-child  { border-radius: 0 10px 0 0; color: #E8562A; }
+
+    .compare-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e8e5e0;
+      color: #333;
+      line-height: 1.5;
+      vertical-align: top;
+    }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:nth-child(even) td { background: #f7f5f2; }
+
+    .compare-table .col-label {
+      font-weight: 600;
+      color: #111;
+      width: 30%;
+    }
+
+    /* ── CTA box ─────────────────────────────────────────────── */
+    .cta-box {
+      background: #111111;
+      color: #fff;
+      padding: 40px 36px;
+      border-radius: 14px;
+      margin-top: 52px;
+      text-align: center;
+    }
+
+    .cta-box h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .cta-box p {
+      font-family: 'Inter', sans-serif;
+      color: #bbb !important;
+      font-size: 16px !important;
+      margin-bottom: 24px !important;
+    }
+
+    .cta-box .question {
+      font-size: 17px !important;
+      color: #f0ece8 !important;
+      font-style: italic;
+      font-weight: 500;
+      margin-bottom: 28px !important;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 10px;
+      max-width: 440px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .cta-form input[type="email"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      border: 1px solid #444;
+      background: #1e1e1e;
+      color: #fff;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .cta-form input[type="email"]::placeholder { color: #666; }
+    .cta-form input[type="email"]:focus { border-color: #E8562A; }
+
+    .cta-form button {
+      padding: 12px 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      background: #E8562A;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .cta-form button:hover { background: #cf4a22; }
+
+    .cta-note {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px !important;
+      color: #888 !important;
+      margin-top: 12px !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── Series label ────────────────────────────────────────── */
+    .series-label {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      background: #E8562A;
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .site-footer {
+      background: #ffffff;
+      color: #999999;
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid #e8e5e0;
+    }
+
+    .site-footer .footer-logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 16px;
+    }
+
+    .site-footer .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .site-footer .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    .site-footer .footer-links a:hover { color: #111; }
+
+    .site-footer .footer-copy {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .site-header nav { display: none; }
+      .article p { font-size: 17px; }
+      .article p.lead { font-size: 19px; }
+      .cta-box { padding: 32px 24px; }
+      .compare-table { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site header ──────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="https://borisdracka.com" class="logo">CFO Unfiltered</a>
+    <nav>
+      <a href="https://borisdracka.com/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="#subscribe" class="btn-subscribe">Subscribe</a>
+    </nav>
+  </header>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="tag">Finance · AI Agents · Automation</div>
+    <h1>An AI CFO Agent Is Not a Chatbot.<br>Here's What It Actually Is.</h1>
+    <p class="subtitle">The difference between a tool you ask questions and a system that works while you sleep.</p>
+  </div>
+
+  <div class="meta">Boris Dračka &nbsp;·&nbsp; May 2026 &nbsp;·&nbsp; 5 min read</div>
+
+  <!-- ── Article ───────────────────────────────────────────────── -->
+  <div class="article">
+
+    <span class="series-label">Post #2 of 50 — The CFO &amp; AI Series</span>
+
+    <p class="lead">
+      Everyone's talking about AI in finance. Most people are confused about what it actually does. And that confusion is expensive — because companies keep buying chatbots when what they need is a system that runs without them.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="num">5</span>
+        <span class="label">Steps in the pipeline</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">0</span>
+        <span class="label">Button presses required</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">Daily</span>
+        <span class="label">Runs automatically</span>
+      </div>
+    </div>
+
+    <p>
+      When most people hear "AI in finance," they picture something like a very smart search box. You type a question — "What was our gross margin in Q1?" — and it answers. That's a chatbot. It's reactive. It waits for you. It only works when someone is sitting in front of it asking something.
+    </p>
+
+    <p>
+      That's not what I'm building. And it's not what the CFOs who are actually ahead of this curve are deploying either.
+    </p>
+
+    <h2>What an AI CFO agent actually does</h2>
+
+    <p>
+      An agent is a system that acts on its own — not a tool you query. It doesn't wait for a question. It runs on a schedule, follows a defined workflow, and delivers output whether or not anyone is paying attention. Here's what that pipeline looks like in practice:
+    </p>
+
+    <!-- Pipeline visual -->
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Pulls data from accounting</div>
+          <p class="step-desc">Connects directly to your ERP, accounting software, or data warehouse. No manual exports. No CSV files emailed between people at 7am. The agent retrieves what it needs — transactions, GL balances, payroll data — on its own.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Cleans and transforms it</div>
+          <p class="step-desc">Real-world accounting data is messy. Duplicate entries, inconsistent category names, mismatched cost centers. The agent applies transformation rules to normalize everything before any calculation runs. This is the step that used to eat an analyst's Monday morning.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Calculates KPIs</div>
+          <p class="step-desc">With clean data, the agent computes the metrics that matter: gross margin, burn rate, operating leverage, DSO, whatever your business tracks. Consistently, using the same definitions every time — not whoever happened to build the model this quarter.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Generates reports</div>
+          <p class="step-desc">Not a dump of raw numbers. Formatted reports with period-over-period comparisons, variance flags, and narrative commentary on what moved and why. The kind of output that used to require a senior analyst and two hours of formatting work.</p>
+        </div>
+      </div>
+      <div class="pipeline-step" style="border-radius: 0 0 12px 12px;">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Sends them to management</div>
+          <p class="step-desc">Delivered to inboxes, Slack channels, or dashboards — automatically, on schedule. The CEO opens their Monday morning email and the numbers are already there. Nobody had to stay late Sunday to make that happen.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-footer">Every day. Automatically. Without anyone pressing a button.</div>
+
+    <h2>Why the chatbot vs. agent distinction matters</h2>
+
+    <p>
+      It's not a semantic difference. It's the difference between a tool that augments one person's productivity and a system that changes how your entire finance operation runs.
+    </p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Chatbot</th>
+          <th>AI Agent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-label">Trigger</td>
+          <td>Someone has to ask</td>
+          <td>Runs on a schedule, automatically</td>
+        </tr>
+        <tr>
+          <td class="col-label">Output</td>
+          <td>Answer to a question</td>
+          <td>Complete, formatted deliverable</td>
+        </tr>
+        <tr>
+          <td class="col-label">Who benefits</td>
+          <td>The person using it</td>
+          <td>The whole organization</td>
+        </tr>
+        <tr>
+          <td class="col-label">Scales with team size</td>
+          <td>No — someone still has to ask</td>
+          <td>Yes — runs regardless</td>
+        </tr>
+        <tr>
+          <td class="col-label">What it replaces</td>
+          <td>A search or a query</td>
+          <td>A recurring manual process</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pullquote">
+      <p>"A chatbot makes an individual faster. An agent makes a process disappear. Those are not the same thing, and buying one when you need the other is a very expensive mistake."</p>
+    </div>
+
+    <h2>The manual work this actually targets</h2>
+
+    <p>
+      Over 30 years, I watched the same work get done the same way in almost every finance department I led or audited. Someone pulls data from the system. Someone cleans it in Excel. Someone checks the numbers. Someone formats the report. Someone emails it out. Then next month, the same person does it again.
+    </p>
+
+    <p>
+      That cycle isn't a people problem. It's a systems problem. The people involved are capable — they're just doing work that a well-designed agent could handle entirely on its own. The human judgment those people have is genuinely valuable. It's just buried under process management that doesn't require judgment at all.
+    </p>
+
+    <div class="pullquote">
+      <p>"The biggest manual task in most finance departments isn't analysis. It's moving the same information from one place to another, in a slightly different format, on a deadline."</p>
+    </div>
+
+    <h2>What this doesn't replace</h2>
+
+    <p>
+      An AI CFO agent does not replace the CFO. It doesn't replace the conversation with the board about why the numbers look the way they do. It doesn't replace the judgment call when two data sources disagree and you have to decide which one is right. It doesn't replace the relationship with the CEO that lets you deliver bad news in a way that doesn't end careers.
+    </p>
+
+    <p>
+      What it does replace is the three hours of data prep that used to happen before any of those conversations could start. That's not a small thing. That's what the next post in this series is about.
+    </p>
+
+    <!-- ── CTA box ──────────────────────────────────────────── -->
+    <div class="cta-box" id="subscribe">
+      <h3>Follow the series</h3>
+      <p>Post #3 covers the first agent I actually deployed — what it replaced, what it cost to build, and the one thing it still can't do.</p>
+      <p class="question">What's the biggest manual task in your finance process right now?</p>
+
+      <form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <button type="submit">Subscribe free</button>
+      </form>
+      <p class="cta-note">No spam. One post per week. Unsubscribe any time.</p>
+    </div>
+
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-logo">CFO Unfiltered</div>
+    <div class="footer-links">
+      <a href="https://borisdracka.com">Home</a>
+      <a href="https://borisdracka.com/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Subscribe</a>
+    </div>
+    <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
+  </footer>
+
+</body>
+</html>
