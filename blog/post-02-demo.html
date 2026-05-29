@@ -269,276 +269,6 @@
     .btn-outline:hover { border-color: #fff; }
 
     .what-inside {
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How the AI CFO Agent Works — Step by Step | Boris Dračka</title>
-  <meta name="description" content="A visual walkthrough of the AI CFO agent from Post #2. See exactly what it does, what it produces, and how to get the code on GitHub." />
-
-  <meta property="og:type"        content="article" />
-  <meta property="og:site_name"   content="Boris Dračka" />
-  <meta property="og:title"       content="How the AI CFO Agent Works — Step by Step" />
-  <meta property="og:description" content="A visual walkthrough of the AI CFO agent from Post #2. See exactly what it does, what it produces, and how to get the code on GitHub." />
-  <meta name="twitter:card"       content="summary_large_image" />
-  <meta name="twitter:site"       content="@BorisDracka" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black:  #111111;
-      --orange: #E8562A;
-      --org2:   #cf4a22;
-      --bg:     #ffffff;
-      --bg2:    #f7f5f2;
-      --border: #e8e5e0;
-      --muted:  #666666;
-      --green:  #16a34a;
-      --yellow: #d97706;
-    }
-
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--black); line-height: 1.75; }
-
-    /* ── HEADER ─────────────────────────────────────────────────── */
-    .site-header {
-      background: rgba(255,255,255,0.96); border-bottom: 1px solid var(--border);
-      padding: 0 24px; height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px);
-    }
-    .logo { font-size: 15px; font-weight: 700; color: var(--black); text-decoration: none; letter-spacing: -0.3px; }
-    .site-header nav { display: flex; gap: 24px; align-items: center; }
-    .site-header nav a { font-size: 13px; color: #666; text-decoration: none; transition: color .15s; }
-    .site-header nav a:hover { color: var(--black); }
-    .btn-subscribe {
-      font-size: 13px; font-weight: 700; background: var(--orange); color: #fff;
-      padding: 8px 16px; border-radius: 8px; text-decoration: none; transition: background .15s;
-    }
-    .btn-subscribe:hover { background: var(--org2); }
-
-    /* ── HERO ───────────────────────────────────────────────────── */
-    .hero {
-      background: var(--black); color: #fff;
-      padding: 72px 24px 60px; text-align: center;
-    }
-    .hero-tag {
-      display: inline-block; font-size: 11px; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: clamp(26px, 5vw, 48px); font-weight: 900;
-      line-height: 1.12; letter-spacing: -1.5px;
-      max-width: 760px; margin: 0 auto 20px;
-    }
-    .hero h1 span { color: var(--orange); }
-    .hero p { font-size: 18px; color: #aaa; max-width: 560px; margin: 0 auto 32px; }
-    .hero-meta {
-      font-size: 13px; color: #555;
-      display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
-    }
-    .hero-meta span { display: flex; align-items: center; gap: 6px; }
-
-    /* ── SECTION ────────────────────────────────────────────────── */
-    .section { max-width: 780px; margin: 0 auto; padding: 56px 24px; }
-    .section-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--orange); margin-bottom: 8px;
-    }
-    .section-heading { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
-    .section-sub { font-size: 16px; color: var(--muted); margin-bottom: 36px; }
-    .divider { border: none; border-top: 1px solid var(--border); }
-
-    /* ── INTRO TEXT ─────────────────────────────────────────────── */
-    .intro-text p {
-      font-size: 18px; line-height: 1.8; color: var(--black);
-      margin-bottom: 22px;
-    }
-    .intro-text p.lead {
-      font-size: 20px; font-weight: 500; line-height: 1.7;
-    }
-    .pullquote {
-      border-left: 4px solid var(--orange);
-      padding: 16px 24px; margin: 36px 0;
-      background: var(--bg2); border-radius: 0 8px 8px 0;
-    }
-    .pullquote p {
-      font-size: 19px !important; font-style: italic;
-      color: #333 !important; margin: 0 !important; line-height: 1.55;
-    }
-
-    /* ── PIPELINE ───────────────────────────────────────────────── */
-    .pipeline { display: flex; flex-direction: column; gap: 0; margin-bottom: 12px; }
-    .p-step {
-      display: flex; align-items: flex-start; gap: 18px;
-      padding: 20px 22px; border: 1px solid var(--border);
-      background: #fff; position: relative;
-      opacity: 0; transform: translateX(-16px);
-      transition: opacity .5s ease, transform .5s ease;
-    }
-    .p-step.visible { opacity: 1; transform: none; }
-    .p-step:first-child { border-radius: 12px 12px 0 0; }
-    .p-step:last-child  { border-radius: 0 0 12px 12px; }
-    .p-step + .p-step { border-top: none; }
-
-    .p-step:hover { background: #fafaf8; }
-
-    .p-num {
-      font-size: 11px; font-weight: 700;
-      background: var(--orange); color: #fff;
-      width: 28px; height: 28px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 2px;
-    }
-    .p-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-    .p-body {}
-    .p-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
-    .p-desc  { font-size: 14px; color: var(--muted); line-height: 1.6; }
-    .p-tag {
-      display: inline-block; margin-top: 8px;
-      font-size: 11px; font-weight: 600; letter-spacing: .5px;
-      background: var(--bg2); color: #555;
-      padding: 3px 10px; border-radius: 100px; border: 1px solid var(--border);
-    }
-    .pipeline-footer {
-      background: var(--black); color: var(--orange);
-      border-radius: 10px; padding: 14px 20px;
-      font-size: 14px; font-weight: 700; text-align: center; letter-spacing: .3px;
-    }
-
-    /* ── KPI DEMO ───────────────────────────────────────────────── */
-    .kpi-label-bar {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
-    }
-    .demo-badge {
-      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-      background: var(--bg2); border: 1px solid var(--border);
-      color: var(--muted); padding: 4px 10px; border-radius: 4px;
-    }
-    .demo-company { font-size: 13px; color: var(--muted); }
-
-    .kpi-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-      gap: 14px; margin-bottom: 16px;
-    }
-    .kpi-card {
-      background: var(--black); border-radius: 14px; padding: 22px 16px;
-      text-align: center; border: 2px solid transparent;
-    }
-    .kpi-card.good { border-color: var(--green); }
-    .kpi-card.warn { border-color: var(--yellow); }
-    .kpi-card.bad  { border-color: #dc2626; }
-    .kpi-val {
-      font-size: 30px; font-weight: 900; display: block; letter-spacing: -1px;
-      color: var(--orange);
-    }
-    .kpi-card.good .kpi-val { color: #4ade80; }
-    .kpi-card.warn .kpi-val { color: #fbbf24; }
-    .kpi-card.bad  .kpi-val { color: #f87171; }
-    .kpi-name  { font-size: 11px; color: #aaa; letter-spacing: .5px; margin-top: 5px; display: block; text-transform: uppercase; }
-    .kpi-delta { font-size: 11px; display: block; margin-top: 4px; font-weight: 600; }
-    .kpi-card.good .kpi-delta { color: #4ade80; }
-    .kpi-card.warn .kpi-delta { color: #fbbf24; }
-    .kpi-card.bad  .kpi-delta { color: #f87171; }
-    .kpi-note { font-size: 12px; color: var(--muted); margin-top: 4px; font-style: italic; }
-
-    /* ── REPORT DEMO ────────────────────────────────────────────── */
-    .report-window {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 14px; overflow: hidden;
-    }
-    .report-topbar {
-      background: var(--black); padding: 12px 20px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .report-dots { display: flex; gap: 6px; }
-    .report-dots span {
-      width: 12px; height: 12px; border-radius: 50%;
-    }
-    .report-dots span:nth-child(1) { background: #ff5f57; }
-    .report-dots span:nth-child(2) { background: #febc2e; }
-    .report-dots span:nth-child(3) { background: #28c840; }
-    .report-filename { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #666; }
-    .report-tag-inline {
-      margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; background: var(--orange); color: #fff;
-      padding: 3px 9px; border-radius: 4px;
-    }
-    .report-body { padding: 28px 32px; }
-    .report-date { font-size: 12px; color: var(--muted); margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; }
-    .report-text {
-      font-size: 16px; line-height: 1.85; color: var(--black);
-      white-space: pre-wrap;
-    }
-    .report-text .highlight { color: var(--orange); font-weight: 600; }
-    .report-cursor {
-      display: inline-block; width: 2px; height: 18px;
-      background: var(--orange); vertical-align: middle;
-      animation: blink .8s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    /* ── HOW IT WORKS (TECH BREAKDOWN) ─────────────────────────── */
-    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
-    .tech-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 22px 20px;
-    }
-    .tech-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-    .tech-card p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .tech-card code {
-      display: inline-block; font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; background: #e8e5e0; padding: 2px 7px; border-radius: 4px;
-      color: var(--black); margin-top: 8px;
-    }
-
-    /* ── GITHUB CTA ─────────────────────────────────────────────── */
-    .github-section {
-      background: var(--black); padding: 72px 24px;
-    }
-    .github-inner { max-width: 680px; margin: 0 auto; text-align: center; }
-    .github-icon { font-size: 48px; margin-bottom: 20px; display: block; }
-    .github-section h2 {
-      font-size: clamp(24px, 4vw, 36px); font-weight: 900;
-      letter-spacing: -1px; color: #fff; margin-bottom: 16px; line-height: 1.2;
-    }
-    .github-section h2 span { color: var(--orange); }
-    .github-section p { font-size: 17px; color: #aaa; margin-bottom: 12px; line-height: 1.7; }
-    .github-section .repo-name {
-      font-family: 'JetBrains Mono', monospace; font-size: 14px;
-      background: #1a1a1a; border: 1px solid #333; color: #aaa;
-      padding: 8px 16px; border-radius: 8px; display: inline-block;
-      margin-bottom: 32px;
-    }
-    .github-section .repo-name span { color: var(--orange); }
-    .github-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
-    .btn-github {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 28px; font-family: 'Inter', sans-serif;
-      font-size: 15px; font-weight: 700;
-      background: #fff; color: var(--black);
-      border: none; border-radius: 10px; text-decoration: none;
-      transition: all .15s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    .btn-github:hover { background: #f0f0f0; transform: translateY(-1px); }
-    .btn-github svg { width: 20px; height: 20px; }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 24px; font-family: 'Inter', sans-serif;
-      font-size: 15px; font-weight: 600;
-      background: transparent; color: #fff;
-      border: 1px solid #444; border-radius: 10px; text-decoration: none;
-      transition: all .15s;
-    }
-    .btn-outline:hover { border-color: #fff; }
-
-    .what-inside {
       background: #1a1a1a; border: 1px solid #2a2a2a;
       border-radius: 12px; padding: 24px 28px;
       text-align: left; margin-bottom: 40px;
@@ -653,7 +383,7 @@
         <div class="p-icon">🔌</div>
         <div class="p-body">
           <div class="p-title">Pull data from the source</div>
-          <div class="p-desc">The agent connects directly to your accounting system — ERP, Xero, QuickBooks, or a Google Sheet. No manual CSV exports. No emails. It retrieves exactly what it needs: GL balances, revenue figures, payroll, accounts receivable.</div>
+          <div class="p-desc">The agent connects directly to your accounting system — ERL, Xero, QuickBooks, or a Google Sheet. No manual CSV exports. No emails. It retrieves exactly what it needs: GL balances, revenue figures, payroll, accounts receivable.</div>
           <span class="p-tag">Automated data retrieval</span>
         </div>
       </div>
@@ -895,26 +625,13 @@
 
     // ── Typewriter effect for the report ───────────────────────
     const reportEl = document.getElementById('report-text');
-    const REPORT = `May 2026 closed on a strong note. Revenue reached $285,000 - up 9.6% month-over-month - while gross margin expanded to 66.0%, reflecting disciplined cost management on the COGS side. The business is operating profitably with net income of $40,000, and cash reserves stand at $1.24M with no active burn rate.\n\nThe clearest improvement this month is operating leverage: at 2.4x, the business is growing revenue faster than costs.\n\nRecommendation: initiate a pipeline review for June with focus on whether the contract funnel supports sustained growth above 7% MoM.`;
+    const REPORT = `May 2026 closed on a strong note. Revenue reached $285,000 - up 9.6% month-over-month - while gross margin expanded to 66.0%, reflecting disciplined cost management on the COGS side. The business is operating profitably with net income of $40,000, and cash reserves stand at $1.24M with no active burn rate to speak of.
 
-    let idx = 0;
-    let started = false;
+The clearest improvement this month is operating leverage: at 2.4x, the business is growing revenue faster than costs. Operating expenses actually declined by $7,000 despite the revenue increase - that is not an accident.
 
-    const reportObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting && !started) {
-          started = true;
-          typeReport();
-          reportObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    reportObs.observe(reportEl);
+Two risks warrant attention heading into June. First, days sales outstanding came in at 7 days - healthy in isolation, but the accounts receivable balance has tightened alongside it. If payment terms shift with any key customers, this metric can deteriorate quickly and will need to be watched weekly, not monthly. Second, the revenue growth rate of 9.6% is strong but was partially driven by a single large contract close. Organic baseline growth without that contribution is closer to 4%, which is below the trajectory needed to hit Q3 targets.
 
-    function typeReport() {
-      const cursor = dll need to be watched weekly, not monthly. Second, the revenue growth rate of 9.6% is strong but was partially driven by a single large contract close. Organic baseline growth without that contribution is closer to 4%, which is below the trajectory needed to hit Q3 targets.
-
-Recommendation: initiate a pipeline review for June with specific focus on whether the contract funnel supports sustained growth above 7% MoM. The margin and cost structure are healthy — the variable is entirely on the top line.`;
+Recommendation: initiate a pipeline review for June with focus on whether the contract funnel supports sustained growth above 7% MoM. The margin and cost structure are healthy - the variable is entirely on the top line.`;
 
     let idx = 0;
     let started = false;
@@ -936,16 +653,14 @@ Recommendation: initiate a pipeline review for June with specific focus on wheth
       reportEl.appendChild(cursor);
 
       const interval = setInterval(() => {
-        if (idx >= REPORT.length) {
+        if (idx >= REPOP�0e���h) {
           clearInterval(interval);
           cursor.remove();
           return;
         }
-        // Insert text node before cursor
         const chunk = REPORT.slice(idx, idx + 3);
         cursor.insertAdjacentText('beforebegin', chunk);
         idx += 3;
-        // Auto-scroll gently
         cursor.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       }, 16);
     }
