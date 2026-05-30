@@ -8,10 +8,14 @@
 
   <meta property="og:type"        content="article" />
   <meta property="og:site_name"   content="Boris Dračka" />
+  <meta property="og:url"         content="https://lulibobo.github.io/cfo-agents/Post%2302-demostatic.html" />
   <meta property="og:title"       content="How the AI CFO Agent Works — Step by Step" />
   <meta property="og:description" content="A visual walkthrough of the AI CFO agent from Post #2. See exactly what it does, what it produces, and how to get the code on GitHub." />
   <meta name="twitter:card"       content="summary_large_image" />
   <meta name="twitter:site"       content="@BorisDracka" />
+  <meta name="twitter:creator"    content="@BorisDracka" />
+
+  <link rel="canonical" href="https://lulibobo.github.io/cfo-agents/Post%2302-demostatic.html" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -72,7 +76,6 @@
       font-size: 13px; color: #555;
       display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
     }
-    .hero-meta span { display: flex; align-items: center; gap: 6px; }
 
     /* ── SECTION ────────────────────────────────────────────────── */
     .section { max-width: 780px; margin: 0 auto; padding: 56px 24px; }
@@ -85,21 +88,16 @@
     .divider { border: none; border-top: 1px solid var(--border); }
 
     /* ── INTRO TEXT ─────────────────────────────────────────────── */
-    .intro-text p {
-      font-size: 18px; line-height: 1.8; color: var(--black);
-      margin-bottom: 22px;
-    }
-    .intro-text p.lead {
-      font-size: 20px; font-weight: 500; line-height: 1.7;
-    }
+    .intro-text p { font-size: 18px; line-height: 1.8; color: var(--black); margin-bottom: 22px; }
+    .intro-text p.lead { font-size: 20px; font-weight: 500; line-height: 1.7; }
     .pullquote {
       border-left: 4px solid var(--orange);
       padding: 16px 24px; margin: 36px 0;
       background: var(--bg2); border-radius: 0 8px 8px 0;
     }
     .pullquote p {
-      font-size: 19px !important; font-style: italic;
-      color: #333 !important; margin: 0 !important; line-height: 1.55;
+      font-size: 19px; font-style: italic;
+      color: #333; line-height: 1.55;
     }
 
     /* ── PIPELINE ───────────────────────────────────────────────── */
@@ -107,17 +105,11 @@
     .p-step {
       display: flex; align-items: flex-start; gap: 18px;
       padding: 20px 22px; border: 1px solid var(--border);
-      background: #fff; position: relative;
-      opacity: 0; transform: translateX(-16px);
-      transition: opacity .5s ease, transform .5s ease;
+      background: #fff;
     }
-    .p-step.visible { opacity: 1; transform: none; }
     .p-step:first-child { border-radius: 12px 12px 0 0; }
     .p-step:last-child  { border-radius: 0 0 12px 12px; }
-    .p-step + .p-step { border-top: none; }
-
-    .p-step:hover { background: #fafaf8; }
-
+    .p-step + .p-step   { border-top: none; }
     .p-num {
       font-size: 11px; font-weight: 700;
       background: var(--orange); color: #fff;
@@ -126,7 +118,6 @@
       flex-shrink: 0; margin-top: 2px;
     }
     .p-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-    .p-body {}
     .p-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
     .p-desc  { font-size: 14px; color: var(--muted); line-height: 1.6; }
     .p-tag {
@@ -141,17 +132,14 @@
       font-size: 14px; font-weight: 700; text-align: center; letter-spacing: .3px;
     }
 
-    /* ── KPI DEMO ───────────────────────────────────────────────── */
-    .kpi-label-bar {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
-    }
+    /* ── KPI GRID ───────────────────────────────────────────────── */
+    .kpi-label-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
     .demo-badge {
       font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
       background: var(--bg2); border: 1px solid var(--border);
       color: var(--muted); padding: 4px 10px; border-radius: 4px;
     }
     .demo-company { font-size: 13px; color: var(--muted); }
-
     .kpi-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
       gap: 14px; margin-bottom: 16px;
@@ -162,22 +150,16 @@
     }
     .kpi-card.good { border-color: var(--green); }
     .kpi-card.warn { border-color: var(--yellow); }
-    .kpi-card.bad  { border-color: #dc2626; }
-    .kpi-val {
-      font-size: 30px; font-weight: 900; display: block; letter-spacing: -1px;
-      color: var(--orange);
-    }
+    .kpi-val { font-size: 30px; font-weight: 900; display: block; letter-spacing: -1px; color: var(--orange); }
     .kpi-card.good .kpi-val { color: #4ade80; }
     .kpi-card.warn .kpi-val { color: #fbbf24; }
-    .kpi-card.bad  .kpi-val { color: #f87171; }
     .kpi-name  { font-size: 11px; color: #aaa; letter-spacing: .5px; margin-top: 5px; display: block; text-transform: uppercase; }
     .kpi-delta { font-size: 11px; display: block; margin-top: 4px; font-weight: 600; }
     .kpi-card.good .kpi-delta { color: #4ade80; }
     .kpi-card.warn .kpi-delta { color: #fbbf24; }
-    .kpi-card.bad  .kpi-delta { color: #f87171; }
     .kpi-note { font-size: 12px; color: var(--muted); margin-top: 4px; font-style: italic; }
 
-    /* ── REPORT DEMO ────────────────────────────────────────────── */
+    /* ── REPORT WINDOW ──────────────────────────────────────────── */
     .report-window {
       background: var(--bg2); border: 1px solid var(--border);
       border-radius: 14px; overflow: hidden;
@@ -187,9 +169,7 @@
       display: flex; align-items: center; gap: 12px;
     }
     .report-dots { display: flex; gap: 6px; }
-    .report-dots span {
-      width: 12px; height: 12px; border-radius: 50%;
-    }
+    .report-dots span { width: 12px; height: 12px; border-radius: 50%; }
     .report-dots span:nth-child(1) { background: #ff5f57; }
     .report-dots span:nth-child(2) { background: #febc2e; }
     .report-dots span:nth-child(3) { background: #28c840; }
@@ -201,25 +181,17 @@
     }
     .report-body { padding: 28px 32px; }
     .report-date { font-size: 12px; color: var(--muted); margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; }
-    .report-text {
-      font-size: 16px; line-height: 1.85; color: var(--black);
-      white-space: pre-wrap;
-    }
-    .report-text .highlight { color: var(--orange); font-weight: 600; }
-    .report-cursor {
-      display: inline-block; width: 2px; height: 18px;
-      background: var(--orange); vertical-align: middle;
-      animation: blink .8s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .report-text { font-size: 16px; line-height: 1.85; color: var(--black); }
+    .report-text p { margin-bottom: 16px; }
+    .report-text p:last-child { margin-bottom: 0; }
 
-    /* ── HOW IT WORKS (TECH BREAKDOWN) ─────────────────────────── */
+    /* ── TECH GRID ──────────────────────────────────────────────── */
     .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
     .tech-card {
       background: var(--bg2); border: 1px solid var(--border);
       border-radius: 12px; padding: 22px 20px;
     }
-    .tech-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .tech-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
     .tech-card p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
     .tech-card code {
       display: inline-block; font-family: 'JetBrains Mono', monospace;
@@ -228,9 +200,7 @@
     }
 
     /* ── GITHUB CTA ─────────────────────────────────────────────── */
-    .github-section {
-      background: var(--black); padding: 72px 24px;
-    }
+    .github-section { background: var(--black); padding: 72px 24px; }
     .github-inner { max-width: 680px; margin: 0 auto; text-align: center; }
     .github-icon { font-size: 48px; margin-bottom: 20px; display: block; }
     .github-section h2 {
@@ -238,14 +208,21 @@
       letter-spacing: -1px; color: #fff; margin-bottom: 16px; line-height: 1.2;
     }
     .github-section h2 span { color: var(--orange); }
-    .github-section p { font-size: 17px; color: #aaa; margin-bottom: 12px; line-height: 1.7; }
-    .github-section .repo-name {
+    .github-section > .github-inner > p { font-size: 17px; color: #aaa; margin-bottom: 12px; line-height: 1.7; }
+    .repo-name {
       font-family: 'JetBrains Mono', monospace; font-size: 14px;
       background: #1a1a1a; border: 1px solid #333; color: #aaa;
-      padding: 8px 16px; border-radius: 8px; display: inline-block;
-      margin-bottom: 32px;
+      padding: 8px 16px; border-radius: 8px; display: inline-block; margin-bottom: 32px;
     }
-    .github-section .repo-name span { color: var(--orange); }
+    .repo-name span { color: var(--orange); }
+    .what-inside {
+      background: #1a1a1a; border: 1px solid #2a2a2a;
+      border-radius: 12px; padding: 24px 28px; text-align: left; margin-bottom: 40px;
+    }
+    .what-inside h4 { font-size: 13px; font-weight: 700; color: #aaa; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .what-inside ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .what-inside li { font-size: 14px; color: #ccc; display: flex; align-items: flex-start; gap: 10px; }
+    .what-inside li::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
     .github-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
     .btn-github {
       display: inline-flex; align-items: center; gap: 10px;
@@ -253,10 +230,10 @@
       font-size: 15px; font-weight: 700;
       background: #fff; color: var(--black);
       border: none; border-radius: 10px; text-decoration: none;
-      transition: all .15s;
+      transition: background .15s;
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .btn-github:hover { background: #f0f0f0; transform: translateY(-1px); }
+    .btn-github:hover { background: #f0f0f0; }
     .btn-github svg { width: 20px; height: 20px; }
     .btn-outline {
       display: inline-flex; align-items: center; gap: 8px;
@@ -264,24 +241,12 @@
       font-size: 15px; font-weight: 600;
       background: transparent; color: #fff;
       border: 1px solid #444; border-radius: 10px; text-decoration: none;
-      transition: all .15s;
+      transition: border-color .15s;
     }
     .btn-outline:hover { border-color: #fff; }
 
-    .what-inside {
-      background: #1a1a1a; border: 1px solid #2a2a2a;
-      border-radius: 12px; padding: 24px 28px;
-      text-align: left; margin-bottom: 40px;
-    }
-    .what-inside h4 { font-size: 13px; font-weight: 700; color: #aaa; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
-    .what-inside ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .what-inside li { font-size: 14px; color: #ccc; display: flex; align-items: flex-start; gap: 10px; }
-    .what-inside li::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
-
-    /* ── SUBSCRIBE CTA ──────────────────────────────────────────── */
-    .subscribe-box {
-      border-top: 1px solid #2a2a2a; padding-top: 36px; text-align: center;
-    }
+    /* ── SUBSCRIBE ──────────────────────────────────────────────── */
+    .subscribe-box { border-top: 1px solid #2a2a2a; padding-top: 36px; text-align: center; }
     .subscribe-box h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
     .subscribe-box p  { font-size: 14px; color: #aaa; margin-bottom: 20px; }
     .cta-form { display: flex; gap: 10px; max-width: 400px; margin: 0 auto; flex-wrap: wrap; }
@@ -289,16 +254,14 @@
       flex: 1; min-width: 180px; padding: 12px 16px;
       font-family: 'Inter', sans-serif; font-size: 14px;
       border: 1px solid #444; background: #1a1a1a; color: #fff;
-      border-radius: 8px; outline: none; transition: border-color .15s;
+      border-radius: 8px; outline: none;
     }
-    .cta-form input:focus { border-color: var(--orange); }
     .cta-form input::placeholder { color: #555; }
     .btn-sub {
       padding: 12px 22px; font-family: 'Inter', sans-serif;
       font-size: 14px; font-weight: 700; background: var(--orange); color: #fff;
-      border: none; border-radius: 8px; cursor: pointer; transition: background .15s;
+      border: none; border-radius: 8px; cursor: pointer;
     }
-    .btn-sub:hover { background: var(--org2); }
     .cta-note { font-size: 12px; color: #555; margin-top: 10px; }
 
     /* ── FOOTER ─────────────────────────────────────────────────── */
@@ -308,14 +271,9 @@
     }
     .footer-logo { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 16px; }
     .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
-    .footer-links a { font-size: 13px; color: #888; text-decoration: none; transition: color .15s; }
+    .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
     .footer-links a:hover { color: var(--black); }
     .footer-copy { font-size: 12px; }
-
-    /* ── ANIMATIONS ─────────────────────────────────────────────── */
-    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
-    .fade-up { opacity: 0; }
-    .fade-up.visible { animation: fadeUp .6s ease forwards; }
 
     /* ── RESPONSIVE ─────────────────────────────────────────────── */
     @media (max-width: 600px) {
@@ -377,47 +335,47 @@
     <div class="section-heading">5 steps. Zero button presses.</div>
     <div class="section-sub">This runs every Monday morning at 7:00 AM. The CEO opens their inbox and the report is already there.</div>
 
-    <div class="pipeline" id="pipeline">
-      <div class="p-step" id="ps1">
+    <div class="pipeline">
+      <div class="p-step">
         <div class="p-num">1</div>
         <div class="p-icon">🔌</div>
-        <div class="p-body">
+        <div>
           <div class="p-title">Pull data from the source</div>
-          <div class="p-desc">The agent connects directly to your accounting system — ERL, Xero, QuickBooks, or a Google Sheet. No manual CSV exports. No emails. It retrieves exactly what it needs: GL balances, revenue figures, payroll, accounts receivable.</div>
+          <div class="p-desc">The agent connects directly to your accounting system — ERP, Xero, QuickBooks, or a Google Sheet. No manual CSV exports. No emails. It retrieves exactly what it needs: GL balances, revenue figures, payroll, accounts receivable.</div>
           <span class="p-tag">Automated data retrieval</span>
         </div>
       </div>
-      <div class="p-step" id="ps2">
+      <div class="p-step">
         <div class="p-num">2</div>
         <div class="p-icon">🧹</div>
-        <div class="p-body">
+        <div>
           <div class="p-title">Clean and transform the data</div>
-          <div class="p-desc">Real accounting data is messy. Duplicate entries, inconsistent category names, rounding differences. The agent applies a set of transformation rules to normalize everything before any number gets calculated. This step alone used to eat a full Monday morning for a junior analyst.</div>
+          <div class="p-desc">Real accounting data is messy. Duplicate entries, inconsistent category names, rounding differences. The agent applies transformation rules to normalize everything before any number gets calculated. This step alone used to eat a full Monday morning for a junior analyst.</div>
           <span class="p-tag">Validation · Normalization · Deduplication</span>
         </div>
       </div>
-      <div class="p-step" id="ps3">
+      <div class="p-step">
         <div class="p-num">3</div>
         <div class="p-icon">📐</div>
-        <div class="p-body">
+        <div>
           <div class="p-title">Calculate KPIs</div>
           <div class="p-desc">With clean data, the agent computes the metrics that matter — gross margin, burn rate, DSO, operating leverage, revenue growth. Using the same formulas, every time. Not whoever happened to build the model this quarter.</div>
           <span class="p-tag">Gross Margin · Burn Rate · DSO · Operating Leverage</span>
         </div>
       </div>
-      <div class="p-step" id="ps4">
+      <div class="p-step">
         <div class="p-num">4</div>
         <div class="p-icon">🤖</div>
-        <div class="p-body">
+        <div>
           <div class="p-title">Generate the AI narrative report</div>
           <div class="p-desc">The KPIs go into a structured prompt. The AI writes a CFO-grade commentary — what moved, why it matters, what risks to watch, and one concrete action. Not a template. Not copy-paste. A fresh analysis generated from the actual numbers every single time.</div>
           <span class="p-tag">Gemini API · Structured prompt · Narrative output</span>
         </div>
       </div>
-      <div class="p-step" id="ps5">
+      <div class="p-step">
         <div class="p-num">5</div>
         <div class="p-icon">📬</div>
-        <div class="p-body">
+        <div>
           <div class="p-title">Deliver the report</div>
           <div class="p-desc">The finished report lands in the right inbox — CEO, board, finance team. Via email, Slack, or a shared dashboard. Formatted. Ready to read. No one had to stay late Sunday to make it happen.</div>
           <span class="p-tag">Email · Slack · Dashboard</span>
@@ -430,10 +388,10 @@
   <hr class="divider" />
 
   <!-- KPI OUTPUT -->
-  <div class="section fade-up" id="kpi-fade">
+  <div class="section">
     <div class="section-label">Step 3 output</div>
     <div class="section-heading">What the KPI dashboard looks like</div>
-    <div class="section-sub">These are sample numbers from a SaaS company. The agent produces this in under a second — from raw data.</div>
+    <div class="section-sub">Sample numbers from a SaaS company. The agent produces this in under a second — from raw data.</div>
 
     <div class="kpi-label-bar">
       <span class="demo-badge">Sample output</span>
@@ -478,22 +436,25 @@
   <hr class="divider" />
 
   <!-- REPORT OUTPUT -->
-  <div class="section fade-up" id="report-fade">
+  <div class="section">
     <div class="section-label">Step 4 output</div>
     <div class="section-heading">What the AI report looks like</div>
-    <div class="section-sub">The agent writes this from scratch, using the actual KPIs. Not a template. The narrative changes every month based on what the numbers say.</div>
+    <div class="section-sub">The agent writes this from scratch using the actual KPIs. The narrative changes every month based on what the numbers say.</div>
 
     <div class="report-window">
       <div class="report-topbar">
-        <div class="report-dots">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="report-dots"><span></span><span></span><span></span></div>
         <span class="report-filename">cfo-report-2026-05.txt</span>
         <span class="report-tag-inline">AI-Generated</span>
       </div>
       <div class="report-body">
         <div class="report-date">Generated: Monday, May 27, 2026 — 07:00 AM</div>
-        <div class="report-text" id="report-text"></div>
+        <div class="report-text">
+          <p>May 2026 closed on a strong note. Revenue reached $285,000 — up 9.6% month-over-month — while gross margin expanded to 66.0%, reflecting disciplined cost management on the COGS side. The business is operating profitably with net income of $40,000, and cash reserves stand at $1.24M with no active burn rate to speak of.</p>
+          <p>The clearest improvement this month is operating leverage: at 2.4x, the business is growing revenue faster than it is growing costs. That is the dynamic you want to see at this stage. Operating expenses actually declined by $7,000 compared to April despite the revenue increase — that is not an accident, and it should be explicitly recognized in the board discussion.</p>
+          <p>Two risks warrant attention heading into June. First, days sales outstanding came in at 7 days — healthy in isolation, but the accounts receivable balance has tightened alongside it. If payment terms shift with any key customers, this metric can deteriorate quickly and will need to be watched weekly, not monthly. Second, the revenue growth rate of 9.6% is strong but was partially driven by a single large contract close. Organic baseline growth without that contribution is closer to 4%, which is below the trajectory needed to hit Q3 targets.</p>
+          <p>Recommendation: initiate a pipeline review for June with specific focus on whether the contract funnel supports sustained growth above 7% MoM. The margin and cost structure are healthy — the variable is entirely on the top line.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -501,7 +462,7 @@
   <hr class="divider" />
 
   <!-- HOW IT'S BUILT -->
-  <div class="section fade-up" id="tech-fade">
+  <div class="section">
     <div class="section-label">Under the hood</div>
     <div class="section-heading">What this is actually built with</div>
     <div class="section-sub">Nothing exotic. Tools that have been available for years — most of them free.</div>
@@ -524,8 +485,8 @@
       </div>
       <div class="tech-card">
         <h4>📬 Delivery</h4>
-        <p>The report is emailed via SendGrid or posted to a Slack channel. Takes about 10 lines of code.</p>
-        <code>SendGrid API / Slack webhook</code>
+        <p>The report is emailed via Gmail SMTP or posted to a Slack channel. About 10 lines of code.</p>
+        <code>Gmail SMTP / Slack webhook</code>
       </div>
     </div>
   </div>
@@ -591,80 +552,6 @@
     </div>
     <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
   </footer>
-
-  <script>
-    // ── Animate pipeline steps on scroll ───────────────────────
-    const steps = document.querySelectorAll('.p-step');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = el.dataset.delay || 0;
-          setTimeout(() => el.classList.add('visible'), delay);
-          observer.unobserve(el);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    steps.forEach((step, i) => {
-      step.dataset.delay = i * 120;
-      observer.observe(step);
-    });
-
-    // ── Fade-up sections ────────────────────────────────────────
-    const fadeEls = document.querySelectorAll('.fade-up');
-    const fadeObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          fadeObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    fadeEls.forEach(el => fadeObs.observe(el));
-
-    // ── Typewriter effect for the report ───────────────────────
-    const reportEl = document.getElementById('report-text');
-    const REPORT = `May 2026 closed on a strong note. Revenue reached $285,000 - up 9.6% month-over-month - while gross margin expanded to 66.0%, reflecting disciplined cost management on the COGS side. The business is operating profitably with net income of $40,000, and cash reserves stand at $1.24M with no active burn rate to speak of.
-
-The clearest improvement this month is operating leverage: at 2.4x, the business is growing revenue faster than costs. Operating expenses actually declined by $7,000 despite the revenue increase - that is not an accident.
-
-Two risks warrant attention heading into June. First, days sales outstanding came in at 7 days - healthy in isolation, but the accounts receivable balance has tightened alongside it. If payment terms shift with any key customers, this metric can deteriorate quickly and will need to be watched weekly, not monthly. Second, the revenue growth rate of 9.6% is strong but was partially driven by a single large contract close. Organic baseline growth without that contribution is closer to 4%, which is below the trajectory needed to hit Q3 targets.
-
-Recommendation: initiate a pipeline review for June with focus on whether the contract funnel supports sustained growth above 7% MoM. The margin and cost structure are healthy - the variable is entirely on the top line.`;
-
-    let idx = 0;
-    let started = false;
-
-    const reportObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting && !started) {
-          started = true;
-          typeReport();
-          reportObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    reportObs.observe(reportEl);
-
-    function typeReport() {
-      const cursor = document.createElement('span');
-      cursor.className = 'report-cursor';
-      reportEl.appendChild(cursor);
-
-      const interval = setInterval(() => {
-        if (idx >= REPOP�0e���h) {
-          clearInterval(interval);
-          cursor.remove();
-          return;
-        }
-        const chunk = REPORT.slice(idx, idx + 3);
-        cursor.insertAdjacentText('beforebegin', chunk);
-        idx += 3;
-        cursor.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      }, 16);
-    }
-  </script>
 
 </body>
 </html>
