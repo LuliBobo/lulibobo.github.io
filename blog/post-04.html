@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plenty of Cash on Wednesday. Missed Payroll on Friday. | Boris Dračka</title>
+  <meta name="description" content="A company with €2M revenue can look completely healthy on Monday and be in crisis by Friday. Not because they're losing money — but because no one was watching the cash in real time." />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="Boris Dračka" />
+  <meta property="og:url"         content="https://borisdracka.com/blog/post-04" />
+  <meta property="og:title"       content="Plenty of Cash on Wednesday. Missed Payroll on Friday." />
+  <meta property="og:description" content="A company with €2M revenue can look completely healthy on Monday and be in crisis by Friday. Not because they're losing money — but because no one was watching." />
+  <meta property="og:image"       content="https://borisdracka.com/og/post-04.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:author"         content="Boris Dračka" />
+  <meta property="article:published_time" content="2026-05-22T14:00:00+02:00" />
+  <meta property="article:section"        content="Finance" />
+  <meta property="article:tag"            content="Cash Flow" />
+  <meta property="article:tag"            content="AI Finance" />
+  <meta property="article:tag"            content="SMB" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@BorisDracka" />
+  <meta name="twitter:creator"     content="@BorisDracka" />
+  <meta name="twitter:title"       content="Plenty of Cash on Wednesday. Missed Payroll on Friday." />
+  <meta name="twitter:description" content="A company with €2M revenue can look completely healthy on Monday and be in crisis by Friday. Not because they're losing money." />
+  <meta name="twitter:image"       content="https://borisdracka.com/og/post-04.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://borisdracka.com/blog/post-04" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #111111;
+      line-height: 1.75;
+    }
+
+    /* ── Site header ─────────────────────────────────────────── */
+    .site-header {
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #e8e5e0;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .site-header .logo {
+      font-size: 15px; font-weight: 700; color: #111111;
+      text-decoration: none; letter-spacing: -0.3px;
+    }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { font-size: 13px; color: #666; text-decoration: none; }
+    .site-header nav a:hover { color: #111; }
+    .site-header .btn-subscribe {
+      font-size: 13px; font-weight: 700; background: #E8562A;
+      color: #fff; padding: 8px 16px; border-radius: 8px;
+      text-decoration: none; transition: background 0.15s;
+    }
+    .site-header .btn-subscribe:hover { background: #cf4a22; }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      background: #111111; color: #fff;
+      padding: 72px 24px 60px; text-align: center;
+    }
+    .hero .tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #E8562A; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 46px); font-weight: 900;
+      line-height: 1.15; letter-spacing: -1.5px;
+      max-width: 780px; margin: 0 auto 20px;
+    }
+    .hero .subtitle {
+      font-size: 18px; color: #aaa;
+      max-width: 580px; margin: 0 auto; font-style: italic;
+    }
+
+    /* ── Meta bar ────────────────────────────────────────────── */
+    .meta {
+      font-size: 13px; color: #999999; text-align: center;
+      padding: 20px 24px; border-bottom: 1px solid #e8e5e0;
+    }
+
+    /* ── Article body ────────────────────────────────────────── */
+    .article { max-width: 720px; margin: 0 auto; padding: 52px 24px 80px; }
+    .article p { font-size: 18px; margin-bottom: 24px; color: #111111; line-height: 1.75; }
+    .article p.lead { font-size: 21px; font-weight: 400; color: #111111; margin-bottom: 32px; line-height: 1.6; }
+    .article h2 { font-size: 22px; font-weight: 700; margin: 44px 0 18px; color: #111111; letter-spacing: -0.5px; }
+
+    /* ── Pull quote ──────────────────────────────────────────── */
+    .pullquote {
+      border-left: 4px solid #E8562A; padding: 16px 24px;
+      margin: 36px 0; background: #f7f5f2; border-radius: 0 8px 8px 0;
+    }
+    .pullquote p {
+      font-size: 20px !important; font-style: italic;
+      color: #333 !important; margin: 0 !important; line-height: 1.5;
+    }
+
+    /* ── Stat row ────────────────────────────────────────────── */
+    .stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 36px 0; }
+    .stat-box {
+      flex: 1; min-width: 140px; background: #111111;
+      padding: 24px 20px; text-align: center;
+      border-radius: 14px; border: 2px solid #111111;
+    }
+    .stat-box .num {
+      font-size: 36px; font-weight: 900; color: #E8562A; display: block;
+    }
+    .stat-box .label {
+      font-size: 12px; color: #aaa; letter-spacing: 0.5px;
+      margin-top: 6px; display: block;
+    }
+
+    /* ── Day timeline visual ─────────────────────────────────── */
+    .day-timeline {
+      margin: 36px 0;
+      border: 1px solid #e8e5e0;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .day-timeline-header {
+      background: #111111;
+      color: #fff;
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .day-timeline-header span { color: #E8562A; }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      align-items: start;
+      gap: 16px;
+      padding: 16px 20px;
+      border-bottom: 1px solid #e8e5e0;
+    }
+
+    .day-row:last-child { border-bottom: none; }
+    .day-row:nth-child(even) { background: #f7f5f2; }
+    .day-row.crisis { background: #fff5f3; border-left: 3px solid #E8562A; }
+
+    .day-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+      padding-top: 2px;
+    }
+
+    .day-label .day-name {
+      display: block;
+      font-size: 15px;
+      font-weight: 900;
+      color: #111;
+    }
+
+    .day-label .day-name.red { color: #E8562A; }
+
+    .day-events {}
+
+    .day-event {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+      padding: 2px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .day-event .ev-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ccc;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .day-event .ev-dot.red { background: #E8562A; }
+    .day-event .ev-dot.green { background: #22c55e; }
+
+    .day-cash {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      padding-top: 2px;
+      text-align: right;
+    }
+
+    .day-cash.positive { color: #22c55e; }
+    .day-cash.warning  { color: #f59e0b; }
+    .day-cash.danger   { color: #E8562A; }
+
+    .day-cash .cash-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: #999;
+      letter-spacing: 0.3px;
+      margin-bottom: 2px;
+    }
+
+    .day-timeline-footer {
+      background: #111;
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #E8562A;
+      border-top: 1px solid #e8e5e0;
+    }
+
+    /* ── Frequency compare table ─────────────────────────────── */
+    .freq-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 36px 0;
+      font-size: 14px;
+    }
+
+    .freq-table th {
+      background: #111111;
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .freq-table th:first-child { border-radius: 10px 0 0 0; }
+    .freq-table th:last-child  { border-radius: 0 10px 0 0; color: #E8562A; }
+
+    .freq-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid #e8e5e0;
+      color: #333;
+      line-height: 1.4;
+      vertical-align: top;
+    }
+
+    .freq-table tr:last-child td { border-bottom: none; }
+    .freq-table tr:nth-child(even) td { background: #f7f5f2; }
+
+    .freq-table .col-freq {
+      font-weight: 700;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .badge.bad    { background: #fee2e2; color: #dc2626; }
+    .badge.ok     { background: #fef3c7; color: #92400e; }
+    .badge.good   { background: #dcfce7; color: #166534; }
+    .badge.best   { background: #E8562A; color: #fff; }
+
+    /* ── CTA box ─────────────────────────────────────────────── */
+    .cta-box {
+      background: #111111; padding: 40px 36px;
+      border-radius: 14px; margin-top: 52px; text-align: center;
+    }
+    .cta-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .cta-box p  { color: #bbb !important; font-size: 16px !important; margin-bottom: 24px !important; }
+    .cta-box .question {
+      font-size: 17px !important; color: #f0ece8 !important;
+      font-style: italic; font-weight: 500; margin-bottom: 28px !important;
+    }
+    .cta-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; }
+    .cta-form input[type="email"] {
+      flex: 1; min-width: 200px; padding: 12px 16px; font-size: 15px;
+      border: 1px solid #444; background: #1e1e1e; color: #fff;
+      border-radius: 8px; outline: none;
+    }
+    .cta-form input[type="email"]::placeholder { color: #666; }
+    .cta-form input[type="email"]:focus { border-color: #E8562A; }
+    .cta-form button {
+      padding: 12px 22px; font-size: 14px; font-weight: 700;
+      background: #E8562A; color: #fff; border: none;
+      border-radius: 8px; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .cta-form button:hover { background: #cf4a22; }
+    .cta-note {
+      font-size: 12px !important; color: #888 !important;
+      margin-top: 12px !important; margin-bottom: 0 !important;
+    }
+
+    /* ── Series label ────────────────────────────────────────── */
+    .series-label {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      background: #E8562A; color: #fff; padding: 5px 12px;
+      border-radius: 4px; letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 36px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .site-footer {
+      background: #ffffff; padding: 40px 24px;
+      text-align: center; border-top: 1px solid #e8e5e0;
+    }
+    .site-footer .footer-logo { font-size: 15px; font-weight: 700; color: #111111; margin-bottom: 16px; }
+    .site-footer .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .site-footer .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
+    .site-footer .footer-links a:hover { color: #111; }
+    .site-footer .footer-copy { font-size: 12px; color: #999; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .site-header nav { display: none; }
+      .article p { font-size: 17px; }
+      .article p.lead { font-size: 19px; }
+      .cta-box { padding: 32px 24px; }
+      .day-row { grid-template-columns: 70px 1fr auto; gap: 10px; }
+      .freq-table { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site header ──────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="https://borisdracka.com" class="logo">CFO Unfiltered</a>
+    <nav>
+      <a href="https://borisdracka.com/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="#subscribe" class="btn-subscribe">Subscribe</a>
+    </nav>
+  </header>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="tag">Cash Flow · Real-Time Finance · SMB</div>
+    <h1>Plenty of Cash on Wednesday.<br>Missed Payroll on Friday.</h1>
+    <p class="subtitle">Why seeing your cash flow once a month is not cash flow management — and what happens when you close that gap.</p>
+  </div>
+
+  <div class="meta">Boris Dračka &nbsp;·&nbsp; May 2026 &nbsp;·&nbsp; 5 min read</div>
+
+  <!-- ── Article ───────────────────────────────────────────────── -->
+  <div class="article">
+
+    <span class="series-label">Post #4 of 50 — The CFO &amp; AI Series</span>
+
+    <p class="lead">
+      A company can look completely healthy on Monday and be in crisis by Friday. Not because something catastrophic happened. Not because the business is failing. But because the people running it were looking at last month's numbers while this week's cash was moving in the wrong direction.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="num">€2M</span>
+        <span class="label">Annual revenue — profitable</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">1×</span>
+        <span class="label">Most companies review cash flow</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">48h</span>
+        <span class="label">From "fine" to payroll crisis</span>
+      </div>
+    </div>
+
+    <p>
+      Most small and mid-size companies review their cash position once a month — when the accountant closes the books. The monthly report lands, someone glances at the bank balance, and the conversation moves on. Everything looks fine.
+    </p>
+
+    <p>
+      What the monthly report doesn't show is what happens in the 29 days between reports. Where the money actually goes. Which clients are paying late. Which supplier payments are queuing. What the account balance will look like on the 25th — when payroll runs.
+    </p>
+
+    <h2>How a profitable company misses payroll</h2>
+
+    <p>
+      This isn't a hypothetical. I've seen versions of this scenario more than once in my 30 years. The details change. The structure is always the same.
+    </p>
+
+    <!-- Day timeline visual -->
+    <div class="day-timeline">
+      <div class="day-timeline-header">
+        One week at a <span>€2M revenue company</span> — the cash flow story nobody saw coming
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">MON</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot green"></span>
+            Monthly report reviewed. Bank balance looks healthy.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot green"></span>
+            Three invoices sent to clients — total €48,000. Payment terms: 30 days.
+          </div>
+        </div>
+        <div class="day-cash positive">
+          <span class="cash-label">Account balance</span>
+          €62,400
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">TUE</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot"></span>
+            Supplier invoice paid — equipment maintenance, €11,200.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot"></span>
+            Office rent direct debit processed, €4,800.
+          </div>
+        </div>
+        <div class="day-cash positive">
+          <span class="cash-label">Account balance</span>
+          €46,400
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">WED</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot"></span>
+            Largest client requests 15-day payment extension. Approved.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot"></span>
+            VAT payment due end of week — €18,300. (Noted in the system.)
+          </div>
+        </div>
+        <div class="day-cash positive">
+          <span class="cash-label">Account balance</span>
+          €46,400
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">THU</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            VAT payment auto-debited — €18,300. Earlier than expected.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            Subcontractor invoice arrives — €14,600, due immediately per contract.
+          </div>
+        </div>
+        <div class="day-cash warning">
+          <span class="cash-label">Account balance</span>
+          €13,500
+        </div>
+      </div>
+
+      <div class="day-row crisis">
+        <div class="day-label">
+          <span class="day-name red">FRI</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            Payroll run scheduled — €21,800 for 18 employees.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            Insufficient funds. Bank rejects the transaction.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            CEO finds out at 4pm on a Friday.
+          </div>
+        </div>
+        <div class="day-cash danger">
+          <span class="cash-label">Account balance</span>
+          –€8,300
+        </div>
+      </div>
+
+      <div class="day-timeline-footer">
+        The business was profitable all week. Nobody was watching the daily flow.
+      </div>
+    </div>
+
+    <p>
+      At no point did the company have a revenue problem. Every invoice in this scenario gets paid — eventually. The business is healthy. What failed was the information system. Nobody was looking at cash position daily. Nobody flagged the collision between the VAT auto-debit and Friday payroll. The monthly report showed a strong month. The weekly reality was a different story.
+    </p>
+
+    <h2>The difference between cash flow reporting and cash flow management</h2>
+
+    <p>
+      Reporting tells you what happened. Management changes what's about to happen. Most small businesses have the first. Almost none have the second — because real-time cash management requires someone watching the numbers every day, and nobody has time for that on top of everything else.
+    </p>
+
+    <div class="pullquote">
+      <p>"A monthly cash flow report is a history book. By the time it's published, you can't change any of the events in it."</p>
+    </div>
+
+    <p>
+      The gap between reporting and management is exactly where most cash crises live. Not in bad businesses. In businesses that are doing fine — but finding out too late that something was about to go wrong.
+    </p>
+
+    <h2>How often should you actually be looking?</h2>
+
+    <p>
+      The answer depends on your cash cycle, your payment terms, and how many large outflows hit in any given week. But here is a practical framework based on what I've seen work — and what I've seen fail — across dozens of companies.
+    </p>
+
+    <!-- Frequency comparison table -->
+    <table class="freq-table">
+      <thead>
+        <tr>
+          <th>Review frequency</th>
+          <th>What you catch</th>
+          <th>What you miss</th>
+          <th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-freq">Monthly</td>
+          <td>End-of-month balance, trends over time</td>
+          <td>Any intra-month crisis. Every week-level collision.</td>
+          <td><span class="badge bad">High risk</span></td>
+        </tr>
+        <tr>
+          <td class="col-freq">Weekly</td>
+          <td>Week-end position, upcoming large payments</td>
+          <td>Mid-week surprises, same-day payment collisions</td>
+          <td><span class="badge ok">Acceptable</span></td>
+        </tr>
+        <tr>
+          <td class="col-freq">Daily</td>
+          <td>Current balance, today's inflows/outflows</td>
+          <td>Very little — most crises visible 1–2 days ahead</td>
+          <td><span class="badge good">Good</span></td>
+        </tr>
+        <tr>
+          <td class="col-freq">Real-time + alerts</td>
+          <td>Balance, projections, anomaly flags — automatically</td>
+          <td>Almost nothing — system flags before human needs to look</td>
+          <td><span class="badge best">Optimal</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The reason most companies stay at "monthly" isn't that they don't know daily is better. It's that daily cash monitoring requires someone to actually do it — pull the bank data, reconcile it against expected payments, check the forward projection. That's 30–45 minutes of work every day. Work that competes with everything else on the accountant's plate.
+    </p>
+
+    <h2>What an AI agent does for cash visibility</h2>
+
+    <p>
+      A well-built cash flow agent doesn't wait to be asked. It connects to the bank feed, accounting system, and payroll schedule. It runs every morning — automatically. By the time the CEO arrives at their desk, there's already a summary: current balance, expected inflows this week, scheduled outflows, and a flag if the projected balance drops below a set threshold at any point in the next 14 days.
+    </p>
+
+    <div class="pullquote">
+      <p>"The payroll crisis in that Friday scenario was visible on Tuesday — if anyone had been looking at a 5-day cash projection. An agent looks at it every day. That's the entire point."</p>
+    </div>
+
+    <p>
+      In the scenario above, a basic cash flow agent would have flagged the problem on Wednesday morning: projected balance Friday after payroll — negative €8,300. Flag: payroll at risk. Action required. That's a solvable problem on Wednesday. It's a crisis on Friday at 4pm.
+    </p>
+
+    <p>
+      The technology for this isn't new. The API connections to bank feeds have existed for years. What's new is that building and running this kind of monitoring system no longer requires a developer, a BI team, or an enterprise software contract. It can be set up by a finance person who is willing to spend a few hours on the architecture. That's what I've been building — and what the rest of this series covers.
+    </p>
+
+    <!-- ── CTA box ──────────────────────────────────────────── -->
+    <div class="cta-box" id="subscribe">
+      <h3>Follow the series</h3>
+      <p>Post #5 walks through the exact setup of the cash flow agent I built — what it connects to, what it sends, and what it cost in time to configure.</p>
+      <p class="question">How often does your company review cash flow?</p>
+
+      <form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <button type="submit">Subscribe free</button>
+      </form>
+      <p class="cta-note">No spam. One post per week. Unsubscribe any time.</p>
+    </div>
+
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-logo">CFO Unfiltered</div>
+    <div class="footer-links">
+      <a href="https://borisdracka.com">Home</a>
+      <a href="https://borisdracka.com/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Subscribe</a>
+    </div>
+    <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
+  </footer>
+
+</body>
+</html>
