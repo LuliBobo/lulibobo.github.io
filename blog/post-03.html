@@ -1,837 +1,902 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>50 People. €15M Revenue. 1 Accountant. This Is Normal. | Boris Dračka</title>
-  <meta name="description" content="The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here's why AI changes the math — without changing the headcount." />
-
-  <!-- Open Graph -->
-  <meta property="og:type"        content="article" />
-  <meta property="og:site_name"   content="Boris Dračka" />
-  <meta property="og:url"         content="https://borisdracka.com/blog/post-03" />
-  <meta property="og:title"       content="50 People. €15M Revenue. 1 Accountant. This Is Normal." />
-  <meta property="og:description" content="The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here's why AI changes the math — without changing the headcount." />
-  <meta property="og:image"       content="https://borisdracka.com/og/post-03.png" />
-  <meta property="og:image:width"  content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="article:author"         content="Boris Dračka" />
-  <meta property="article:published_time" content="2026-05-15T14:00:00+02:00" />
-  <meta property="article:section"        content="Finance" />
-  <meta property="article:tag"            content="SMB Finance" />
-  <meta property="article:tag"            content="AI" />
-  <meta property="article:tag"            content="Finance Team" />
-
-  <!-- Twitter / X Card -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:site"        content="@BorisDracka" />
-  <meta name="twitter:creator"     content="@BorisDracka" />
-  <meta name="twitter:title"       content="50 People. €15M Revenue. 1 Accountant. This Is Normal." />
-  <meta name="twitter:description" content="The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here's why AI changes the math." />
-  <meta name="twitter:image"       content="https://borisdracka.com/og/post-03.png" />
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://borisdracka.com/blog/post-03" />
-
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #111111;
-      line-height: 1.75;
-    }
-
-    /* ── Site header ─────────────────────────────────────────── */
-    .site-header {
-      background: rgba(255,255,255,0.96);
-      border-bottom: 1px solid #e8e5e0;
-      padding: 0 24px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(8px);
-    }
-
-    .site-header .logo {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: #111111;
-      text-decoration: none;
-      letter-spacing: -0.3px;
-    }
-
-    .site-header nav {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .site-header nav a {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: #666;
-      text-decoration: none;
-    }
-
-    .site-header nav a:hover { color: #111; }
-
-    .site-header .btn-subscribe {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      background: #E8562A;
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.15s;
-    }
-
-    .site-header .btn-subscribe:hover { background: #cf4a22; }
-
-    /* ── Hero ────────────────────────────────────────────────── */
-    .hero {
-      background: #111111;
-      color: #fff;
-      padding: 72px 24px 60px;
-      text-align: center;
-    }
-
-    .hero .tag {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #E8562A;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(26px, 5vw, 46px);
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: -1.5px;
-      max-width: 780px;
-      margin: 0 auto 20px;
-    }
-
-    .hero .subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: 18px;
-      color: #aaa;
-      max-width: 580px;
-      margin: 0 auto;
-      font-style: italic;
-    }
-
-    /* ── Meta bar ────────────────────────────────────────────── */
-    .meta {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: #999999;
-      text-align: center;
-      padding: 20px 24px;
-      border-bottom: 1px solid #e8e5e0;
-    }
-
-    /* ── Article body ────────────────────────────────────────── */
-    .article {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 52px 24px 80px;
-    }
-
-    .article p {
-      font-family: 'Inter', sans-serif;
-      font-size: 18px;
-      margin-bottom: 24px;
-      color: #111111;
-      line-height: 1.75;
-    }
-
-    .article p.lead {
-      font-size: 21px;
-      font-weight: 400;
-      color: #111111;
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-
-    .article h2 {
-      font-family: 'Inter', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      margin: 44px 0 18px;
-      color: #111111;
-      letter-spacing: -0.5px;
-    }
-
-    /* ── Pull quote ──────────────────────────────────────────── */
-    .pullquote {
-      border-left: 4px solid #E8562A;
-      padding: 16px 24px;
-      margin: 36px 0;
-      background: #f7f5f2;
-      border-radius: 0 8px 8px 0;
-    }
-
-    .pullquote p {
-      font-family: 'Inter', sans-serif;
-      font-size: 20px !important;
-      font-style: italic;
-      color: #333 !important;
-      margin: 0 !important;
-      line-height: 1.5;
-    }
-
-    /* ── Stat row ────────────────────────────────────────────── */
-    .stat-row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin: 36px 0;
-    }
-
-    .stat-box {
-      flex: 1;
-      min-width: 140px;
-      background: #111111;
-      color: #fff;
-      padding: 24px 20px;
-      text-align: center;
-      border-radius: 14px;
-      border: 2px solid #111111;
-    }
-
-    .stat-box .num {
-      font-family: 'Inter', sans-serif;
-      font-size: 36px;
-      font-weight: 900;
-      color: #E8562A;
-      display: block;
-    }
-
-    .stat-box .label {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      color: #aaa;
-      letter-spacing: 0.5px;
-      margin-top: 6px;
-      display: block;
-    }
-
-    /* ── Week breakdown visual ───────────────────────────────── */
-    .week-breakdown {
-      margin: 36px 0;
-      border: 1px solid #e8e5e0;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .week-breakdown-header {
-      background: #111111;
-      color: #fff;
-      padding: 14px 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .week-breakdown-header span {
-      color: #E8562A;
-    }
-
-    .week-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 20px;
-      border-bottom: 1px solid #e8e5e0;
-    }
-
-    .week-row:last-child { border-bottom: none; }
-    .week-row:nth-child(even) { background: #f7f5f2; }
-
-    .week-row .task-name {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: #111;
-      width: 220px;
-      flex-shrink: 0;
-    }
-
-    .week-row .bar-wrap {
-      flex: 1;
-      background: #e8e5e0;
-      border-radius: 4px;
-      height: 10px;
-      overflow: hidden;
-    }
-
-    .week-row .bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      background: #E8562A;
-    }
-
-    .week-row .bar-fill.dim { background: #ccc; }
-
-    .week-row .pct {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: #111;
-      width: 36px;
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    .week-breakdown-footer {
-      background: #f7f5f2;
-      padding: 12px 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: #888;
-      border-top: 1px solid #e8e5e0;
-    }
-
-    /* ── Capacity card ───────────────────────────────────────── */
-    .capacity-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 36px 0;
-    }
-
-    .capacity-card {
-      border-radius: 14px;
-      padding: 24px 20px;
-      border: 2px solid #e8e5e0;
-    }
-
-    .capacity-card.before {
-      background: #fff;
-    }
-
-    .capacity-card.after {
-      background: #111111;
-      border-color: #111111;
-    }
-
-    .capacity-card .cap-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .capacity-card.before .cap-label { color: #999; }
-    .capacity-card.after  .cap-label { color: #E8562A; }
-
-    .capacity-card .cap-num {
-      font-family: 'Inter', sans-serif;
-      font-size: 52px;
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 8px;
-      display: block;
-      letter-spacing: -2px;
-    }
-
-    .capacity-card.before .cap-num { color: #111; }
-    .capacity-card.after  .cap-num { color: #fff; }
-
-    .capacity-card .cap-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .capacity-card.before .cap-desc { color: #666; }
-    .capacity-card.after  .cap-desc { color: #aaa; }
-
-    .capacity-card .cap-items {
-      margin-top: 14px;
-      list-style: none;
-      padding: 0;
-    }
-
-    .capacity-card .cap-items li {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      padding: 5px 0;
-      border-bottom: 1px solid #e8e5e0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .capacity-card.after .cap-items li {
-      border-bottom-color: #2a2a2a;
-      color: #ccc;
-    }
-
-    .capacity-card.before .cap-items li { color: #444; }
-
-    .cap-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .capacity-card.before .cap-dot { background: #ccc; }
-    .capacity-card.after  .cap-dot { background: #E8562A; }
-
-    /* ── Pipeline visual ─────────────────────────────────────── */
-    .pipeline {
-      margin: 36px 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .pipeline-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 18px 20px;
-      border: 1px solid #e8e5e0;
-      background: #fff;
-    }
-
-    .pipeline-step:first-child { border-radius: 12px 12px 0 0; }
-    .pipeline-step:last-child  { border-radius: 0 0 12px 12px; }
-    .pipeline-step + .pipeline-step { border-top: none; }
-
-    .pipeline-step .step-num {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      background: #E8562A;
-      color: #fff;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .pipeline-step .step-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 4px;
-    }
-
-    .pipeline-step .step-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: #666;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    .pipeline-footer {
-      margin-top: 12px;
-      background: #111111;
-      border-radius: 10px;
-      padding: 16px 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: #E8562A;
-      text-align: center;
-      letter-spacing: 0.3px;
-    }
-
-    /* ── CTA box ─────────────────────────────────────────────── */
-    .cta-box {
-      background: #111111;
-      color: #fff;
-      padding: 40px 36px;
-      border-radius: 14px;
-      margin-top: 52px;
-      text-align: center;
-    }
-
-    .cta-box h3 {
-      font-family: 'Inter', sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-
-    .cta-box p {
-      font-family: 'Inter', sans-serif;
-      color: #bbb !important;
-      font-size: 16px !important;
-      margin-bottom: 24px !important;
-    }
-
-    .cta-box .question {
-      font-size: 17px !important;
-      color: #f0ece8 !important;
-      font-style: italic;
-      font-weight: 500;
-      margin-bottom: 28px !important;
-    }
-
-    .cta-form {
-      display: flex;
-      gap: 10px;
-      max-width: 440px;
-      margin: 0 auto;
-      flex-wrap: wrap;
-    }
-
-    .cta-form input[type="email"] {
-      flex: 1;
-      min-width: 200px;
-      padding: 12px 16px;
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      border: 1px solid #444;
-      background: #1e1e1e;
-      color: #fff;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    .cta-form input[type="email"]::placeholder { color: #666; }
-    .cta-form input[type="email"]:focus { border-color: #E8562A; }
-
-    .cta-form button {
-      padding: 12px 22px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      background: #E8562A;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s;
-    }
-
-    .cta-form button:hover { background: #cf4a22; }
-
-    .cta-note {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px !important;
-      color: #888 !important;
-      margin-top: 12px !important;
-      margin-bottom: 0 !important;
-    }
-
-    /* ── Series label ────────────────────────────────────────── */
-    .series-label {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      background: #E8562A;
-      color: #fff;
-      padding: 5px 12px;
-      border-radius: 4px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 36px;
-    }
-
-    /* ── Footer ──────────────────────────────────────────────── */
-    .site-footer {
-      background: #ffffff;
-      color: #999999;
-      padding: 40px 24px;
-      text-align: center;
-      border-top: 1px solid #e8e5e0;
-    }
-
-    .site-footer .footer-logo {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: #111111;
-      margin-bottom: 16px;
-    }
-
-    .site-footer .footer-links {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .site-footer .footer-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: #888;
-      text-decoration: none;
-    }
-
-    .site-footer .footer-links a:hover { color: #111; }
-
-    .site-footer .footer-copy {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      color: #999;
-    }
-
-    /* ── Responsive ──────────────────────────────────────────── */
-    @media (max-width: 600px) {
-      .site-header nav { display: none; }
-      .article p { font-size: 17px; }
-      .article p.lead { font-size: 19px; }
-      .cta-box { padding: 32px 24px; }
-      .capacity-grid { grid-template-columns: 1fr; }
-      .week-row .task-name { width: 140px; font-size: 12px; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>50 People. â¬15M Revenue. 1 Accountant. This Is Normal. | Boris DraÄka</title>
+<meta name="description" content="The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here's why AI changes the math â without changing the headcount." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Boris DraÄka" />
+<meta property="og:url" content="https://borisdracka.com/blog/post-03" />
+<meta property="og:title" content="50 People. â¬15M Revenue. 1 Accountant. This Is Normal." />
+<meta property="og:description" content="The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here's why AI changes the math â without changing the headcount." />
+<meta property="og:image" content="https://borisdracka.com/og/post-03.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="article:author" content="Boris DraÄka" />
+<meta property="article:published_time" content="2026-05-15T14:00:00+02:00" />
+<meta property="article:section" content="Finance" />
+<meta property="article:tag" content="SMB Finance" />
+<meta property="article:tag" content="AI" />
+<meta property="article:tag" content="Finance Team" />
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@BorisDracka" />
+<meta name="twitter:creator" content="@BorisDracka" />
+<meta name="twitter:title" content="50 People. â¬15M Revenue. 1 Accountant. This Is Normal." />
+<meta name="twitter:description" content="The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here's why AI changes the math." />
+<meta name="twitter:image" content="https://borisdracka.com/og/post-03.png" />
+
+<!-- Canonical -->
+<link rel="canonical" href="https://borisdracka.com/blog/post-03" />
+
+<!-- Google Fonts: Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: 'Inter', sans-serif;
+background: #ffffff;
+color: #111111;
+line-height: 1.75;
+}
+
+/* ââ Site header âââââââââââââââââââââââââââââââââââââââââââ */
+.site-header {
+background: rgba(255,255,255,0.96);
+border-bottom: 1px solid #e8e5e0;
+padding: 0 24px;
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+position: sticky;
+top: 0;
+z-index: 100;
+backdrop-filter: blur(8px);
+}
+
+.site-header .logo {
+font-family: 'Inter', sans-serif;
+font-size: 15px;
+font-weight: 700;
+color: #111111;
+text-decoration: none;
+letter-spacing: -0.3px;
+}
+
+.site-header nav {
+display: flex;
+gap: 24px;
+align-items: center;
+}
+
+.site-header nav a {
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+color: #666;
+text-decoration: none;
+}
+
+.site-header nav a:hover { color: #111; }
+
+.site-header .btn-subscribe {
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+font-weight: 700;
+background: #E8562A;
+color: #fff;
+padding: 8px 16px;
+border-radius: 8px;
+text-decoration: none;
+transition: background 0.15s;
+}
+
+.site-header .btn-subscribe:hover { background: #cf4a22; }
+
+/* ââ Hero ââââââââââââââââââââââââââââââââââââââââââââââââââ */
+.hero {
+background: #111111;
+color: #fff;
+padding: 72px 24px 60px;
+text-align: center;
+}
+
+.hero .tag {
+display: inline-block;
+font-family: 'Inter', sans-serif;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: #E8562A;
+margin-bottom: 20px;
+}
+
+.hero h1 {
+font-family: 'Inter', sans-serif;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+max-width: 780px;
+margin: 0 auto 20px;
+}
+
+.hero .subtitle {
+font-family: 'Inter', sans-serif;
+font-size: 18px;
+color: #aaa;
+max-width: 580px;
+margin: 0 auto;
+font-style: italic;
+}
+
+/* ââ Meta bar ââââââââââââââââââââââââââââââââââââââââââââââ */
+.meta {
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+color: #999999;
+text-align: center;
+padding: 20px 24px;
+border-bottom: 1px solid #e8e5e0;
+}
+
+/* ââ Article body ââââââââââââââââââââââââââââââââââââââââââ */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+
+.article p {
+font-family: 'Inter', sans-serif;
+font-size: 18px;
+margin-bottom: 24px;
+color: #111111;
+line-height: 1.75;
+}
+
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+color: #111111;
+margin-bottom: 32px;
+line-height: 1.6;
+}
+
+.article h2 {
+font-family: 'Inter', sans-serif;
+font-size: 22px;
+font-weight: 700;
+margin: 44px 0 18px;
+color: #111111;
+letter-spacing: -0.5px;
+}
+
+/* ââ Pull quote ââââââââââââââââââââââââââââââââââââââââââââ */
+.pullquote {
+border-left: 4px solid #E8562A;
+padding: 16px 24px;
+margin: 36px 0;
+background: #f7f5f2;
+border-radius: 0 8px 8px 0;
+}
+
+.pullquote p {
+font-family: 'Inter', sans-serif;
+font-size: 20px !important;
+font-style: italic;
+color: #333 !important;
+margin: 0 !important;
+line-height: 1.5;
+}
+
+/* ââ Stat row ââââââââââââââââââââââââââââââââââââââââââââââ */
+.stat-row {
+display: flex;
+gap: 16px;
+flex-wrap: wrap;
+margin: 36px 0;
+}
+
+.stat-box {
+flex: 1;
+min-width: 140px;
+background: #111111;
+color: #fff;
+padding: 24px 20px;
+text-align: center;
+border-radius: 14px;
+border: 2px solid #111111;
+}
+
+.stat-box .num {
+font-family: 'Inter', sans-serif;
+font-size: 36px;
+font-weight: 900;
+color: #E8562A;
+display: block;
+}
+
+.stat-box .label {
+font-family: 'Inter', sans-serif;
+font-size: 12px;
+color: #aaa;
+letter-spacing: 0.5px;
+margin-top: 6px;
+display: block;
+}
+
+/* ââ Week breakdown visual âââââââââââââââââââââââââââââââââ */
+.week-breakdown {
+margin: 36px 0;
+border: 1px solid #e8e5e0;
+border-radius: 14px;
+overflow: hidden;
+}
+
+.week-breakdown-header {
+background: #111111;
+color: #fff;
+padding: 14px 20px;
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+font-weight: 700;
+letter-spacing: 0.5px;
+}
+
+.week-breakdown-header span {
+color: #E8562A;
+}
+
+.week-row {
+display: flex;
+align-items: center;
+gap: 16px;
+padding: 14px 20px;
+border-bottom: 1px solid #e8e5e0;
+}
+
+.week-row:last-child { border-bottom: none; }
+.week-row:nth-child(even) { background: #f7f5f2; }
+
+.week-row .task-name {
+font-family: 'Inter', sans-serif;
+font-size: 14px;
+font-weight: 600;
+color: #111;
+width: 220px;
+flex-shrink: 0;
+}
+
+.week-row .bar-wrap {
+flex: 1;
+background: #e8e5e0;
+border-radius: 4px;
+height: 10px;
+overflow: hidden;
+}
+
+.week-row .bar-fill {
+height: 100%;
+border-radius: 4px;
+background: #E8562A;
+}
+
+.week-row .bar-fill.dim { background: #ccc; }
+
+.week-row .pct {
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+font-weight: 700;
+color: #111;
+width: 36px;
+text-align: right;
+flex-shrink: 0;
+}
+
+.week-breakdown-footer {
+background: #f7f5f2;
+padding: 12px 20px;
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+color: #888;
+border-top: 1px solid #e8e5e0;
+}
+
+/* ââ Capacity card âââââââââââââââââââââââââââââââââââââââââ */
+.capacity-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+margin: 36px 0;
+}
+
+.capacity-card {
+border-radius: 14px;
+padding: 24px 20px;
+border: 2px solid #e8e5e0;
+}
+
+.capacity-card.before {
+background: #fff;
+}
+
+.capacity-card.after {
+background: #111111;
+border-color: #111111;
+}
+
+.capacity-card .cap-label {
+font-family: 'Inter', sans-serif;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 16px;
+display: block;
+}
+
+.capacity-card.before .cap-label { color: #999; }
+.capacity-card.after .cap-label { color: #E8562A; }
+
+.capacity-card .cap-num {
+font-family: 'Inter', sans-serif;
+font-size: 52px;
+font-weight: 900;
+line-height: 1;
+margin-bottom: 8px;
+display: block;
+letter-spacing: -2px;
+}
+
+.capacity-card.before .cap-num { color: #111; }
+.capacity-card.after .cap-num { color: #fff; }
+
+.capacity-card .cap-desc {
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+line-height: 1.5;
+}
+
+.capacity-card.before .cap-desc { color: #666; }
+.capacity-card.after .cap-desc { color: #aaa; }
+
+.capacity-card .cap-items {
+margin-top: 14px;
+list-style: none;
+padding: 0;
+}
+
+.capacity-card .cap-items li {
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+padding: 5px 0;
+border-bottom: 1px solid #e8e5e0;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.capacity-card.after .cap-items li {
+border-bottom-color: #2a2a2a;
+color: #ccc;
+}
+
+.capacity-card.before .cap-items li { color: #444; }
+
+.cap-dot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+flex-shrink: 0;
+}
+
+.capacity-card.before .cap-dot { background: #ccc; }
+.capacity-card.after .cap-dot { background: #E8562A; }
+
+/* ââ Pipeline visual âââââââââââââââââââââââââââââââââââââââ */
+.pipeline {
+margin: 36px 0;
+display: flex;
+flex-direction: column;
+}
+
+.pipeline-step {
+display: flex;
+align-items: flex-start;
+gap: 16px;
+padding: 18px 20px;
+border: 1px solid #e8e5e0;
+background: #fff;
+}
+
+.pipeline-step:first-child { border-radius: 12px 12px 0 0; }
+.pipeline-step:last-child { border-radius: 0 0 12px 12px; }
+.pipeline-step + .pipeline-step { border-top: none; }
+
+.pipeline-step .step-num {
+font-family: 'Inter', sans-serif;
+font-size: 11px;
+font-weight: 700;
+background: #E8562A;
+color: #fff;
+width: 26px;
+height: 26px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+margin-top: 2px;
+}
+
+.pipeline-step .step-title {
+font-family: 'Inter', sans-serif;
+font-size: 15px;
+font-weight: 700;
+color: #111;
+margin-bottom: 4px;
+}
+
+.pipeline-step .step-desc {
+font-family: 'Inter', sans-serif;
+font-size: 14px;
+color: #666;
+line-height: 1.5;
+margin: 0;
+}
+
+.pipeline-footer {
+margin-top: 12px;
+background: #111111;
+border-radius: 10px;
+padding: 16px 20px;
+font-family: 'Inter', sans-serif;
+font-size: 14px;
+font-weight: 700;
+color: #E8562A;
+text-align: center;
+letter-spacing: 0.3px;
+}
+
+/* ââ Demo CTA ââââââââââââââââââââââââââââââââââââââââââââââ */
+.demo-cta {
+  background: #111111;
+  border-radius: 14px;
+  padding: 40px 40px;
+  margin: 48px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.demo-cta-text {}
+.demo-cta-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #E8562A;
+  margin-bottom: 10px;
+}
+.demo-cta h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.demo-cta p {
+  font-size: 14px !important;
+  color: #888888 !important;
+  margin: 0 !important;
+  line-height: 1.6;
+}
+.demo-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: #E8562A;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, transform 0.1s;
+}
+.demo-cta-btn:hover { background: #cf4a22; transform: translateY(-1px); }
+@media (max-width: 600px) {
+  .demo-cta { flex-direction: column; padding: 28px 24px; gap: 20px; }
+  .demo-cta-btn { width: 100%; justify-content: center; }
+}
+
+/* ââ CTA box âââââââââââââââââââââââââââââââââââââââââââââââ */
+.cta-box {
+background: #111111;
+color: #fff;
+padding: 40px 36px;
+border-radius: 14px;
+margin-top: 52px;
+text-align: center;
+}
+
+.cta-box h3 {
+font-family: 'Inter', sans-serif;
+font-size: 20px;
+font-weight: 700;
+margin-bottom: 12px;
+color: #fff;
+}
+
+.cta-box p {
+font-family: 'Inter', sans-serif;
+color: #bbb !important;
+font-size: 16px !important;
+margin-bottom: 24px !important;
+}
+
+.cta-box .question {
+font-size: 17px !important;
+color: #f0ece8 !important;
+font-style: italic;
+font-weight: 500;
+margin-bottom: 28px !important;
+}
+
+.cta-form {
+display: flex;
+gap: 10px;
+max-width: 440px;
+margin: 0 auto;
+flex-wrap: wrap;
+}
+
+.cta-form input[type="email"] {
+flex: 1;
+min-width: 200px;
+padding: 12px 16px;
+font-family: 'Inter', sans-serif;
+font-size: 15px;
+border: 1px solid #444;
+background: #1e1e1e;
+color: #fff;
+border-radius: 8px;
+outline: none;
+}
+
+.cta-form input[type="email"]::placeholder { color: #666; }
+.cta-form input[type="email"]:focus { border-color: #E8562A; }
+
+.cta-form button {
+padding: 12px 22px;
+font-family: 'Inter', sans-serif;
+font-size: 14px;
+font-weight: 700;
+background: #E8562A;
+color: #fff;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+white-space: nowrap;
+transition: background 0.15s;
+}
+
+.cta-form button:hover { background: #cf4a22; }
+
+.cta-note {
+font-family: 'Inter', sans-serif;
+font-size: 12px !important;
+color: #888 !important;
+margin-top: 12px !important;
+margin-bottom: 0 !important;
+}
+
+/* ââ Series label ââââââââââââââââââââââââââââââââââââââââââ */
+.series-label {
+display: inline-block;
+font-family: 'Inter', sans-serif;
+font-size: 12px;
+font-weight: 700;
+background: #E8562A;
+color: #fff;
+padding: 5px 12px;
+border-radius: 4px;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-bottom: 36px;
+}
+
+/* ââ Footer ââââââââââââââââââââââââââââââââââââââââââââââââ */
+.site-footer {
+background: #ffffff;
+color: #999999;
+padding: 40px 24px;
+text-align: center;
+border-top: 1px solid #e8e5e0;
+}
+
+.site-footer .footer-logo {
+font-family: 'Inter', sans-serif;
+font-size: 15px;
+font-weight: 700;
+color: #111111;
+margin-bottom: 16px;
+}
+
+.site-footer .footer-links {
+display: flex;
+gap: 24px;
+justify-content: center;
+flex-wrap: wrap;
+margin-bottom: 20px;
+}
+
+.site-footer .footer-links a {
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+color: #888;
+text-decoration: none;
+}
+
+.site-footer .footer-links a:hover { color: #111; }
+
+.site-footer .footer-copy {
+font-family: 'Inter', sans-serif;
+font-size: 12px;
+color: #999;
+}
+
+/* ââ Responsive ââââââââââââââââââââââââââââââââââââââââââââ */
+@media (max-width: 600px) {
+.site-header nav { display: none; }
+.article p { font-size: 17px; }
+.article p.lead { font-size: 19px; }
+.cta-box { padding: 32px 24px; }
+.capacity-grid { grid-template-columns: 1fr; }
+.week-row .task-name { width: 140px; font-size: 12px; }
+}
+</style>
 </head>
 <body>
 
-  <!-- ── Site header ──────────────────────────────────────────── -->
-  <header class="site-header">
-    <a href="https://borisdracka.com" class="logo">CFO Unfiltered</a>
-    <nav>
-      <a href="https://borisdracka.com/blog">Blog</a>
-      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
-      <a href="#subscribe" class="btn-subscribe">Subscribe</a>
-    </nav>
-  </header>
+<!-- ââ Site header ââââââââââââââââââââââââââââââââââââââââââââ -->
+<header class="site-header">
+<a href="https://borisdracka.com" class="logo">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/blog">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+<a href="#subscribe" class="btn-subscribe">Subscribe</a>
+</nav>
+</header>
 
-  <!-- ── Hero ─────────────────────────────────────────────────── -->
-  <div class="hero">
-    <div class="tag">SMB Finance · AI Capacity · Team Size</div>
-    <h1>50 People. €15M Revenue.<br>1 Accountant. This Is Normal.</h1>
-    <p class="subtitle">Why the finance function in most small businesses is either invisible or overwhelmed — and what AI actually does about it.</p>
+<!-- ââ Hero âââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<div class="hero">
+<div class="tag">SMB Finance Â· AI Capacity Â· Team Size</div>
+<h1>50 People. â¬15M Revenue.<br>1 Accountant. This Is Normal.</h1>
+<p class="subtitle">Why the finance function in most small businesses is either invisible or overwhelmed â and what AI actually does about it.</p>
+</div>
+
+<div class="meta">Boris DraÄka &nbsp;Â·&nbsp; May 2026 &nbsp;Â·&nbsp; 5 min read</div>
+
+<!-- ââ Article âââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<div class="article">
+
+<span class="series-label">Post #3 of 50 â The CFO &amp; AI Series</span>
+
+<p class="lead">
+This is the most common finance setup in small businesses â and nobody talks about it. One person handling everything. Not because the company is poorly run. Because that's how it works at this size. And for most of those companies, it has always worked â until it doesn't.
+</p>
+
+<div class="stat-row">
+<div class="stat-box">
+<span class="num">50</span>
+<span class="label">Employees</span>
+</div>
+<div class="stat-box">
+<span class="num">â¬15M</span>
+<span class="label">Annual revenue</span>
+</div>
+<div class="stat-box">
+<span class="num">1</span>
+<span class="label">Person in finance</span>
+</div>
+</div>
+
+<p>
+I've seen this ratio in more companies than I can count. Sometimes it's 30 people and â¬8M. Sometimes it's 80 people and â¬22M. The exact numbers change â the structural problem doesn't. The finance function is undersized relative to what the business actually needs from it.
+</p>
+
+<p>
+The company isn't making a mistake. It's making a rational decision: a full finance team is expensive, and at this scale, one capable person can handle the basics. Invoicing. Payroll. Monthly close. Tax filings. That's the job description. It's also a full-time job. So the basics are what gets done.
+</p>
+
+<h2>What "undervalued" actually looks like</h2>
+
+<p>
+The finance function in a 50-person company is usually one of two things: invisible or overwhelmed. Sometimes both at once, depending on the month.
+</p>
+
+<p>
+"Undervalued" doesn't mean the accountant is unappreciated. It means finance is treated as a compliance function, not a strategic one. The numbers get reported after the fact. Nobody is running cash flow forecasts three months out. Budget variances get explained in retrospect. Nobody is asking "why did operating costs jump 12% last quarter" until the end of the quarter.
+</p>
+
+<div class="pullquote">
+<p>"In a 50-person company with one accountant, finance is almost always reactive. Not because the person isn't capable â but because there's no time left to be proactive."</p>
+</div>
+
+<h2>Where the time actually goes</h2>
+
+<p>
+Here is a realistic breakdown of a typical week for a solo accountant in a growing SMB. I've seen variations of this across dozens of companies. The proportions shift slightly â the pattern doesn't.
+</p>
+
+<!-- Week breakdown visual -->
+<div class="week-breakdown">
+<div class="week-breakdown-header">
+One accountant's week &nbsp;Â·&nbsp; <span>40 hours</span> &nbsp;Â·&nbsp; where the time actually goes
+</div>
+<div class="week-row">
+<div class="task-name">Invoicing &amp; AP/AR</div>
+<div class="bar-wrap"><div class="bar-fill" style="width:30%"></div></div>
+<div class="pct">30%</div>
+</div>
+<div class="week-row">
+<div class="task-name">Payroll &amp; HR admin</div>
+<div class="bar-wrap"><div class="bar-fill" style="width:20%"></div></div>
+<div class="pct">20%</div>
+</div>
+<div class="week-row">
+<div class="task-name">Month-end close &amp; reporting</div>
+<div class="bar-wrap"><div class="bar-fill" style="width:20%"></div></div>
+<div class="pct">20%</div>
+</div>
+<div class="week-row">
+<div class="task-name">Tax filings &amp; compliance</div>
+<div class="bar-wrap"><div class="bar-fill" style="width:15%"></div></div>
+<div class="pct">15%</div>
+</div>
+<div class="week-row">
+<div class="task-name">Ad hoc requests from management</div>
+<div class="bar-wrap"><div class="bar-fill dim" style="width:10%"></div></div>
+<div class="pct">10%</div>
+</div>
+<div class="week-row">
+<div class="task-name">Forecasting &amp; analysis</div>
+<div class="bar-wrap"><div class="bar-fill dim" style="width:5%"></div></div>
+<div class="pct">5%</div>
+</div>
+<div class="week-breakdown-footer">
+The work that drives decisions gets 5% of the time. The work that keeps the lights on gets 95%.
+</div>
+</div>
+
+<p>
+That 5% for forecasting and analysis is not a personal failure. It's a structural one. When one person is responsible for keeping the operational finance running, there is no slack in the system for anything strategic. The month-end close doesn't move. Invoices don't wait. Payroll runs on a deadline.
+</p>
+
+<h2>What "overwhelmed" looks like</h2>
+
+<p>
+The company grows. Revenue goes from â¬8M to â¬15M. Headcount goes from 30 to 50. Transaction volume doubles. The number of people in finance stays at one. Because hiring a second finance person means admitting the function needs real investment â and the business has never had to make that call before.
+</p>
+
+<p>
+So the accountant absorbs it. Works longer hours. Gets faster at the routine tasks. Stops taking vacation in March and September. Becomes the single point of failure for anything finance-related. And still doesn't have time for the forecasting, the scenario analysis, the proactive cash management that would actually help the CEO make better decisions.
+</p>
+
+<div class="pullquote">
+<p>"The company's finance team isn't failing. It's succeeding at the wrong things â because those are the only things there's time for."</p>
+</div>
+
+<h2>AI doesn't add headcount. It adds capacity.</h2>
+
+<p>
+The answer most people reach for is: hire a second person. That's not always wrong. But it's also not always the right first move â especially when what's broken is the time allocation, not the headcount number itself.
+</p>
+
+<p>
+What AI does is shift where the time goes. Not by replacing the accountant â by automating the parts of the job that are high-volume, low-judgment, and deeply repetitive. Data pulling. Report formatting. Variance flagging. Recurring reconciliations. The work that fills the week without adding insight.
+</p>
+
+<!-- Capacity grid -->
+<div class="capacity-grid">
+<div class="capacity-card before">
+<span class="cap-label">Without AI</span>
+<span class="cap-num">1Ã</span>
+<div class="cap-desc">One person. One person's capacity. Strategic work happens in the margins.</div>
+<ul class="cap-items">
+<li><span class="cap-dot"></span>Manual data exports every month</li>
+<li><span class="cap-dot"></span>Report formatting takes hours</li>
+<li><span class="cap-dot"></span>Forecasting skipped when busy</li>
+<li><span class="cap-dot"></span>Variance analysis done late</li>
+<li><span class="cap-dot"></span>CEO asks, accountant scrambles</li>
+</ul>
+</div>
+<div class="capacity-card after">
+<span class="cap-label">With AI agents</span>
+<span class="cap-num">10Ã</span>
+<div class="cap-desc">Same person. Automated pipeline. Strategic work moves to the front.</div>
+<ul class="cap-items">
+<li><span class="cap-dot"></span>Data pulled and cleaned automatically</li>
+<li><span class="cap-dot"></span>Reports generated on schedule</li>
+<li><span class="cap-dot"></span>Forecasts updated continuously</li>
+<li><span class="cap-dot"></span>Variances flagged before anyone asks</li>
+<li><span class="cap-dot"></span>CEO gets answers before the question</li>
+</ul>
+</div>
+</div>
+
+<p>
+The 10Ã figure isn't marketing. It's a rough approximation of what happens when you remove the repetitive process layer from a one-person finance function. The person doesn't become ten people. The function starts operating like it has ten people's worth of coverage on the routine work â which frees the actual person to do the work that requires judgment.
+</p>
+
+<h2>What changes in practice</h2>
+
+<p>
+I've watched this play out in real companies. The first thing that changes is not the quality of the reports â it's the timing. Reports that used to arrive on the 10th of the month start arriving on the 2nd. The CEO starts making decisions with current data instead of data from three weeks ago.
+</p>
+
+<p>
+The second thing that changes is what the accountant does with recovered time. In every case I've seen, it goes toward things the business genuinely needed but was never getting: rolling cash flow projections, scenario planning before a major hire or investment, proactive flagging of margin compression before it shows up in the P&L conversation.
+</p>
+
+<p>
+The finance function doesn't get bigger. It gets better at the thing it's supposed to be â a system that helps the business make decisions, not just a system that records what already happened.
+</p>
+
+<div class="pullquote">
+<p>"AI doesn't replace the person in finance. It replaces the version of that person who spent 95% of their week on tasks that don't require a person at all."</p>
+</div>
+
+<!-- ââ Demo CTA âââââââââââââââââââââââââââââââââââââââââââ -->
+<div class="demo-cta">
+  <div class="demo-cta-text">
+    <div class="demo-cta-label">See it in action</div>
+    <h3>Want to see exactly how<br>this agent handles invoices?</h3>
+    <p>The invoice table, AI-generated emails, and the 5-step pipeline â all visualized. Code on GitHub.</p>
   </div>
+  <a href="/blog/post-03-demo" class="demo-cta-btn">â See the agent in action</a>
+</div>
 
-  <div class="meta">Boris Dračka &nbsp;·&nbsp; May 2026 &nbsp;·&nbsp; 5 min read</div>
+<!-- ââ CTA box ââââââââââââââââââââââââââââââââââââââââââââ -->
+<div class="cta-box" id="subscribe">
+<h3>Follow the series</h3>
+<p>Post #4 covers the specific tasks I've automated first â and why the order matters more than the tools.</p>
+<p class="question">How many people are in your finance team right now?</p>
 
-  <!-- ── Article ───────────────────────────────────────────────── -->
-  <div class="article">
+<form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+<input type="email" name="email" placeholder="your@email.com" required />
+<button type="submit">Subscribe free</button>
+</form>
+<p class="cta-note">No spam. One post per week. Unsubscribe any time.</p>
+</div>
 
-    <span class="series-label">Post #3 of 50 — The CFO &amp; AI Series</span>
+</div>
 
-    <p class="lead">
-      This is the most common finance setup in small businesses — and nobody talks about it. One person handling everything. Not because the company is poorly run. Because that's how it works at this size. And for most of those companies, it has always worked — until it doesn't.
-    </p>
-
-    <div class="stat-row">
-      <div class="stat-box">
-        <span class="num">50</span>
-        <span class="label">Employees</span>
-      </div>
-      <div class="stat-box">
-        <span class="num">€15M</span>
-        <span class="label">Annual revenue</span>
-      </div>
-      <div class="stat-box">
-        <span class="num">1</span>
-        <span class="label">Person in finance</span>
-      </div>
-    </div>
-
-    <p>
-      I've seen this ratio in more companies than I can count. Sometimes it's 30 people and €8M. Sometimes it's 80 people and €22M. The exact numbers change — the structural problem doesn't. The finance function is undersized relative to what the business actually needs from it.
-    </p>
-
-    <p>
-      The company isn't making a mistake. It's making a rational decision: a full finance team is expensive, and at this scale, one capable person can handle the basics. Invoicing. Payroll. Monthly close. Tax filings. That's the job description. It's also a full-time job. So the basics are what gets done.
-    </p>
-
-    <h2>What "undervalued" actually looks like</h2>
-
-    <p>
-      The finance function in a 50-person company is usually one of two things: invisible or overwhelmed. Sometimes both at once, depending on the month.
-    </p>
-
-    <p>
-      "Undervalued" doesn't mean the accountant is unappreciated. It means finance is treated as a compliance function, not a strategic one. The numbers get reported after the fact. Nobody is running cash flow forecasts three months out. Budget variances get explained in retrospect. Nobody is asking "why did operating costs jump 12% last quarter" until the end of the quarter.
-    </p>
-
-    <div class="pullquote">
-      <p>"In a 50-person company with one accountant, finance is almost always reactive. Not because the person isn't capable — but because there's no time left to be proactive."</p>
-    </div>
-
-    <h2>Where the time actually goes</h2>
-
-    <p>
-      Here is a realistic breakdown of a typical week for a solo accountant in a growing SMB. I've seen variations of this across dozens of companies. The proportions shift slightly — the pattern doesn't.
-    </p>
-
-    <!-- Week breakdown visual -->
-    <div class="week-breakdown">
-      <div class="week-breakdown-header">
-        One accountant's week &nbsp;·&nbsp; <span>40 hours</span> &nbsp;·&nbsp; where the time actually goes
-      </div>
-      <div class="week-row">
-        <div class="task-name">Invoicing & AP/AR</div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:30%"></div></div>
-        <div class="pct">30%</div>
-      </div>
-      <div class="week-row">
-        <div class="task-name">Payroll & HR admin</div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:20%"></div></div>
-        <div class="pct">20%</div>
-      </div>
-      <div class="week-row">
-        <div class="task-name">Month-end close & reporting</div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:20%"></div></div>
-        <div class="pct">20%</div>
-      </div>
-      <div class="week-row">
-        <div class="task-name">Tax filings & compliance</div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:15%"></div></div>
-        <div class="pct">15%</div>
-      </div>
-      <div class="week-row">
-        <div class="task-name">Ad hoc requests from management</div>
-        <div class="bar-wrap"><div class="bar-fill dim" style="width:10%"></div></div>
-        <div class="pct">10%</div>
-      </div>
-      <div class="week-row">
-        <div class="task-name">Forecasting & analysis</div>
-        <div class="bar-wrap"><div class="bar-fill dim" style="width:5%"></div></div>
-        <div class="pct">5%</div>
-      </div>
-      <div class="week-breakdown-footer">
-        The work that drives decisions gets 5% of the time. The work that keeps the lights on gets 95%.
-      </div>
-    </div>
-
-    <p>
-      That 5% for forecasting and analysis is not a personal failure. It's a structural one. When one person is responsible for keeping the operational finance running, there is no slack in the system for anything strategic. The month-end close doesn't move. Invoices don't wait. Payroll runs on a deadline.
-    </p>
-
-    <h2>What "overwhelmed" looks like</h2>
-
-    <p>
-      The company grows. Revenue goes from €8M to €15M. Headcount goes from 30 to 50. Transaction volume doubles. The number of people in finance stays at one. Because hiring a second finance person means admitting the function needs real investment — and the business has never had to make that call before.
-    </p>
-
-    <p>
-      So the accountant absorbs it. Works longer hours. Gets faster at the routine tasks. Stops taking vacation in March and September. Becomes the single point of failure for anything finance-related. And still doesn't have time for the forecasting, the scenario analysis, the proactive cash management that would actually help the CEO make better decisions.
-    </p>
-
-    <div class="pullquote">
-      <p>"The company's finance team isn't failing. It's succeeding at the wrong things — because those are the only things there's time for."</p>
-    </div>
-
-    <h2>AI doesn't add headcount. It adds capacity.</h2>
-
-    <p>
-      The answer most people reach for is: hire a second person. That's not always wrong. But it's also not always the right first move — especially when what's broken is the time allocation, not the headcount number itself.
-    </p>
-
-    <p>
-      What AI does is shift where the time goes. Not by replacing the accountant — by automating the parts of the job that are high-volume, low-judgment, and deeply repetitive. Data pulling. Report formatting. Variance flagging. Recurring reconciliations. The work that fills the week without adding insight.
-    </p>
-
-    <!-- Capacity grid -->
-    <div class="capacity-grid">
-      <div class="capacity-card before">
-        <span class="cap-label">Without AI</span>
-        <span class="cap-num">1×</span>
-        <div class="cap-desc">One person. One person's capacity. Strategic work happens in the margins.</div>
-        <ul class="cap-items">
-          <li><span class="cap-dot"></span>Manual data exports every month</li>
-          <li><span class="cap-dot"></span>Report formatting takes hours</li>
-          <li><span class="cap-dot"></span>Forecasting skipped when busy</li>
-          <li><span class="cap-dot"></span>Variance analysis done late</li>
-          <li><span class="cap-dot"></span>CEO asks, accountant scrambles</li>
-        </ul>
-      </div>
-      <div class="capacity-card after">
-        <span class="cap-label">With AI agents</span>
-        <span class="cap-num">10×</span>
-        <div class="cap-desc">Same person. Automated pipeline. Strategic work moves to the front.</div>
-        <ul class="cap-items">
-          <li><span class="cap-dot"></span>Data pulled and cleaned automatically</li>
-          <li><span class="cap-dot"></span>Reports generated on schedule</li>
-          <li><span class="cap-dot"></span>Forecasts updated continuously</li>
-          <li><span class="cap-dot"></span>Variances flagged before anyone asks</li>
-          <li><span class="cap-dot"></span>CEO gets answers before the question</li>
-        </ul>
-      </div>
-    </div>
-
-    <p>
-      The 10× figure isn't marketing. It's a rough approximation of what happens when you remove the repetitive process layer from a one-person finance function. The person doesn't become ten people. The function starts operating like it has ten people's worth of coverage on the routine work — which frees the actual person to do the work that requires judgment.
-    </p>
-
-    <h2>What changes in practice</h2>
-
-    <p>
-      I've watched this play out in real companies. The first thing that changes is not the quality of the reports — it's the timing. Reports that used to arrive on the 10th of the month start arriving on the 2nd. The CEO starts making decisions with current data instead of data from three weeks ago.
-    </p>
-
-    <p>
-      The second thing that changes is what the accountant does with recovered time. In every case I've seen, it goes toward things the business genuinely needed but was never getting: rolling cash flow projections, scenario planning before a major hire or investment, proactive flagging of margin compression before it shows up in the P&L conversation.
-    </p>
-
-    <p>
-      The finance function doesn't get bigger. It gets better at the thing it's supposed to be — a system that helps the business make decisions, not just a system that records what already happened.
-    </p>
-
-    <div class="pullquote">
-      <p>"AI doesn't replace the person in finance. It replaces the version of that person who spent 95% of their week on tasks that don't require a person at all."</p>
-    </div>
-
-    <!-- ── CTA box ──────────────────────────────────────────── -->
-    <div class="cta-box" id="subscribe">
-      <h3>Follow the series</h3>
-      <p>Post #4 covers the specific tasks I've automated first — and why the order matters more than the tools.</p>
-      <p class="question">How many people are in your finance team right now?</p>
-
-      <form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
-        <input type="email" name="email" placeholder="your@email.com" required />
-        <button type="submit">Subscribe free</button>
-      </form>
-      <p class="cta-note">No spam. One post per week. Unsubscribe any time.</p>
-    </div>
-
-  </div>
-
-  <!-- ── Footer ───────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="footer-logo">CFO Unfiltered</div>
-    <div class="footer-links">
-      <a href="https://borisdracka.com">Home</a>
-      <a href="https://borisdracka.com/blog">Blog</a>
-      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
-      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Subscribe</a>
-    </div>
-    <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
-  </footer>
+<!-- ââ Footer âââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<footer class="site-footer">
+<div class="footer-logo">CFO Unfiltered</div>
+<div class="footer-links">
+<a href="https://borisdracka.com">Home</a>
+<a href="https://borisdracka.com/blog">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+<a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Subscribe</a>
+</div>
+<p class="footer-copy">Â© 2026 Boris DraÄka Â· borisdracka.com</p>
+</footer>
 
 </body>
 </html>
