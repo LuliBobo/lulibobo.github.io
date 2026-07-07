@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inside the Architecture: How an AI CFO Agent Actually Gets Built | Boris Dračka</title>
+  <meta name="description" content="Most descriptions of AI CFO agents are too abstract. Here's the actual plumbing — what systems connect to what, what the agent layer does, and why it's simpler than it sounds once you know where to start." />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="Boris Dračka" />
+  <meta property="og:url"         content="https://borisdracka.com/blog/post-06" />
+  <meta property="og:title"       content="Inside the Architecture: How an AI CFO Agent Actually Gets Built" />
+  <meta property="og:description" content="Most descriptions of AI CFO agents are too abstract. Here's the actual plumbing — what connects to what, and what runs without anyone pressing a button." />
+  <meta property="og:image"       content="https://borisdracka.com/og/post-06.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:author"         content="Boris Dračka" />
+  <meta property="article:published_time" content="2026-06-05T14:00:00+02:00" />
+  <meta property="article:section"        content="Finance" />
+  <meta property="article:tag"            content="AI Agents" />
+  <meta property="article:tag"            content="Finance Architecture" />
+  <meta property="article:tag"            content="CFO" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@BorisDracka" />
+  <meta name="twitter:creator"     content="@BorisDracka" />
+  <meta name="twitter:title"       content="Inside the Architecture: How an AI CFO Agent Actually Gets Built" />
+  <meta name="twitter:description" content="The actual plumbing behind an AI CFO agent — what connects to what, and how reports land in the CEO's inbox without anyone pressing a button." />
+  <meta name="twitter:image"       content="https://borisdracka.com/og/post-06.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://borisdracka.com/blog/post-06" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { font-family: 'Inter', sans-serif; background: #ffffff; color: #111111; line-height: 1.75; }
+
+    /* ── Site header ─────────────────────────────────────────── */
+    .site-header {
+      background: rgba(255,255,255,0.96); border-bottom: 1px solid #e8e5e0;
+      padding: 0 24px; height: 56px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px);
+    }
+    .site-header .logo { font-size: 15px; font-weight: 700; color: #111111; text-decoration: none; letter-spacing: -0.3px; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { font-size: 13px; color: #666; text-decoration: none; }
+    .site-header nav a:hover { color: #111; }
+    .site-header .btn-subscribe {
+      font-size: 13px; font-weight: 700; background: #E8562A; color: #fff;
+      padding: 8px 16px; border-radius: 8px; text-decoration: none; transition: background 0.15s;
+    }
+    .site-header .btn-subscribe:hover { background: #cf4a22; }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero { background: #111111; color: #fff; padding: 72px 24px 60px; text-align: center; }
+    .hero .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #E8562A; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(26px, 5vw, 46px); font-weight: 900; line-height: 1.15; letter-spacing: -1.5px; max-width: 780px; margin: 0 auto 20px; }
+    .hero .subtitle { font-size: 18px; color: #aaa; max-width: 580px; margin: 0 auto; font-style: italic; }
+
+    /* ── Meta bar ────────────────────────────────────────────── */
+    .meta { font-size: 13px; color: #999999; text-align: center; padding: 20px 24px; border-bottom: 1px solid #e8e5e0; }
+
+    /* ── Article body ────────────────────────────────────────── */
+    .article { max-width: 720px; margin: 0 auto; padding: 52px 24px 80px; }
+    .article p { font-size: 18px; margin-bottom: 24px; color: #111111; line-height: 1.75; }
+    .article p.lead { font-size: 21px; font-weight: 400; color: #111111; margin-bottom: 32px; line-height: 1.6; }
+    .article h2 { font-size: 22px; font-weight: 700; margin: 44px 0 18px; color: #111111; letter-spacing: -0.5px; }
+
+    /* ── Pull quote ──────────────────────────────────────────── */
+    .pullquote { border-left: 4px solid #E8562A; padding: 16px 24px; margin: 36px 0; background: #f7f5f2; border-radius: 0 8px 8px 0; }
+    .pullquote p { font-size: 20px !important; font-style: italic; color: #333 !important; margin: 0 !important; line-height: 1.5; }
+
+    /* ── Stat row ────────────────────────────────────────────── */
+    .stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 36px 0; }
+    .stat-box { flex: 1; min-width: 140px; background: #111111; padding: 24px 20px; text-align: center; border-radius: 14px; border: 2px solid #111111; }
+    .stat-box .num { font-size: 36px; font-weight: 900; color: #E8562A; display: block; }
+    .stat-box .label { font-size: 12px; color: #aaa; letter-spacing: 0.5px; margin-top: 6px; display: block; }
+
+    /* ── Architecture diagram ────────────────────────────────── */
+    .arch-diagram {
+      margin: 36px 0;
+      border: 1px solid #e8e5e0;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .arch-header {
+      background: #111111;
+      padding: 13px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #aaa;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .arch-header span { color: #E8562A; }
+
+    .arch-body {
+      padding: 28px 20px;
+      background: #fafaf8;
+    }
+
+    /* Layer labels */
+    .arch-layer {
+      margin-bottom: 8px;
+    }
+
+    .arch-layer-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .arch-nodes {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .arch-node {
+      flex: 1;
+      min-width: 120px;
+      background: #fff;
+      border: 1.5px solid #e8e5e0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+
+    .arch-node.accent {
+      background: #111111;
+      border-color: #111111;
+    }
+
+    .arch-node .node-icon {
+      font-size: 18px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .arch-node .node-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .arch-node.accent .node-name { color: #fff; }
+
+    .arch-node .node-sub {
+      font-size: 11px;
+      color: #888;
+      line-height: 1.3;
+    }
+
+    .arch-node.accent .node-sub { color: #aaa; }
+
+    /* Arrow row */
+    .arch-arrow-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 0;
+      gap: 6px;
+    }
+
+    .arch-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      flex: 1;
+    }
+
+    .arch-arrow .arrow-line {
+      width: 2px;
+      height: 20px;
+      background: #E8562A;
+      position: relative;
+    }
+
+    .arch-arrow .arrow-head {
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid #E8562A;
+    }
+
+    .arch-arrow .arrow-label {
+      font-size: 10px;
+      color: #E8562A;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    /* Agent layer - special box */
+    .arch-agent-box {
+      background: #111111;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 4px;
+    }
+
+    .arch-agent-box .ab-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #E8562A;
+      margin-bottom: 12px;
+    }
+
+    .arch-agent-steps {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .arch-agent-step {
+      flex: 1;
+      min-width: 90px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 10px 10px;
+      text-align: center;
+    }
+
+    .arch-agent-step .as-num {
+      font-size: 18px;
+      font-weight: 900;
+      color: #E8562A;
+      display: block;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .arch-agent-step .as-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .arch-agent-step .as-sub {
+      font-size: 10px;
+      color: #666;
+      line-height: 1.3;
+    }
+
+    .arch-diagram-footer {
+      background: #fff5f3;
+      border-top: 1px solid #fdd8cc;
+      padding: 11px 20px;
+      font-size: 13px;
+      color: #E8562A;
+      font-weight: 700;
+    }
+
+    /* ── Build effort table ──────────────────────────────────── */
+    .effort-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 36px 0;
+      font-size: 14px;
+    }
+
+    .effort-table th {
+      background: #111111;
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .effort-table th:first-child { border-radius: 10px 0 0 0; }
+    .effort-table th:last-child  { border-radius: 0 10px 0 0; color: #E8562A; }
+
+    .effort-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e8e5e0;
+      color: #333;
+      line-height: 1.4;
+      vertical-align: middle;
+    }
+
+    .effort-table tr:last-child td { border-bottom: none; }
+    .effort-table tr:nth-child(even) td { background: #f7f5f2; }
+
+    .effort-table .col-comp { font-weight: 700; color: #111; }
+
+    .effort-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .effort-pill.easy   { background: #dcfce7; color: #166534; }
+    .effort-pill.medium { background: #fef3c7; color: #92400e; }
+    .effort-pill.hard   { background: #fee2e2; color: #dc2626; }
+
+    /* ── Gap table ───────────────────────────────────────────── */
+    .gap-table { width: 100%; border-collapse: collapse; margin: 36px 0; font-size: 14px; }
+    .gap-table th { background: #111111; color: #fff; padding: 12px 16px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.5px; }
+    .gap-table th:first-child { border-radius: 10px 0 0 0; }
+    .gap-table th:last-child   { border-radius: 0 10px 0 0; color: #E8562A; }
+    .gap-table td { padding: 12px 16px; border-bottom: 1px solid #e8e5e0; color: #333; line-height: 1.4; vertical-align: top; }
+    .gap-table tr:last-child td { border-bottom: none; }
+    .gap-table tr:nth-child(even) td { background: #f7f5f2; }
+    .gap-table .col-q { font-weight: 700; color: #111; }
+    .gap-icon { display: inline-block; width: 18px; height: 18px; border-radius: 50%; font-size: 10px; font-weight: 900; text-align: center; line-height: 18px; margin-right: 4px; }
+    .gap-icon.no  { background: #fee2e2; color: #dc2626; }
+    .gap-icon.yes { background: #dcfce7; color: #166534; }
+
+    /* ── CTA box ─────────────────────────────────────────────── */
+    .cta-box { background: #111111; padding: 40px 36px; border-radius: 14px; margin-top: 52px; text-align: center; }
+    .cta-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .cta-box p  { color: #bbb !important; font-size: 16px !important; margin-bottom: 24px !important; }
+    .cta-box .question { font-size: 17px !important; color: #f0ece8 !important; font-style: italic; font-weight: 500; margin-bottom: 28px !important; }
+    .cta-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; }
+    .cta-form input[type="email"] { flex: 1; min-width: 200px; padding: 12px 16px; font-size: 15px; border: 1px solid #444; background: #1e1e1e; color: #fff; border-radius: 8px; outline: none; }
+    .cta-form input[type="email"]::placeholder { color: #666; }
+    .cta-form input[type="email"]:focus { border-color: #E8562A; }
+    .cta-form button { padding: 12px 22px; font-size: 14px; font-weight: 700; background: #E8562A; color: #fff; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+    .cta-form button:hover { background: #cf4a22; }
+    .cta-note { font-size: 12px !important; color: #888 !important; margin-top: 12px !important; margin-bottom: 0 !important; }
+
+    /* ── Series label ────────────────────────────────────────── */
+    .series-label { display: inline-block; font-size: 12px; font-weight: 700; background: #E8562A; color: #fff; padding: 5px 12px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 36px; }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .site-footer { background: #ffffff; padding: 40px 24px; text-align: center; border-top: 1px solid #e8e5e0; }
+    .site-footer .footer-logo { font-size: 15px; font-weight: 700; color: #111111; margin-bottom: 16px; }
+    .site-footer .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .site-footer .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
+    .site-footer .footer-links a:hover { color: #111; }
+    .site-footer .footer-copy { font-size: 12px; color: #999; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .site-header nav { display: none; }
+      .article p { font-size: 17px; }
+      .article p.lead { font-size: 19px; }
+      .cta-box { padding: 32px 24px; }
+      .arch-agent-steps { flex-direction: column; }
+      .effort-table { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site header ──────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="https://borisdracka.com" class="logo">CFO Unfiltered</a>
+    <nav>
+      <a href="https://borisdracka.com/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="#subscribe" class="btn-subscribe">Subscribe</a>
+    </nav>
+  </header>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="tag">AI Architecture · Finance Systems · Build</div>
+    <h1>Inside the Architecture:<br>How an AI CFO Agent Actually Gets Built</h1>
+    <p class="subtitle">Most descriptions are too abstract. Here's the actual plumbing — what connects to what, and how reports land in the CEO's inbox without anyone pressing a button.</p>
+  </div>
+
+  <div class="meta">Boris Dračka &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; 6 min read</div>
+
+  <!-- ── Article ───────────────────────────────────────────────── -->
+  <div class="article">
+
+    <span class="series-label">Post #6 of 50 — The CFO &amp; AI Series</span>
+
+    <p class="lead">
+      In Post #2, I described what an AI CFO agent does — it pulls data, cleans it, calculates KPIs, generates reports, and sends them. Every day. Automatically. Several people asked the obvious follow-up: how? This post is the answer.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="num">4</span>
+        <span class="label">Source systems connected</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">5</span>
+        <span class="label">Agent steps, fully automated</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">0</span>
+        <span class="label">Developers required</span>
+      </div>
+    </div>
+
+    <p>
+      The phrase "AI agent" sounds opaque by design. It conjures images of machine learning pipelines, cloud infrastructure, and engineering teams. The reality — for the specific problem of finance reporting automation in a 50–200 person company — is considerably more accessible. You don't need a developer. You need a clear picture of what connects to what.
+    </p>
+
+    <h2>The full architecture, layer by layer</h2>
+
+    <p>
+      An AI CFO agent has three layers: source systems (where the data lives), the agent layer (where it gets processed), and outputs (where it lands). Here's what each layer contains and how they connect.
+    </p>
+
+    <!-- Architecture diagram -->
+    <div class="arch-diagram">
+      <div class="arch-header">
+        <span>CFO Agent Architecture</span> — end-to-end data flow
+      </div>
+
+      <div class="arch-body">
+
+        <!-- Layer 1: Sources -->
+        <div class="arch-layer">
+          <div class="arch-layer-label">Layer 1 — Source systems (where data lives)</div>
+          <div class="arch-nodes">
+            <div class="arch-node">
+              <span class="node-icon">🏦</span>
+              <span class="node-name">Bank Feed</span>
+              <span class="node-sub">Live balance & transactions via open banking API</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">📒</span>
+              <span class="node-name">Accounting SW</span>
+              <span class="node-sub">Invoice, AP/AR, chart of accounts (Pohoda, QuickBooks, Xero…)</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">👥</span>
+              <span class="node-name">Payroll</span>
+              <span class="node-sub">Scheduled payroll amounts & dates</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">📊</span>
+              <span class="node-name">Budget File</span>
+              <span class="node-sub">Monthly targets & actuals (Excel or Google Sheets)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div class="arch-arrow-row">
+          <div class="arch-arrow">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"></div>
+            <div class="arch-arrow-label">API + scheduled pull · every morning 6:00</div>
+          </div>
+        </div>
+
+        <!-- Layer 2: Agent -->
+        <div class="arch-agent-box">
+          <div class="ab-label">Layer 2 — Agent (what runs automatically)</div>
+          <div class="arch-agent-steps">
+            <div class="arch-agent-step">
+              <span class="as-num">1</span>
+              <span class="as-name">Pull</span>
+              <span class="as-sub">Fetches raw data from all 4 sources</span>
+            </div>
+            <div class="arch-agent-step">
+              <span class="as-num">2</span>
+              <span class="as-name">Clean</span>
+              <span class="as-sub">Deduplicates, normalises categories, flags anomalies</span>
+            </div>
+            <div class="arch-agent-step">
+              <span class="as-num">3</span>
+              <span class="as-name">Calculate</span>
+              <span class="as-sub">KPIs, 14-day cash projection, budget vs actual</span>
+            </div>
+            <div class="arch-agent-step">
+              <span class="as-num">4</span>
+              <span class="as-name">Generate</span>
+              <span class="as-sub">Formatted report with variance commentary</span>
+            </div>
+            <div class="arch-agent-step">
+              <span class="as-num">5</span>
+              <span class="as-name">Send</span>
+              <span class="as-sub">Delivers to configured outputs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div class="arch-arrow-row">
+          <div class="arch-arrow">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"></div>
+            <div class="arch-arrow-label">Automated delivery · by 7:30 every morning</div>
+          </div>
+        </div>
+
+        <!-- Layer 3: Outputs -->
+        <div class="arch-layer">
+          <div class="arch-layer-label">Layer 3 — Outputs (where results land)</div>
+          <div class="arch-nodes">
+            <div class="arch-node">
+              <span class="node-icon">📧</span>
+              <span class="node-name">Email Digest</span>
+              <span class="node-sub">Daily summary to CEO + CFO inbox</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">📱</span>
+              <span class="node-name">Slack / Teams</span>
+              <span class="node-sub">KPI snapshot posted to finance channel</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">📈</span>
+              <span class="node-name">Dashboard</span>
+              <span class="node-sub">Google Looker Studio or Notion live view</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">🚨</span>
+              <span class="node-name">Alert</span>
+              <span class="node-sub">Threshold breach → immediate SMS / push</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="arch-diagram-footer">
+        Every morning at 7:30, the CEO's inbox has the numbers. Nobody assembled them.
+      </div>
+    </div>
+
+    <p>
+      The agent doesn't "think" about finance in the way a CFO does. It executes a defined workflow — reliably, on schedule, with the same logic every time. That consistency is actually one of its main advantages: the KPI definitions don't change depending on who ran the model, and the report doesn't arrive late because someone had a meeting.
+    </p>
+
+    <h2>What the agent layer actually runs on</h2>
+
+    <p>
+      This is the question I get most often when I describe the architecture. The honest answer: it depends on how far you want to go. For the basic version — daily data pull, KPI calculation, email report — you don't need AI at all. You need scheduled automation (Make.com, n8n, or even a Python script) and clean data connections.
+    </p>
+
+    <div class="pullquote">
+      <p>"The 'AI' part of an AI CFO agent is actually the smallest part. The hard work is the data plumbing. Get that right and the intelligence layer almost builds itself."</p>
+    </div>
+
+    <p>
+      The AI layer becomes valuable for three specific tasks: anomaly detection (flagging transactions that don't fit the pattern), narrative generation (writing the variance commentary in plain language), and predictive projection (using historical patterns to improve the 14-day cash forecast). None of those require a custom model. They can all run on a general-purpose LLM with a well-designed prompt and clean input data.
+    </p>
+
+    <h2>Which parts are actually hard to build</h2>
+
+    <p>
+      Not everything in this architecture is equally difficult. Here's an honest breakdown of where the effort actually goes — and what tends to break first.
+    </p>
+
+    <!-- Build effort table -->
+    <table class="effort-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Effort to set up</th>
+          <th>What breaks / what to watch</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-comp">Bank feed connection</td>
+          <td><span class="effort-pill easy">Easy</span></td>
+          <td>Open banking APIs are well-documented. Main issue: some smaller banks don't support them yet — manual CSV upload as fallback.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Accounting software export</td>
+          <td><span class="effort-pill medium">Medium</span></td>
+          <td>API quality varies by vendor. Xero and QuickBooks are excellent. Pohoda (common in CEE) requires more custom work. Data format inconsistencies are common.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Data cleaning rules</td>
+          <td><span class="effort-pill hard">Hard</span></td>
+          <td>This is the real work. Every company's chart of accounts is different. Normalisation rules need to be built manually and tested against months of real data before they're reliable.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">KPI calculation logic</td>
+          <td><span class="effort-pill easy">Easy</span></td>
+          <td>Once data is clean, formulas are straightforward. The main risk is definition drift — make sure everyone agrees on what "gross margin" means before you automate it.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">AI narrative generation</td>
+          <td><span class="effort-pill easy">Easy</span></td>
+          <td>A well-structured prompt with the delta data produces good variance commentary. Prompt needs tuning for tone and length, but this is hours not days.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Report delivery (email/Slack)</td>
+          <td><span class="effort-pill easy">Easy</span></td>
+          <td>Standard integrations. Main failure mode: email formatting breaks on mobile. Test on multiple clients before going live.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">14-day cash projection</td>
+          <td><span class="effort-pill medium">Medium</span></td>
+          <td>Accuracy depends on AR/AP data quality. If clients pay late unpredictably, the projection will drift. Flag confidence level in the output rather than presenting a single number.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Alert threshold logic</td>
+          <td><span class="effort-pill easy">Easy</span></td>
+          <td>Set thresholds conservatively at first — too many false alerts and people start ignoring them. Tune over 4–6 weeks of real operation.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>The one thing that takes longer than expected</h2>
+
+    <p>
+      In my experience building this, the data cleaning layer took three times longer than I planned. Not because it's technically complex — but because you don't know what's wrong with your data until you start looking at it systematically. Duplicate vendor entries. Transactions posted to the wrong cost center. Invoice categories that changed when someone updated the chart of accounts two years ago and didn't tell anyone.
+    </p>
+
+    <p>
+      This is not a failure mode. It's actually one of the most valuable outputs of building this system: you discover what your data quality actually looks like, and you fix it permanently rather than working around it every month when you close the books.
+    </p>
+
+    <div class="pullquote">
+      <p>"Building the agent forced me to fix problems in the underlying data that had been there for years. The automation didn't just speed up the reporting — it made the reporting accurate for the first time."</p>
+    </div>
+
+    <h2>What "without pressing a button" actually requires</h2>
+
+    <p>
+      Full automation — where the CEO's inbox has fresh numbers every morning without any human action — requires three things to be stable: reliable data connections, a scheduler that runs even when nobody is watching, and an error-handling layer that catches failures before they produce wrong output.
+    </p>
+
+    <p>
+      The scheduler is the simplest piece. A cloud-hosted cron job (or Make.com's scheduling feature) handles this for almost no cost. The error handling is where most first-version implementations fall short — when the bank API is down or the accounting export is malformed, the agent needs to fail visibly and loudly rather than silently sending an empty or incorrect report.
+    </p>
+
+    <p>
+      Building the error handling properly took about a week of additional work after the "happy path" was running. It's not glamorous. It's what makes the difference between a demo and a system you can actually trust at 7:30 on a Monday morning.
+    </p>
+
+    <!-- ── CTA box ──────────────────────────────────────────── -->
+    <div class="cta-box" id="subscribe">
+      <h3>Follow the series</h3>
+      <p>Post #7 covers the first report the agent produced — what the CEO said when it landed, and the one number that was wrong and why.</p>
+      <p class="question">What's the biggest manual task in your finance process right now?</p>
+
+      <form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <button type="submit">Subscribe free</button>
+      </form>
+      <p class="cta-note">No spam. One post per week. Unsubscribe any time.</p>
+    </div>
+
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-logo">CFO Unfiltered</div>
+    <div class="footer-links">
+      <a href="https://borisdracka.com">Home</a>
+      <a href="https://borisdracka.com/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Subscribe</a>
+    </div>
+    <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
+  </footer>
+
+</body>
+</html>
