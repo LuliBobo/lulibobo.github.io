@@ -8,6 +8,9 @@
   <meta property="og:title" content="Boris Dracka — CFO Unfiltered" />
   <meta property="og:description" content="30 years as CFO. Now writing what no one tells you about running numbers at the top." />
   <meta property="og:image" content="luli_profile.png" />
+  <link rel="alternate" hreflang="en" href="https://borisdracka.com/" />
+  <link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/" />
+  <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/" />
 
   <!-- Security headers -->
   <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -107,6 +110,21 @@
       transition: background 0.2s;
     }
     .nav-subscribe:hover { background: var(--orange-d); }
+    .nav-lang {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .nav-lang a {
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-lang a.active { color: var(--orange); }
+    .nav-lang a:hover { color: var(--dark); }
+    .nav-lang .lang-sep { color: var(--border); }
 
     /* ── HERO ── */
     .hero {
@@ -429,6 +447,9 @@
       @BorisDracka
     </a>
     <a class="nav-subscribe" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
+    <div class="nav-lang">
+      <a href="/" class="active">EN</a><span class="lang-sep">/</span><a href="/sk/">SK</a>
+    </div>
   </div>
 </nav>
 
@@ -503,7 +524,7 @@
   <span class="cta-note">No spam. Unsubscribe anytime. Free forever.</span>
   <br>
   <a class="x-link" href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer">
-    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.7z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
     Follow @BorisDracka on X
   </a>
 </section>
