@@ -9,6 +9,9 @@
   <meta property="og:description" content="50 posts. One CFO's honest account of building AI into finance." />
   <meta property="og:image" content="https://borisdracka.com/luli_profile.png" />
   <link rel="canonical" href="https://borisdracka.com/blog" />
+  <link rel="alternate" hreflang="en" href="https://borisdracka.com/blog" />
+  <link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog" />
+  <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
@@ -89,6 +92,21 @@
       transition: background 0.2s;
     }
     .nav-subscribe:hover { background: var(--orange-d); }
+    .nav-lang {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .nav-lang a {
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-lang a.active { color: var(--orange); }
+    .nav-lang a:hover { color: var(--dark); }
+    .nav-lang .lang-sep { color: var(--border); }
 
     /* ── PAGE HEADER ── */
     .page-header {
@@ -363,6 +381,9 @@
       @BorisDracka
     </a>
     <a class="nav-subscribe" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
+    <div class="nav-lang">
+      <a href="/blog" class="active">EN</a><span class="lang-sep">/</span><a href="/sk/blog">SK</a>
+    </div>
   </div>
 </nav>
 
