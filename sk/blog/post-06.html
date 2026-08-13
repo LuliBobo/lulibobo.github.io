@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pod kapotou architektúry: Ako sa naozaj postaví AI CFO agent | Boris Dračka</title>
+  <meta name="description" content="Väčšina popisov AI CFO agentov je príliš abstraktná. Toto je skutočná inštalatérska práca — čo je prepojené s čím, čo robí vrstva agenta a prečo je to jednoduchšie, než to znie, keď viete, kde začať." />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="Boris Dračka" />
+  <meta property="og:url"         content="https://borisdracka.com/sk/blog/post-06" />
+  <meta property="og:title"       content="Pod kapotou architektúry: Ako sa naozaj postaví AI CFO agent" />
+  <meta property="og:description" content="Väčšina popisov AI CFO agentov je príliš abstraktná. Toto je skutočná inštalatérska práca — čo je prepojené s čím a čo bežia bez toho, aby na to niekto musel kliknúť." />
+  <meta property="og:image"       content="https://borisdracka.com/og/post-06.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:author"         content="Boris Dračka" />
+  <meta property="article:published_time" content="2026-06-05T14:00:00+02:00" />
+  <meta property="article:section"        content="Financie" />
+  <meta property="article:tag"            content="AI agenti" />
+  <meta property="article:tag"            content="Finančná architektúra" />
+  <meta property="article:tag"            content="CFO" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@BorisDracka" />
+  <meta name="twitter:creator"     content="@BorisDracka" />
+  <meta name="twitter:title"       content="Pod kapotou architektúry: Ako sa naozaj postaví AI CFO agent" />
+  <meta name="twitter:description" content="Skutočná inštalatérska práca za AI CFO agentom — čo je prepojené s čím a ako sa reporty dostanú do inboxu CEO bez toho, aby na to niekto musel kliknúť." />
+  <meta name="twitter:image"       content="https://borisdracka.com/og/post-06.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://borisdracka.com/sk/blog/post-06" />
+  <link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-06" />
+  <link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-06" />
+  <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-06" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { font-family: 'Inter', sans-serif; background: #ffffff; color: #111111; line-height: 1.75; }
+
+    /* ── Site header ─────────────────────────────────────────── */
+    .site-header {
+      background: rgba(255,255,255,0.96); border-bottom: 1px solid #e8e5e0;
+      padding: 0 24px; height: 56px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px);
+    }
+    .site-header .logo { font-size: 15px; font-weight: 700; color: #111111; text-decoration: none; letter-spacing: -0.3px; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { font-size: 13px; color: #666; text-decoration: none; }
+    .site-header nav a:hover { color: #111; }
+    .site-header .btn-subscribe {
+      font-size: 13px; font-weight: 700; background: #E8562A; color: #fff;
+      padding: 8px 16px; border-radius: 8px; text-decoration: none; transition: background 0.15s;
+    }
+    .site-header .btn-subscribe:hover { background: #cf4a22; }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .lang-switch a { color: #666; text-decoration: none; }
+    .lang-switch a.active { color: #E8562A; }
+    .lang-switch a:hover { color: #111; }
+    .lang-switch .sep { color: #e8e5e0; }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero { background: #111111; color: #fff; padding: 72px 24px 60px; text-align: center; }
+    .hero .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #E8562A; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(26px, 5vw, 46px); font-weight: 900; line-height: 1.15; letter-spacing: -1.5px; max-width: 780px; margin: 0 auto 20px; }
+    .hero .subtitle { font-size: 18px; color: #aaa; max-width: 580px; margin: 0 auto; font-style: italic; }
+
+    /* ── Meta bar ────────────────────────────────────────────── */
+    .meta { font-size: 13px; color: #999999; text-align: center; padding: 20px 24px; border-bottom: 1px solid #e8e5e0; }
+
+    /* ── Article body ────────────────────────────────────────── */
+    .article { max-width: 720px; margin: 0 auto; padding: 52px 24px 80px; }
+    .article p { font-size: 18px; margin-bottom: 24px; color: #111111; line-height: 1.75; }
+    .article p.lead { font-size: 21px; font-weight: 400; color: #111111; margin-bottom: 32px; line-height: 1.6; }
+    .article h2 { font-size: 22px; font-weight: 700; margin: 44px 0 18px; color: #111111; letter-spacing: -0.5px; }
+
+    /* ── Pull quote ──────────────────────────────────────────── */
+    .pullquote { border-left: 4px solid #E8562A; padding: 16px 24px; margin: 36px 0; background: #f7f5f2; border-radius: 0 8px 8px 0; }
+    .pullquote p { font-size: 20px !important; font-style: italic; color: #333 !important; margin: 0 !important; line-height: 1.5; }
+
+    /* ── Stat row ────────────────────────────────────────────── */
+    .stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 36px 0; }
+    .stat-box { flex: 1; min-width: 140px; background: #111111; padding: 24px 20px; text-align: center; border-radius: 14px; border: 2px solid #111111; }
+    .stat-box .num { font-size: 36px; font-weight: 900; color: #E8562A; display: block; }
+    .stat-box .label { font-size: 12px; color: #aaa; letter-spacing: 0.5px; margin-top: 6px; display: block; }
+
+    /* ── Architecture diagram ────────────────────────────────── */
+    .arch-diagram {
+      margin: 36px 0;
+      border: 1px solid #e8e5e0;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .arch-header {
+      background: #111111;
+      padding: 13px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #aaa;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .arch-header span { color: #E8562A; }
+
+    .arch-body {
+      padding: 28px 20px;
+      background: #fafaf8;
+    }
+
+    /* Layer labels */
+    .arch-layer {
+      margin-bottom: 8px;
+    }
+
+    .arch-layer-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .arch-nodes {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .arch-node {
+      flex: 1;
+      min-width: 120px;
+      background: #fff;
+      border: 1.5px solid #e8e5e0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+
+    .arch-node.accent {
+      background: #111111;
+      border-color: #111111;
+    }
+
+    .arch-node .node-icon {
+      font-size: 18px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .arch-node .node-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .arch-node.accent .node-name { color: #fff; }
+
+    .arch-node .node-sub {
+      font-size: 11px;
+      color: #888;
+      line-height: 1.3;
+    }
+
+    .arch-node.accent .node-sub { color: #aaa; }
+
+    /* Arrow row */
+    .arch-arrow-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 0;
+      gap: 6px;
+    }
+
+    .arch-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      flex: 1;
+    }
+
+    .arch-arrow .arrow-line {
+      width: 2px;
+      height: 20px;
+      background: #E8562A;
+      position: relative;
+    }
+
+    .arch-arrow .arrow-head {
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid #E8562A;
+    }
+
+    .arch-arrow .arrow-label {
+      font-size: 10px;
+      color: #E8562A;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    /* Agent layer - special box */
+    .arch-agent-box {
+      background: #111111;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 4px;
+    }
+
+    .arch-agent-box .ab-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #E8562A;
+      margin-bottom: 12px;
+    }
+
+    .arch-agent-steps {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .arch-agent-step {
+      flex: 1;
+      min-width: 90px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 10px 10px;
+      text-align: center;
+    }
+
+    .arch-agent-step .as-num {
+      font-size: 18px;
+      font-weight: 900;
+      color: #E8562A;
+      display: block;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .arch-agent-step .as-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .arch-agent-step .as-sub {
+      font-size: 10px;
+      color: #666;
+      line-height: 1.3;
+    }
+
+    .arch-diagram-footer {
+      background: #fff5f3;
+      border-top: 1px solid #fdd8cc;
+      padding: 11px 20px;
+      font-size: 13px;
+      color: #E8562A;
+      font-weight: 700;
+    }
+
+    /* ── Build effort table ──────────────────────────────────── */
+    .effort-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 36px 0;
+      font-size: 14px;
+    }
+
+    .effort-table th {
+      background: #111111;
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .effort-table th:first-child { border-radius: 10px 0 0 0; }
+    .effort-table th:last-child  { border-radius: 0 10px 0 0; color: #E8562A; }
+
+    .effort-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e8e5e0;
+      color: #333;
+      line-height: 1.4;
+      vertical-align: middle;
+    }
+
+    .effort-table tr:last-child td { border-bottom: none; }
+    .effort-table tr:nth-child(even) td { background: #f7f5f2; }
+
+    .effort-table .col-comp { font-weight: 700; color: #111; }
+
+    .effort-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .effort-pill.easy   { background: #dcfce7; color: #166534; }
+    .effort-pill.medium { background: #fef3c7; color: #92400e; }
+    .effort-pill.hard   { background: #fee2e2; color: #dc2626; }
+
+    /* ── Gap table ───────────────────────────────────────────── */
+    .gap-table { width: 100%; border-collapse: collapse; margin: 36px 0; font-size: 14px; }
+    .gap-table th { background: #111111; color: #fff; padding: 12px 16px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.5px; }
+    .gap-table th:first-child { border-radius: 10px 0 0 0; }
+    .gap-table th:last-child   { border-radius: 0 10px 0 0; color: #E8562A; }
+    .gap-table td { padding: 12px 16px; border-bottom: 1px solid #e8e5e0; color: #333; line-height: 1.4; vertical-align: top; }
+    .gap-table tr:last-child td { border-bottom: none; }
+    .gap-table tr:nth-child(even) td { background: #f7f5f2; }
+    .gap-table .col-q { font-weight: 700; color: #111; }
+    .gap-icon { display: inline-block; width: 18px; height: 18px; border-radius: 50%; font-size: 10px; font-weight: 900; text-align: center; line-height: 18px; margin-right: 4px; }
+    .gap-icon.no  { background: #fee2e2; color: #dc2626; }
+    .gap-icon.yes { background: #dcfce7; color: #166534; }
+
+    /* ── CTA box ─────────────────────────────────────────────── */
+    .cta-box { background: #111111; padding: 40px 36px; border-radius: 14px; margin-top: 52px; text-align: center; }
+    .cta-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .cta-box p  { color: #bbb !important; font-size: 16px !important; margin-bottom: 24px !important; }
+    .cta-box .question { font-size: 17px !important; color: #f0ece8 !important; font-style: italic; font-weight: 500; margin-bottom: 28px !important; }
+    .cta-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; }
+    .cta-form input[type="email"] { flex: 1; min-width: 200px; padding: 12px 16px; font-size: 15px; border: 1px solid #444; background: #1e1e1e; color: #fff; border-radius: 8px; outline: none; }
+    .cta-form input[type="email"]::placeholder { color: #666; }
+    .cta-form input[type="email"]:focus { border-color: #E8562A; }
+    .cta-form button { padding: 12px 22px; font-size: 14px; font-weight: 700; background: #E8562A; color: #fff; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+    .cta-form button:hover { background: #cf4a22; }
+    .cta-note { font-size: 12px !important; color: #888 !important; margin-top: 12px !important; margin-bottom: 0 !important; }
+
+    /* ── Series label ────────────────────────────────────────── */
+    .series-label { display: inline-block; font-size: 12px; font-weight: 700; background: #E8562A; color: #fff; padding: 5px 12px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 36px; }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .site-footer { background: #ffffff; padding: 40px 24px; text-align: center; border-top: 1px solid #e8e5e0; }
+    .site-footer .footer-logo { font-size: 15px; font-weight: 700; color: #111111; margin-bottom: 16px; }
+    .site-footer .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .site-footer .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
+    .site-footer .footer-links a:hover { color: #111; }
+    .site-footer .footer-copy { font-size: 12px; color: #999; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .site-header nav { display: none; }
+      .article p { font-size: 17px; }
+      .article p.lead { font-size: 19px; }
+      .cta-box { padding: 32px 24px; }
+      .arch-agent-steps { flex-direction: column; }
+      .effort-table { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site header ──────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="https://borisdracka.com/sk/" class="logo">CFO Unfiltered</a>
+    <nav>
+      <a href="https://borisdracka.com/sk/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="#subscribe" class="btn-subscribe">Odoberať</a>
+      <span class="lang-switch">
+        <a href="https://borisdracka.com/blog/post-06">EN</a><span class="sep">/</span><a href="https://borisdracka.com/sk/blog/post-06" class="active">SK</a>
+      </span>
+    </nav>
+  </header>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="tag">AI architektúra · Finančné systémy · Budovanie</div>
+    <h1>Pod kapotou architektúry:<br>Ako sa naozaj postaví AI CFO agent</h1>
+    <p class="subtitle">Väčšina popisov je príliš abstraktná. Toto je skutočná inštalatérska práca — čo je prepojené s čím a ako sa reporty dostanú do inboxu CEO bez toho, aby na to niekto musel kliknúť.</p>
+  </div>
+
+  <div class="meta">Boris Dračka &nbsp;·&nbsp; jún 2026 &nbsp;·&nbsp; 6 min čítania</div>
+
+  <!-- ── Article ───────────────────────────────────────────────── -->
+  <div class="article">
+
+    <span class="series-label">Príspevok #6 z 50 — Séria CFO &amp; AI</span>
+
+    <p class="lead">
+      V príspevku #2 som popísal, čo AI CFO agent robí — sťahuje dáta, čistí ich, počíta KPI, generuje reporty a odosiela ich. Každý deň. Automaticky. Viacerí sa pýtali na tú logickú otázku: ako? Táto časť je odpoveď.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="num">4</span>
+        <span class="label">Pripojené zdrojové systémy</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">5</span>
+        <span class="label">Krokov agenta, plne automatizovaných</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">0</span>
+        <span class="label">Potrebných vývojárov</span>
+      </div>
+    </div>
+
+    <p>
+      Slovné spojenie „AI agent" znie zámerne nejasne. Vyvoláva predstavy pipeline strojového učenia, cloudovej infrastruktúry a tímov inžinierov. Realita — pre konkrétny problém automatizácie finančného reportingu vo firme s 50 až 200 ľuďmi — je podstatne prístupnejšia. Nepotrebujete vývojára. Potrebujete jasnú predstavu o tom, čo je prepojené s čím.
+    </p>
+
+    <h2>Celá architektúra, vrstva po vrstve</h2>
+
+    <p>
+      AI CFO agent má tri vrstvy: zdrojové systémy (kde žijú dáta), vrstvu agenta (kde sa spracúvajú) a výstupy (kde skončia). Tu je, čo obsahuje každá vrstva a ako sú prepojené.
+    </p>
+
+    <!-- Architecture diagram -->
+    <div class="arch-diagram">
+      <div class="arch-header">
+        <span>Architektúra CFO agenta</span> — end-to-end toky dát
+      </div>
+
+      <div class="arch-body">
+
+        <!-- Layer 1: Sources -->
+        <div class="arch-layer">
+          <div class="arch-layer-label">Vrstva 1 — Zdrojové systémy (kde žijú dáta)</div>
+          <div class="arch-nodes">
+            <div class="arch-node">
+              <span class="node-icon">🏦</span>
+              <span class="node-name">Bankové dáta</span>
+              <span class="node-sub">Zostatok a transakcie naživo cez open banking API</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">📒</span>
+              <span class="node-name">Účtovný SW</span>
+              <span class="node-sub">Faktúry, záväzky/pohľadávky, účtovná osnova (Pohoda, QuickBooks, Xero…)</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">👥</span>
+              <span class="node-name">Mzdy</span>
+              <span class="node-sub">Plánované výšky a dátumy výplat</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">📊</span>
+              <span class="node-name">Rozpočet</span>
+              <span class="node-sub">Mesačné ciele a skutočnosť (Excel alebo Google Sheets)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div class="arch-arrow-row">
+          <div class="arch-arrow">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"></div>
+            <div class="arch-arrow-label">API + plánované stiahnutie · každé ráno o 6:00</div>
+          </div>
+        </div>
+
+        <!-- Layer 2: Agent -->
+        <div class="arch-agent-box">
+          <div class="ab-label">Vrstva 2 — Agent (čo beží automaticky)</div>
+          <div class="arch-agent-steps">
+            <div class="arch-agent-step">
+              <span class="as-num">1</span>
+              <span class="as-name">Stiahnutie</span>
+              <span class="as-sub">Stiahne surové dáta zo všetkých 4 zdrojov</span>
+            </div>
+            <div class="arch-agent-step">
+              <span class="as-num">2</span>
+              <span class="as-name">Čistenie</span>
+              <span class="as-sub">Odstráni duplicity, znormalizuje kategórie, označí anomálie</span>
+            </div>
+            <div class="arch-agent-step">
+              <span class="as-num">3</span>
+              <span class="as-name">Výpočet</span>
+              <span class="as-sub">KPI, 14-dňová prognóza cash flow, rozpočet vs. skutočnosť</span>
+            </div>
+            <div class="arch-agent-step">
+              <span class="as-num">4</span>
+              <span class="as-name">Generovanie</span>
+              <span class="as-sub">Naformátovaný report s komentárom k odchýlkam</span>
+            </div>
+            <div class="arch-agent-step">
+              <span class="as-num">5</span>
+              <span class="as-name">Odoslanie</span>
+              <span class="as-sub">Doručí na nakonfigurované výstupy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div class="arch-arrow-row">
+          <div class="arch-arrow">
+            <div class="arch-arrow-line"></div>
+            <div class="arch-arrow-head"></div>
+            <div class="arch-arrow-label">Automatizované doručenie · do 7:30 každé ráno</div>
+          </div>
+        </div>
+
+        <!-- Layer 3: Outputs -->
+        <div class="arch-layer">
+          <div class="arch-layer-label">Vrstva 3 — Výstupy (kde skončia výsledky)</div>
+          <div class="arch-nodes">
+            <div class="arch-node">
+              <span class="node-icon">📧</span>
+              <span class="node-name">E-mailový súhrn</span>
+              <span class="node-sub">Denný súhrn do inboxu CEO + CFO</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">📱</span>
+              <span class="node-name">Slack / Teams</span>
+              <span class="node-sub">Snímka KPI zverejnená vo finančnom kanáli</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">📈</span>
+              <span class="node-name">Dashboard</span>
+              <span class="node-sub">Živý pohľad v Google Looker Studio alebo Notion</span>
+            </div>
+            <div class="arch-node">
+              <span class="node-icon">🚨</span>
+              <span class="node-name">Upozornenie</span>
+              <span class="node-sub">Prekročenie hranice → okamžitá SMS / push notifikácia</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="arch-diagram-footer">
+        Každé ráno o 7:30 má CEO čísla v inboxe. Nikto ich nezostavoval.
+      </div>
+    </div>
+
+    <p>
+      Agent o financiách nepremýšľa tak, ako CFO. Vykonáva definovaný pracovný postup — spoľahlivo, podľa plánu, s rovnakou logikou každý raz. Táto konzistentnosť je v skutočnosti jedna z jeho hlavných výhod: definície KPI sa nemenia podľa toho, kto model spustil, a report nedorazí neskoro, pretože niekto mal poradu.
+    </p>
+
+    <h2>Na čom vlastne bežia vrstva agenta</h2>
+
+    <p>
+      Toto je otázka, ktorú počúvam najčastejšie, keď popisujem túto architektúru. Poctivá odpoveď: závisí to od toho, ako ďaleko chcete ísť. Pre základnú verziu — denné stiahnutie dát, výpočet KPI, e-mailový report — nepotrebujete AI vôbec. Potrebujete plánovanú automatizáciu (Make.com, n8n, alebo aj Python skript) a čisté dátové prepojenia.
+    </p>
+
+    <div class="pullquote">
+      <p>„Časť „AI" v AI CFO agentovi je v skutočnosti tá najmenšia časť. Ťažká práca je dátová inštalatérčina. Keď to zvládnete, inteligenčná vrstva sa postaví takmer sama."</p>
+    </div>
+
+    <p>
+      AI vrstva sa stáva hodnotnou pri troch konkrétnych úlohách: detekcia anomálií (označenie transakcií, ktoré nesedia do vzoru), generovanie naratívu (písanie komentára k odchýlkam v prirodzenom jazyku) a predikčná prognóza (využitie historických vzorov na zlepšenie 14-dňovej prognózy cash flow). Žiadna z nich nevyžaduje vlastný model. Všetky môžu bežať na univerzálnom LLM s dobre navrhnutým promptom a čistými vstupnými dátami.
+    </p>
+
+    <h2>Ktoré časti sú naozaj náročné na postavenie</h2>
+
+    <p>
+      Nie všetko v tejto architektúre je rovnako náročné. Tu je poctivý prehľad toho, kam skutočne ide úsilie — a čo sa pokazí najskôr.
+    </p>
+
+    <!-- Build effort table -->
+    <table class="effort-table">
+      <thead>
+        <tr>
+          <th>Komponent</th>
+          <th>Náročnosť nastavenia</th>
+          <th>Čo sa pokazí / na čo si dať pozor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-comp">Pripojenie bankových dát</td>
+          <td><span class="effort-pill easy">Jednoduché</span></td>
+          <td>Open banking API sú dobre zdokumentované. Hlavný problém: niektoré menšie banky ich ešte nepodporujú — ako záloha slúži manuálny CSV upload.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Export z účtovného softvéru</td>
+          <td><span class="effort-pill medium">Stredné</span></td>
+          <td>Kvalita API sa líši podľa dodávateľa. Xero a QuickBooks sú výborné. Pohoda (bežná v CEE regióne) vyžaduje viac vlastnej práce. Nekonzistentnosti vo formáte dát sú bežné.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Pravidlá čistenia dát</td>
+          <td><span class="effort-pill hard">Náročné</span></td>
+          <td>Toto je tá skutočná práca. Účtovná osnova každej firmy je iná. Pravidlá normalizácie treba postaviť manuálne a testovať proti mesiacom reálnych dát, kým sú spoľahlivé.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Logika výpočtu KPI</td>
+          <td><span class="effort-pill easy">Jednoduché</span></td>
+          <td>Keď sú dáta čisté, vzorce sú priame. Hlavné riziko je posun v definíciách — uistite sa, že sa všetci zhodnú na tom, čo znamená „hrubá marža", skôr než to automatizujete.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Generovanie AI naratívu</td>
+          <td><span class="effort-pill easy">Jednoduché</span></td>
+          <td>Dobre štruktúrovaný prompt s dátami o zmenách produkuje dobrý komentár k odchýlkam. Prompt treba doladiť na tón a dĺžku, ale ide o hodiny, nie dni.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Doručenie reportu (e-mail/Slack)</td>
+          <td><span class="effort-pill easy">Jednoduché</span></td>
+          <td>Štandardné integrácie. Hlavný spôsob zlyhania: formátovanie e-mailu sa rozpadne na mobile. Testujte na viacerých klientoch pred nasadením.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">14-dňová prognóza cash flow</td>
+          <td><span class="effort-pill medium">Stredné</span></td>
+          <td>Presnosť závisí od kvality dát o pohľadávkach/záväzkoch. Ak klienti platia neskoro a nepredvídateľne, prognóza sa bude odkláňať. Vo výstupe uveďte úroveň spoľahlivosti, nie len jedno číslo.</td>
+        </tr>
+        <tr>
+          <td class="col-comp">Logika prahových upozornení</td>
+          <td><span class="effort-pill easy">Jednoduché</span></td>
+          <td>Nastavte hranice zo začiatku konzervatívne — pri príliš veľa falošných upozorneniach ich ľudia začnú ignorovať. Dolaďte počas 4–6 týždňov reálnej prevádzky.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Jedna vec, ktorá trvá dlhšie, než by ste čakali</h2>
+
+    <p>
+      Podľa mojej skúsenosti pri stavbe tohto systému trvala vrstva čistenia dát trikrát dlhšie, než som plánoval. Nie preto, že by bola technicky komplexná — ale preto, že nevie, čo je s vašimi dátami v poriadku, kým sa na ne nezačnete pozerať systematicky. Duplicitné záznamy dodávateľov. Transakcie zaúčtované na nesprávne nákladové stredisko. Kategórie faktúr, ktoré sa zmenili, keď niekto pred dvoma rokmi upravil účtovnú osnovu a nikomu to nepovedal.
+    </p>
+
+    <p>
+      Toto nie je zlyhanie. Je to v skutočnosti jeden z najhodnotnejších výstupov stavby tohto systému: objavíte, ako naozaj vypadá kvalita vašich dát, a opravíte to natrvalo, namiesto toho, aby ste to obchádzali každý mesiac pri uzatváraní kníh.
+    </p>
+
+    <div class="pullquote">
+      <p>„Stavba agenta ma prinútila opraviť problémy v podkladových dátach, ktoré tam boli roky. Automatizácia reporting nielen zrýchlila — po prvý raz ho urobila aj presným."</p>
+    </div>
+
+    <h2>Čo si vyžaduje „bez toho, aby na to niekto klikol"</h2>
+
+    <p>
+      Plná automatizácia — kde má CEO v inboxe čerstvé čísla každé ráno bez ľudského zásahu — vyžaduje, aby boli stabilné tri veci: spoľahlivé dátové prepojenia, plánovač, ktorý beží aj keď sa nikto nepozerá, a vrstva na spracovanie chýb, ktorá zachytí problémy skôr, než vyprodukujú nesprávny výstup.
+    </p>
+
+    <p>
+      Plánovač je najjednoduchšia časť. Cloudový cron job (alebo funkcia plánovania v Make.com) to zvládne takmer bez nákladov. Spracovanie chýb je miesto, kde väčšina prvých verzií zaostáva — keď je API banky nedostupné alebo export z účtovníctva je poškodený, agent musí zlyhať viditeľne a nahlas, nie ticho odoslať prázdny alebo nesprávny report.
+    </p>
+
+    <p>
+      Poriadne vybudovanie spracovania chýb trvalo asi týždeň navyše po tom, ako fungovala „šťastná cesta". Nie je to okázalé. Ale je to rozdiel medzi demom a systémom, ktorému môžete naozaj dôverovať v pondelok o 7:30 ráno.
+    </p>
+
+    <!-- ── CTA box ──────────────────────────────────────────── -->
+    <div class="cta-box" id="subscribe">
+      <h3>Sleduj sériu</h3>
+      <p>Príspevok #7 rozoberá prvý report, ktorý agent vyprodukoval — čo povedal CEO, keď dorazil, a jedno číslo, ktoré bolo nesprávne, a prečo.</p>
+      <p class="question">Aká je najväčšia manuálna úloha vo vašom finančnom procese práve teraz?</p>
+
+      <form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <button type="submit">Odoberať zdarma</button>
+      </form>
+      <p class="cta-note">Žiadny spam. Jeden príspevok týždenne. Kedykoľvek sa môžete odhlásiť.</p>
+    </div>
+
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-logo">CFO Unfiltered</div>
+    <div class="footer-links">
+      <a href="https://borisdracka.com/sk/">Domov</a>
+      <a href="https://borisdracka.com/sk/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Odoberať</a>
+    </div>
+    <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
+  </footer>
+
+</body>
+</html>
