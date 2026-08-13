@@ -32,6 +32,9 @@
 
   <!-- Canonical -->
   <link rel="canonical" href="https://borisdracka.com/blog/post-04" />
+  <link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-04" />
+  <link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-04" />
+  <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-04" />
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -75,6 +78,18 @@
       text-decoration: none; transition: background 0.15s;
     }
     .site-header .btn-subscribe:hover { background: #cf4a22; }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .lang-switch a { color: #666; text-decoration: none; }
+    .lang-switch a.active { color: #E8562A; }
+    .lang-switch a:hover { color: #111; }
+    .lang-switch .sep { color: #e8e5e0; }
 
     /* ── Hero ────────────────────────────────────────────────── */
     .hero {
@@ -357,6 +372,9 @@
       <a href="https://borisdracka.com/blog">Blog</a>
       <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
       <a href="#subscribe" class="btn-subscribe">Subscribe</a>
+      <span class="lang-switch">
+        <a href="https://borisdracka.com/blog/post-04" class="active">EN</a><span class="sep">/</span><a href="https://borisdracka.com/sk/blog/post-04">SK</a>
+      </span>
     </nav>
   </header>
 
