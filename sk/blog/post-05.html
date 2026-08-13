@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CEO volá v piatok o 16:00. Účtovník ešte nemá uzavretý mesiac. | Boris Dračka</title>
+  <meta name="description" content="Tento rozhovor sa odohráva každý mesiac v každej firme do 200 ľudí. CEO potrebuje výhľadové dáta. Účtovný systém produkuje len spätné reporty. Nie je to chyba účtovníka. Je to systémový problém." />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="Boris Dračka" />
+  <meta property="og:url"         content="https://borisdracka.com/sk/blog/post-05" />
+  <meta property="og:title"       content="CEO volá v piatok o 16:00. Účtovník ešte nemá uzavretý mesiac." />
+  <meta property="og:description" content="Tento rozhovor sa odohráva každý mesiac v každej firme do 200 ľudí. Nie je to chyba účtovníka. Je to systémový problém." />
+  <meta property="og:image"       content="https://borisdracka.com/og/post-05.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:author"         content="Boris Dračka" />
+  <meta property="article:published_time" content="2026-05-29T14:00:00+02:00" />
+  <meta property="article:section"        content="Financie" />
+  <meta property="article:tag"            content="CFO" />
+  <meta property="article:tag"            content="Finančné systémy" />
+  <meta property="article:tag"            content="Dáta v reálnom čase" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@BorisDracka" />
+  <meta name="twitter:creator"     content="@BorisDracka" />
+  <meta name="twitter:title"       content="CEO volá v piatok o 16:00. Účtovník ešte nemá uzavretý mesiac." />
+  <meta name="twitter:description" content="Tento rozhovor sa odohráva každý mesiac v každej firme do 200 ľudí. Nie je to chyba účtovníka. Je to systémový problém." />
+  <meta name="twitter:image"       content="https://borisdracka.com/og/post-05.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://borisdracka.com/sk/blog/post-05" />
+  <link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-05" />
+  <link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-05" />
+  <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-05" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #111111;
+      line-height: 1.75;
+    }
+
+    /* ── Site header ─────────────────────────────────────────── */
+    .site-header {
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #e8e5e0;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .site-header .logo { font-size: 15px; font-weight: 700; color: #111111; text-decoration: none; letter-spacing: -0.3px; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { font-size: 13px; color: #666; text-decoration: none; }
+    .site-header nav a:hover { color: #111; }
+    .site-header .btn-subscribe {
+      font-size: 13px; font-weight: 700; background: #E8562A;
+      color: #fff; padding: 8px 16px; border-radius: 8px;
+      text-decoration: none; transition: background 0.15s;
+    }
+    .site-header .btn-subscribe:hover { background: #cf4a22; }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .lang-switch a { color: #666; text-decoration: none; }
+    .lang-switch a.active { color: #E8562A; }
+    .lang-switch a:hover { color: #111; }
+    .lang-switch .sep { color: #e8e5e0; }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero { background: #111111; color: #fff; padding: 72px 24px 60px; text-align: center; }
+    .hero .tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; color: #E8562A; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 46px); font-weight: 900;
+      line-height: 1.15; letter-spacing: -1.5px;
+      max-width: 780px; margin: 0 auto 20px;
+    }
+    .hero .subtitle { font-size: 18px; color: #aaa; max-width: 580px; margin: 0 auto; font-style: italic; }
+
+    /* ── Meta bar ────────────────────────────────────────────── */
+    .meta { font-size: 13px; color: #999999; text-align: center; padding: 20px 24px; border-bottom: 1px solid #e8e5e0; }
+
+    /* ── Article body ────────────────────────────────────────── */
+    .article { max-width: 720px; margin: 0 auto; padding: 52px 24px 80px; }
+    .article p { font-size: 18px; margin-bottom: 24px; color: #111111; line-height: 1.75; }
+    .article p.lead { font-size: 21px; font-weight: 400; color: #111111; margin-bottom: 32px; line-height: 1.6; }
+    .article h2 { font-size: 22px; font-weight: 700; margin: 44px 0 18px; color: #111111; letter-spacing: -0.5px; }
+
+    /* ── Pull quote ──────────────────────────────────────────── */
+    .pullquote { border-left: 4px solid #E8562A; padding: 16px 24px; margin: 36px 0; background: #f7f5f2; border-radius: 0 8px 8px 0; }
+    .pullquote p { font-size: 20px !important; font-style: italic; color: #333 !important; margin: 0 !important; line-height: 1.5; }
+
+    /* ── Stat row ────────────────────────────────────────────── */
+    .stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 36px 0; }
+    .stat-box { flex: 1; min-width: 140px; background: #111111; padding: 24px 20px; text-align: center; border-radius: 14px; border: 2px solid #111111; }
+    .stat-box .num { font-size: 36px; font-weight: 900; color: #E8562A; display: block; }
+    .stat-box .label { font-size: 12px; color: #aaa; letter-spacing: 0.5px; margin-top: 6px; display: block; }
+
+    /* ── Dialogue visual ─────────────────────────────────────── */
+    .dialogue {
+      margin: 36px 0;
+      border: 1px solid #e8e5e0;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .dialogue-header {
+      background: #111111;
+      color: #fff;
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dialogue-header .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #E8562A;
+    }
+
+    .dialogue-body {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #fafaf8;
+    }
+
+    .msg {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      max-width: 90%;
+    }
+
+    .msg.right {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .msg-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .msg-avatar.ceo { background: #111111; color: #fff; }
+    .msg-avatar.acc { background: #E8562A; color: #fff; }
+
+    .msg-bubble {
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .msg.left  .msg-bubble { background: #fff; border: 1px solid #e8e5e0; color: #111; border-radius: 4px 12px 12px 12px; }
+    .msg.right .msg-bubble { background: #111111; color: #fff; border-radius: 12px 4px 12px 12px; }
+
+    .msg-sender {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .msg.left  .msg-sender { color: #999; }
+    .msg.right .msg-sender { color: #E8562A; }
+
+    .msg-time {
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .msg.left .msg-time { text-align: left; }
+
+    .dialogue-footer {
+      background: #fff5f3;
+      border-top: 1px solid #fdd8cc;
+      padding: 12px 20px;
+      font-size: 13px;
+      color: #E8562A;
+      font-weight: 700;
+    }
+
+    /* ── Gap table ───────────────────────────────────────────── */
+    .gap-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 36px 0;
+      font-size: 14px;
+    }
+
+    .gap-table th {
+      background: #111111;
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .gap-table th:first-child { border-radius: 10px 0 0 0; }
+    .gap-table th:nth-child(2) { color: #aaa; }
+    .gap-table th:last-child   { border-radius: 0 10px 0 0; color: #E8562A; }
+
+    .gap-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e8e5e0;
+      color: #333;
+      line-height: 1.4;
+      vertical-align: top;
+    }
+
+    .gap-table tr:last-child td { border-bottom: none; }
+    .gap-table tr:nth-child(even) td { background: #f7f5f2; }
+
+    .gap-table .col-q { font-weight: 700; color: #111; }
+
+    .gap-icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 900;
+      text-align: center;
+      line-height: 18px;
+      margin-right: 4px;
+      flex-shrink: 0;
+    }
+
+    .gap-icon.no  { background: #fee2e2; color: #dc2626; }
+    .gap-icon.yes { background: #dcfce7; color: #166534; }
+
+    /* ── Info card ───────────────────────────────────────────── */
+    .info-card {
+      background: #111;
+      border-radius: 14px;
+      padding: 28px 24px;
+      margin: 36px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .info-col .ic-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .info-col.highlight .ic-label { color: #E8562A; }
+
+    .info-col .ic-item {
+      font-size: 14px;
+      color: #aaa;
+      padding: 7px 0;
+      border-bottom: 1px solid #222;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    .info-col .ic-item:last-child { border-bottom: none; }
+
+    .info-col.highlight .ic-item { color: #ddd; border-bottom-color: #2a2a2a; }
+
+    .ic-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 5px;
+    }
+
+    .info-col .ic-dot { background: #333; }
+    .info-col.highlight .ic-dot { background: #E8562A; }
+
+    /* ── CTA box ─────────────────────────────────────────────── */
+    .cta-box { background: #111111; padding: 40px 36px; border-radius: 14px; margin-top: 52px; text-align: center; }
+    .cta-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .cta-box p  { color: #bbb !important; font-size: 16px !important; margin-bottom: 24px !important; }
+    .cta-box .question { font-size: 17px !important; color: #f0ece8 !important; font-style: italic; font-weight: 500; margin-bottom: 28px !important; }
+    .cta-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; }
+    .cta-form input[type="email"] {
+      flex: 1; min-width: 200px; padding: 12px 16px; font-size: 15px;
+      border: 1px solid #444; background: #1e1e1e; color: #fff; border-radius: 8px; outline: none;
+    }
+    .cta-form input[type="email"]::placeholder { color: #666; }
+    .cta-form input[type="email"]:focus { border-color: #E8562A; }
+    .cta-form button {
+      padding: 12px 22px; font-size: 14px; font-weight: 700;
+      background: #E8562A; color: #fff; border: none; border-radius: 8px;
+      cursor: pointer; white-space: nowrap; transition: background 0.15s;
+    }
+    .cta-form button:hover { background: #cf4a22; }
+    .cta-note { font-size: 12px !important; color: #888 !important; margin-top: 12px !important; margin-bottom: 0 !important; }
+
+    /* ── Series label ────────────────────────────────────────── */
+    .series-label {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      background: #E8562A; color: #fff; padding: 5px 12px;
+      border-radius: 4px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 36px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .site-footer { background: #ffffff; padding: 40px 24px; text-align: center; border-top: 1px solid #e8e5e0; }
+    .site-footer .footer-logo { font-size: 15px; font-weight: 700; color: #111111; margin-bottom: 16px; }
+    .site-footer .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .site-footer .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
+    .site-footer .footer-links a:hover { color: #111; }
+    .site-footer .footer-copy { font-size: 12px; color: #999; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .site-header nav { display: none; }
+      .article p { font-size: 17px; }
+      .article p.lead { font-size: 19px; }
+      .cta-box { padding: 32px 24px; }
+      .info-card { grid-template-columns: 1fr; }
+      .gap-table { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site header ──────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="https://borisdracka.com/sk/" class="logo">CFO Unfiltered</a>
+    <nav>
+      <a href="https://borisdracka.com/sk/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="#subscribe" class="btn-subscribe">Odoberať</a>
+      <span class="lang-switch">
+        <a href="https://borisdracka.com/blog/post-05">EN</a><span class="sep">/</span><a href="https://borisdracka.com/sk/blog/post-05" class="active">SK</a>
+      </span>
+    </nav>
+  </header>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="tag">Finančné systémy · Dáta v reálnom čase · SMB</div>
+    <h1>CEO volá v piatok o 16:00.<br>Účtovník ešte nemá uzavretý mesiac.</h1>
+    <p class="subtitle">Tento rozhovor sa odohráva každý mesiac. V každej firme do 200 ľudí. Nie je to chyba účtovníka — je to systémový problém.</p>
+  </div>
+
+  <div class="meta">Boris Dračka &nbsp;·&nbsp; máj 2026 &nbsp;·&nbsp; 5 min čítania</div>
+
+  <!-- ── Article ───────────────────────────────────────────────── -->
+  <div class="article">
+
+    <span class="series-label">Príspevok #5 z 50 — Séria CFO &amp; AI</span>
+
+    <p class="lead">
+      Každý, kto robí financie, zažil tento rozhovor. CEO potrebuje výhľadové číslo. Účtovný systém produkuje len spätné reporty. A človek uprostred — účtovník — je obviňovaný za medzeru, ktorá je čisto systémová.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="num">Každý</span>
+        <span class="label">piatok sa to niekde stane</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">&lt;200</span>
+        <span class="label">Zamestnancov — univerzálny problém</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">10+</span>
+        <span class="label">Dní medzi realitou a reportom</span>
+      </div>
+    </div>
+
+    <p>
+      Scenár je dostatočne konkrétny, aby ho každý spoznal, ale zároveň dostatočne univerzálny, že sa stal bežným šumom vo väčšine malých firiem. CEO chce niečo vedieť. Dáta nie sú pripravené. Účtovník vysvetľuje prečo. CEO je frustrovaný. Nič sa nezmení. O mesiac nato sa to zopakuje.
+    </p>
+
+    <h2>Rozhovor, ako sa naozaj odohráva</h2>
+
+    <p>
+      Toto je výmena presne tak, ako sa reálne odohráva — nie dramatizovaná, len presná. Zažil som verzie tohto rozhovoru z oboch strán stola.
+    </p>
+
+    <!-- Dialogue visual -->
+    <div class="dialogue">
+      <div class="dialogue-header">
+        <div class="dot"></div>
+        Piatok · 16:03 · Každý mesiac · Každá firma do 200 ľudí
+      </div>
+
+      <div class="dialogue-body">
+
+        <div class="msg left">
+          <div class="msg-avatar ceo">CEO</div>
+          <div>
+            <div class="msg-sender">CEO</div>
+            <div class="msg-bubble">
+              Potrebujem prognózu cash flow na budúci týždeň ešte pred hovorom s radou v pondelok. Môžeš mi to poslať dnes popoludní?
+            </div>
+            <div class="msg-time">16:03</div>
+          </div>
+        </div>
+
+        <div class="msg right">
+          <div class="msg-avatar acc">ÚČ</div>
+          <div>
+            <div class="msg-sender">Účtovník</div>
+            <div class="msg-bubble">
+              Ešte sme nezavreli máj — čakáme na tri faktúry od dodávateľov a zosúladenie mzdovej agendy. Nemôžem postaviť výhľadovú prognózu na otvorenom mesiaci.
+            </div>
+            <div class="msg-time">16:09</div>
+          </div>
+        </div>
+
+        <div class="msg left">
+          <div class="msg-avatar ceo">CEO</div>
+          <div>
+            <div class="msg-sender">CEO</div>
+            <div class="msg-bubble">
+              Ale budúci týždeň je streda. Rada potrebuje vedieť, či máme dostatočný runway na nábor, o ktorom uvažujeme.
+            </div>
+            <div class="msg-time">16:11</div>
+          </div>
+        </div>
+
+        <div class="msg right">
+          <div class="msg-avatar acc">ÚČ</div>
+          <div>
+            <div class="msg-sender">Účtovník</div>
+            <div class="msg-bubble">
+              Môžem dať dokopy hrubý odhad, ale nebude presný, kým nebude hotové uzavretie. Povedal by som skoro budúci týždeň, najskôr.
+            </div>
+            <div class="msg-time">16:18</div>
+          </div>
+        </div>
+
+        <div class="msg left">
+          <div class="msg-avatar ceo">CEO</div>
+          <div>
+            <div class="msg-sender">CEO</div>
+            <div class="msg-bubble">
+              Skoro budúci týždeň JE budúci týždeň. Hovor s radou je v pondelok ráno.
+            </div>
+            <div class="msg-time">16:19</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="dialogue-footer">
+        Nikto z nich sa nemýli. Mýli sa systém.
+      </div>
+    </div>
+
+    <p>
+      CEO nežiada nič neprimerané. Poznať pozíciu cash flow na budúci týždeň pred hovorom s radou je základný finančný manažment. Účtovník sa nevyhovára. Naozaj nemôžete postaviť presnú výhľadovú prognózu na nezosúladených dátach. Obaja postupujú správne v rámci pokazeného systému.
+    </p>
+
+    <h2>Čo CEO v skutočnosti požaduje</h2>
+
+    <p>
+      Keď sa CEO pýta „aký bude cash flow budúci týždeň", nepýta sa na účtovný report. Pýta sa plánovaciu otázku: máme finančnú kapacitu urobiť konkrétne rozhodnutie práve teraz? Táto otázka má trojčlennú odpoveď — súčasná pozícia, očakávané príjmy, plánované výdavky — a žiadna z týchto troch vecí nevyžaduje uzavretý mesiac.
+    </p>
+
+    <div class="pullquote">
+      <p>„CEO potrebuje plánovaciu odpoveď. Účtovný systém produkuje len kompliančné odpovede. Sú to dve odlišné veci, postavené na dvoch odlišných časových orientáciách."</p>
+    </div>
+
+    <p>
+      Mesačné uzavretie je kompliančný artefakt. Existuje, pretože GAAP, daňové úrady a audítori potrebujú čistý, zosúladený záznam o tom, čo sa stalo. Tento záznam má hodnotu — ale je zo svojej podstaty spätný. Hovorí vám, aká bola pozícia. Nemôže vám povedať, aká bude pozícia v stredu.
+    </p>
+
+    <h2>Prečo účtovník nemôže odpovedať bez uzavretia</h2>
+
+    <p>
+      Toto je časť, ktorú CEO často nechápu, a ktorú účtovníci ťažko vysvetľujú bez toho, aby to znelo ako výhovorka. Medzera medzi „otvoreným mesiacom" a „presnou prognózou" nie je byrokratická opatrnosť. Je to problém kvality dát.
+    </p>
+
+    <!-- Gap table -->
+    <table class="gap-table">
+      <thead>
+        <tr>
+          <th>Čo chce CEO vedieť</th>
+          <th>Dostupné bez uzavretia?</th>
+          <th>Dostupné so systémom v reálnom čase?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-q">Aktuálny zostatok na bankovom účte</td>
+          <td><span class="gap-icon yes">✓</span> Áno — cez bankové API</td>
+          <td><span class="gap-icon yes">✓</span> Automaticky, naživo</td>
+        </tr>
+        <tr>
+          <td class="col-q">Neuhradené faktúry dodávateľov splatné tento týždeň</td>
+          <td><span class="gap-icon no">✗</span> Len ak sa sleduje manuálne</td>
+          <td><span class="gap-icon yes">✓</span> Automaticky z AP systému</td>
+        </tr>
+        <tr>
+          <td class="col-q">Očakávané platby od klientov</td>
+          <td><span class="gap-icon no">✗</span> Nie bez otvoreného zosúladenia pohľadávok</td>
+          <td><span class="gap-icon yes">✓</span> Sledované voči splatnosti faktúr</td>
+        </tr>
+        <tr>
+          <td class="col-q">Výška a dátum výplaty miezd</td>
+          <td><span class="gap-icon yes">✓</span> Známe vopred</td>
+          <td><span class="gap-icon yes">✓</span> Predom nahraté v modeli prognózy</td>
+        </tr>
+        <tr>
+          <td class="col-q">Prognózovaný zostatok v piatok na konci dňa</td>
+          <td><span class="gap-icon no">✗</span> Vyžaduje zosúladenie všetkého vyššie</td>
+          <td><span class="gap-icon yes">✓</span> Počíta sa automaticky, denne aktualizované</td>
+        </tr>
+        <tr>
+          <td class="col-q">Rizikové signály (zostatok pod hranicou)</td>
+          <td><span class="gap-icon no">✗</span> Nikto to nesleduje v reálnom čase</td>
+          <td><span class="gap-icon yes">✓</span> Upozornenie prichádza pred problémom, nie po ňom</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Problém nie je, že dáta neexistujú. Je to, že dáta žijú v troch alebo štyroch samostatných systémoch — banka, účtovný software, sledovanie záväzkov, mzdový systém — a nikto ich nespojil do jedného výhľadového pohľadu. Práca účtovníka je momentálne robiť to manuálne, každý raz, keď sa ho niekto spýta. Preto je odpoveď vždy „až po uzavretí".
+    </p>
+
+    <h2>Dve odlišné informačné architektúry</h2>
+
+    <p>
+      Väčšina finančných nastavení malých firiem je postavená pre komplianciu, nie pre rozhodovanie. Účtovný systém je navrhnutý tak, aby produkoval čisté historické záznamy. Na to je optimalizovaný. Pýtať sa ho na výhľadovú prognózu cash flow je ako pýtať sa kamery, čo sa stane ďalej — vie zaznamenať len to, čo sa už stalo.
+    </p>
+
+    <!-- Info card: before/after -->
+    <div class="info-card">
+      <div class="info-col">
+        <span class="ic-label">Postavené pre komplianciu</span>
+        <div class="ic-item"><span class="ic-dot"></span>Report vzniká až po mesačnom uzavretí</div>
+        <div class="ic-item"><span class="ic-dot"></span>Dáta sú presné k dátumu uzavretia</div>
+        <div class="ic-item"><span class="ic-dot"></span>CEO sa spýta → účtovník to postaví → 2–5 dní</div>
+        <div class="ic-item"><span class="ic-dot"></span>Výhľadový pohľad vyžaduje manuálne zostavenie</div>
+        <div class="ic-item"><span class="ic-dot"></span>Jediný bod zlyhania: čas jedného človeka</div>
+      </div>
+      <div class="info-col highlight">
+        <span class="ic-label">Postavené pre rozhodovanie</span>
+        <div class="ic-item"><span class="ic-dot"></span>Systém beží denne — uzavretie je irelevantné</div>
+        <div class="ic-item"><span class="ic-dot"></span>Dáta sú aktuálne k dnešnému ránu</div>
+        <div class="ic-item"><span class="ic-dot"></span>CEO sa spýta → dashboard to už má</div>
+        <div class="ic-item"><span class="ic-dot"></span>Výhľadový pohľad je štandardný výstup</div>
+        <div class="ic-item"><span class="ic-dot"></span>Nie je potrebný žiadny konkrétny človek na jeho vytvorenie</div>
+      </div>
+    </div>
+
+    <h2>Čo sa zmení, keď sa zmení architektúra</h2>
+
+    <p>
+      Piatkový hovor o 16:00 nezmizne, keď postavíte cash flow viditeľnosť v reálnom čase. CEO stále volá. Zmení sa odpoveď. Namiesto „to ti nemôžem dať skôr ako budúci týždeň" znie odpoveď „už je to v dashboarde — tu je link".
+    </p>
+
+    <p>
+      Účtovník nestráca piatkové popoludnie manuálnym ťahaním dát a stavaním prognózy pod tlakom. Ten čas ide niekam hodnotnejšie — na kontrolu čísel, ktoré systém už vyprodukoval, dopĺňanie kontextu, upozorňovanie na anomálie, ktoré vyžadujú ľudský úsudok. Kompliančná práca sa stále robí. Plánovacia práca už nie je ňou blokovaná.
+    </p>
+
+    <div class="pullquote">
+      <p>„Keď CEO dostane odpoveď za 30 sekúnd namiesto 3 dní, finančná funkcia prestáva byť brzdou. Stáva sa najrýchlejším človekom v miestnosti."</p>
+    </div>
+
+    <p>
+      Tento posun — od brzdy k najrýchlejšiemu človeku v miestnosti — je to, na čom stavia posledné dva roky. Nie s enterprise softwarom. Nie s tímom vývojárov. S pár prepojenými systémami, niekoľkými AI agentmi a jasnejším pochopením toho, ktoré problémy sú ľudské a ktoré sú architektonické.
+    </p>
+
+    <p>
+      Piatkový hovor o 16:00 je architektonický problém. A architektonické problémy majú riešenia.
+    </p>
+
+    <!-- ── CTA box ──────────────────────────────────────────── -->
+    <div class="cta-box" id="subscribe">
+      <h3>Sleduj sériu</h3>
+      <p>Príspevok #6 rozoberá presnú architektúru, ktorú som postavil — čo je prepojené s čím a ako sa CEO dashboard naozaj naplní bez toho, aby na to musel niekto kliknúť.</p>
+      <p class="question">Odohral sa tento rozhovor už aj vo vašej firme?</p>
+
+      <form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+        <input type="email" name="email" placeholder="your@email.com" required />
+        <button type="submit">Odoberať zdarma</button>
+      </form>
+      <p class="cta-note">Žiadny spam. Jeden príspevok týždenne. Kedykoľvek sa môžete odhlásiť.</p>
+    </div>
+
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-logo">CFO Unfiltered</div>
+    <div class="footer-links">
+      <a href="https://borisdracka.com/sk/">Domov</a>
+      <a href="https://borisdracka.com/sk/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Odoberať</a>
+    </div>
+    <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
+  </footer>
+
+</body>
+</html>
