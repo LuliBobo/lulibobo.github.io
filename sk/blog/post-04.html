@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V stredu dosť hotovosti. V piatok nezaplatené mzdy. | Boris Dračka</title>
+  <meta name="description" content="Firma s obratom 2 mil. € môže v pondelok vyzerať úplne zdravo a v piatok byť v kríze. Nie preto, že by strácala peniaze — ale preto, že nikto nesledoval hotovosť v reálnom čase." />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="Boris Dračka" />
+  <meta property="og:url"         content="https://borisdracka.com/sk/blog/post-04" />
+  <meta property="og:title"       content="V stredu dosť hotovosti. V piatok nezaplatené mzdy." />
+  <meta property="og:description" content="Firma s obratom 2 mil. € môže v pondelok vyzerať úplne zdravo a v piatok byť v kríze. Nie preto, že by strácala peniaze — ale preto, že to nikto nesledoval." />
+  <meta property="og:image"       content="https://borisdracka.com/og/post-04.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:author"         content="Boris Dračka" />
+  <meta property="article:published_time" content="2026-05-22T14:00:00+02:00" />
+  <meta property="article:section"        content="Financie" />
+  <meta property="article:tag"            content="Cash Flow" />
+  <meta property="article:tag"            content="AI vo financiách" />
+  <meta property="article:tag"            content="SMB" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@BorisDracka" />
+  <meta name="twitter:creator"     content="@BorisDracka" />
+  <meta name="twitter:title"       content="V stredu dosť hotovosti. V piatok nezaplatené mzdy." />
+  <meta name="twitter:description" content="Firma s obratom 2 mil. € môže v pondelok vyzerať úplne zdravo a v piatok byť v kríze. Nie preto, že by strácala peniaze." />
+  <meta name="twitter:image"       content="https://borisdracka.com/og/post-04.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://borisdracka.com/sk/blog/post-04" />
+  <link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-04" />
+  <link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-04" />
+  <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-04" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #111111;
+      line-height: 1.75;
+    }
+
+    /* ── Site header ─────────────────────────────────────────── */
+    .site-header {
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #e8e5e0;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .site-header .logo {
+      font-size: 15px; font-weight: 700; color: #111111;
+      text-decoration: none; letter-spacing: -0.3px;
+    }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { font-size: 13px; color: #666; text-decoration: none; }
+    .site-header nav a:hover { color: #111; }
+    .site-header .btn-subscribe {
+      font-size: 13px; font-weight: 700; background: #E8562A;
+      color: #fff; padding: 8px 16px; border-radius: 8px;
+      text-decoration: none; transition: background 0.15s;
+    }
+    .site-header .btn-subscribe:hover { background: #cf4a22; }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .lang-switch a { color: #666; text-decoration: none; }
+    .lang-switch a.active { color: #E8562A; }
+    .lang-switch a:hover { color: #111; }
+    .lang-switch .sep { color: #e8e5e0; }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      background: #111111; color: #fff;
+      padding: 72px 24px 60px; text-align: center;
+    }
+    .hero .tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #E8562A; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 46px); font-weight: 900;
+      line-height: 1.15; letter-spacing: -1.5px;
+      max-width: 780px; margin: 0 auto 20px;
+    }
+    .hero .subtitle {
+      font-size: 18px; color: #aaa;
+      max-width: 580px; margin: 0 auto; font-style: italic;
+    }
+
+    /* ── Meta bar ────────────────────────────────────────────── */
+    .meta {
+      font-size: 13px; color: #999999; text-align: center;
+      padding: 20px 24px; border-bottom: 1px solid #e8e5e0;
+    }
+
+    /* ── Article body ────────────────────────────────────────── */
+    .article { max-width: 720px; margin: 0 auto; padding: 52px 24px 80px; }
+    .article p { font-size: 18px; margin-bottom: 24px; color: #111111; line-height: 1.75; }
+    .article p.lead { font-size: 21px; font-weight: 400; color: #111111; margin-bottom: 32px; line-height: 1.6; }
+    .article h2 { font-size: 22px; font-weight: 700; margin: 44px 0 18px; color: #111111; letter-spacing: -0.5px; }
+
+    /* ── Pull quote ──────────────────────────────────────────── */
+    .pullquote {
+      border-left: 4px solid #E8562A; padding: 16px 24px;
+      margin: 36px 0; background: #f7f5f2; border-radius: 0 8px 8px 0;
+    }
+    .pullquote p {
+      font-size: 20px !important; font-style: italic;
+      color: #333 !important; margin: 0 !important; line-height: 1.5;
+    }
+
+    /* ── Stat row ────────────────────────────────────────────── */
+    .stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 36px 0; }
+    .stat-box {
+      flex: 1; min-width: 140px; background: #111111;
+      padding: 24px 20px; text-align: center;
+      border-radius: 14px; border: 2px solid #111111;
+    }
+    .stat-box .num {
+      font-size: 36px; font-weight: 900; color: #E8562A; display: block;
+    }
+    .stat-box .label {
+      font-size: 12px; color: #aaa; letter-spacing: 0.5px;
+      margin-top: 6px; display: block;
+    }
+
+    /* ── Day timeline visual ─────────────────────────────────── */
+    .day-timeline {
+      margin: 36px 0;
+      border: 1px solid #e8e5e0;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .day-timeline-header {
+      background: #111111;
+      color: #fff;
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .day-timeline-header span { color: #E8562A; }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      align-items: start;
+      gap: 16px;
+      padding: 16px 20px;
+      border-bottom: 1px solid #e8e5e0;
+    }
+
+    .day-row:last-child { border-bottom: none; }
+    .day-row:nth-child(even) { background: #f7f5f2; }
+    .day-row.crisis { background: #fff5f3; border-left: 3px solid #E8562A; }
+
+    .day-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+      padding-top: 2px;
+    }
+
+    .day-label .day-name {
+      display: block;
+      font-size: 15px;
+      font-weight: 900;
+      color: #111;
+    }
+
+    .day-label .day-name.red { color: #E8562A; }
+
+    .day-events {}
+
+    .day-event {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+      padding: 2px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .day-event .ev-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ccc;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .day-event .ev-dot.red { background: #E8562A; }
+    .day-event .ev-dot.green { background: #22c55e; }
+
+    .day-cash {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      padding-top: 2px;
+      text-align: right;
+    }
+
+    .day-cash.positive { color: #22c55e; }
+    .day-cash.warning  { color: #f59e0b; }
+    .day-cash.danger   { color: #E8562A; }
+
+    .day-cash .cash-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: #999;
+      letter-spacing: 0.3px;
+      margin-bottom: 2px;
+    }
+
+    .day-timeline-footer {
+      background: #111;
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #E8562A;
+      border-top: 1px solid #e8e5e0;
+    }
+
+    /* ── Frequency compare table ─────────────────────────────── */
+    .freq-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 36px 0;
+      font-size: 14px;
+    }
+
+    .freq-table th {
+      background: #111111;
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .freq-table th:first-child { border-radius: 10px 0 0 0; }
+    .freq-table th:last-child  { border-radius: 0 10px 0 0; color: #E8562A; }
+
+    .freq-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid #e8e5e0;
+      color: #333;
+      line-height: 1.4;
+      vertical-align: top;
+    }
+
+    .freq-table tr:last-child td { border-bottom: none; }
+    .freq-table tr:nth-child(even) td { background: #f7f5f2; }
+
+    .freq-table .col-freq {
+      font-weight: 700;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .badge.bad    { background: #fee2e2; color: #dc2626; }
+    .badge.ok     { background: #fef3c7; color: #92400e; }
+    .badge.good   { background: #dcfce7; color: #166534; }
+    .badge.best   { background: #E8562A; color: #fff; }
+
+    /* ── CTA box ─────────────────────────────────────────────── */
+    .cta-box {
+      background: #111111; padding: 40px 36px;
+      border-radius: 14px; margin-top: 52px; text-align: center;
+    }
+    .cta-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .cta-box p  { color: #bbb !important; font-size: 16px !important; margin-bottom: 24px !important; }
+    .cta-box .question {
+      font-size: 17px !important; color: #f0ece8 !important;
+      font-style: italic; font-weight: 500; margin-bottom: 28px !important;
+    }
+    .cta-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; }
+    .cta-form input[type="email"] {
+      flex: 1; min-width: 200px; padding: 12px 16px; font-size: 15px;
+      border: 1px solid #444; background: #1e1e1e; color: #fff;
+      border-radius: 8px; outline: none;
+    }
+    .cta-form input[type="email"]::placeholder { color: #666; }
+    .cta-form input[type="email"]:focus { border-color: #E8562A; }
+    .cta-form button {
+      padding: 12px 22px; font-size: 14px; font-weight: 700;
+      background: #E8562A; color: #fff; border: none;
+      border-radius: 8px; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .cta-form button:hover { background: #cf4a22; }
+    .cta-note {
+      font-size: 12px !important; color: #888 !important;
+      margin-top: 12px !important; margin-bottom: 0 !important;
+    }
+
+    /* ── Series label ────────────────────────────────────────── */
+    .series-label {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      background: #E8562A; color: #fff; padding: 5px 12px;
+      border-radius: 4px; letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 36px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .site-footer {
+      background: #ffffff; padding: 40px 24px;
+      text-align: center; border-top: 1px solid #e8e5e0;
+    }
+    .site-footer .footer-logo { font-size: 15px; font-weight: 700; color: #111111; margin-bottom: 16px; }
+    .site-footer .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .site-footer .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
+    .site-footer .footer-links a:hover { color: #111; }
+    .site-footer .footer-copy { font-size: 12px; color: #999; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .site-header nav { display: none; }
+      .article p { font-size: 17px; }
+      .article p.lead { font-size: 19px; }
+      .cta-box { padding: 32px 24px; }
+      .day-row { grid-template-columns: 70px 1fr auto; gap: 10px; }
+      .freq-table { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Site header ──────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="https://borisdracka.com/sk/" class="logo">CFO Unfiltered</a>
+    <nav>
+      <a href="https://borisdracka.com/sk/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="#subscribe" class="btn-subscribe">Odoberať</a>
+      <span class="lang-switch">
+        <a href="https://borisdracka.com/blog/post-04">EN</a><span class="sep">/</span><a href="https://borisdracka.com/sk/blog/post-04" class="active">SK</a>
+      </span>
+    </nav>
+  </header>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="tag">Cash Flow · Financie v reálnom čase · SMB</div>
+    <h1>V stredu dosť hotovosti.<br>V piatok nezaplatené mzdy.</h1>
+    <p class="subtitle">Prečo sledovanie cash flow raz za mesiac nie je riadenie cash flow — a čo sa stane, keď tú medzeru zatvoríte.</p>
+  </div>
+
+  <div class="meta">Boris Dračka &nbsp;·&nbsp; máj 2026 &nbsp;·&nbsp; 5 min čítania</div>
+
+  <!-- ── Article ───────────────────────────────────────────────── -->
+  <div class="article">
+
+    <span class="series-label">Príspevok #4 z 50 — Séria CFO &amp; AI</span>
+
+    <p class="lead">
+      Firma môže v pondelok vyzerať úplne zdravo a v piatok byť v kríze. Nie preto, že sa stalo niečo katastrofické. Nie preto, že by firma zlyhávala. Ale preto, že ľudia, ktorí ju riadia, sa pozerali na minulomesačné čísla, zatiaľ čo hotovosť tento týždeň sa hýbala nesprávnym smerom.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="num">2 mil. €</span>
+        <span class="label">Ročný obrat — ziskové</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">1×</span>
+        <span class="label">Ako často väčšina firiem sleduje cash flow</span>
+      </div>
+      <div class="stat-box">
+        <span class="num">48h</span>
+        <span class="label">Od „v poriadku" po krízu vo mzdách</span>
+      </div>
+    </div>
+
+    <p>
+      Väčšina malých a stredných firiem kontroluje svoju hotovostnú pozíciu raz za mesiac — keď účtovník uzavrie knihy. Mesačný report dorazí, niekto sa pozrie na zostatok na účte a rozhovor sa posunie ďalej. Všetko vyzerá v poriadku.
+    </p>
+
+    <p>
+      Čo mesačný report neukazuje, je to, čo sa deje počas 29 dní medzi reportmi. Kam peniaze skutočne idú. Ktorí klienti platia neskoro. Ktoré platby dodávateľom sú v poradí. Ako bude vyzerať zostatok na účte 25. deň — keď idú mzdy.
+    </p>
+
+    <h2>Ako ziskovej firme nevyjdú mzdy</h2>
+
+    <p>
+      Toto nie je hypotéza. Videl som verzie tohto scenára viac než raz počas svojich 30 rokov. Detaily sa menia. Štruktúra je vždy rovnaká.
+    </p>
+
+    <!-- Day timeline visual -->
+    <div class="day-timeline">
+      <div class="day-timeline-header">
+        Jeden týždeň vo firme s <span>obratom 2 mil. €</span> — príbeh cash flow, ktorý nikto nevidel prichádzať
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">PO</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot green"></span>
+            Mesačný report skontrolovaný. Zostatok na účte vyzerá zdravo.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot green"></span>
+            Tri faktúry odoslané klientom — celkovo 48 000 €. Platobné podmienky: 30 dní.
+          </div>
+        </div>
+        <div class="day-cash positive">
+          <span class="cash-label">Zostatok na účte</span>
+          62 400 €
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">UT</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot"></span>
+            Zaplatená faktúra dodávateľovi — údržba zariadenia, 11 200 €.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot"></span>
+            Spracovaný inkasný príkaz za nájom kancelárie, 4 800 €.
+          </div>
+        </div>
+        <div class="day-cash positive">
+          <span class="cash-label">Zostatok na účte</span>
+          46 400 €
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">ST</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot"></span>
+            Najväčší klient si žiada 15-dňové predĺženie platby. Schválené.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot"></span>
+            Platba DPH splatná koncom týždňa — 18 300 €. (Zaznamenané v systéme.)
+          </div>
+        </div>
+        <div class="day-cash positive">
+          <span class="cash-label">Zostatok na účte</span>
+          46 400 €
+        </div>
+      </div>
+
+      <div class="day-row">
+        <div class="day-label">
+          <span class="day-name">ŠT</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            Platba DPH automaticky strhnutá — 18 300 €. Skôr, než sa čakalo.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            Prichádza faktúra od subdodávateľa — 14 600 €, splatná okamžite podľa zmluvy.
+          </div>
+        </div>
+        <div class="day-cash warning">
+          <span class="cash-label">Zostatok na účte</span>
+          13 500 €
+        </div>
+      </div>
+
+      <div class="day-row crisis">
+        <div class="day-label">
+          <span class="day-name red">PI</span>
+        </div>
+        <div class="day-events">
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            Naplánovaný výplatný termín — 21 800 € pre 18 zamestnancov.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            Nedostatok finančných prostriedkov. Banka transakciu zamietla.
+          </div>
+          <div class="day-event">
+            <span class="ev-dot red"></span>
+            CEO sa to dozvie v piatok o 16:00.
+          </div>
+        </div>
+        <div class="day-cash danger">
+          <span class="cash-label">Zostatok na účte</span>
+          –8 300 €
+        </div>
+      </div>
+
+      <div class="day-timeline-footer">
+        Firma bola celý týždeň zisková. Nikto nesledoval denný tok hotovosti.
+      </div>
+    </div>
+
+    <p>
+      Firma v žiadnom momente nemala problém s tržbami. Každá faktúra v tomto scenári sa nakoniec zaplatí. Firma je zdravá. Zlyhal informačný systém. Nikto nesledoval hotovostnú pozíciu denne. Nikto neupozornil na kolíziu medzi automatickým strhnutím DPH a piatkovými mzdami. Mesačný report ukázal silný mesiac. Týždenná realita bola iný príbeh.
+    </p>
+
+    <h2>Rozdiel medzi reportovaním cash flow a riadením cash flow</h2>
+
+    <p>
+      Reportovanie vám povie, čo sa stalo. Riadenie mení to, čo sa má stať. Väčšina malých firiem má to prvé. Takmer žiadna nemá to druhé — pretože riadenie hotovosti v reálnom čase vyžaduje, aby niekto sledoval čísla každý deň, a na to nikto nemá čas nad všetkým ostatným.
+    </p>
+
+    <div class="pullquote">
+      <p>„Mesačný report cash flow je kniha dejín. Kým vyjde, nemôžete zmeniť žiadnu udalosť v ňom."</p>
+    </div>
+
+    <p>
+      Presne v medzere medzi reportovaním a riadením žijú väčšina hotovostných krízí. Nie v zlých firmách. Vo firmách, ktorým sa darí — ale ktoré sa príliš neskoro dozvedia, že sa niečo chystá zle.
+    </p>
+
+    <h2>Ako často by ste sa skutočne mali pozerať?</h2>
+
+    <p>
+      Odpoveď závisí od vášho hotovostného cyklu, platobných podmienok a od toho, koľko veľkých výdavkov padne v danom týždni. Ale tu je praktický rámec založený na tom, čo som videl fungovať — a čo som videl zlyhať — v desiatkach firiem.
+    </p>
+
+    <!-- Frequency comparison table -->
+    <table class="freq-table">
+      <thead>
+        <tr>
+          <th>Frekvencia kontroly</th>
+          <th>Čo zachytíte</th>
+          <th>Čo prehliadnete</th>
+          <th>Verdikt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-freq">Mesačne</td>
+          <td>Zostatok na konci mesiaca, trendy v čase</td>
+          <td>Akúkoľvek krízu v priebehu mesiaca. Každú týždennú kolíziu.</td>
+          <td><span class="badge bad">Vysoké riziko</span></td>
+        </tr>
+        <tr>
+          <td class="col-freq">Týždenne</td>
+          <td>Pozícia na konci týždňa, nadchádzajúce veľké platby</td>
+          <td>Prekvapenia v priebehu týždňa, kolízie platieb v ten istý deň</td>
+          <td><span class="badge ok">Prijateľné</span></td>
+        </tr>
+        <tr>
+          <td class="col-freq">Denne</td>
+          <td>Aktuálny zostatok, dnešné príjmy/výdavky</td>
+          <td>Veľmi málo — väčšina kríz je viditeľná 1–2 dni vopred</td>
+          <td><span class="badge good">Dobré</span></td>
+        </tr>
+        <tr>
+          <td class="col-freq">V reálnom čase + upozornenia</td>
+          <td>Zostatok, prognózy, upozornenia na anomálie — automaticky</td>
+          <td>Takmer nič — systém upozorní skôr, než sa musí pozrieť človek</td>
+          <td><span class="badge best">Optimálne</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Dôvod, prečo väčšina firiem zostáva na „mesačne", nie je, že by nevedeli, že denne je lepšie. Je to preto, že denné sledovanie hotovosti vyžaduje, aby to niekto naozaj robil — stiahol bankové dáta, zosúladil ich s očakávanými platbami, skontroloval prognózu do budúcnosti. To je 30–45 minút práce každý deň. Práca, ktorá konkuruje všetkému ostatnému, čo má účtovník na stole.
+    </p>
+
+    <h2>Čo robí AI agent pre viditeľnosť hotovosti</h2>
+
+    <p>
+      Dobre postavený cash flow agent nečaká, kým sa ho niekto spýta. Pripojí sa na bankový feed, účtovný systém a mzdový rozvrh. Beží každé ráno — automaticky. Kým CEO dorazí ku stolu, už existuje súhrn: aktuálny zostatok, očakávané príjmy tento týždeň, plánované výdavky, a upozornenie, ak prognózovaný zostatok klesne pod stanovenú hranicu kedykoľvek v nasledujúcich 14 dňoch.
+    </p>
+
+    <div class="pullquote">
+      <p>„Kríza vo mzdách z toho piatkového scenára bola viditeľná už v utorok — ak by sa niekto pozrel na 5-dňovú prognózu hotovosti. Agent sa na to pozerá každý deň. To je celý zmysel."</p>
+    </div>
+
+    <p>
+      V scenári vyššie by základný cash flow agent upozornil na problém v stredu ráno: prognózovaný zostatok v piatok po mzdách — mínus 8 300 €. Upozornenie: mzdy v ohrození. Potrebná akcia. To je riešiteľný problém v stredu. Je to kríza v piatok o 16:00.
+    </p>
+
+    <p>
+      Technológia na toto nie je nová. API prepojenia na bankové feedy existujú roky. Nové je, že postaviť a spustiť tento typ monitorovacieho systému už nevyžaduje developera, BI tím ani enterprise softvérovú zmluvu. Môže to nastaviť finančný človek, ktorý je ochotný stráviť niekoľko hodín na architektúre. Presne to som staval — a o tom je zvyšok tejto série.
+    </p>
+
+    <!-- ── CTA box ──────────────────────────────────────────── -->
+    <div class="cta-box" id="subscribe">
+      <h3>Sledujte túto sériu</h3>
+      <p>Príspevok #5 prechádza presným nastavením cash flow agenta, ktorého som postavil — na čo sa pripája, čo odosiela a koľko času stálo jeho nastavenie.</p>
+      <p class="question">Ako často vaša firma kontroluje cash flow?</p>
+
+      <form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+        <input type="email" name="email" placeholder="vas@email.com" required />
+        <button type="submit">Odoberať zadarmo</button>
+      </form>
+      <p class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhláste sa kedykoľvek.</p>
+    </div>
+
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-logo">CFO Unfiltered</div>
+    <div class="footer-links">
+      <a href="https://borisdracka.com/sk/">Domov</a>
+      <a href="https://borisdracka.com/sk/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener">X.com</a>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Odoberať</a>
+    </div>
+    <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
+  </footer>
+
+</body>
+</html>
