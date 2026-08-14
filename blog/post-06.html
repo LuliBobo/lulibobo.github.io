@@ -415,6 +415,10 @@
 
     <span class="series-label">Post #6 of 50 — The CFO &amp; AI Series</span>
 
+    <p style="font-size: 14px; color: #888; font-style: italic; margin-bottom: 28px;">
+      The examples and architectures in this series are my personal educational, non-commercial experiments; they are not an offer of IT or consulting services.
+    </p>
+
     <p class="lead">
       In Post #2, I described what an AI CFO agent does — it pulls data, cleans it, calculates KPIs, generates reports, and sends them. Every day. Automatically. Several people asked the obvious follow-up: how? This post is the answer.
     </p>
@@ -642,7 +646,7 @@
     <h2>The one thing that takes longer than expected</h2>
 
     <p>
-      In my experience building this, the data cleaning layer took three times longer than I planned. Not because it's technically complex — but because you don't know what's wrong with your data until you start looking at it systematically. Duplicate vendor entries. Transactions posted to the wrong cost center. Invoice categories that changed when someone updated the chart of accounts two years ago and didn't tell anyone.
+      In practical experimentation with this type of architecture, the data cleaning layer tends to require significantly more time than it seems at first glance. Not because it's technically complex — but because you don't know what's wrong with your data until you start looking at it systematically. Duplicate vendor entries. Transactions posted to the wrong cost center. Invoice categories that changed when someone updated the chart of accounts two years ago and didn't tell anyone.
     </p>
 
     <p>
@@ -650,7 +654,7 @@
     </p>
 
     <div class="pullquote">
-      <p>"Building the agent forced me to fix problems in the underlying data that had been there for years. The automation didn't just speed up the reporting — it made the reporting accurate for the first time."</p>
+      <p>"A practical experiment with an agent tends to surface problems in the underlying data very quickly — problems that may have stayed hidden for years. The automation doesn't just speed up the reporting — it makes the reporting accurate for the first time."</p>
     </div>
 
     <h2>What "without pressing a button" actually requires</h2>
@@ -664,7 +668,7 @@
     </p>
 
     <p>
-      Building the error handling properly took about a week of additional work after the "happy path" was running. It's not glamorous. It's what makes the difference between a demo and a system you can actually trust at 7:30 on a Monday morning.
+      In a practical prototype, error handling can end up being more time-consuming than the basic automation itself. It's not glamorous. It's what makes the difference between a demo and a system you can actually trust at 7:30 on a Monday morning.
     </p>
 
     <!-- ── CTA box ──────────────────────────────────────────── -->
