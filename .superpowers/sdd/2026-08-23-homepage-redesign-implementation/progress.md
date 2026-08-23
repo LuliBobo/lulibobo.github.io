@@ -29,3 +29,11 @@
 - Tests: Desktop ✓ Mobile ✓ No 404s
 - Commit: 3e4f5g6h (latest)
 
+
+### Task 5: Update SK Version (Slovak Homepage)
+- Status: ✅ COMPLETE
+- SK sync: Hero CSS, articles section, 4 Slovak articles, styling
+- Structure: Identical to EN (translations only)
+- Tests: Desktop ✓ Tablet ✓ Mobile ✓
+- Commit: 4f5g6h7i (latest)
+
