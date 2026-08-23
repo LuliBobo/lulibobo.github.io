@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+  <title>Agent na sledovanie faktúr po splatnosti — ako funguje | Boris Dračka</title>
+  <meta name="description" content="30 % týždňa samostatného účtovníka ide na zháňanie faktúr. Tento AI agent to robí automaticky — deteguje pohľadávky po splatnosti, prioritizuje podľa rizika a píše pripomienkové e-maily." />
+
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="Boris Dračka" />
+  <meta property="og:url"         content="https://borisdracka.com/sk/blog/post-03-demo" />
+  <meta property="og:title"       content="Agent na sledovanie faktúr po splatnosti — ako funguje" />
+  <meta property="og:description" content="30 % týždňa samostatného účtovníka ide na zháňanie faktúr. Tento AI agent to robí automaticky." />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:site"       content="@BorisDracka" />
+  <meta name="twitter:creator"    content="@BorisDracka" />
+
+  <link rel="canonical" href="https://borisdracka.com/sk/blog/post-03-demo" />
+  <link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-03-demo" />
+  <link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-03-demo" />
+  <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-03-demo" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:    #111111;
+      --orange:   #E8562A;
+      --org2:     #cf4a22;
+      --bg:       #ffffff;
+      --bg2:      #f7f5f2;
+      --border:   #e8e5e0;
+      --muted:    #666666;
+      --red:      #dc2626;
+      --red-bg:   #fef2f2;
+      --red-bd:   #fecaca;
+      --yellow:   #d97706;
+      --yel-bg:   #fffbeb;
+      --yel-bd:   #fde68a;
+      --green:    #16a34a;
+      --grn-bg:   #f0fdf4;
+      --grn-bd:   #bbf7d0;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--black); line-height: 1.75; }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+    .site-header {
+      background: rgba(255,255,255,0.96); border-bottom: 1px solid var(--border);
+      padding: 0 24px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px);
+    }
+    .logo { font-size: 15px; font-weight: 700; color: var(--black); text-decoration: none; letter-spacing: -0.3px; }
+    .site-header nav { display: flex; gap: 24px; align-items: center; }
+    .site-header nav a { font-size: 13px; color: #666; text-decoration: none; transition: color .15s; }
+    .site-header nav a:hover { color: var(--black); }
+    .btn-subscribe {
+      font-size: 13px; font-weight: 700; background: var(--orange); color: #fff;
+      padding: 8px 16px; border-radius: 8px; text-decoration: none; transition: background .15s;
+    }
+    .btn-subscribe:hover { background: var(--org2); }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .lang-switch a { color: #666; text-decoration: none; }
+    .lang-switch a.active { color: var(--orange); }
+    .lang-switch a:hover { color: var(--black); }
+    .lang-switch .sep { color: var(--border); }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    .hero { background: var(--black); color: #fff; padding: 72px 24px 60px; text-align: center; }
+    .hero-tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 48px); font-weight: 900;
+      line-height: 1.12; letter-spacing: -1.5px;
+      max-width: 760px; margin: 0 auto 20px;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p { font-size: 18px; color: #aaa; max-width: 580px; margin: 0 auto 32px; }
+    .hero-meta {
+      font-size: 13px; color: #555;
+      display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
+
+    /* ── STAT STRIP ─────────────────────────────────────────── */
+    .stat-strip {
+      background: var(--orange); color: #fff;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+    }
+    .stat-item {
+      padding: 18px 40px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num  { font-size: 30px; font-weight: 900; display: block; letter-spacing: -1px; }
+    .stat-label{ font-size: 12px; opacity: .8; letter-spacing: .5px; display: block; margin-top: 2px; }
+
+    /* ── SECTION ────────────────────────────────────────────── */
+    .section { max-width: 780px; margin: 0 auto; padding: 56px 24px; }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+    .section-heading { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .section-sub { font-size: 16px; color: var(--muted); margin-bottom: 36px; }
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ── INTRO ──────────────────────────────────────────────── */
+    .intro-text p { font-size: 18px; line-height: 1.8; margin-bottom: 22px; }
+    .intro-text p.lead { font-size: 20px; font-weight: 500; line-height: 1.7; }
+    .pullquote {
+      border-left: 4px solid var(--orange); padding: 16px 24px; margin: 36px 0;
+      background: var(--bg2); border-radius: 0 8px 8px 0;
+    }
+    .pullquote p { font-size: 19px; font-style: italic; color: #333; line-height: 1.55; }
+
+    /* ── TIME BREAKDOWN ─────────────────────────────────────── */
+    .week-table { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+    .week-header {
+      background: var(--black); color: #fff; padding: 14px 20px;
+      font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px;
+    }
+    .week-header span { color: var(--orange); }
+    .week-row {
+      display: flex; align-items: center; gap: 14px; padding: 13px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .week-row:last-child { border-bottom: none; }
+    .week-row:nth-child(even) { background: var(--bg2); }
+    .week-row.highlight { background: #fff8f5; }
+    .task-name { font-size: 14px; font-weight: 600; width: 220px; flex-shrink: 0; }
+    .task-name.orange { color: var(--orange); }
+    .bar-wrap { flex: 1; background: #e8e5e0; border-radius: 4px; height: 10px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; background: var(--orange); }
+    .bar-fill.dim { background: #ccc; }
+    .pct { font-size: 13px; font-weight: 700; width: 36px; text-align: right; flex-shrink: 0; }
+    .pct.orange { color: var(--orange); }
+    .week-footer { background: var(--bg2); padding: 12px 20px; font-size: 13px; color: #888; border-top: 1px solid var(--border); }
+
+    /* ── INVOICE TABLE ──────────────────────────────────────── */
+    .invoice-window { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .invoice-topbar {
+      background: var(--black); padding: 12px 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .invoice-dots { display: flex; gap: 6px; }
+    .invoice-dots span { width: 12px; height: 12px; border-radius: 50%; }
+    .invoice-dots span:nth-child(1) { background: #ff5f57; }
+    .invoice-dots span:nth-child(2) { background: #febc2e; }
+    .invoice-dots span:nth-child(3) { background: #28c840; }
+    .invoice-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #666; }
+    .run-badge {
+      margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; background: var(--orange); color: #fff;
+      padding: 3px 9px; border-radius: 4px;
+    }
+
+    .invoice-summary {
+      background: var(--bg2); padding: 14px 20px;
+      display: flex; gap: 24px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .inv-sum-item { display: flex; flex-direction: column; }
+    .inv-sum-val  { font-size: 20px; font-weight: 900; color: var(--black); letter-spacing: -0.5px; }
+    .inv-sum-val.red    { color: var(--red); }
+    .inv-sum-val.yellow { color: var(--yellow); }
+    .inv-sum-val.orange { color: var(--orange); }
+    .inv-sum-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      background: var(--bg2); padding: 10px 16px; text-align: left;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .8px; color: var(--muted); border-bottom: 1px solid var(--border);
+    }
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 13px 16px; font-size: 14px; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 700; padding: 3px 9px;
+      border-radius: 100px; letter-spacing: .3px;
+    }
+    .badge.critical { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-bd); }
+    .badge.warning  { background: var(--yel-bg); color: var(--yellow); border: 1px solid var(--yel-bd); }
+    .badge.watch    { background: var(--grn-bg); color: var(--green); border: 1px solid var(--grn-bd); }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    .amount { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+    .client-name { font-weight: 600; }
+    .days-col { font-weight: 700; }
+    .days-col.critical { color: var(--red); }
+    .days-col.warning  { color: var(--yellow); }
+    .days-col.watch    { color: var(--green); }
+    .risk-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .risk-bar { height: 6px; border-radius: 3px; background: var(--orange); }
+
+    /* ── EMAIL PREVIEW ──────────────────────────────────────── */
+    .email-window { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .email-topbar {
+      background: var(--black); padding: 12px 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .email-dots { display: flex; gap: 6px; }
+    .email-dots span { width: 12px; height: 12px; border-radius: 50%; }
+    .email-dots span:nth-child(1) { background: #ff5f57; }
+    .email-dots span:nth-child(2) { background: #febc2e; }
+    .email-dots span:nth-child(3) { background: #28c840; }
+    .email-app-name { font-size: 12px; color: #666; }
+    .ai-badge {
+      margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; background: var(--orange); color: #fff;
+      padding: 3px 9px; border-radius: 4px;
+    }
+    .email-header { background: var(--bg2); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+    .email-header-row { display: flex; gap: 8px; font-size: 13px; margin-bottom: 6px; }
+    .email-header-row:last-child { margin-bottom: 0; }
+    .email-field { color: var(--muted); min-width: 50px; font-weight: 600; }
+    .email-value { color: var(--black); }
+    .email-value.subject { font-weight: 700; color: var(--red); }
+    .email-body { padding: 24px 28px; }
+    .email-body p { font-size: 15px; line-height: 1.8; margin-bottom: 14px; color: var(--black); }
+    .email-body p:last-child { margin-bottom: 0; }
+    .email-body strong { color: var(--red); }
+    .email-sig { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+
+    /* ── PIPELINE ───────────────────────────────────────────── */
+    .pipeline { display: flex; flex-direction: column; margin-bottom: 12px; }
+    .p-step {
+      display: flex; align-items: flex-start; gap: 18px;
+      padding: 20px 22px; border: 1px solid var(--border); background: #fff;
+    }
+    .p-step:first-child { border-radius: 12px 12px 0 0; }
+    .p-step:last-child  { border-radius: 0 0 12px 12px; }
+    .p-step + .p-step   { border-top: none; }
+    .p-num {
+      font-size: 11px; font-weight: 700; background: var(--orange); color: #fff;
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+    }
+    .p-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .p-title { font-size: 16px; font-weight: 700; margin-bottom: 5px; }
+    .p-desc  { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .p-tag {
+      display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600;
+      background: var(--bg2); color: #555; padding: 3px 10px;
+      border-radius: 100px; border: 1px solid var(--border);
+    }
+    .pipeline-footer {
+      background: var(--black); color: var(--orange); border-radius: 10px;
+      padding: 14px 20px; font-size: 14px; font-weight: 700; text-align: center;
+    }
+
+    /* ── CODE TUTORIAL ──────────────────────────────────────── */
+    .tutorial-step {
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin-bottom: 16px;
+    }
+    .tutorial-step-header {
+      background: var(--bg2); padding: 14px 20px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-badge {
+      font-size: 11px; font-weight: 700; background: var(--orange); color: #fff;
+      width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-title-t { font-size: 15px; font-weight: 700; }
+    .step-file { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); margin-left: auto; }
+    pre {
+      background: #1a1a1a; color: #e2e8f0; padding: 20px 24px;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      line-height: 1.7; overflow-x: auto; margin: 0;
+    }
+    .code-comment { color: #6b7280; }
+    .code-string  { color: #86efac; }
+    .code-keyword { color: #93c5fd; }
+    .code-fn      { color: #fbbf24; }
+    .code-var     { color: #e2e8f0; }
+    .code-num     { color: #f9a8d4; }
+
+    /* ── TECH GRID ──────────────────────────────────────────── */
+    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .tech-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 22px 20px; }
+    .tech-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .tech-card p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .tech-card code {
+      display: inline-block; font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; background: #e8e5e0; padding: 2px 7px;
+      border-radius: 4px; color: var(--black); margin-top: 8px;
+    }
+
+    /* ── GITHUB CTA ─────────────────────────────────────────── */
+    .github-section { background: var(--black); padding: 72px 24px; }
+    .github-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .github-section h2 {
+      font-size: clamp(24px, 4vw, 36px); font-weight: 900;
+      letter-spacing: -1px; color: #fff; margin-bottom: 16px; line-height: 1.2;
+    }
+    .github-section h2 span { color: var(--orange); }
+    .github-section p { font-size: 17px; color: #aaa; margin-bottom: 12px; line-height: 1.7; }
+    .repo-name {
+      font-family: 'JetBrains Mono', monospace; font-size: 14px;
+      background: #1a1a1a; border: 1px solid #333; color: #aaa;
+      padding: 8px 16px; border-radius: 8px; display: inline-block; margin-bottom: 32px;
+    }
+    .repo-name span { color: var(--orange); }
+    .what-inside { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 24px 28px; text-align: left; margin-bottom: 40px; }
+    .what-inside h4 { font-size: 13px; font-weight: 700; color: #aaa; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .what-inside ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .what-inside li { font-size: 14px; color: #ccc; display: flex; align-items: flex-start; gap: 10px; }
+    .what-inside li::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+    .github-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+    .btn-github {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px; font-family: 'Inter', sans-serif;
+      font-size: 15px; font-weight: 700; background: #fff; color: var(--black);
+      border: none; border-radius: 10px; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: background .15s;
+    }
+    .btn-github:hover { background: #f0f0f0; }
+    .btn-github svg { width: 20px; height: 20px; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 24px; font-family: 'Inter', sans-serif;
+      font-size: 15px; font-weight: 600; background: transparent; color: #fff;
+      border: 1px solid #444; border-radius: 10px; text-decoration: none; transition: border-color .15s;
+    }
+    .btn-outline:hover { border-color: #fff; }
+
+    /* ── SUBSCRIBE ──────────────────────────────────────────── */
+    .subscribe-box { border-top: 1px solid #2a2a2a; padding-top: 36px; text-align: center; }
+    .subscribe-box h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .subscribe-box p  { font-size: 14px; color: #aaa; margin-bottom: 20px; }
+    .cta-form { display: flex; gap: 10px; max-width: 400px; margin: 0 auto; flex-wrap: wrap; }
+    .cta-form input {
+      flex: 1; min-width: 180px; padding: 12px 16px;
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      border: 1px solid #444; background: #1a1a1a; color: #fff; border-radius: 8px; outline: none;
+    }
+    .cta-form input::placeholder { color: #555; }
+    .btn-sub {
+      padding: 12px 22px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700;
+      background: var(--orange); color: #fff; border: none; border-radius: 8px; cursor: pointer;
+    }
+    .cta-note { font-size: 12px; color: #555; margin-top: 10px; }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    .site-footer {
+      background: #fff; color: #999; padding: 40px 24px;
+      text-align: center; border-top: 1px solid var(--border);
+    }
+    .footer-logo { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 16px; }
+    .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
+    .footer-links a:hover { color: var(--black); }
+    .footer-copy { font-size: 12px; }
+
+    @media (max-width: 640px) {
+      .site-header nav { display: none; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .stat-item { padding: 16px 24px; }
+      .task-name { width: 140px; font-size: 12px; }
+      table { font-size: 13px; }
+      thead th, tbody td { padding: 10px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="https://borisdracka.com/sk/" class="logo">CFO Unfiltered</a>
+    <nav>
+      <a href="https://borisdracka.com/sk/blog/post-03">← Príspevok #3</a>
+      <a href="https://borisdracka.com/sk/blog">Blog</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" class="btn-subscribe">Odoberať</a>
+      <span class="lang-switch">
+        <a href="https://borisdracka.com/blog/post-03-demo">EN</a><span class="sep">/</span><a href="https://borisdracka.com/sk/blog/post-03-demo" class="active">SK</a>
+      </span>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Doplnok k príspevku #3 — Séria CFO &amp; AI</div>
+    <h1>Agent, ktorý <span>zháňa faktúry</span><br>aby ste to nemuseli robiť vy</h1>
+    <p>30 % týždňa samostatného účtovníka ide na pohľadávky a fakturáciu. Tento agent monitoruje vaše faktúry po splatnosti, zoraďuje ich podľa rizika a píše pripomienkové e-maily — automaticky.</p>
+    <div class="hero-meta">
+      <span>📄 Boris Dračka</span>
+      <span>·</span>
+      <span>⏱ 5 min čítania</span>
+      <span>·</span>
+      <span>📦 Kód na GitHube</span>
+    </div>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-item">
+      <span class="stat-num">30 %</span>
+      <span class="stat-label">Týždňa na fakturácii a pohľadávkach</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">12h</span>
+      <span class="stat-label">Ušetrených na účtovníka týždenne</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">Pondelok</span>
+      <span class="stat-label">7:00 — beží automaticky</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section intro-text">
+    <div class="section-label">Problém</div>
+    <div class="section-heading">Kam skutočne ide 30 % týždňa</div>
+
+    <p class="lead">V príspevku #3 som vám ukázal rozpis času typického samostatného účtovníka v 50-člennej firme. Najväčšia jednotlivá kategória — 30 % týždňa — je fakturácia a pohľadávky.</p>
+
+    <p>To je 12 hodín každý týždeň strávených na: kontrole, ktoré faktúry sú po splatnosti, zisťovaní, koho treba naháňať, písaní pripomienkových e-mailov, opätovnom kontaktovaní, keď nedôjde odpoveď. Manuálne. Opakovane. Každý jeden týždeň.</p>
+
+    <div class="week-table">
+      <div class="week-header">Týždeň jedného účtovníka &nbsp;·&nbsp; <span>40 hodín</span> &nbsp;·&nbsp; kam ide čas</div>
+      <div class="week-row highlight">
+        <div class="task-name orange">Fakturácia a AP/AR</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div>
+        <div class="pct orange">30%</div>
+      </div>
+      <div class="week-row">
+        <div class="task-name">Mzdy a HR administratíva</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:67%"></div></div>
+        <div class="pct">20%</div>
+      </div>
+      <div class="week-row">
+        <div class="task-name">Mesačná uzávierka</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:67%"></div></div>
+        <div class="pct">20%</div>
+      </div>
+      <div class="week-row">
+        <div class="task-name">Dane a compliance</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:50%"></div></div>
+        <div class="pct">15%</div>
+      </div>
+      <div class="week-row">
+        <div class="task-name">Ad hoc požiadavky</div>
+        <div class="bar-wrap"><div class="bar-fill dim" style="width:33%"></div></div>
+        <div class="pct">10%</div>
+      </div>
+      <div class="week-row">
+        <div class="task-name">Prognózovanie a analýza</div>
+        <div class="bar-wrap"><div class="bar-fill dim" style="width:17%"></div></div>
+        <div class="pct">5%</div>
+      </div>
+      <div class="week-footer">Fakturácia a pohľadávky sú najväčším spotrebiteľom času. Sú tiež najlepšie automatizovateľné.</div>
+    </div>
+
+    <div class="pullquote">
+      <p>„Práca s najvyššou hodnotou — prognózovanie, scenárová analýza, proaktívne riadenie hotovosti — dostane 5 % času. Pretože zvyšných 95 % je už obsadených."</p>
+    </div>
+
+    <p>Toto je presne to, čo rieši Agent na faktúry po splatnosti. Nenahrádza účtovníka. Berie tých 30 %, ktoré nevyžadujú úsudok — a rieši to automaticky.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- INVOICE TABLE -->
+  <div class="section">
+    <div class="section-label">Výstup krokov 2 a 3</div>
+    <div class="section-heading">Čo agent vidí každé pondelkové ráno</div>
+    <div class="section-sub">Agent prečíta vaše dáta o faktúrach, deteguje, čo je po splatnosti, a zoradí všetko podľa finančného rizika — skôr, než niekto dorazí do kancelárie.</div>
+
+    <div class="invoice-window">
+      <div class="invoice-topbar">
+        <div class="invoice-dots"><span></span><span></span><span></span></div>
+        <span class="invoice-title">invoices.csv — Analýza po splatnosti</span>
+        <span class="run-badge">Pondelok 07:00</span>
+      </div>
+
+      <div class="invoice-summary">
+        <div class="inv-sum-item">
+          <span class="inv-sum-val red">104 900 €</span>
+          <span class="inv-sum-label">Celkovo v riziku</span>
+        </div>
+        <div class="inv-sum-item">
+          <span class="inv-sum-val orange">8</span>
+          <span class="inv-sum-label">Faktúr po splatnosti</span>
+        </div>
+        <div class="inv-sum-item">
+          <span class="inv-sum-val red">3</span>
+          <span class="inv-sum-label">Kritické (60d+)</span>
+        </div>
+        <div class="inv-sum-item">
+          <span class="inv-sum-val yellow">2</span>
+          <span class="inv-sum-label">Varovanie (30–60d)</span>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Faktúra</th>
+            <th>Klient</th>
+            <th>Suma</th>
+            <th>Po splatnosti</th>
+            <th>Stav</th>
+            <th>Skóre rizika</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="amount">INV-003</span></td>
+            <td><span class="client-name">Gamma s.r.o.</span></td>
+            <td><span class="amount">31 000 €</span></td>
+            <td><span class="days-col critical">81 dní</span></td>
+            <td><span class="badge critical">Kritické</span></td>
+            <td>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:80px"></div>
+                <span style="font-size:12px;color:#888">2 511 000</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="amount">INV-007</span></td>
+            <td><span class="client-name">Eta Solutions</span></td>
+            <td><span class="amount">22 000 €</span></td>
+            <td><span class="days-col critical">97 dní</span></td>
+            <td><span class="badge critical">Kritické</span></td>
+            <td>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:70px"></div>
+                <span style="font-size:12px;color:#888">2 134 000</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="amount">INV-005</span></td>
+            <td><span class="client-name">Epsilon Ltd</span></td>
+            <td><span class="amount">15 000 €</span></td>
+            <td><span class="days-col warning">10 dní</span></td>
+            <td><span class="badge watch">Sledovať</span></td>
+            <td>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:24px"></div>
+                <span style="font-size:12px;color:#888">150 000</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="amount">INV-001</span></td>
+            <td><span class="client-name">Acme Corp</span></td>
+            <td><span class="amount">12 500 €</span></td>
+            <td><span class="days-col critical">64 dní</span></td>
+            <td><span class="badge critical">Kritické</span></td>
+            <td>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:32px"></div>
+                <span style="font-size:12px;color:#888">800 000</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><span class="amount">INV-004</span></td>
+            <td><span class="client-name">Delta AG</span></td>
+            <td><span class="amount">8 200 €</span></td>
+            <td><span class="days-col warning">25 dní</span></td>
+            <td><span class="badge warning">Varovanie</span></td>
+            <td>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:16px"></div>
+                <span style="font-size:12px;color:#888">205 000</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><span class="amount">INV-006</span></td>
+            <td><span class="client-name">Zeta Corp</span></td>
+            <td><span class="amount">6 400 €</span></td>
+            <td><span class="days-col watch">7 dní</span></td>
+            <td><span class="badge watch">Sledovať</span></td>
+            <td>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:8px"></div>
+                <span style="font-size:12px;color:#888">44 800</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><span class="amount">INV-002</span></td>
+            <td><span class="client-name">Beta GmbH</span></td>
+            <td><span class="amount">4 800 €</span></td>
+            <td><span class="days-col warning">45 dní</span></td>
+            <td><span class="badge warning">Varovanie</span></td>
+            <td>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:18px"></div>
+                <span style="font-size:12px;color:#888">216 000</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><span class="amount">INV-008</span></td>
+            <td><span class="client-name">Theta GmbH</span></td>
+            <td><span class="amount">3 200 €</span></td>
+            <td><span class="days-col watch">3 dni</span></td>
+            <td><span class="badge watch">Sledovať</span></td>
+            <td>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:4px"></div>
+                <span style="font-size:12px;color:#888">9 600</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- EMAIL PREVIEW -->
+  <div class="section">
+    <div class="section-label">Výstup kroku 4</div>
+    <div class="section-heading">Ako vyzerá AI pripomienkový e-mail</div>
+    <div class="section-sub">Pre každú faktúru po splatnosti agent napíše personalizovanú pripomienku — tón sa prispôsobuje závažnosti. Kritické faktúry dostanú prísny e-mail. Prvé pripomienky zostávajú slušné.</div>
+
+    <div class="email-window">
+      <div class="email-topbar">
+        <div class="email-dots"><span></span><span></span><span></span></div>
+        <span class="email-app-name">Návrh pripomienky — INV-003 — Gamma s.r.o.</span>
+        <span class="ai-badge">Napísané AI</span>
+      </div>
+      <div class="email-header">
+        <div class="email-header-row">
+          <span class="email-field">Komu:</span>
+          <span class="email-value">accounts@gamma.sk</span>
+        </div>
+        <div class="email-header-row">
+          <span class="email-field">Od:</span>
+          <span class="email-value">finance@yourcompany.com</span>
+        </div>
+        <div class="email-header-row">
+          <span class="email-field">Predmet:</span>
+          <span class="email-value subject">Pripomienka platby — INV-003 — 31 000 € — 81 dní po splatnosti</span>
+        </div>
+      </div>
+      <div class="email-body">
+        <p>Vážený finančný tím Gamma s.r.o.,</p>
+        <p>Píšem vám v súvislosti s faktúrou <strong>INV-003</strong> na sumu <strong>31 000 €</strong>, ktorá bola splatná <strong>15. marca 2026</strong> — teraz je <strong>81 dní</strong> po termíne platby. Napriek predchádzajúcej komunikácii je táto faktúra stále neuhradená.</p>
+        <p>V tejto fáze požadujeme buď okamžitú platbu v plnej výške, alebo potvrdený záväzok platby s konkrétnym dátumom do konca pracovného dňa tento piatok. Prosím, berte to ako naliehavé.</p>
+        <p>Prosím, poukážte platbu na náš evidovaný bankový účet, alebo ma kontaktujte priamo na <strong>[VÁŠ TELEFÓN / E-MAIL]</strong>, aby sme prebrali podmienky platby.</p>
+        <p>Vážime si náš vzťah s Gamma s.r.o. a rádi by sme túto záležitosť vyriešili bez ďalšej eskalácie.</p>
+        <div class="email-sig">
+          S pozdravom,<br>
+          Finančný tím · Názov vašej firmy<br>
+          [VÁŠ TELEFÓN / E-MAIL]
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- PIPELINE -->
+  <div class="section">
+    <div class="section-label">Ako to funguje</div>
+    <div class="section-heading">5 krokov. Každý pondelok. Automaticky.</div>
+    <div class="section-sub">Agent beží bez akéhokoľvek ľudského spustenia. Do 7:15 má účtovník kompletný report o faktúrach po splatnosti s návrhmi e-mailov pripravenými na kontrolu alebo odoslanie.</div>
+
+    <div class="pipeline">
+      <div class="p-step">
+        <div class="p-num">1</div>
+        <div class="p-icon">🔌</div>
+        <div>
+          <div class="p-title">Stiahnutie dát o faktúrach</div>
+          <div class="p-desc">Prečíta váš súbor s faktúrami — CSV, Google Sheet alebo export z ERP. ID faktúry, meno klienta, suma, termín splatnosti, stav platby. Žiadna manuálna príprava.</div>
+          <span class="p-tag">CSV · Google Sheets · ERP export</span>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-num">2</div>
+        <div class="p-icon">🔍</div>
+        <div>
+          <div class="p-title">Detekcia faktúr po splatnosti</div>
+          <div class="p-desc">Porovná termín splatnosti každej faktúry s dnešným dátumom. Zaradí každú faktúru po splatnosti do troch úrovní závažnosti: Kritická (60+ dní), Varovanie (30–60 dní), Sledovať (&lt; 30 dní).</div>
+          <span class="p-tag">🔴 Kritické · 🟡 Varovanie · 🟢 Sledovať</span>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-num">3</div>
+        <div class="p-icon">📊</div>
+        <div>
+          <div class="p-title">Prioritizácia podľa finančného rizika</div>
+          <div class="p-desc">Vypočíta skóre rizika pre každú faktúru: Suma × Dni po splatnosti. Faktúra na 31 000 €, ktorá má 81 dní omeškania, sa umiestni vyššie ako faktúra na 5 000 €, ktorá má 90 dní omeškania. Účtovník uvidí položky s najväčším dopadom ako prvé.</div>
+          <span class="p-tag">Skóre rizika = Suma × Dni po splatnosti</span>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-num">4</div>
+        <div class="p-icon">🤖</div>
+        <div>
+          <div class="p-title">Generovanie personalizovaných pripomienok</div>
+          <div class="p-desc">Pre každú faktúru po splatnosti napíše Gemini AI prispôsobený pripomienkový e-mail. Tón sa prispôsobuje závažnosti — slušný pre prvé pripomienky, prísny a naliehavý pre faktúry po 60 dňoch. Meno klienta, číslo faktúry a suma sa dopĺňajú automaticky.</div>
+          <span class="p-tag">Gemini API · Tón podľa závažnosti · Personalizované pre klienta</span>
+        </div>
+      </div>
+      <div class="p-step">
+        <div class="p-num">5</div>
+        <div class="p-icon">📬</div>
+        <div>
+          <div class="p-title">Doručenie súhrnu účtovníkovi</div>
+          <div class="p-desc">Odošle jeden e-mail účtovníkovi s kompletným reportom o faktúrach po splatnosti: súčty, rozpis podľa závažnosti a všetky návrhy pripomienkových e-mailov pripravené na skopírovanie, kontrolu a odoslanie. Žiadne naháňanie. Žiadne manuálne písanie.</div>
+          <span class="p-tag">Doručenie e-mailom · Návrhy pripomienok súčasťou</span>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-footer">Výsledok: Čo kedysi trvalo 3 hodiny, teraz zaberie 3 minúty na kontrolu a akciu.</div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- TUTORIAL -->
+  <div class="section">
+    <div class="section-label">Postavte si to sami</div>
+    <div class="section-heading">Ako to nastaviť za 30 minút</div>
+    <div class="section-sub">Potrebujete Python, bezplatný Gemini API kľúč a tabuľku s vašimi faktúrami. To je všetko.</div>
+
+    <div class="tutorial-step">
+      <div class="tutorial-step-header">
+        <div class="step-badge">1</div>
+        <div class="step-title-t">Naklonujte repozitár a nainštalujte závislosti</div>
+        <span class="step-file">terminal</span>
+      </div>
+      <pre><span class="code-comment"># Naklonujte repozitár</span>
+git clone https://github.com/LuliBobo/cfo-agents.git
+cd cfo-agents
+
+<span class="code-comment"># Nainštalujte dva potrebné balíky</span>
+pip install -r requirements.txt</pre>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="tutorial-step-header">
+        <div class="step-badge">2</div>
+        <div class="step-title-t">Pridajte svoje dáta o faktúrach</div>
+        <span class="step-file">data/invoices.csv</span>
+      </div>
+      <pre><span class="code-comment"># Upravte tento súbor svojimi skutočnými faktúrami</span>
+invoice_id,client,amount_eur,due_date,contact_email,status
+INV-001,Acme Corp,<span class="code-num">12500</span>,<span class="code-string">2026-04-01</span>,finance@acmecorp.com,unpaid
+INV-002,Beta GmbH,<span class="code-num">4800</span>,<span class="code-string">2026-04-20</span>,ap@betagmbh.de,unpaid
+INV-003,Your Client,<span class="code-num">31000</span>,<span class="code-string">2026-03-15</span>,billing@client.com,unpaid</pre>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="tutorial-step-header">
+        <div class="step-badge">3</div>
+        <div class="step-title-t">Nastavte API kľúč a e-mail</div>
+        <span class="step-file">.env</span>
+      </div>
+      <pre><span class="code-comment"># Skopírujte šablónu a doplňte svoje hodnoty</span>
+cp .env.example .env
+
+<span class="code-comment"># Obsah súboru .env:</span>
+<span class="code-var">GEMINI_API_KEY</span>=<span class="code-string">your_key_from_aistudio.google.com</span>
+<span class="code-var">SENDER_EMAIL</span>=<span class="code-string">your@gmail.com</span>
+<span class="code-var">SENDER_PASSWORD</span>=<span class="code-string">your_gmail_app_password</span>
+<span class="code-var">RECIPIENT_EMAIL</span>=<span class="code-string">accountant@yourcompany.com</span>
+<span class="code-var">COMPANY_NAME</span>=<span class="code-string">Your Company Name</span></pre>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="tutorial-step-header">
+        <div class="step-badge">4</div>
+        <div class="step-title-t">Spustite agenta a pozrite si výstup</div>
+        <span class="step-file">terminal</span>
+      </div>
+      <pre><span class="code-comment"># Najprv ho spustite manuálne na test</span>
+python invoice_agent.py
+
+<span class="code-comment"># Uvidíte výstup podobný tomuto:</span>
+══════════════════════════════════════════════════════
+  Agent na faktúry — Monitor pohľadávok po splatnosti
+  2026-06-05 07:00
+══════════════════════════════════════════════════════
+
+[Krok 1] Stiahnutie dát o faktúrach z: data/invoices.csv
+  ✓ Načítaných 8 faktúr
+[Krok 2] Detekcia faktúr po splatnosti...
+  ✓ Nájdených 8 faktúr po splatnosti
+    [KRITICKÉ] INV-003 — Gamma s.r.o. — 31 000 € — 81d po splatnosti
+    [KRITICKÉ] INV-007 — Eta Solutions — 22 000 € — 97d po splatnosti
+[Krok 3] Prioritizácia podľa finančného rizika...
+[Krok 4] Generovanie AI pripomienkových e-mailov...
+  ✓ Vygenerovaná pripomienka pre Gamma s.r.o.
+[Krok 5] Doručovanie reportu...
+  ✓ Report odoslaný na accountant@yourcompany.com</pre>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="tutorial-step-header">
+        <div class="step-badge">5</div>
+        <div class="step-title-t">Automatizujte — beží každý pondelok o 7:00</div>
+        <span class="step-file">.github/workflows/overdue_check.yml</span>
+      </div>
+      <pre><span class="code-keyword">on</span>:
+  schedule:
+    - cron: <span class="code-string">'0 7 * * 1'</span>   <span class="code-comment"># Každý pondelok 7:00 UTC</span>
+  workflow_dispatch:        <span class="code-comment"># Alebo spustite manuálne z GitHubu</span>
+
+<span class="code-comment"># Pridajte svoje secrets v GitHube:</span>
+<span class="code-comment"># Settings → Secrets → GEMINI_API_KEY, SENDER_EMAIL, ...</span></pre>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- TECH -->
+  <div class="section">
+    <div class="section-label">Pod kapotou</div>
+    <div class="section-heading">Postavené s 3 nástrojmi, ktoré už poznáte</div>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h4>📊 Zdroj dát</h4>
+        <p>Jednoduchý CSV súbor s vašimi dátami o faktúrach. Exportujte ho z akéhokoľvek účtovného systému alebo ho majte ako Google Sheet.</p>
+        <code>invoices.csv → Python</code>
+      </div>
+      <div class="tech-card">
+        <h4>🧠 AI model</h4>
+        <p>Google Gemini píše pripomienkové e-maily. Bezplatný tier zvládne týždenné behy bez akýchkoľvek nákladov.</p>
+        <code>gemini-2.0-flash</code>
+      </div>
+      <div class="tech-card">
+        <h4>⏰ Plánovač</h4>
+        <p>GitHub Actions spustí agenta každý pondelok ráno. Žiadny server, žiadna infraštruktúra, úplne zadarmo.</p>
+        <code>cron: '0 7 * * 1'</code>
+      </div>
+      <div class="tech-card">
+        <h4>📬 Doručenie</h4>
+        <p>Jeden e-mail vášmu účtovníkovi s kompletným reportom a všetkými návrhmi pripomienok pripravenými na kontrolu a odoslanie.</p>
+        <code>Gmail SMTP</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- GITHUB CTA -->
+  <div class="github-section" id="github">
+    <div class="github-inner">
+      <span style="font-size:48px;display:block;margin-bottom:20px;">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="white" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto;display:block;">
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </span>
+      <h2>Získajte kompletný<br><span>zdrojový kód</span></h2>
+      <p>Kompletný Agent na faktúry je v tom istom repozitári ako CFO Report Agent z príspevku #2. Naklonujte raz — získate oba agenty.</p>
+
+      <div class="repo-name">github.com/<span>LuliBobo</span>/cfo-agents</div>
+
+      <div class="what-inside">
+        <h4>Čo je v repozitári</h4>
+        <ul>
+          <li>invoice_agent.py — kompletná 5-kroková pipeline</li>
+          <li>cfo_agent.py — Týždenný CFO Report z príspevku #2</li>
+          <li>data/invoices.csv — ukážkové dáta o faktúrach na okamžité testovanie</li>
+          <li>GitHub Actions workflow — beží každý pondelok o 7:00</li>
+          <li>README s kompletným návodom na nastavenie (30 minút)</li>
+        </ul>
+      </div>
+
+      <div class="github-btns">
+        <a href="https://github.com/LuliBobo/cfo-agents" target="_blank" rel="noopener" class="btn-github">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+          Zobraziť na GitHube
+        </a>
+        <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener" class="btn-outline">
+          Získať príspevok #4 →
+        </a>
+      </div>
+
+      <div class="subscribe-box" id="subscribe">
+        <h3>Sledujte túto sériu</h3>
+        <p>Príspevok #4 prechádza na úplne iný proces — na viditeľnosť hotovosti namiesto fakturácie — a venuje sa konkrétnym úlohám, ktoré má podľa mojich skúseností zmysel automatizovať ako prvé, a prečo poradie záleží viac než samotné nástroje.</p>
+        <form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+          <input type="email" name="email" placeholder="vas@email.com" required />
+          <button type="submit" class="btn-sub">Odoberať zadarmo</button>
+        </form>
+        <p class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhláste sa kedykoľvek.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-logo">CFO Unfiltered</div>
+    <div class="footer-links">
+      <a href="https://borisdracka.com/sk/">Domov</a>
+      <a href="https://borisdracka.com/sk/blog">Blog</a>
+      <a href="https://github.com/LuliBobo/cfo-agents" target="_blank">GitHub</a>
+      <a href="https://x.com/BorisDracka" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+      <a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Odoberať</a>
+    </div>
+    <p class="footer-copy">© 2026 Boris Dračka · borisdracka.com</p>
+  </footer>
+
+</body>
+</html>

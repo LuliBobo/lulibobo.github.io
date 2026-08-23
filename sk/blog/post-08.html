@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Alert, ktorý bol falošný | CFO Unfiltered</title>
+<meta name="description" content="Post #8 z 50 v sérii CFO & AI: pravidlo zdravého rozumu označilo problém, ktorý napokon žiadnym problémom nebol — a čo ma to naučilo o ladení upozornení, kým ich ľudia neprestanú brať vážne.">
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-08">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-08">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-08">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-08">
+
+<meta property="og:title" content="Alert, ktorý bol falošný">
+<meta property="og:description" content="Pravidlo zdravého rozumu označilo problém, ktorý napokon žiadnym problémom nebol — a čo ma to naučilo o ladení upozornení.">
+<meta property="og:image" content="https://borisdracka.com/og/post-08.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-08">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-08-04T14:00:00+02:00">
+<meta property="article:section" content="Financie">
+<meta property="article:tag" content="AI agenti">
+<meta property="article:tag" content="Upozornenia">
+<meta property="article:tag" content="Kvalita dát">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-08.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --orange:   #E8562A;
+  --orange-d: #C44420;
+  --dark:     #111111;
+  --mid:      #555555;
+  --light:    #F7F5F2;
+  --white:    #FFFFFF;
+  --border:   #E8E5E0;
+  --gray:         #999999;
+  --gray-on-dark: #AAAAAA;
+  --gray-light-on-dark: #BBBBBB;
+  --nav-bg:       rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #eee;
+  z-index: 100;
+}
+.site-header .logo {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.site-header nav a {
+  font-size: 13px;
+  color: #666;
+  text-decoration: none;
+  margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+  .site-header nav { display: none; }
+}
+
+/* Hero */
+.hero {
+  background: var(--dark);
+  padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+.hero h1 {
+  color: white;
+  font-size: clamp(26px, 5vw, 46px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin: 0 0 14px;
+}
+.hero-subtitle {
+  color: var(--gray-light-on-dark);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 620px;
+}
+.hero-meta {
+  font-size: 13px;
+  color: var(--gray-on-dark);
+  margin-bottom: 16px;
+}
+.series-label {
+  display: inline-block;
+  background: var(--orange);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 3px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 52px 24px 80px;
+}
+.article p {
+  font-size: 18px;
+  line-height: 1.75;
+  margin: 0 0 24px;
+  color: var(--dark);
+}
+.article p.lead {
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.article p.disclaimer {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--mid);
+  border-left: 3px solid var(--border);
+  padding: 4px 0 4px 16px;
+  margin: 0 0 32px;
+}
+.article h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--dark);
+  margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+  border-left: 4px solid #E8562A;
+  background: #f7f5f2;
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 32px 0;
+}
+.pullquote p {
+  font-size: 20px;
+  font-style: italic;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+  background: #111111;
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin: 32px 0 40px;
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 120px; }
+.stat-box .num {
+  font-size: 36px;
+  font-weight: 900;
+  color: #E8562A;
+  line-height: 1;
+}
+.stat-box .label {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: #aaa;
+  margin-top: 6px;
+}
+
+/* Gap table */
+.gap-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 36px;
+  font-size: 15px;
+}
+.gap-table th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--light);
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--mid);
+  line-height: 1.55;
+}
+
+/* Follow the series */
+.followup {
+  margin: 48px 0 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.followup h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+  background: #111111;
+  border-radius: 14px;
+  padding: 40px 36px;
+  text-align: center;
+  margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p  { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+.btn-primary {
+  background: var(--orange);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Footer */
+footer {
+  background: var(--dark);
+  padding: 28px 48px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+  .site-header { padding: 16px 20px; height: auto; }
+  .hero { padding: 32px 20px; }
+  .article { padding: 36px 16px 60px; }
+  .article p { font-size: 17px; }
+  .stat-box { padding: 24px 20px; gap: 20px; }
+  footer { padding: 24px 20px; flex-direction: column; }
+  .footer-nav { display: flex; flex-direction: column; gap: 6px; }
+  .footer-nav a { margin-left: 0; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://borisdracka.com/sk/blog/post-08#article",
+  "headline": "Alert, ktorý bol falošný",
+  "description": "Pravidlo zdravého rozumu označilo problém, ktorý napokon žiadnym problémom nebol — a čo ma to naučilo o ladení upozornení.",
+  "image": "https://borisdracka.com/og/post-08.png",
+  "url": "https://borisdracka.com/sk/blog/post-08",
+  "datePublished": "2026-08-04T14:00:00+02:00",
+  "author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+  "publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+  "inLanguage": "sk",
+  "articleSection": "Financie",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/sk/blog/post-08" }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://borisdracka.com/sk/">CFO Unfiltered</a>
+  <nav>
+    <a href="https://borisdracka.com/sk/blog/">Blog</a>
+    <a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+    <a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+    <a href="https://borisdracka.com/blog/post-08">EN</a>/<a href="https://borisdracka.com/sk/blog/post-08" class="lang-active">SK</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">AI agenti · Upozornenia · Kvalita dát</div>
+    <h1>Alert, ktorý bol falošný</h1>
+    <p class="hero-subtitle">Post #7 bol o čísle, ktoré bolo zlé a nikto si ho nevšimol dosť rýchlo. Toto je to, čo sa stalo o tri týždne neskôr, keď ten istý systém označil niečo, čo v skutočnosti nikdy zlé nebolo.</p>
+    <div class="hero-meta">Boris Dračka · august 2026 · 5 min čítania</div>
+    <span class="series-label">Post #8 z 50 — Séria CFO &amp; AI</span>
+  </div>
+</section>
+
+<article class="article">
+
+  <p class="disclaimer">Príklady a architektúry v tejto sérii vznikajú ako moje osobné vzdelávacie a nekomerčné experimenty; nejde o ponuku IT alebo poradenských služieb.</p>
+
+  <p class="lead">Post #7 sa skončil opravou: pravidlom zdravého rozumu, ktoré pozastaví report na manuálnu kontrolu vždy, keď sa niektoré číslo oproti predchádzajúcemu obdobiu zmení viac, než je nastavený prah — namiesto toho, aby report odišiel rovno do schránky. O tri týždne neskôr toto pravidlo urobilo presne to, na čo bolo určené. Len tentoraz označilo niečo, čo napokon vôbec nebol problém.</p>
+
+  <p>Alert, čísla aj vysvetlenie nižšie sú modelová/composite ilustrácia zostavená z opakujúcich sa vzorov, ktoré som počas kariéry videl; neopisujú konkrétnu firmu, dátovú sadu ani osobu.</p>
+
+  <h2>O tri týždne neskôr</h2>
+
+  <div class="stat-box">
+    <div class="stat"><div class="num">1</div><div class="label">Pravidlo prahu z Postu #7, teraz naostro</div></div>
+    <div class="stat"><div class="num">58 %</div><div class="label">Nárast v označenom čísle</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">Skutočných problémov, ktoré našlo</div></div>
+  </div>
+
+  <h2>Čo alert označil</h2>
+
+  <p>Pravidlo sleduje niekoľko kľúčových ukazovateľov a porovnáva každé nové číslo s predchádzajúcim obdobím. Jedno ráno pozastavilo report skôr, než odišiel: počet dní hotovosti na účte vyskočil z 45 na 71 v priebehu jediného týždňa — nárast o 58 %, ďaleko nad prahom nastaveným po Poste #7. Na papieri malo ísť presne o toto. Skok tejto veľkosti, bez vysvetlenia, je buď veľmi dobrá správa, alebo znak, že niečo v dátach nesedí.</p>
+
+  <table class="gap-table">
+    <tr><th>Čo alert označil</th><th>Čo bolo v skutočnosti pravda</th></tr>
+    <tr>
+      <td>Dni hotovosti na účte: 45 → 71 za jeden týždeň, nad kontrolným prahom</td>
+      <td>Klient vopred zaplatil zálohu na šesť mesiacov za projekt, ktorý začína v Q4 — reálna hotovosť, správne zaznamenaná, len nezvyčajne načasovaná</td>
+    </tr>
+    <tr>
+      <td>Ten istý účet bol znova označený o týždeň neskôr, stále zvýšený</td>
+      <td>Nešlo o novú anomáliu — bol to ten istý vklad, stále na účte, presne podľa očakávania</td>
+    </tr>
+  </table>
+
+  <h2>Prečo to vyzeralo ako problém</h2>
+
+  <p>Pravidlo nevie, prečo sa číslo zmenilo — len to, že sa zmenilo o viac, než je nastavené percento. Nepozná rozdiel medzi „očakávané, ale nezvyčajné" a „neočakávané a nesprávne" — každé prekročenie prahu vyzerá zvnútra rovnako. Výpočet runwayu sám osebe nedokáže odlíšiť skorú platbu od chyby v modeli, duplicitného záznamu alebo ukazovateľa, ktorý teraz jednoducho meria niečo iné, než číslo, s ktorým sa porovnáva.</p>
+
+  <div class="pullquote">
+    <p>Systém, ktorý zbytočne kričí „vlk", ťa stojí rovnakú dôveru ako ten, čo vlka prehliadne — len ju minie pomalšie.</p>
+  </div>
+
+  <h2>Čo sa takmer stalo</h2>
+
+  <p>Po druhom označení bol prvý inštinkt v miestnosti vyhlásiť celé pravidlo za „príliš citlivé" a znížiť prah — čo by potichu znova otvorilo presne tú medzeru, ktorú mal Post #7 zavrieť. To je skutočné riziko falošného poplachu: nie strata dvadsiatich minút na jeho overenie, ale erózia, ktorá spôsobí, že ľudia prestanú overovať ten ďalší — skutočný alebo nie.</p>
+
+  <h2>Čo sa zmenilo potom</h2>
+
+  <p>Pridali sa dve úpravy. Po prvé, krátky zoznam známych, opakujúcich sa, ale nepravidelných udalostí — zálohové platby, obnovenie poistky, ročné licenčné poplatky — ktoré sa označia už pri zápise, aby ich pravidlo prahu vedelo posudzovať inak než neobjasnený skok. Po druhé, každý pozastavený alert musí odteraz niesť jednu vetu vysvetľujúcu, čo sa zmenilo, skôr než na neho niekto zareaguje — nielen číslo a červenú vlajku. Ak túto vetu ešte nikto nevie napísať, report zostáva pozastavený, kým sa to nezistí.</p>
+
+  <h2>Prečo môže falošný poplach vážiť viac než chyba, pred ktorou má chrániť</h2>
+
+  <p>Podľa mojej skúsenosti alert, ktorý sa raz pomýli, samotný systém takmer nič nenaučí — ale naučí niečo človeka, ktorý ho číta, a to si zapamätá: že tejto konkrétnej vlajke sa nedá vždy veriť. Prehliadnutá chyba ťa stojí raz, keď sa odhalí neskoro. Falošný poplach ťa môže stáť zakaždým potom — potichu, v podobe alertu, ktorý už nikto neotvára.</p>
+
+  <div class="followup">
+    <h4>Ďalej v sérii</h4>
+    <p>Post #9 sa pozerá na iné slepé miesto — také, ktoré sa meria v kurzoch mien, nie v dátumoch.</p>
+  </div>
+
+  <div class="cta-box">
+    <h3>Prichytili ste sa niekedy, ako ignorujete upozornenie, lebo to predchádzajúce bolo nakoniec zbytočné?</h3>
+    <a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Odoberať zadarmo</a>
+    <div class="cta-note">Žiadny spam. Jeden príspevok týždenne. Kedykoľvek sa môžete odhlásiť.</div>
+  </div>
+
+</article>
+
+<footer>
+  <div>
+    <div class="footer-brand">CFO Unfiltered</div>
+    <div class="footer-copy">© 2026 Boris Dračka · borisdracka.com</div>
+  </div>
+  <div class="footer-nav">
+    <a href="https://borisdracka.com/sk/">Domov</a>
+    <a href="https://borisdracka.com/sk/blog/">Blog</a>
+    <a href="https://borisdracka.com/blog/post-08">English version</a>
+    <a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+    <a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+  </div>
+</footer>
+
+</body>
+</html>
