@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>The Alert That Was Wrong | CFO Unfiltered</title>
+<meta name="description" content="Post #8 of 50 in The CFO & AI Series: a sanity-check rule flagged a problem that turned out not to be one — and what that taught me about tuning alerts before people start ignoring them.">
+<link rel="canonical" href="https://borisdracka.com/blog/post-08">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-08">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-08">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-08">
+
+<meta property="og:title" content="The Alert That Was Wrong">
+<meta property="og:description" content="A sanity-check rule flagged a problem that turned out not to be one — and what that taught me about tuning alerts before people start ignoring them.">
+<meta property="og:image" content="https://borisdracka.com/og/post-08.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/blog/post-08">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-08-04T14:00:00+02:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="AI Agents">
+<meta property="article:tag" content="Alerts">
+<meta property="article:tag" content="Data Quality">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-08.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --orange:   #E8562A;
+  --orange-d: #C44420;
+  --dark:     #111111;
+  --mid:      #555555;
+  --light:    #F7F5F2;
+  --white:    #FFFFFF;
+  --border:   #E8E5E0;
+  --gray:         #999999;
+  --gray-on-dark: #AAAAAA;
+  --gray-light-on-dark: #BBBBBB;
+  --nav-bg:       rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #eee;
+  z-index: 100;
+}
+.site-header .logo {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.site-header nav a {
+  font-size: 13px;
+  color: #666;
+  text-decoration: none;
+  margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+  .site-header nav { display: none; }
+}
+
+/* Hero */
+.hero {
+  background: var(--dark);
+  padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+.hero h1 {
+  color: white;
+  font-size: clamp(26px, 5vw, 46px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin: 0 0 14px;
+}
+.hero-subtitle {
+  color: var(--gray-light-on-dark);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 620px;
+}
+.hero-meta {
+  font-size: 13px;
+  color: var(--gray-on-dark);
+  margin-bottom: 16px;
+}
+.series-label {
+  display: inline-block;
+  background: var(--orange);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 3px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 52px 24px 80px;
+}
+.article p {
+  font-size: 18px;
+  line-height: 1.75;
+  margin: 0 0 24px;
+  color: var(--dark);
+}
+.article p.lead {
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.article p.disclaimer {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--mid);
+  border-left: 3px solid var(--border);
+  padding: 4px 0 4px 16px;
+  margin: 0 0 32px;
+}
+.article h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--dark);
+  margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+  border-left: 4px solid #E8562A;
+  background: #f7f5f2;
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 32px 0;
+}
+.pullquote p {
+  font-size: 20px;
+  font-style: italic;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+  background: #111111;
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin: 32px 0 40px;
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 120px; }
+.stat-box .num {
+  font-size: 36px;
+  font-weight: 900;
+  color: #E8562A;
+  line-height: 1;
+}
+.stat-box .label {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: #aaa;
+  margin-top: 6px;
+}
+
+/* Gap table */
+.gap-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 36px;
+  font-size: 15px;
+}
+.gap-table th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--light);
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--mid);
+  line-height: 1.55;
+}
+
+/* Follow the series */
+.followup {
+  margin: 48px 0 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.followup h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+  background: #111111;
+  border-radius: 14px;
+  padding: 40px 36px;
+  text-align: center;
+  margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p  { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+.btn-primary {
+  background: var(--orange);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Footer */
+footer {
+  background: var(--dark);
+  padding: 28px 48px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+  .site-header { padding: 16px 20px; height: auto; }
+  .hero { padding: 32px 20px; }
+  .article { padding: 36px 16px 60px; }
+  .article p { font-size: 17px; }
+  .stat-box { padding: 24px 20px; gap: 20px; }
+  footer { padding: 24px 20px; flex-direction: column; }
+  .footer-nav { display: flex; flex-direction: column; gap: 6px; }
+  .footer-nav a { margin-left: 0; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://borisdracka.com/blog/post-08#article",
+  "headline": "The Alert That Was Wrong",
+  "description": "A sanity-check rule flagged a problem that turned out not to be one — and what that taught me about tuning alerts before people start ignoring them.",
+  "image": "https://borisdracka.com/og/post-08.png",
+  "url": "https://borisdracka.com/blog/post-08",
+  "datePublished": "2026-08-04T14:00:00+02:00",
+  "author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+  "publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+  "inLanguage": "en",
+  "articleSection": "Finance",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/blog/post-08" }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://borisdracka.com/">CFO Unfiltered</a>
+  <nav>
+    <a href="https://borisdracka.com/blog/">Blog</a>
+    <a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+    <a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+    <a href="https://borisdracka.com/blog/post-08" class="lang-active">EN</a>/<a href="https://borisdracka.com/sk/blog/post-08">SK</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">AI Agents · Alerts · Data Quality</div>
+    <h1>The Alert That Was Wrong</h1>
+    <p class="hero-subtitle">Post #7 covered a wrong number nobody caught fast enough. This is what happened three weeks later, when the same system caught something that was never actually wrong.</p>
+    <div class="hero-meta">Boris Dračka · August 2026 · 5 min read</div>
+    <span class="series-label">Post #8 of 50 — The CFO & AI Series</span>
+  </div>
+</section>
+
+<article class="article">
+
+  <p class="disclaimer">The examples and architectures in this series are my personal educational, non-commercial experiments; they are not an offer of IT or consulting services.</p>
+
+  <p class="lead">Post #7 ended with a fix: a sanity-check rule that holds a report for manual review whenever a number moves more than a set threshold from the prior period, instead of sending it straight to an inbox. Three weeks later, that rule did exactly what it was built to do. It just flagged the wrong thing — or rather, it flagged something that turned out to be completely fine.</p>
+
+  <p>The alert, the numbers, and the explanation below are a composite illustration, put together from patterns I've seen repeat across different projects; they don't describe a specific company, dataset, or person.</p>
+
+  <h2>Three weeks later</h2>
+
+  <div class="stat-box">
+    <div class="stat"><div class="num">1</div><div class="label">Threshold rule from Post #7, now live</div></div>
+    <div class="stat"><div class="num">58%</div><div class="label">Jump in the flagged number</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">Actual problems it found</div></div>
+  </div>
+
+  <h2>What the alert flagged</h2>
+
+  <p>The rule watches a handful of core figures and compares each new one to the prior period. One morning, it held a report before it went out: days of cash on hand had jumped from 45 to 71 in a single week — a 58% move, well past the variance threshold set after Post #7. On paper, that's exactly the kind of number the rule exists to catch. A jump that size, unexplained, is either very good news or a sign something in the data is broken.</p>
+
+  <table class="gap-table">
+    <tr><th>What the alert flagged</th><th>What was actually true</th></tr>
+    <tr>
+      <td>Days of cash on hand: 45 → 71 in one week, above the review threshold</td>
+      <td>A client had paid a six-month retainer upfront for a project starting in Q4 — real cash, correctly recorded, just unusually timed</td>
+    </tr>
+    <tr>
+      <td>The same account was flagged again the following week, still elevated</td>
+      <td>Not a new anomaly — the same deposit, still sitting there, exactly as expected</td>
+    </tr>
+  </table>
+
+  <h2>Why it looked like a problem</h2>
+
+  <p>The rule doesn't know why a number moved, only that it moved more than a set percentage. It has no concept of "expected but unusual" versus "unexpected and wrong" — every threshold breach looks identical from the inside. Runway math has no way, on its own, to tell an early payment apart from a modeling error, a duplicate entry, or a metric that's simply now measuring something different than the number it's being compared to.</p>
+
+  <div class="pullquote">
+    <p>A system that cries wolf costs you the same trust as one that misses the wolf — it just spends it more slowly.</p>
+  </div>
+
+  <h2>What almost happened</h2>
+
+  <p>By the second flag, the instinct in the room was to mark the whole rule "too sensitive" and turn the threshold down — which would have quietly reopened the exact gap Post #7 was meant to close. That's the real risk in a false alarm: not the twenty minutes spent checking it, but the erosion that makes people stop checking the next one, real or not.</p>
+
+  <h2>What changed after that</h2>
+
+  <p>Two adjustments went in. First, a short list of known, recurring-but-irregular events — advance payments, insurance renewals, annual license fees — that get tagged at the point of entry, so the threshold rule can treat them differently from an unexplained jump. Second, every held alert now has to carry one line explaining what changed before anyone acts on it, instead of just a number and a red flag. If nobody can write that line yet, the report stays held until someone can.</p>
+
+  <h2>Why a false alarm can matter more than the mistake it's guarding against</h2>
+
+  <p>In my experience, an alert that's wrong once teaches the system almost nothing on its own — but it teaches the person reading it something they don't forget: that this particular flag isn't always worth trusting. A missed error costs you once, when it's caught late. A false alarm can cost you every time after it, quietly, in the form of an alert nobody opens anymore.</p>
+
+  <div class="followup">
+    <h4>Follow the series</h4>
+    <p>Post #9 looks at a different blind spot — one measured in exchange rates, not dates.</p>
+  </div>
+
+  <div class="cta-box">
+    <h3>Have you ever caught yourself dismissing an alert because the last one turned out to be nothing?</h3>
+    <a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Subscribe free</a>
+    <div class="cta-note">No spam. One post per week. Unsubscribe any time.</div>
+  </div>
+
+</article>
+
+<footer>
+  <div>
+    <div class="footer-brand">CFO Unfiltered</div>
+    <div class="footer-copy">© 2026 Boris Dračka · borisdracka.com</div>
+  </div>
+  <div class="footer-nav">
+    <a href="https://borisdracka.com/">Home</a>
+    <a href="https://borisdracka.com/blog/">Blog</a>
+    <a href="https://borisdracka.com/sk/blog/post-08">Slovenská verzia</a>
+    <a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+    <a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+  </div>
+</footer>
+
+</body>
+</html>
