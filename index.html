@@ -413,6 +413,87 @@
     }
     footer a { color: inherit; text-decoration: underline; }
 
+    /* ── ARTICLES SECTION ── */
+    .articles-section {
+      padding: 80px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .articles-section .kicker {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .articles-section h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 48px;
+      max-width: 560px;
+      line-height: 1.15;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .article-card {
+      border: 1px solid var(--border);
+      padding: 32px;
+      border-radius: 12px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      background: var(--white);
+    }
+
+    .article-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .article-date {
+      font-size: 0.8rem;
+      color: var(--mid);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .article-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .article-excerpt {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .article-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .article-link:hover {
+      color: var(--orange-d);
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
@@ -433,6 +514,9 @@
       .cards { grid-template-columns: 1fr; }
       .card { border-right: none; border-bottom: 2px solid var(--dark); }
       .card:last-child { border-bottom: none; }
+      .articles-section { padding: 60px 24px; }
+      .articles-grid { grid-template-columns: 1fr; gap: 16px; }
+      .article-card { padding: 24px; }
       .section-about { padding: 60px 24px; }
       .about-inner { grid-template-columns: 1fr; gap: 36px; }
       .about-img img { max-width: 200px; }
@@ -524,6 +608,15 @@
       </a>
       <p class="subscribe-note">No spam. Unsubscribe anytime.</p>
     </div>
+  </div>
+</section>
+
+<!-- ARTICLES SECTION (NEW) -->
+<section class="articles-section">
+  <p class="kicker">LATEST INSIGHTS</p>
+  <h2>What I'm writing about</h2>
+  <div class="articles-grid">
+    <!-- Article cards will be populated in Task 4 -->
   </div>
 </section>
 
