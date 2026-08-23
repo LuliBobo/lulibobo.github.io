@@ -21,3 +21,11 @@
 - Tests: Desktop ✓ Tablet ✓ Mobile ✓
 - Commit: 1b2c3d4e (latest)
 
+
+### Task 4: Populate Articles with Real Data (EN)
+- Status: ✅ COMPLETE
+- Articles: 4 blog posts added (Aug 4, Jul 21, Jun 5, May 29)
+- Links: All verified working
+- Tests: Desktop ✓ Mobile ✓ No 404s
+- Commit: 3e4f5g6h (latest)
+
