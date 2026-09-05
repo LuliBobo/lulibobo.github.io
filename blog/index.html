@@ -1,594 +1,608 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
-  <title>Blog — CFO Unfiltered | Boris Dracka</title>
-  <meta name="description" content="50 posts. One CFO's honest account of building AI into finance — from the first agent to the lessons that didn't make the demo." />
-  <meta property="og:title" content="Blog — CFO Unfiltered" />
-  <meta property="og:description" content="50 posts. One CFO's honest account of building AI into finance." />
-  <meta property="og:image" content="https://borisdracka.com/LULI_profile_2.png" />
-  <link rel="canonical" href="https://borisdracka.com/blog" />
-  <link rel="alternate" hreflang="en" href="https://borisdracka.com/blog" />
-  <link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog" />
-  <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Blog — CFO Unfiltered | Boris Dracka</title>
+<meta name="description" content="50 posts. One CFO's honest account of building AI into finance — from the first agent to the lessons that didn't make the demo." />
+<meta property="og:title" content="Blog — CFO Unfiltered" />
+<meta property="og:description" content="50 posts. One CFO's honest account of building AI into finance." />
+<meta property="og:image" content="https://borisdracka.com/LULI_profile_2.png" />
+<link rel="canonical" href="https://borisdracka.com/blog" />
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog" />
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog" />
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog" />
 
-  <link rel="stylesheet" href="/fonts/plex.css">
+<link rel="stylesheet" href="/fonts/plex.css">
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --orange:      #C21F2F;
-      --orange-d:    #9A1824;
-      --orange-on-dark: #FF7A66;
-      --dark:        #1A1714;
-      --mid:         #4E483F;
-      --light:       #F3F0E7;
-      --white:       #FBF9F3;
-      --border:      #DCD5C7;
-      --font-display: 'IBM Plex Serif', Georgia, serif;
-      --font-body:    'IBM Plex Sans', system-ui, sans-serif;
-      --font-mono:    'IBM Plex Mono', 'SF Mono', monospace;
-    }
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--orange-on-dark: #FF7A66;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--font-display: 'IBM Plex Serif', Georgia, serif;
+--font-body: 'IBM Plex Sans', system-ui, sans-serif;
+--font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
 
-    html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-    body {
-      font-family: var(--font-body);
-      background: var(--white);
-      color: var(--dark);
-      line-height: 1.6;
-    }
+body {
+font-family: var(--font-body);
+background: var(--white);
+color: var(--dark);
+line-height: 1.6;
+}
 
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 48px;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: rgba(251,249,243,0.96);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .nav-name {
-      font-family: var(--font-mono);
-      text-transform: uppercase;
-      font-weight: 800;
-      font-size: 1rem;
-      color: var(--dark);
-      letter-spacing: -0.02em;
-    }
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .nav-blog {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--orange);
-      text-decoration: none;
-    }
-    .nav-x {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-x:hover { color: var(--dark); }
-    .nav-x svg { width: 16px; height: 16px; fill: currentColor; }
-    .nav-subscribe {
-      background: var(--orange);
-      color: var(--white);
-      font-size: 0.9rem;
-      font-weight: 700;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .nav-subscribe:hover { background: var(--orange-d); }
-    .nav-lang {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
-    .nav-lang a {
-      color: var(--mid);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-lang a.active { color: var(--orange); }
-    .nav-lang a:hover { color: var(--dark); }
-    .nav-lang .lang-sep { color: var(--border); }
+/* ── NAV ── */
+nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 48px;
+border-bottom: 1px solid var(--border);
+position: sticky;
+top: 0;
+background: rgba(251,249,243,0.96);
+backdrop-filter: blur(8px);
+z-index: 100;
+}
+.nav-logo {
+display: flex;
+align-items: center;
+gap: 12px;
+text-decoration: none;
+}
+.nav-name {
+font-family: var(--font-mono);
+text-transform: uppercase;
+font-weight: 800;
+font-size: 1rem;
+color: var(--dark);
+letter-spacing: -0.02em;
+}
+.nav-right {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+.nav-blog {
+font-size: 0.88rem;
+font-weight: 700;
+color: var(--orange);
+text-decoration: none;
+}
+.nav-x {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 0.88rem;
+font-weight: 600;
+color: var(--mid);
+text-decoration: none;
+transition: color 0.2s;
+}
+.nav-x:hover { color: var(--dark); }
+.nav-x svg { width: 16px; height: 16px; fill: currentColor; }
+.nav-subscribe {
+background: var(--orange);
+color: var(--white);
+font-size: 0.9rem;
+font-weight: 700;
+padding: 10px 20px;
+border-radius: 8px;
+text-decoration: none;
+transition: background 0.2s;
+}
+.nav-subscribe:hover { background: var(--orange-d); }
+.nav-lang {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 0.82rem;
+font-weight: 700;
+}
+.nav-lang a {
+color: var(--mid);
+text-decoration: none;
+transition: color 0.2s;
+}
+.nav-lang a.active { color: var(--orange); }
+.nav-lang a:hover { color: var(--dark); }
+.nav-lang .lang-sep { color: var(--border); }
 
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 64px 48px 40px;
-      max-width: 1100px;
-      margin: 0 auto;
-      border-bottom: 1px solid var(--border);
-    }
-    .page-header .kicker {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 12px;
-    }
-    .page-header h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
-      margin-bottom: 14px;
-    }
-    .page-header .redpen-note {
-      font-family: 'Caveat', cursive;
-      font-weight: 600;
-      font-size: 1.35rem;
-      color: var(--orange-d);
-      transform: rotate(-1deg);
-      margin-bottom: 18px;
-      display: inline-block;
-    }
-    .page-header p.lede {
-      font-size: 1.05rem;
-      color: var(--mid);
-      max-width: 540px;
-      line-height: 1.7;
-    }
+/* ── PAGE HEADER ── */
+.page-header {
+padding: 64px 48px 40px;
+max-width: 1100px;
+margin: 0 auto;
+border-bottom: 1px solid var(--border);
+}
+.page-header .kicker {
+font-family: var(--font-mono);
+font-size: 0.78rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 12px;
+}
+.page-header h1 {
+font-family: var(--font-display);
+font-size: clamp(2rem, 4vw, 3rem);
+font-weight: 900;
+letter-spacing: -0.04em;
+line-height: 1.1;
+margin-bottom: 14px;
+}
+.page-header .redpen-note {
+font-family: 'Caveat', cursive;
+font-weight: 600;
+font-size: 1.35rem;
+color: var(--orange-d);
+transform: rotate(-1deg);
+margin-bottom: 18px;
+display: inline-block;
+}
+.page-header p.lede {
+font-size: 1.05rem;
+color: var(--mid);
+max-width: 540px;
+line-height: 1.7;
+}
 
-    /* ── SERIES PROGRESS ── */
-    .series-bar {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px 48px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-    .series-bar .label {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--mid);
-      white-space: nowrap;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .progress-track {
-      flex: 1;
-      height: 6px;
-      background: var(--border);
-      border-radius: 100px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      width: 16%;  /* 8 of 50 posts = 16% */
-      background: var(--orange);
-      border-radius: 100px;
-      transition: width 0.4s ease;
-    }
-    .series-bar .count {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--orange);
-      white-space: nowrap;
-    }
+/* ── SERIES PROGRESS ── */
+.series-bar {
+max-width: 1100px;
+margin: 0 auto;
+padding: 24px 48px;
+display: flex;
+align-items: center;
+gap: 16px;
+border-bottom: 1px solid var(--border);
+}
+.series-bar .label {
+font-family: var(--font-mono);
+font-size: 0.8rem;
+font-weight: 700;
+color: var(--mid);
+white-space: nowrap;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+}
+.progress-track {
+flex: 1;
+height: 6px;
+background: var(--border);
+border-radius: 100px;
+overflow: hidden;
+}
+.progress-fill {
+height: 100%;
+width: 18%; /* 9 of 50 posts = 18% */
+background: var(--orange);
+border-radius: 100px;
+transition: width 0.4s ease;
+}
+.series-bar .count {
+font-family: var(--font-mono);
+font-size: 0.82rem;
+font-weight: 700;
+color: var(--orange);
+white-space: nowrap;
+}
 
-    /* ── POST LIST ── */
-    .post-list {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 48px 48px 80px;
-    }
+/* ── POST LIST ── */
+.post-list {
+max-width: 1100px;
+margin: 0 auto;
+padding: 48px 48px 80px;
+}
 
-    .post-card {
-      position: relative;
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      gap: 0;
-      border: 2px solid var(--dark);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.2s, transform 0.15s;
-      background: var(--white);
-    }
-    .post-card:hover {
-      background: var(--light);
-      transform: translateY(-2px);
-    }
+.post-card {
+position: relative;
+display: grid;
+grid-template-columns: 80px 1fr auto;
+gap: 0;
+border: 2px solid var(--dark);
+border-radius: 14px;
+overflow: hidden;
+margin-bottom: 20px;
+text-decoration: none;
+color: inherit;
+transition: background 0.2s, transform 0.15s;
+background: var(--white);
+}
+.post-card:hover {
+background: var(--light);
+transform: translateY(-2px);
+}
 
-    .post-num {
-      background: var(--dark);
-      color: var(--orange-on-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      min-height: 120px;
-    }
+.post-num {
+background: var(--dark);
+color: var(--orange-on-dark);
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: var(--font-mono);
+font-size: 1.4rem;
+font-weight: 700;
+letter-spacing: -0.02em;
+min-height: 120px;
+}
 
-    .post-body {
-      padding: 28px 32px;
-      border-left: 2px solid var(--dark);
-    }
+.post-body {
+padding: 28px 32px;
+border-left: 2px solid var(--dark);
+}
 
-    .post-series {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      background: var(--orange);
-      color: var(--white);
-      padding: 3px 10px;
-      border-radius: 4px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
+.post-series {
+display: inline-block;
+font-family: var(--font-mono);
+font-size: 0.7rem;
+font-weight: 700;
+background: var(--orange);
+color: var(--white);
+padding: 3px 10px;
+border-radius: 4px;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+margin-bottom: 12px;
+}
 
-    .post-fresh {
-      display: inline-block;
-      font-family: 'Caveat', cursive;
-      font-weight: 600;
-      font-size: 1.2rem;
-      color: var(--orange-d);
-      margin-left: 10px;
-      transform: rotate(-2deg);
-    }
+.post-fresh {
+display: inline-block;
+font-family: 'Caveat', cursive;
+font-weight: 600;
+font-size: 1.2rem;
+color: var(--orange-d);
+margin-left: 10px;
+transform: rotate(-2deg);
+}
 
-    .post-title {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.35;
-      margin-bottom: 10px;
-      color: var(--dark);
-    }
+.post-title {
+font-family: var(--font-display);
+font-size: 1.15rem;
+font-weight: 700;
+letter-spacing: -0.02em;
+line-height: 1.35;
+margin-bottom: 10px;
+color: var(--dark);
+}
 
-    .post-excerpt {
-      font-size: 0.9rem;
-      color: var(--mid);
-      line-height: 1.65;
-    }
+.post-excerpt {
+font-size: 0.9rem;
+color: var(--mid);
+line-height: 1.65;
+}
 
-    .post-meta {
-      padding: 28px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: space-between;
-      border-left: 2px solid var(--dark);
-      min-width: 140px;
-    }
+.post-meta {
+padding: 28px 32px;
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+justify-content: space-between;
+border-left: 2px solid var(--dark);
+min-width: 140px;
+}
 
-    .post-date {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--mid);
-      font-weight: 500;
-    }
+.post-date {
+font-family: var(--font-mono);
+font-size: 0.78rem;
+color: var(--mid);
+font-weight: 500;
+}
 
-    .post-read {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--orange);
-      white-space: nowrap;
-    }
+.post-read {
+font-size: 0.8rem;
+font-weight: 700;
+color: var(--orange);
+white-space: nowrap;
+}
 
-    /* ── COMING SOON PLACEHOLDER ── */
-    .coming-soon {
-      border: 2px dashed var(--border);
-      border-radius: 14px;
-      padding: 32px;
-      text-align: center;
-      color: #B7AF9E;
-      margin-top: 8px;
-    }
-    .coming-soon p {
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-    .coming-soon span {
-      font-size: 0.78rem;
-      color: #C9C2B0;
-      display: block;
-      margin-top: 6px;
-    }
+/* ── COMING SOON PLACEHOLDER ── */
+.coming-soon {
+border: 2px dashed var(--border);
+border-radius: 14px;
+padding: 32px;
+text-align: center;
+color: #B7AF9E;
+margin-top: 8px;
+}
+.coming-soon p {
+font-size: 0.88rem;
+font-weight: 600;
+}
+.coming-soon span {
+font-size: 0.78rem;
+color: #C9C2B0;
+display: block;
+margin-top: 6px;
+}
 
-    /* ── SUBSCRIBE CTA ── */
-    .subscribe-cta {
-      background: var(--dark);
-      color: var(--white);
-      margin: 0 48px 80px;
-      border-radius: 14px;
-      padding: 48px;
-      text-align: center;
-      max-width: calc(1100px - 96px);
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .subscribe-cta .kicker {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--orange-on-dark);
-      margin-bottom: 12px;
-    }
-    .subscribe-cta h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-    .subscribe-cta p {
-      color: #C9C2B6;
-      font-size: 1rem;
-      margin-bottom: 28px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .btn-sub {
-      display: inline-block;
-      padding: 16px 40px;
-      background: var(--orange);
-      color: var(--white);
-      font-size: 1rem;
-      font-weight: 800;
-      font-family: inherit;
-      border-radius: 9px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.1s;
-    }
-    .btn-sub:hover { background: var(--orange-d); transform: translateY(-1px); }
-    .sub-note {
-      display: block;
-      font-size: 0.76rem;
-      color: #9A9384;
-      margin-top: 12px;
-    }
+/* ── SUBSCRIBE CTA ── */
+.subscribe-cta {
+background: var(--dark);
+color: var(--white);
+margin: 0 48px 80px;
+border-radius: 14px;
+padding: 48px;
+text-align: center;
+max-width: calc(1100px - 96px);
+margin-left: auto;
+margin-right: auto;
+}
+.subscribe-cta .kicker {
+font-family: var(--font-mono);
+font-size: 0.78rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange-on-dark);
+margin-bottom: 12px;
+}
+.subscribe-cta h2 {
+font-family: var(--font-display);
+font-size: clamp(1.6rem, 3vw, 2.2rem);
+font-weight: 900;
+letter-spacing: -0.03em;
+margin-bottom: 12px;
+}
+.subscribe-cta p {
+color: #C9C2B6;
+font-size: 1rem;
+margin-bottom: 28px;
+max-width: 480px;
+margin-left: auto;
+margin-right: auto;
+}
+.btn-sub {
+display: inline-block;
+padding: 16px 40px;
+background: var(--orange);
+color: var(--white);
+font-size: 1rem;
+font-weight: 800;
+font-family: inherit;
+border-radius: 9px;
+text-decoration: none;
+transition: background 0.2s, transform 0.1s;
+}
+.btn-sub:hover { background: var(--orange-d); transform: translateY(-1px); }
+.sub-note {
+display: block;
+font-size: 0.76rem;
+color: #9A9384;
+margin-top: 12px;
+}
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 28px 48px;
-      border-top: 1px solid var(--border);
-      color: var(--mid);
-      font-size: 0.8rem;
-    }
-    footer a { color: inherit; text-decoration: underline; }
+/* ── FOOTER ── */
+footer {
+text-align: center;
+padding: 28px 48px;
+border-top: 1px solid var(--border);
+color: var(--mid);
+font-size: 0.8rem;
+}
+footer a { color: inherit; text-decoration: underline; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      .nav-blog { display: block; }
-      .page-header { padding: 40px 24px 32px; }
-      .series-bar { padding: 20px 24px; }
-      .post-list { padding: 32px 24px 60px; }
-      .post-card { grid-template-columns: 60px 1fr; }
-      .post-meta { display: none; }
-      .post-num { min-height: 100px; font-size: 1.1rem; }
-      .post-body { padding: 20px 20px; }
-      .subscribe-cta { margin: 0 24px 60px; padding: 36px 24px; }
-      footer { padding: 24px; }
-    }
-  </style>
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+nav { padding: 16px 24px; }
+.nav-blog { display: block; }
+.page-header { padding: 40px 24px 32px; }
+.series-bar { padding: 20px 24px; }
+.post-list { padding: 32px 24px 60px; }
+.post-card { grid-template-columns: 60px 1fr; }
+.post-meta { display: none; }
+.post-num { min-height: 100px; font-size: 1.1rem; }
+.post-body { padding: 20px 20px; }
+.subscribe-cta { margin: 0 24px 60px; padding: 36px 24px; }
+footer { padding: 24px; }
+}
+</style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/">
-    <span class="nav-name">CFO Unfiltered</span>
-  </a>
-  <div class="nav-right">
-    <a class="nav-blog" href="/blog">Blog</a>
-    <a class="nav-x" href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
-      @BorisDracka
-    </a>
-    <a class="nav-subscribe" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
-    <div class="nav-lang">
-      <a href="/blog" class="active">EN</a><span class="lang-sep">/</span><a href="/sk/blog">SK</a>
-    </div>
-  </div>
+<a class="nav-logo" href="/">
+<span class="nav-name">CFO Unfiltered</span>
+</a>
+<div class="nav-right">
+<a class="nav-blog" href="/blog">Blog</a>
+<a class="nav-x" href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer">
+<svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+@BorisDracka
+</a>
+<a class="nav-subscribe" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
+<div class="nav-lang">
+<a href="/blog" class="active">EN</a><span class="lang-sep">/</span><a href="/sk/blog">SK</a>
+</div>
+</div>
 </nav>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
-  <p class="kicker">The CFO &amp; AI Series</p>
-  <h1>50 posts.<br>One honest account.</h1>
-  <br>
-  <p class="redpen-note">Marked up in red pen. No corporate polish.</p>
-  <p class="lede">A 30-year CFO documents what actually happens when you build AI into finance — in real time, without the vendor pitch.</p>
+<p class="kicker">The CFO &amp; AI Series</p>
+<h1>50 posts.<br>One honest account.</h1>
+<br>
+<p class="redpen-note">Marked up in red pen. No corporate polish.</p>
+<p class="lede">A 30-year CFO documents what actually happens when you build AI into finance — in real time, without the vendor pitch.</p>
 </div>
 
 <!-- SERIES PROGRESS -->
 <div class="series-bar">
-  <span class="label">Series progress</span>
-  <div class="progress-track">
-    <div class="progress-fill" style="width:16%"></div>
-  </div>
-  <span class="count">8 / 50 posts</span>
+<span class="label">Series progress</span>
+<div class="progress-track">
+<div class="progress-fill" style="width:18%"></div>
+</div>
+<span class="count">9 / 50 posts</span>
 </div>
 
 <!-- POST LIST -->
 <div class="post-list">
 
-  <!-- Post #01 -->
-  <a class="post-card" href="/blog/post-01">
-    <div class="post-num">01</div>
-    <div class="post-body">
-      <span class="post-series">Post #1 of 50</span>
-      <div class="post-title">30 Years as a CFO. Now I'm Exploring How Much of the Job AI Can Take Over.</div>
-      <p class="post-excerpt">Most CFOs I know are waiting. Waiting for vendors to add AI to their ERP. I did that for a while. Then I stopped — and started experimenting instead.</p>
-    </div>
-    <div class="post-meta">
-      <span class="post-date">May 26, 2026</span>
-      <span class="post-read">Read → 4 min</span>
-    </div>
-  </a>
+<!-- Post #01 -->
+<a class="post-card" href="/blog/post-01">
+<div class="post-num">01</div>
+<div class="post-body">
+<span class="post-series">Post #1 of 50</span>
+<div class="post-title">30 Years as a CFO. Now I'm Exploring How Much of the Job AI Can Take Over.</div>
+<p class="post-excerpt">Most CFOs I know are waiting. Waiting for vendors to add AI to their ERP. I did that for a while. Then I stopped — and started experimenting instead.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">May 26, 2026</span>
+<span class="post-read">Read → 4 min</span>
+</div>
+</a>
 
-  <!-- Post #02 -->
-  <a class="post-card" href="/blog/post-02">
-    <div class="post-num">02</div>
-    <div class="post-body">
-      <span class="post-series">Post #2 of 50</span>
-      <div class="post-title">An AI CFO Agent Is Not a Chatbot. Here's What It Actually Is.</div>
-      <p class="post-excerpt">Everyone's talking about AI in finance. Most people are confused about what it actually does. That confusion is expensive — because companies keep buying chatbots when what they need is a system that runs without them.</p>
-    </div>
-    <div class="post-meta">
-      <span class="post-date">May 8, 2026</span>
-      <span class="post-read">Read → 4 min</span>
-    </div>
-  </a>
+<!-- Post #02 -->
+<a class="post-card" href="/blog/post-02">
+<div class="post-num">02</div>
+<div class="post-body">
+<span class="post-series">Post #2 of 50</span>
+<div class="post-title">An AI CFO Agent Is Not a Chatbot. Here's What It Actually Is.</div>
+<p class="post-excerpt">Everyone's talking about AI in finance. Most people are confused about what it actually does. That confusion is expensive — because companies keep buying chatbots when what they need is a system that runs without them.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">May 8, 2026</span>
+<span class="post-read">Read → 4 min</span>
+</div>
+</a>
 
-  <!-- Post #03 -->
-  <a class="post-card" href="/blog/post-03">
-    <div class="post-num">03</div>
-    <div class="post-body">
-      <span class="post-series">Post #3 of 50</span>
-      <div class="post-title">50 People. €15M Revenue. 1 Accountant. This Is Normal.</div>
-      <p class="post-excerpt">The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here's why AI changes the math — without changing the headcount.</p>
-    </div>
-    <div class="post-meta">
-      <span class="post-date">May 15, 2026</span>
-      <span class="post-read">Read → 5 min</span>
-    </div>
-  </a>
+<!-- Post #03 -->
+<a class="post-card" href="/blog/post-03">
+<div class="post-num">03</div>
+<div class="post-body">
+<span class="post-series">Post #3 of 50</span>
+<div class="post-title">50 People. €15M Revenue. 1 Accountant. This Is Normal.</div>
+<p class="post-excerpt">The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here's why AI changes the math — without changing the headcount.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">May 15, 2026</span>
+<span class="post-read">Read → 5 min</span>
+</div>
+</a>
 
-  <!-- Post #04 -->
-  <a class="post-card" href="/blog/post-04">
-    <div class="post-num">04</div>
-    <div class="post-body">
-      <span class="post-series">Post #4 of 50</span>
-      <div class="post-title">Plenty of Cash on Wednesday. Missed Payroll on Friday.</div>
-      <p class="post-excerpt">A company with €2M revenue can look completely healthy on Monday and be in crisis by Friday. Not because it's losing money — but because no one was watching the cash in real time.</p>
-    </div>
-    <div class="post-meta">
-      <span class="post-date">May 22, 2026</span>
-      <span class="post-read">Read → 5 min</span>
-    </div>
-  </a>
+<!-- Post #04 -->
+<a class="post-card" href="/blog/post-04">
+<div class="post-num">04</div>
+<div class="post-body">
+<span class="post-series">Post #4 of 50</span>
+<div class="post-title">Plenty of Cash on Wednesday. Missed Payroll on Friday.</div>
+<p class="post-excerpt">A company with €2M revenue can look completely healthy on Monday and be in crisis by Friday. Not because it's losing money — but because no one was watching the cash in real time.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">May 22, 2026</span>
+<span class="post-read">Read → 5 min</span>
+</div>
+</a>
 
-  <!-- Post #05 -->
-  <a class="post-card" href="/blog/post-05">
-    <div class="post-num">05</div>
-    <div class="post-body">
-      <span class="post-series">Post #5 of 50</span>
-      <div class="post-title">CEO Calls Friday at 4pm. The Accountant Hasn't Closed the Month.</div>
-      <p class="post-excerpt">This conversation happens every month in many companies under 200 people. The CEO needs forward-looking data. The accounting system produces backward-looking reports. It's not the accountant's fault — it's a systems problem.</p>
-    </div>
-    <div class="post-meta">
-      <span class="post-date">May 29, 2026</span>
-      <span class="post-read">Read → 5 min</span>
-    </div>
-  </a>
+<!-- Post #05 -->
+<a class="post-card" href="/blog/post-05">
+<div class="post-num">05</div>
+<div class="post-body">
+<span class="post-series">Post #5 of 50</span>
+<div class="post-title">CEO Calls Friday at 4pm. The Accountant Hasn't Closed the Month.</div>
+<p class="post-excerpt">This conversation happens every month in many companies under 200 people. The CEO needs forward-looking data. The accounting system produces backward-looking reports. It's not the accountant's fault — it's a systems problem.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">May 29, 2026</span>
+<span class="post-read">Read → 5 min</span>
+</div>
+</a>
 
-  <!-- Post #06 -->
-  <a class="post-card" href="/blog/post-06">
-    <div class="post-num">06</div>
-    <div class="post-body">
-      <span class="post-series">Post #6 of 50</span>
-      <div class="post-title">Inside the Architecture: How an AI CFO Agent Actually Gets Built</div>
-      <p class="post-excerpt">Most descriptions of AI CFO agents are too abstract. Here's the actual plumbing — what systems connect to what, what the agent layer does, and why it's simpler than it sounds once you know where to start.</p>
-    </div>
-    <div class="post-meta">
-      <span class="post-date">June 5, 2026</span>
-      <span class="post-read">Read → 6 min</span>
-    </div>
-  </a>
+<!-- Post #06 -->
+<a class="post-card" href="/blog/post-06">
+<div class="post-num">06</div>
+<div class="post-body">
+<span class="post-series">Post #6 of 50</span>
+<div class="post-title">Inside the Architecture: How an AI CFO Agent Actually Gets Built</div>
+<p class="post-excerpt">Most descriptions of AI CFO agents are too abstract. Here's the actual plumbing — what systems connect to what, what the agent layer does, and why it's simpler than it sounds once you know where to start.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">June 5, 2026</span>
+<span class="post-read">Read → 6 min</span>
+</div>
+</a>
 
-  <!-- Post #07 -->
-  <a class="post-card" href="/blog/post-07">
-    <div class="post-num">07</div>
-    <div class="post-body">
-      <span class="post-series">Post #7 of 50</span>
-      <div class="post-title">The First Report Landed at 6am. One Number Was Wrong.</div>
-      <p class="post-excerpt">The first report the agent produced — what the CEO said when it landed, and the one number that was wrong and why.</p>
-    </div>
-    <div class="post-meta">
-      <span class="post-date">July 21, 2026</span>
-      <span class="post-read">Read → 6 min</span>
-    </div>
-  </a>
+<!-- Post #07 -->
+<a class="post-card" href="/blog/post-07">
+<div class="post-num">07</div>
+<div class="post-body">
+<span class="post-series">Post #7 of 50</span>
+<div class="post-title">The First Report Landed at 6am. One Number Was Wrong.</div>
+<p class="post-excerpt">The first report the agent produced — what the CEO said when it landed, and the one number that was wrong and why.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">July 21, 2026</span>
+<span class="post-read">Read → 6 min</span>
+</div>
+</a>
 
-  <!-- Post #08 -->
-  <a class="post-card" href="/blog/post-08">
-    <div class="post-num">08</div>
-    <div class="post-body">
-      <span class="post-series">Post #8 of 50<span class="post-fresh">newest ↑</span></span>
-      <div class="post-title">The Alert That Was Wrong</div>
-      <p class="post-excerpt">What happened when the agent flagged a problem that turned out not to be one — and what that taught me about tuning alerts.</p>
-    </div>
-    <div class="post-meta">
-      <span class="post-date">August 4, 2026</span>
-      <span class="post-read">Read → 5 min</span>
-    </div>
-  </a>
+<!-- Post #08 -->
+<a class="post-card" href="/blog/post-08">
+<div class="post-num">08</div>
+<div class="post-body">
+<span class="post-series">Post #8 of 50</span>
+<div class="post-title">The Alert That Was Wrong</div>
+<p class="post-excerpt">What happened when the agent flagged a problem that turned out not to be one — and what that taught me about tuning alerts.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">August 4, 2026</span>
+<span class="post-read">Read → 5 min</span>
+</div>
+</a>
 
-  <!-- Coming soon -->
-  <div class="coming-soon">
-    <p>Post #09 — coming soon</p>
-    <span>A different blind spot — one measured in exchange rates, not dates.</span>
-  </div>
+<!-- Post #09 -->
+<a class="post-card" href="/blog/post-09">
+<div class="post-num">09</div>
+<div class="post-body">
+<span class="post-series">Post #9 of 50<span class="post-fresh">newest ↑</span></span>
+<div class="post-title">The FX Loss Nobody Sees Until Month-End</div>
+<p class="post-excerpt">A currency move spread across thirty ordinary days can quietly cost more than most invoices are worth — and nobody notices until the books close.</p>
+</div>
+<div class="post-meta">
+<span class="post-date">August 18, 2026</span>
+<span class="post-read">Read → 6 min</span>
+</div>
+</a>
+
+<!-- Coming soon -->
+<div class="coming-soon">
+<p>Post #10 — coming soon</p>
+<span>Cash sitting in the account, earning nothing, for reasons that have nothing to do with not knowing better.</span>
+</div>
 
 </div>
 
 <!-- SUBSCRIBE CTA -->
 <div class="subscribe-cta">
-  <p class="kicker">Don't miss the next post</p>
-  <h2>Get each post in your inbox</h2>
-  <p>One email per week. No hype. Just a CFO writing what he sees.</p>
-  <a class="btn-sub" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">
-    Subscribe free →
-  </a>
-  <span class="sub-note">No spam. Unsubscribe anytime.</span>
+<p class="kicker">Don't miss the next post</p>
+<h2>Get each post in your inbox</h2>
+<p>One email per week. No hype. Just a CFO writing what he sees.</p>
+<a class="btn-sub" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">
+Subscribe free →
+</a>
+<span class="sub-note">No spam. Unsubscribe anytime.</span>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Boris Dracka · <a href="mailto:likeaCFO@borisdracka.com">likeaCFO@borisdracka.com</a> · <a href="/privacy">Privacy</a></p>
+<p>© 2026 Boris Dracka · <a href="mailto:likeaCFO@borisdracka.com">likeaCFO@borisdracka.com</a> · <a href="/privacy">Privacy</a></p>
 </footer>
 
 </body>
