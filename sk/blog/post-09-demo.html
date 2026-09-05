@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>FX Monitoring Agent — ako funguje | Boris Dračka</title>
+<meta name="description" content="Osobný, nekomerčný prototyp: skript, ktorý načíta otvorené FX pozície z CSV a označí všetko, čo sa od zaúčtovania posunulo nad nastavený prah." />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Boris Dračka" />
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-09-demo" />
+<meta property="og:title" content="FX Monitoring Agent — ako funguje" />
+<meta property="og:description" content="Skript, ktorý načíta otvorené FX pozície z CSV a označí všetko, čo sa od zaúčtovania posunulo nad nastavený prah." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@BorisDracka" />
+<meta name="twitter:creator" content="@BorisDracka" />
+
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-09-demo" />
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-09-demo" />
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-09-demo" />
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-09-demo" />
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+--black: #1A1714;
+--orange: #C21F2F;
+--org2: #9A1824;
+--bg: #FBF9F3;
+--bg2: #F3F0E7;
+--border: #DCD5C7;
+--muted: #666666;
+--red: #dc2626;
+--red-bg: #fef2f2;
+--red-bd: #fecaca;
+--yellow: #d97706;
+--yel-bg: #fffbeb;
+--yel-bd: #fde68a;
+--green: #16a34a;
+--grn-bg: #f0fdf4;
+--grn-bd: #bbf7d0;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--black); line-height: 1.75; }
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.site-header {
+background: rgba(255,255,255,0.96); border-bottom: 1px solid var(--border);
+padding: 0 24px; height: 56px;
+display: flex; align-items: center; justify-content: space-between;
+position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px);
+}
+.logo { font-size: 15px; font-weight: 700; color: var(--black); text-decoration: none; letter-spacing: -0.3px; }
+.site-header nav { display: flex; gap: 24px; align-items: center; }
+.site-header nav a { font-size: 13px; color: #666; text-decoration: none; transition: color .15s; }
+.site-header nav a:hover { color: var(--black); }
+.btn-subscribe {
+font-size: 13px; font-weight: 700; background: var(--orange); color: #FBF9F3;
+padding: 8px 16px; border-radius: 8px; text-decoration: none; transition: background .15s;
+}
+.btn-subscribe:hover { background: var(--org2); }
+
+.lang-switch {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 13px;
+font-weight: 700;
+}
+.lang-switch a { color: #666; text-decoration: none; }
+.lang-switch a.active { color: var(--orange); }
+.lang-switch a:hover { color: var(--black); }
+.lang-switch .sep { color: var(--border); }
+
+/* ── HERO ───────────────────────────────────────────────── */
+.hero { background: var(--black); color: #FBF9F3; padding: 72px 24px 60px; text-align: center; }
+.hero-tag {
+display: inline-block; font-size: 11px; font-weight: 700;
+letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px;
+}
+.hero h1 {
+font-size: clamp(26px, 5vw, 48px); font-weight: 900;
+line-height: 1.12; letter-spacing: -1.5px;
+max-width: 760px; margin: 0 auto 20px;
+}
+.hero h1 span { color: var(--orange); }
+.hero p { font-size: 18px; color: #aaa; max-width: 580px; margin: 0 auto 32px; }
+.hero-meta {
+font-size: 13px; color: #4E483F;
+display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+
+/* ── STAT STRIP ─────────────────────────────────────────── */
+.stat-strip {
+background: var(--orange); color: #FBF9F3;
+display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+}
+.stat-item {
+padding: 18px 40px; text-align: center;
+border-right: 1px solid rgba(255,255,255,0.2);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num { font-size: 30px; font-weight: 900; display: block; letter-spacing: -1px; }
+.stat-label{ font-size: 12px; opacity: .8; letter-spacing: .5px; display: block; margin-top: 2px; }
+
+/* ── SECTION ────────────────────────────────────────────── */
+.section { max-width: 780px; margin: 0 auto; padding: 56px 24px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+.section-heading { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+.section-sub { font-size: 16px; color: var(--muted); margin-bottom: 36px; }
+.divider { border: none; border-top: 1px solid var(--border); }
+
+/* ── INTRO ──────────────────────────────────────────────── */
+.intro-text p { font-size: 18px; line-height: 1.8; margin-bottom: 22px; }
+.intro-text p.lead { font-size: 20px; font-weight: 500; line-height: 1.7; }
+.pullquote {
+border-left: 4px solid var(--orange); padding: 16px 24px; margin: 36px 0;
+background: var(--bg2); border-radius: 0 8px 8px 0;
+}
+.pullquote p { font-size: 19px; font-style: italic; color: #333; line-height: 1.55; }
+
+/* ── POSITION TABLE ─────────────────────────────────────── */
+.invoice-window { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.invoice-topbar {
+background: var(--black); padding: 12px 20px;
+display: flex; align-items: center; gap: 12px;
+}
+.invoice-dots { display: flex; gap: 6px; }
+.invoice-dots span { width: 12px; height: 12px; border-radius: 50%; }
+.invoice-dots span:nth-child(1) { background: #ff5f57; }
+.invoice-dots span:nth-child(2) { background: #febc2e; }
+.invoice-dots span:nth-child(3) { background: #28c840; }
+.invoice-title { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666; }
+.run-badge {
+margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+text-transform: uppercase; background: var(--orange); color: #FBF9F3;
+padding: 3px 9px; border-radius: 4px;
+}
+
+.invoice-summary {
+background: var(--bg2); padding: 14px 20px;
+display: flex; gap: 24px; flex-wrap: wrap;
+border-bottom: 1px solid var(--border);
+}
+.inv-sum-item { display: flex; flex-direction: column; }
+.inv-sum-val { font-size: 20px; font-weight: 900; color: var(--black); letter-spacing: -0.5px; }
+.inv-sum-val.red { color: var(--red); }
+.inv-sum-val.yellow { color: var(--yellow); }
+.inv-sum-val.orange { color: var(--orange); }
+.inv-sum-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+
+table { width: 100%; border-collapse: collapse; }
+thead th {
+background: var(--bg2); padding: 10px 16px; text-align: left;
+font-size: 11px; font-weight: 700; text-transform: uppercase;
+letter-spacing: .8px; color: var(--muted); border-bottom: 1px solid var(--border);
+}
+tbody tr { border-bottom: 1px solid var(--border); }
+tbody tr:last-child { border-bottom: none; }
+tbody td { padding: 13px 16px; font-size: 14px; }
+
+.badge {
+display: inline-flex; align-items: center; gap: 5px;
+font-size: 11px; font-weight: 700; padding: 3px 9px;
+border-radius: 100px; letter-spacing: .3px;
+}
+.badge.warning { background: var(--yel-bg); color: var(--yellow); border: 1px solid var(--yel-bd); }
+.badge.watch { background: var(--grn-bg); color: var(--green); border: 1px solid var(--grn-bd); }
+.badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+.amount { font-family: 'IBM Plex Mono', monospace; font-weight: 600; }
+.client-name { font-weight: 600; }
+.days-col { font-weight: 700; }
+.table-caption { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+/* ── PIPELINE ───────────────────────────────────────────── */
+.pipeline { display: flex; flex-direction: column; margin-bottom: 12px; }
+.p-step {
+display: flex; align-items: flex-start; gap: 18px;
+padding: 20px 22px; border: 1px solid var(--border); background: #FBF9F3;
+}
+.p-step:first-child { border-radius: 12px 12px 0 0; }
+.p-step:last-child { border-radius: 0 0 12px 12px; }
+.p-step + .p-step { border-top: none; }
+.p-num {
+font-size: 11px; font-weight: 700; background: var(--orange); color: #FBF9F3;
+width: 28px; height: 28px; border-radius: 50%;
+display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+}
+.p-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.p-title { font-size: 16px; font-weight: 700; margin-bottom: 5px; }
+.p-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.p-tag {
+display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600;
+background: var(--bg2); color: #4E483F; padding: 3px 10px;
+border-radius: 100px; border: 1px solid var(--border);
+}
+
+/* ── CODE TUTORIAL ──────────────────────────────────────── */
+.tutorial-step {
+border: 1px solid var(--border); border-radius: 12px;
+overflow: hidden; margin-bottom: 16px;
+}
+.tutorial-step-header {
+background: var(--bg2); padding: 14px 20px;
+display: flex; align-items: center; gap: 12px;
+border-bottom: 1px solid var(--border);
+}
+.step-badge {
+font-size: 11px; font-weight: 700; background: var(--orange); color: #FBF9F3;
+width: 24px; height: 24px; border-radius: 50%;
+display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-title-t { font-size: 15px; font-weight: 700; }
+.step-file { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); margin-left: auto; }
+pre {
+background: #1a1a1a; color: #e2e8f0; padding: 20px 24px;
+font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+line-height: 1.7; overflow-x: auto; margin: 0;
+}
+.code-comment { color: #6b7280; }
+.code-string { color: #86efac; }
+.code-num { color: #f9a8d4; }
+
+/* ── TECH GRID ──────────────────────────────────────────── */
+.tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tech-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 22px 20px; }
+.tech-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.tech-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.tech-card code {
+display: inline-block; font-family: 'IBM Plex Mono', monospace;
+font-size: 11px; background: #DCD5C7; padding: 2px 7px;
+border-radius: 4px; color: var(--black); margin-top: 8px;
+}
+
+/* ── GITHUB CTA ─────────────────────────────────────────── */
+.github-section { background: var(--black); padding: 72px 24px; }
+.github-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+.github-section h2 {
+font-size: clamp(24px, 4vw, 36px); font-weight: 900;
+letter-spacing: -1px; color: #FBF9F3; margin-bottom: 16px; line-height: 1.2;
+}
+.github-section h2 span { color: var(--orange); }
+.github-section p { font-size: 17px; color: #aaa; margin-bottom: 12px; line-height: 1.7; }
+.repo-name {
+font-family: 'IBM Plex Mono', monospace; font-size: 14px;
+background: #1a1a1a; border: 1px solid #333; color: #aaa;
+padding: 8px 16px; border-radius: 8px; display: inline-block; margin-bottom: 32px;
+}
+.repo-name span { color: var(--orange); }
+.what-inside { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 24px 28px; text-align: left; margin-bottom: 40px; }
+.what-inside h4 { font-size: 13px; font-weight: 700; color: #aaa; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+.what-inside ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.what-inside li { font-size: 14px; color: #ccc; display: flex; align-items: flex-start; gap: 10px; }
+.what-inside li::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+.github-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+.btn-github {
+display: inline-flex; align-items: center; gap: 10px;
+padding: 14px 28px; font-family: 'IBM Plex Sans', sans-serif;
+font-size: 15px; font-weight: 700; background: #FBF9F3; color: var(--black);
+border: none; border-radius: 10px; text-decoration: none;
+box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: background .15s;
+}
+.btn-github:hover { background: #f0f0f0; }
+.btn-github svg { width: 20px; height: 20px; }
+.btn-outline {
+display: inline-flex; align-items: center; gap: 8px;
+padding: 14px 24px; font-family: 'IBM Plex Sans', sans-serif;
+font-size: 15px; font-weight: 600; background: transparent; color: #FBF9F3;
+border: 1px solid #444; border-radius: 10px; text-decoration: none; transition: border-color .15s;
+}
+.btn-outline:hover { border-color: #FBF9F3; }
+
+/* ── SUBSCRIBE ──────────────────────────────────────────── */
+.subscribe-box { border-top: 1px solid #2a2a2a; padding-top: 36px; text-align: center; }
+.subscribe-box h3 { font-size: 18px; font-weight: 700; color: #FBF9F3; margin-bottom: 8px; }
+.subscribe-box p { font-size: 14px; color: #aaa; margin-bottom: 20px; }
+.cta-form { display: flex; gap: 10px; max-width: 400px; margin: 0 auto; flex-wrap: wrap; }
+.cta-form input {
+flex: 1; min-width: 180px; padding: 12px 16px;
+font-family: 'IBM Plex Sans', sans-serif; font-size: 14px;
+border: 1px solid #444; background: #1a1a1a; color: #FBF9F3; border-radius: 8px; outline: none;
+}
+.cta-form input::placeholder { color: #4E483F; }
+.btn-sub {
+padding: 12px 22px; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; font-weight: 700;
+background: var(--orange); color: #FBF9F3; border: none; border-radius: 8px; cursor: pointer;
+}
+.cta-note { font-size: 12px; color: #4E483F; margin-top: 10px; }
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+.site-footer {
+background: #FBF9F3; color: #999; padding: 40px 24px;
+text-align: center; border-top: 1px solid var(--border);
+}
+.footer-logo { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 16px; }
+.footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+.footer-links a { font-size: 13px; color: #888; text-decoration: none; }
+.footer-links a:hover { color: var(--black); }
+.footer-copy { font-size: 12px; }
+
+@media (max-width: 640px) {
+.site-header nav { display: none; }
+.tech-grid { grid-template-columns: 1fr; }
+.stat-item { padding: 16px 24px; }
+table { font-size: 13px; }
+thead th, tbody td { padding: 10px 10px; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+<a href="https://borisdracka.com/sk/" class="logo">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/sk/blog/post-09">← Post #9</a>
+<a href="https://borisdracka.com/sk/blog">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" class="btn-subscribe">Odoberať</a>
+<span class="lang-switch">
+<a href="https://borisdracka.com/blog/post-09-demo">EN</a><span class="sep">/</span><a href="https://borisdracka.com/sk/blog/post-09-demo" class="active">SK</a>
+</span>
+</nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+<div class="hero-tag">Doplnok k príspevku #9 — Séria CFO &amp; AI</div>
+<h1>Agent, ktorý <span>zachytí pohyb kurzu</span><br>skôr než to nájde uzávierka</h1>
+<p>Malý skript, ktorý načíta otvorené FX pozície a označí všetko, čo sa posunulo nad nastavený prah — skôr, než to nájde uzávierka na konci mesiaca.</p>
+<div class="hero-meta">
+<span>📄 Boris Dračka</span>
+<span>·</span>
+<span>⏱ 4 min čítania</span>
+<span>·</span>
+<span>📦 Kód na GitHube</span>
+</div>
+<p style="margin-top:18px; font-size:0.85rem; color:var(--muted); border-top:1px solid var(--border); padding-top:14px;">Toto je osobný, nekomerčný vedľajší projekt, ktorý som vytvoril, aby som sa učil — nie je to produkt ani služba a nie je napojený na žiadnu firmu, s ktorou spolupracujem.</p>
+</div>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+<div class="stat-item">
+<span class="stat-num">6</span>
+<span class="stat-label">Otvorených pozícií vo vzorových dátach</span>
+</div>
+<div class="stat-item">
+<span class="stat-num">2</span>
+<span class="stat-label">Označené nad prahom ±2 %</span>
+</div>
+<div class="stat-item">
+<span class="stat-num">0</span>
+<span class="stat-label">Potrebných API kľúčov či živých účtov</span>
+</div>
+</div>
+
+<!-- INTRO -->
+<div class="section intro-text">
+<div class="section-label">Slepé miesto</div>
+<div class="section-heading">Prečo strata zostáva neviditeľná až do uzávierky</div>
+
+<p class="lead">Post #9 vysvetlil, prečo FX strata zostáva neviditeľná až do uzávierky: faktúra sa zaúčtuje jedným kurzom, v jeden deň, a nič ten kurz znova neskontroluje, kým o niekoľko týždňov nepríde platba a niekto ju nezosúladí.</p>
+
+<p>Tento skript je malý osobný experiment, ktorý som zložil, aby som zistil, čo by denná kontrola reálne musela počítať. Nič neobchoduje a nedotýka sa reálneho účtu — len načíta zoznam otvorených pozícií a spraví to jedno porovnanie, ktoré nikto nespustí až do uzávierky.</p>
+
+<div class="pullquote">
+<p>„Nič z toho nemusí byť komplikované. Len to musí bežať skôr, než sa kurz prestane hýbať — nie až potom."</p>
+</div>
+</div>
+
+<hr class="divider" />
+
+<!-- POSITION TABLE -->
+<div class="section">
+<div class="section-label">Čo agent vidí</div>
+<div class="section-heading">Každá otvorená pozícia oproti dnešnému kurzu</div>
+<div class="section-sub">Načíta CSV s otvorenými pozíciami — faktúrami v cudzej mene, ktoré ešte neboli vyrovnané — a označí všetko nad nastavenou odchýlkou od zaúčtovania.</div>
+
+<div class="invoice-window">
+<div class="invoice-topbar">
+<div class="invoice-dots"><span></span><span></span><span></span></div>
+<span class="invoice-title">fx_positions.csv — kontrola odchýlky</span>
+<span class="run-badge">Vzorový beh</span>
+</div>
+
+<div class="invoice-summary">
+<div class="inv-sum-item">
+<span class="inv-sum-val red">−4 622,49 €</span>
+<span class="inv-sum-label">Čistá nerealizovaná odchýlka</span>
+</div>
+<div class="inv-sum-item">
+<span class="inv-sum-val orange">6</span>
+<span class="inv-sum-label">Skontrolovaných pozícií</span>
+</div>
+<div class="inv-sum-item">
+<span class="inv-sum-val yellow">2</span>
+<span class="inv-sum-label">Označené (prah ±2,0 %)</span>
+</div>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Klient</th>
+<th>Pár</th>
+<th>Suma</th>
+<th>Zaúčt.</th>
+<th>Aktuálny</th>
+<th>Odchýlka</th>
+<th>Flag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="amount">FX-01</span></td>
+<td><span class="client-name">Iota Digital</span></td>
+<td><span class="amount">EUR/USD</span></td>
+<td><span class="amount">95 000</span></td>
+<td><span class="amount">1,0750</span></td>
+<td><span class="amount">1,1100</span></td>
+<td><span class="days-col">−2 786,51 €</span></td>
+<td><span class="badge warning">⚠ Flag</span></td>
+</tr>
+<tr>
+<td><span class="amount">FX-05</span></td>
+<td><span class="client-name">Xi Manufacturing</span></td>
+<td><span class="amount">EUR/USD</span></td>
+<td><span class="amount">61 000</span></td>
+<td><span class="amount">1,0800</span></td>
+<td><span class="amount">1,1150</span></td>
+<td><span class="days-col">−1 772,96 €</span></td>
+<td><span class="badge warning">⚠ Flag</span></td>
+</tr>
+<tr>
+<td><span class="amount">FX-04</span></td>
+<td><span class="client-name">Nu Consulting</span></td>
+<td><span class="amount">EUR/CHF</span></td>
+<td><span class="amount">27 000</span></td>
+<td><span class="amount">0,9550</span></td>
+<td><span class="amount">0,9700</span></td>
+<td><span class="days-col">−437,20 €</span></td>
+<td><span class="badge watch">Čisté</span></td>
+</tr>
+<tr>
+<td><span class="amount">FX-02</span></td>
+<td><span class="client-name">Kappa Logistics</span></td>
+<td><span class="amount">EUR/GBP</span></td>
+<td><span class="amount">42 000</span></td>
+<td><span class="amount">0,8600</span></td>
+<td><span class="amount">0,8550</span></td>
+<td><span class="days-col">+285,60 €</span></td>
+<td><span class="badge watch">Čisté</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="table-caption">Skutočný výstup skriptu nižšie na vzorovom CSV, prah nastavený na ±2,0 % — celý beh je ďalej nižšie.</p>
+</div>
+
+<hr class="divider" />
+
+<!-- PIPELINE -->
+<div class="section">
+<div class="section-label">Ako to funguje</div>
+<div class="section-heading">5 krokov. Jedno CSV. Žiadne živé napojenie.</div>
+<div class="section-sub">Nič z toho nepotrebuje API kľúč ani reálny účet — je to výpočet, spustený na vzorových dátach.</div>
+
+<div class="pipeline">
+<div class="p-step">
+<div class="p-num">1</div>
+<div class="p-icon">📥</div>
+<div>
+<div class="p-title">Načítanie otvorených pozícií</div>
+<div class="p-desc">Načíta CSV: ID pozície, klient, menový pár, fakturovaná suma a kurz, ktorým bola zaúčtovaná.</div>
+<span class="p-tag">Vstup CSV · bez API</span>
+</div>
+</div>
+<div class="p-step">
+<div class="p-num">2</div>
+<div class="p-icon">🔁</div>
+<div>
+<div class="p-title">Aplikovanie aktuálneho kurzu</div>
+<div class="p-desc">Pre každú pozíciu porovná zaúčtovaný kurz s aktuálnym kurzom, ktorý pre daný pár zadáte.</div>
+<span class="p-tag">Zadaný alebo manuálny kurz</span>
+</div>
+</div>
+<div class="p-step">
+<div class="p-num">3</div>
+<div class="p-icon">🧮</div>
+<div>
+<div class="p-title">Výpočet odchýlky</div>
+<div class="p-desc">Vypočíta hodnotu v EUR pri oboch kurzoch a rozdiel — v eurách aj v percentách.</div>
+<span class="p-tag">Hodnota v EUR = suma ÷ kurz</span>
+</div>
+</div>
+<div class="p-step">
+<div class="p-num">4</div>
+<div class="p-icon">🚩</div>
+<div>
+<div class="p-title">Označenie nad prahom</div>
+<div class="p-desc">Všetko nad nastaveným percentom (predvolene 2 %) sa označí na druhé posúdenie.</div>
+<span class="p-tag">Predvolený prah: ±2,0 %</span>
+</div>
+</div>
+<div class="p-step">
+<div class="p-num">5</div>
+<div class="p-icon">🖨️</div>
+<div>
+<div class="p-title">Výpis reportu</div>
+<div class="p-desc">Vypíše zoradenú tabuľku plus zhrnutie v jednoduchom jazyku, čo je označené a prečo.</div>
+<span class="p-tag">Výstup do terminálu · žiadny dashboard</span>
+</div>
+</div>
+</div>
+</div>
+
+<hr class="divider" />
+
+<!-- TUTORIAL -->
+<div class="section">
+<div class="section-label">Vyskúšajte si to sami</div>
+<div class="section-heading">Potrebujete Python. To je všetko.</div>
+<div class="section-sub">Žiadne API kľúče, žiadne napojenie na živý obchodný systém — len CSV s vlastnými otvorenými pozíciami.</div>
+
+<div class="tutorial-step">
+<div class="tutorial-step-header">
+<div class="step-badge">1</div>
+<div class="step-title-t">Naklonujte repozitár</div>
+<span class="step-file">terminal</span>
+</div>
+<pre><span class="code-comment"># Naklonovanie repozitára</span>
+git clone https://github.com/LuliBobo/cfo-agents.git
+cd cfo-agents</pre>
+</div>
+
+<div class="tutorial-step">
+<div class="tutorial-step-header">
+<div class="step-badge">2</div>
+<div class="step-title-t">Pridajte svoje otvorené pozície</div>
+<span class="step-file">data/fx_positions.csv</span>
+</div>
+<pre><span class="code-comment"># position_id,client,currency_pair,amount_foreign,booked_rate,current_rate,invoice_date</span>
+FX-01,Iota Digital,EUR/USD,<span class="code-num">95000</span>,<span class="code-string">1.0750</span>,<span class="code-string">1.1100</span>,<span class="code-string">2026-07-15</span>
+FX-02,Kappa Logistics,EUR/GBP,<span class="code-num">42000</span>,<span class="code-string">0.8600</span>,<span class="code-string">0.8550</span>,<span class="code-string">2026-07-22</span></pre>
+</div>
+
+<div class="tutorial-step">
+<div class="tutorial-step-header">
+<div class="step-badge">3</div>
+<div class="step-title-t">Spustite</div>
+<span class="step-file">terminal</span>
+</div>
+<pre>python fx_monitor_agent.py data/fx_positions.csv --threshold 2.0</pre>
+</div>
+
+<div class="tutorial-step">
+<div class="tutorial-step-header">
+<div class="step-badge">4</div>
+<div class="step-title-t">Čo dostanete</div>
+<span class="step-file">výstup</span>
+</div>
+<pre><span class="code-comment">================================================================
+  FX Monitoring Agent — kontrola otvorených pozícií
+================================================================
+
+[Krok 1] Načítaných 6 otvorených pozícií z CSV
+[Krok 2] Porovnávam zaúčtovaný a aktuálny kurz pre každú pozíciu
+[Krok 3] Označujem všetko nad odchýlkou ±2,0 %</span>
+
+FX-01  Iota Digital      EUR/USD  1,0750  1,1100  −2 786,51  −3,15 %  ⚠ FLAG
+FX-05  Xi Manufacturing  EUR/USD  1,0800  1,1150  −1 772,96  −3,14 %  ⚠ FLAG
+
+<span class="code-comment">[Krok 4] Označené 2 z 6 pozícií
+[Krok 5] Čistá nerealizovaná FX odchýlka: −4 622,49 €</span></pre>
+</div>
+</div>
+
+<hr class="divider" />
+
+<!-- TECH -->
+<div class="section">
+<div class="section-label">Čo je pod kapotou</div>
+<div class="section-heading">Žiadna infraštruktúra. Žiadne API kľúče.</div>
+
+<div class="tech-grid">
+<div class="tech-card">
+<h4>📄 Zdroj dát</h4>
+<p>Obyčajné CSV s otvorenými pozíciami. Vyexportujte ho odkiaľkoľvek, alebo ho napíšte ručne.</p>
+<code>fx_positions.csv → Python</code>
+</div>
+<div class="tech-card">
+<h4>🐍 Výpočet</h4>
+<p>Python zo štandardnej knižnice — žiadne externé balíčky, žiadne API kľúče potrebné na spustenie.</p>
+<code>python3 fx_monitor_agent.py</code>
+</div>
+<div class="tech-card">
+<h4>🎚️ Prah</h4>
+<p>Nastaviteľné percento rozhoduje, čo sa označí a čo je len bežný šum.</p>
+<code>--threshold 2.0</code>
+</div>
+<div class="tech-card">
+<h4>🔒 Žiadne živé napojenie</h4>
+<p>Nič sa tu nedotýka reálneho účtu, bankového feedu ani obchodnej platformy — len vzorové dáta.</p>
+<code>0 API kľúčov</code>
+</div>
+</div>
+</div>
+
+<!-- GITHUB CTA -->
+<div class="github-section" id="github">
+<div class="github-inner">
+<span style="font-size:48px;display:block;margin-bottom:20px;">
+<svg viewBox="0 0 24 24" width="48" height="48" fill="white" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto;display:block;">
+<path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+</svg>
+</span>
+<h2>Získajte kompletný<br><span>zdrojový kód</span></h2>
+<p>FX Monitoring Agent je v tom istom osobnom, nekomerčnom repozitári ako predchádzajúce demá v tejto sérii.</p>
+
+<div class="repo-name">github.com/<span>LuliBobo</span>/cfo-agents</div>
+
+<div class="what-inside">
+<h4>Čo je v repozitári</h4>
+<ul>
+<li>fx_monitor_agent.py — celý skript</li>
+<li>data/fx_positions.csv — vzorové dáta na okamžité vyskúšanie</li>
+<li>Plus CFO Report Agent (Post #2) a Invoice Agent (Post #3) v tom istom repozitári</li>
+</ul>
+</div>
+
+<div class="github-btns">
+<a href="https://github.com/LuliBobo/cfo-agents" target="_blank" rel="noopener" class="btn-github">
+<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+</svg>
+Zobraziť na GitHube
+</a>
+<a href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener" class="btn-outline">
+Získať Post #10 →
+</a>
+</div>
+
+<div class="subscribe-box" id="subscribe">
+<h3>Sledujte túto sériu</h3>
+<p>Post #10 zostáva pri peniazoch, ktoré firma už má — hotovosť na účte, ktorá nezarába nič, z dôvodov, ktoré nemajú nič spoločné s tým, že by to niekto nevedel lepšie.</p>
+<form class="cta-form" action="https://borisdracka.beehiiv.com/subscribe" method="GET" target="_blank">
+<input type="email" name="email" placeholder="vas@email.com" required />
+<button type="submit" class="btn-sub">Odoberať zadarmo</button>
+</form>
+<p class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhláste sa kedykoľvek.</p>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+<div class="footer-logo">CFO Unfiltered</div>
+<div class="footer-links">
+<a href="https://borisdracka.com/sk/">Domov</a>
+<a href="https://borisdracka.com/sk/blog">Blog</a>
+<a href="https://github.com/LuliBobo/cfo-agents" target="_blank">GitHub</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe" target="_blank">Odoberať</a>
+</div>
+<p class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/sk/privacy">Ochrana súkromia</a></p>
+</footer>
+
+</body>
+</html>
