@@ -476,6 +476,58 @@
     .x-link:hover { color: var(--dark); }
     .x-link svg { width: 16px; height: 16px; fill: currentColor; }
 
+    /* ── PROOF STRIP ── */
+    .proof-strip {
+      padding: 28px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .proof-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .proof-badges .dot { color: var(--border); }
+    .proof-stat {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: var(--mid);
+    }
+    .proof-stat strong { color: var(--dark); font-weight: 700; }
+    .proof-stat em {
+      font-style: normal;
+      color: var(--mid);
+      opacity: .7;
+      font-size: 0.85em;
+    }
+
+    /* ── STAGE FRAMEWORK ── */
+    .stage-framework {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: -20px 0 44px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--mid);
+    }
+    .stage-framework .stage {
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+    .stage-framework .arrow { color: var(--border); }
+
     /* ── ARTICLES SECTION ── */
     .articles-section {
       padding: 80px 48px;
@@ -635,6 +687,8 @@
       .cards { grid-template-columns: 1fr; }
       .card { border-right: none; border-bottom: 2px solid var(--dark); }
       .card:last-child { border-bottom: none; }
+      .proof-strip { padding: 20px 24px; }
+      .stage-framework { margin-top: 0; }
       .articles-section {
         padding: 60px 24px;
       }
@@ -803,10 +857,28 @@
   </div>
 </section>
 
+<!-- PROOF STRIP -->
+<section class="proof-strip">
+  <div class="proof-badges">
+    <span>30+ Rokov CFO Skúseností</span><span class="dot">·</span>
+    <span>Reálne Finančné Operácie</span><span class="dot">·</span>
+    <span>AI Experimenty</span><span class="dot">·</span>
+    <span>50-dielna Séria CFO &amp; AI</span>
+  </div>
+  <p class="proof-stat"><strong>Reporting: ~4h &rarr; 15 min</strong> <em>(ilustratívny odhad, nie meraný benchmark)</em></p>
+</section>
+
 <!-- ARTICLES SECTION (NEW) -->
 <section class="articles-section">
-  <p class="kicker">NAJNOVŠIE INSIGHTS</p>
-  <h2>Čo píšem</h2>
+  <p class="kicker">SÉRIA CFO &amp; AI</p>
+  <h2>50 experimentov. Jedna otázka: čo by mal CFO skutočne automatizovať?</h2>
+  <div class="stage-framework">
+    <span class="stage">Problém</span><span class="arrow">&rarr;</span>
+    <span class="stage">Prístup</span><span class="arrow">&rarr;</span>
+    <span class="stage">Výsledok</span><span class="arrow">&rarr;</span>
+    <span class="stage">Zlyhanie</span><span class="arrow">&rarr;</span>
+    <span class="stage">Poučenie</span>
+  </div>
   <div class="articles-grid">
     <div class="article-card">
       <p class="article-date">18. august 2026</p>
