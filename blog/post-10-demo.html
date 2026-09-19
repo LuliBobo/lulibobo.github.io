@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>The Agent That Notices Idle Cash | CFO Unfiltered</title>
+<meta name="description" content="A walkthrough of a small script that compares account balances to their buffers and estimates the forgone interest on whatever sits idle — the Post #10 companion demo.">
+<link rel="canonical" href="https://borisdracka.com/blog/post-10-demo">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-10-demo">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-10-demo">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-10-demo">
+
+<meta property="og:title" content="The Agent That Notices Idle Cash">
+<meta property="og:description" content="A small script that compares account balances to their buffers and estimates what the excess could have earned instead.">
+<meta property="og:image" content="https://borisdracka.com/og/post-10.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/blog/post-10-demo">
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-10.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--white); color: var(--dark); font-family: 'IBM Plex Sans', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--orange); }
+.site-header { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; z-index: 100; }
+.site-header .logo { font-size: 15px; font-weight: 700; color: #1A1714; text-decoration: none; letter-spacing: -0.02em; }
+.site-header nav a { font-size: 13px; color: #666; text-decoration: none; margin-left: 20px; }
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+
+.hero { background: var(--dark); padding: 56px 24px 48px; text-align: center; }
+.hero-inner { max-width: 760px; margin: 0 auto; }
+.hero-tag { display: inline-block; background: var(--orange); color: white; font-size: 12px; font-weight: 700; border-radius: 4px; padding: 3px 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
+.hero h1 { color: white; font-family: 'IBM Plex Serif', Georgia, serif; font-size: clamp(26px, 5vw, 42px); font-weight: 900; line-height: 1.2; letter-spacing: -1px; margin: 0 0 14px; }
+.hero h1 span { color: var(--orange); }
+.hero-subtitle { color: #bbb; font-size: 1.05rem; line-height: 1.6; margin: 0 auto 20px; max-width: 600px; }
+.hero-meta { font-size: 13px; color: #999; }
+
+.content { max-width: 760px; margin: 0 auto; padding: 52px 24px 80px; }
+.content p { font-size: 17px; line-height: 1.75; margin: 0 0 22px; color: var(--dark); }
+.content p.disclaimer { font-size: 14px; font-style: italic; color: var(--mid); border-left: 3px solid var(--border); padding: 4px 0 4px 16px; margin: 0 0 32px; }
+.content h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: var(--dark); margin: 44px 0 18px; }
+.content h3 { font-size: 18px; font-weight: 700; color: var(--dark); margin: 30px 0 12px; }
+
+.stat-strip { display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-around; background: var(--light); border: 1px solid var(--border); border-radius: 14px; padding: 26px 20px; margin: 32px 0 40px; }
+.stat-strip .stat { text-align: center; flex: 1 1 160px; }
+.stat-strip .num { font-size: 26px; font-weight: 900; color: var(--orange-d); line-height: 1; font-family: 'IBM Plex Mono', monospace; }
+.stat-strip .label { font-size: 12px; color: var(--mid); margin-top: 8px; }
+
+.pullquote { border-left: 4px solid #C21F2F; background: #F3F0E7; border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 32px 0; }
+.pullquote p { font-size: 19px; font-style: italic; color: #333; line-height: 1.6; margin: 0; }
+
+.balance-window { background: var(--dark); border-radius: 14px; overflow: hidden; margin: 28px 0 40px; }
+.balance-window .bw-header { background: #111; padding: 12px 18px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #888; display: flex; gap: 8px; align-items: center; }
+.balance-window .bw-dot { width: 9px; height: 9px; border-radius: 50%; background: #444; display: inline-block; }
+.balance-window table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Mono', monospace; font-size: 13px; }
+.balance-window th { text-align: left; padding: 10px 16px; color: #888; font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.06em; border-bottom: 1px solid #2a2a2a; }
+.balance-window td { padding: 12px 16px; color: #ddd; border-bottom: 1px solid #232323; }
+.balance-window .as-name { color: #fff; font-weight: 600; }
+.balance-window .badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.balance-window .badge.warning { background: rgba(194,31,47,0.18); color: #ff7a7a; }
+.balance-window .badge.clear { background: rgba(90,180,120,0.15); color: #7fd99a; }
+
+.pipeline { display: flex; flex-direction: column; gap: 0; margin: 28px 0 40px; }
+.pipeline .step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.pipeline .step:last-child { border-bottom: none; }
+.pipeline .step-num { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--orange); color: white; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; }
+.pipeline .step-text strong { display: block; font-size: 15px; color: var(--dark); margin-bottom: 3px; }
+.pipeline .step-text span { font-size: 14px; color: var(--mid); }
+
+.tutorial-step { margin: 0 0 26px; }
+.tutorial-step h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin: 0 0 10px; font-family: 'IBM Plex Mono', monospace; }
+.code-block { background: #1A1714; color: #e8e4da; border-radius: 10px; padding: 18px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.65; overflow-x: auto; white-space: pre; }
+.code-block .cmt { color: #888; }
+.code-block .out-ok { color: #7fd99a; }
+.code-block .out-warn { color: #ff9d8a; }
+
+.tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 28px 0 40px; }
+.tech-card { border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.tech-card h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin: 0 0 6px; }
+.tech-card p { font-size: 13px; color: var(--mid); margin: 0; line-height: 1.55; }
+
+.github-section { background: var(--light); border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin: 40px 0; }
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 16px; }
+.github-section ul { margin: 0 0 20px; padding-left: 20px; }
+.github-section li { font-size: 14px; color: var(--mid); margin-bottom: 6px; }
+.repo-name { font-family: 'IBM Plex Mono', monospace; background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; font-size: 13px; }
+.btn-primary { background: var(--orange); color: white; padding: 14px 28px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; border: none; text-decoration: none; display: inline-block; cursor: pointer; }
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary { background: transparent; color: var(--dark); border: 2px solid var(--border); padding: 12px 26px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-block; margin-left: 10px; }
+.btn-secondary:hover { border-color: var(--dark); }
+
+.cta-box { background: #1A1714; border-radius: 14px; padding: 40px 36px; text-align: center; margin-top: 40px; }
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 10px; line-height: 1.4; }
+.cta-box p { font-size: 15px; color: #bbb; margin: 0 0 22px; }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+footer { background: var(--dark); padding: 28px 48px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid #222; }
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+@media (max-width: 700px) {
+.tech-grid { grid-template-columns: 1fr; }
+.hero { padding: 40px 20px; }
+.content { padding: 36px 16px 60px; }
+.balance-window { overflow-x: auto; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-10">← Back to Post #10</a>
+<a href="https://borisdracka.com/blog/post-10-demo" class="lang-active">EN</a>/<a href="https://borisdracka.com/sk/blog/post-10-demo">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<span class="hero-tag">Post #10 Companion — The CFO & AI Series</span>
+<h1>The Agent That <span>Notices Idle Cash</span><br>Before Anyone Adds It Up</h1>
+<p class="hero-subtitle">A small script that compares each account's balance to its buffer and estimates what the excess could have earned instead — before the number quietly disappears into next month's close.</p>
+<div class="hero-meta">Boris Dračka · August 2026 · Companion demo</div>
+</div>
+</section>
+
+<div class="content">
+
+<p class="disclaimer">This is a personal, non-commercial side project I put together to learn — not a product or service, and not connected to any company I work with.</p>
+
+<p>Post #10 asked a simple question: if a balance sits above the agreed operating buffer for weeks, who actually notices — and what does that silence cost? Below is a small prototype that answers the second half of that question with sample data.</p>
+
+<div class="stat-strip">
+<div class="stat"><div class="num">6</div><div class="label">Sample accounts checked</div></div>
+<div class="stat"><div class="num">2 of 6</div><div class="label">Flagged as sitting well above buffer</div></div>
+<div class="stat"><div class="num">~€8,100/yr</div><div class="label">Illustrative forgone interest across the flagged accounts</div></div>
+</div>
+
+<div class="pullquote">
+<p>The script doesn't decide anything. It just puts the one number — what the excess could have earned — next to the balance that was already sitting there in plain sight.</p>
+</div>
+
+<h2>The sample data</h2>
+<p>Six accounts, each with a balance, an agreed buffer, and the rate a routine cash sweep could reasonably earn. Two of them are carrying meaningfully more than their buffer calls for.</p>
+
+<div class="balance-window">
+<div class="bw-header"><span class="bw-dot"></span><span class="bw-dot"></span><span class="bw-dot"></span>&nbsp;&nbsp;account_balances.csv — sample data</div>
+<table>
+<tr><th>ID</th><th>Account</th><th>Balance</th><th>Buffer</th><th>Excess</th><th>Alt. rate</th><th>Status</th></tr>
+<tr><td class="as-name">AC-01</td><td>Operating Account</td><td>€340,000</td><td>€150,000</td><td>€190,000</td><td>3.00%</td><td><span class="badge warning">Flagged</span></td></tr>
+<tr><td class="as-name">AC-02</td><td>Payroll Account</td><td>€85,000</td><td>€80,000</td><td>€5,000</td><td>3.00%</td><td><span class="badge clear">Clear</span></td></tr>
+<tr><td class="as-name">AC-03</td><td>VAT Reserve</td><td>€60,000</td><td>€60,000</td><td>€0</td><td>3.00%</td><td><span class="badge clear">Clear</span></td></tr>
+<tr><td class="as-name">AC-04</td><td>Project Account</td><td>€120,000</td><td>€40,000</td><td>€80,000</td><td>3.00%</td><td><span class="badge warning">Flagged</span></td></tr>
+<tr><td class="as-name">AC-05</td><td>Marketing Account</td><td>€45,000</td><td>€40,000</td><td>€5,000</td><td>3.00%</td><td><span class="badge clear">Clear</span></td></tr>
+<tr><td class="as-name">AC-06</td><td>Contingency Reserve</td><td>€200,000</td><td>€200,000</td><td>€0</td><td>3.00%</td><td><span class="badge clear">Clear</span></td></tr>
+</table>
+</div>
+
+<h2>How it works</h2>
+<div class="pipeline">
+<div class="step"><div class="step-num">1</div><div class="step-text"><strong>Load the balances</strong><span>Reads a CSV with one row per account: balance, buffer, and an illustrative alternative rate.</span></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text"><strong>Compare to buffer</strong><span>For each account, subtracts the buffer from the balance to get the excess sitting idle.</span></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text"><strong>Apply a threshold</strong><span>Anything above a configurable excess amount (default €50,000) gets flagged for review.</span></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text"><strong>Estimate forgone interest</strong><span>Multiplies the flagged excess by the alternative rate to estimate what a sweep could have earned.</span></div></div>
+<div class="step"><div class="step-num">5</div><div class="step-text"><strong>Print a summary</strong><span>Lists the flagged accounts and the estimated annual and monthly opportunity cost.</span></div></div>
+</div>
+
+<h2>Try it yourself</h2>
+
+<div class="tutorial-step">
+<h4>1 — Clone the repository</h4>
+<div class="code-block"><span class="cmt"># same personal, non-commercial repo as the earlier demos in this series</span>
+git clone https://github.com/LuliBobo/cfo-agents.git
+cd cfo-agents/idle-cash-agent</div>
+</div>
+
+<div class="tutorial-step">
+<h4>2 — Add your own balances (optional)</h4>
+<div class="code-block">account_id,account_name,balance,buffer,alt_rate_pct
+AC-01,Operating Account,340000,150000,3.0
+AC-04,Project Account,120000,40000,3.0
+<span class="cmt"># ...add as many rows as you have accounts</span></div>
+</div>
+
+<div class="tutorial-step">
+<h4>3 — Run it</h4>
+<div class="code-block">python idle_cash_agent.py data/account_balances.csv --threshold 50000 --rate 3.0</div>
+</div>
+
+<div class="tutorial-step">
+<h4>4 — Read the output</h4>
+<div class="code-block">================================================================
+  Idle Cash Agent — Balance vs Buffer Check
+================================================================
+
+[Step 1] Loaded 6 account balance(s) from CSV
+[Step 2] Comparing each balance to its configured buffer
+[Step 3] Flagging anything with more than €50,000 sitting idle above buffer
+
+AC-01  Operating Account     340,000  150,000  190,000  3.00%  <span class="out-warn">⚠ FLAG</span>
+AC-04  Project Account       120,000   40,000   80,000  3.00%  <span class="out-warn">⚠ FLAG</span>
+
+[Step 4] <span class="out-warn">2 of 6</span> account(s) flagged
+[Step 5] <span class="out-ok">Estimated forgone interest: ~€8,100/year (~€675/month)</span></div>
+</div>
+
+<h2>What it's built from</h2>
+<div class="tech-grid">
+<div class="tech-card"><h4>Data source</h4><p>A plain CSV of account balances — no live banking connection, no API keys, nothing beyond sample data.</p></div>
+<div class="tech-card"><h4>Calculation</h4><p>Standard Python, no external dependencies — subtraction and a rate applied to the excess.</p></div>
+<div class="tech-card"><h4>Configurable threshold</h4><p>The flagging amount and the alternative rate are both command-line arguments, not hardcoded.</p></div>
+<div class="tech-card"><h4>Read-only by design</h4><p>The script only reads and reports. It doesn't move money, connect to a bank, or take any action on its own.</p></div>
+</div>
+
+<div class="github-section">
+<h3>What's in the repository</h3>
+<p>The same personal, non-commercial repository as the earlier demos in this series:</p>
+<ul>
+<li><span class="repo-name">idle_cash_agent.py</span> — the full script used above</li>
+<li><span class="repo-name">data/account_balances.csv</span> — the sample data shown in this walkthrough</li>
+<li>The <strong>CFO Report Agent</strong> from Post #2, the <strong>Invoice Agent</strong> from Post #3, and the <strong>FX Monitoring Agent</strong> from Post #9</li>
+</ul>
+<a class="btn-primary" href="https://github.com/LuliBobo/cfo-agents">View on GitHub</a>
+<a class="btn-secondary" href="https://borisdracka.com/blog/post-10">Back to Post #10</a>
+</div>
+
+<div class="cta-box">
+<h3>Follow the series</h3>
+<p>Post #11 stays with cash — this time on the other side of the ledger: which invoices actually get paid first, and why the answer usually has nothing to do with the due date printed on them.</p>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Subscribe free</a>
+<div class="cta-note">No spam. One post per week. Unsubscribe any time.</div>
+</div>
+
+</div>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Privacy</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/">Home</a>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://borisdracka.com/sk/blog/post-10-demo">Slovenská verzia</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+</div>
+</footer>
+
+</body>
+</html>
