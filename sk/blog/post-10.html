@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Hotovosť, ktorá len tak leží na účte | CFO Unfiltered</title>
+<meta name="description" content="Príspevok #10 z 50 v sérii The CFO & AI Series: peniaze, ktoré už sú na účte, vás môžu stáť rovnako ako peniaze, ktoré meškajú — len to robia potichu, jeden bázický bod za druhým.">
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-10">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-10">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-10">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-10">
+
+<meta property="og:title" content="Hotovosť, ktorá len tak leží na účte">
+<meta property="og:description" content="Peniaze, ktoré už sú na účte, vás môžu stáť rovnako ako peniaze, ktoré meškajú — len to robia potichu, jeden bázický bod za druhým.">
+<meta property="og:image" content="https://borisdracka.com/og/post-10.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-10">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-08-25T14:00:00+02:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Cash Management">
+<meta property="article:tag" content="Treasury">
+<meta property="article:tag" content="Real-Time Finance">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-10.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/sk/blog/post-10#article",
+"headline": "Hotovosť, ktorá len tak leží na účte",
+"description": "Peniaze, ktoré už sú na účte, vás môžu stáť rovnako ako peniaze, ktoré meškajú — len to robia potichu, jeden bázický bod za druhým.",
+"image": "https://borisdracka.com/og/post-10.png",
+"url": "https://borisdracka.com/sk/blog/post-10",
+"datePublished": "2026-08-25T14:00:00+02:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "sk",
+"articleSection": "Finance",
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/sk/blog/post-10" }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+<a href="https://borisdracka.com/blog/post-10">EN</a>/<a href="https://borisdracka.com/sk/blog/post-10" class="lang-active">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Riadenie hotovosti · Treasury · Financie v reálnom čase</div>
+<h1>Hotovosť, ktorá len tak leží na účte</h1>
+<p class="hero-subtitle">Kurzová strata v minulom príspevku vznikla bez toho, aby sa niekto peňazí čo i len dotkol. Tento je o peniazoch, ktorých sa nedotkne vôbec nikto — a o tom, čo to naozaj stojí, keď si to niekto konečne spočíta.</p>
+<div class="hero-meta">Boris Dračka · august 2026 · 6 min čítania</div>
+<span class="series-label">Príspevok #10 z 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">Príklady a architektúry v tejto sérii vznikajú ako moje osobné vzdelávacie a nekomerčné experimenty; nejde o ponuku IT alebo poradenských služieb.</p>
+
+<p class="lead">Príspevok #9 sa venoval strate, ktorá sa skrýva vo výmennom kurze. Tento sa skrýva na oveľa viditeľnejšom mieste: v zostatku na účte, ktorý vidno v každom reporte, každý mesiac — a ktorý napriek tomu nikto nepohne.</p>
+
+<p>Zostatok, úroková sadzba aj čísla nižšie sú kompozitnou ilustráciou postavenou na vzorcoch, ktoré som opakovane videl naprieč rôznymi projektmi; nepopisujú konkrétnu spoločnosť ani konkrétny účet.</p>
+
+<h2>Jeden zostatok, jeden rok, jedno číslo, ktoré nikto nepočíta</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">340 000 €</div><div class="label">Priemerný zostatok na prevádzkovom účte v tomto kompozitnom scenári</div></div>
+<div class="stat"><div class="num">0,05 %</div><div class="label">Ročná sadzba, ktorú prevádzkový účet skutočne pripisuje</div></div>
+<div class="stat"><div class="num">8 000 – 12 000 €</div><div class="label">Ilustratívny rozsah toho, čo mohol namiesto toho zarobiť bežný cash sweep — nie garantované číslo</div></div>
+</div>
+
+<h2>Čo ukazuje súvaha, a čo neukazuje</h2>
+
+<p>Samotný zostatok nie je nikde skrytý. Je na bankovom výpise, v mesačnej uzávierke, v treasury reporte — ktokoľvek, kto chce, presne vidí, koľko leží na prevádzkovom účte v ktorýkoľvek deň. Chýba niečo iné — číslo vedľa neho, ktoré by povedalo, čo tento zostatok potichu nezarába, mesiac čo mesiac, kým tam len tak leží.</p>
+
+<table class="gap-table">
+<tr><th>Ako to vyzerá</th><th>Ako to naozaj je</th></tr>
+<tr>
+<td>Nikto tento účet nesleduje</td>
+<td>Sleduje ho každý, kto číta mesačnú uzávierku — len nie z tohto pohľadu</td>
+</tr>
+<tr>
+<td>Niečo to zarába, takže je to v poriadku</td>
+<td>0,05 % zo 340 000 € vychádza na približne 14 € mesačne — neviditeľné, kým ich dvanásť nespočítate dokopy</td>
+</tr>
+<tr>
+<td>Pohnúť s tým je riskantné</td>
+<td>Suma nad potvrdeným prevádzkovým bufferom nie je z definície v riziku — je to práve tá časť, ktorá je už dohodnutá ako prebytočná</td>
+</tr>
+<tr>
+<td>Pre pár bázických bodov to nestojí za operatívnu záťaž</td>
+<td>Záťaž je reálna. Rovnako reálny je aj úrok, ktorý sa do konca roka nazbiera na hodnotu približne mesačného cash flow</td>
+</tr>
+</table>
+
+<h2>Prečo s tým nikto nepohne</h2>
+
+<p>Nič z toho sa nedeje preto, že by niekto nerozumel úrokovým sadzbám. Deje sa to preto, že presúvanie voľnej hotovosti zvyčajne nie je ničou jedinou zodpovednosťou. Treasury nemusí mať mandát denne presúvať zostatky. Účtovníctvo uzatvára to, čo sa stalo — nie to, čo sa mohlo stať namiesto toho. A samotný buffer bol nastavený raz, pred mesiacmi či rokmi, pre podmienky, ktoré už možno neplatia — nikto ho neprehodnocuje, pretože prehodnocovanie nie je v ničom kalendári.</p>
+
+<div class="pullquote">
+<p>Voľná hotovosť vás nestojí ako chyba. Stojí vás ako predplatné, na ktoré si nikto nespomína, že sa prihlásil — malé, opakujúce sa, a ľahké platiť ďalej tým, že neurobíte nič.</p>
+</div>
+
+<h2>Ako často by sa to malo naozaj kontrolovať?</h2>
+
+<table class="gap-table">
+<tr><th>Frekvencia kontroly</th><th>Čo zachytíte</th><th>Čo vám unikne</th><th>Hodnotenie</th></tr>
+<tr>
+<td>Raz ročne (rozpočtová revízia)</td>
+<td>Že predpoklad o bufferi je zastaraný</td>
+<td>Celý rok ušlého úroku, kým si to niekto všimne</td>
+<td>Vysoké riziko</td>
+</tr>
+<tr>
+<td>Štvrťročne</td>
+<td>Či zostatok výrazne prekročil buffer</td>
+<td>Týždne odchýlky v rámci štvrťroka</td>
+<td>Prijateľné</td>
+</tr>
+<tr>
+<td>Mesačne</td>
+<td>Prebytok tohto mesiaca voči dohodnutému bufferu</td>
+<td>Ktoré konkråtne dni v mesiaci sa dal presunúť</td>
+<td>Dobré</td>
+</tr>
+<tr>
+<td>Denne, s automatickým sweepom</td>
+<td>Každý deň, keď zostatok prekročí buffer, presunutý skôr, než na tom začne záležať</td>
+<td>Takmer nič — prebytok sa presunie skôr, než stihne vzniknúť ušlý výnos</td>
+<td>Optimálne</td>
+</tr>
+</table>
+
+<h2>Čo by denné sledovanie voľnej hotovosti muselo reálne robiť</h2>
+
+<p>Potrebuje rovnaký typ mechanizmu ako kurzová kontrola z minulého príspevku: číslo na porovnanie s prahovou hodnotou, sadzbu na aplikovanie na rozdiel a pravidlo, čo stojí za upozornenie. Tu je tým číslom zostatok na účte, prahovou hodnotou dohodnutý prevádzkový buffer a sadzbou to, čo by hotovosť reálne mohla zarobiť, keby bola presunutá namiesto toho, aby len ležala.</p>
+
+<p>Pripravil som si na to malý skript, ktorý presne toto robí nad vzorovými dátami: načíta zostatky na účtoch, porovná každý s jeho nastaveným bufferom a odhadne, čo by prebytok zarobil pri ilustratívnej sadzbe — nič naviazané na reálny účet, žiadny živý prístup k banke, len samotný výpočet. Je v tom istom osobnom, nekomerčnom repozitári ako predchádzajúce demá z tejto série.</p>
+
+<div class="github-section">
+<h3>Existuje na to malý prototyp</h3>
+<p><code>idle_cash_agent.py</code> načíta CSV so zostatkami na účtoch a odhadne ušlý úrok na všetkom, čo prevyšuje nastavený buffer — rovnaká logika ako vyššie, spustená nad vzorovými dátami.</p>
+<a class="btn-primary" href="https://borisdracka.com/sk/blog/post-10-demo">Pozrieť si postup</a>
+<a class="btn-secondary" href="https://github.com/LuliBobo/cfo-agents">Zobraziť na GitHub</a>
+</div>
+
+<div class="followup">
+<h4>Sledujte sériu</h4>
+<p>Príspevok #11 zostáva pri hotovosti — tentoraz na druhej strane súvahy: ktoré faktúry sa v skutočnosti platia ako prvé, a prečo odpovedŮ zväčša nemá nič spoločné s dátumom splatnosti, ktoré je na nich vytlačený.</p>
+</div>
+
+<div class="cta-box">
+<h3>Ako dlho by 340 000 € ležalo na účte a zarábalo takmer nič, kým by si niekto spočítal, čo ho to stojí?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Odoberať zadarmo</a>
+<div class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhlásenie kedykoľvek.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Ochrana súkromia</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/">Domov</a>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-10">English version</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+</div>
+</footer>
+
+</body>
+</html>
