@@ -1,0 +1,7 @@
+# Interné pracovné súbory — nikdy nepatria do verejného repa
+Compliance/
+X_Engagement/
+
+# macOS
+.DS_Store
+**/.DS_Store
