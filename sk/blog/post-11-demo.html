@@ -81,6 +81,17 @@ a { color: var(--orange); }
 .balance-window .badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
 .balance-window .badge.warning { background: rgba(194,31,47,0.18); color: #ff7a7a; }
 .balance-window .badge.clear { background: rgba(90,180,120,0.15); color: #7fd99a; }
+.balance-window tbody tr { will-change: transform; }
+.balance-window .bw-pause { margin-left: auto; background: none; border: 1px solid #333; color: #999; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 9px; border-radius: 5px; cursor: pointer; }
+.balance-window .bw-pause:hover { color: #fff; border-color: #555; }
+.balance-window .bw-pause:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.balance-window .bw-status { display: flex; align-items: center; gap: 9px; padding: 11px 16px 13px; border-top: 1px solid #2a2a2a; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #aaa; }
+.balance-window .bw-status .bw-status-dot { width: 7px; height: 7px; border-radius: 50%; background: #666; flex: 0 0 auto; transition: background 300ms ease; }
+.balance-window .bw-status.is-suggested { color: #e8c9c9; }
+.balance-window .bw-status.is-suggested .bw-status-dot { background: var(--orange); }
+@media (prefers-reduced-motion: reduce) {
+.balance-window tbody tr { transition: none !important; }
+}
 
 .pipeline { display: flex; flex-direction: column; gap: 0; margin: 28px 0 40px; }
 .pipeline .step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
@@ -175,18 +186,23 @@ footer { padding: 24px 20px; flex-direction: column; }
 <p>Osem otvorených faktúr, každá s dátumom splatnosti, sumou, prípadnou zľavou a príznakom, či je dodávateľ označený ako kritický. Dve z nich sa posunú pred staršiu faktúru, keď sa tieto signály započítajú.</p>
 
 <div class="balance-window">
-<div class="bw-header"><span class="bw-dot"></span><span class="bw-dot"></span><span class="bw-dot"></span>&nbsp;&nbsp;open_invoices.csv — vzorové dáta</div>
+<div class="bw-header"><span class="bw-dot"></span><span class="bw-dot"></span><span class="bw-dot"></span>&nbsp;&nbsp;open_invoices.csv — vzorové dáta<button class="bw-pause" id="bwPause" type="button" aria-pressed="false">Pauza</button></div>
 <table>
+<thead>
 <tr><th>ID</th><th>Dodávateľ</th><th>Suma</th><th>Splatnosť o</th><th>Zľava</th><th>Kritický</th><th>Poradie</th><th>Stav</th></tr>
-<tr><td class="as-name">INV-05</td><td>Zmluvný výrobca</td><td>41 000 €</td><td>6 dní</td><td>—</td><td>Áno</td><td>1</td><td><span class="badge warning">Preradené ↑</span></td></tr>
-<tr><td class="as-name">INV-02</td><td>Základná SaaS platforma</td><td>3 200 €</td><td>9 dní</td><td>—</td><td>Áno</td><td>2</td><td><span class="badge warning">Preradené ↑</span></td></tr>
-<tr><td class="as-name">INV-03</td><td>Prepravca</td><td>8 750 €</td><td>1 deň</td><td>2 %/10</td><td>Nie</td><td>3</td><td><span class="badge clear">V poradí</span></td></tr>
-<tr><td class="as-name">INV-07</td><td>Dodávateľ energií</td><td>1 850 €</td><td>2 dni</td><td>—</td><td>Nie</td><td>4</td><td><span class="badge clear">V poradí</span></td></tr>
-<tr><td class="as-name">INV-01</td><td>Dodávateľ obalov</td><td>12 400 €</td><td>3 dni</td><td>—</td><td>Nie</td><td>5</td><td><span class="badge clear">V poradí</span></td></tr>
-<tr><td class="as-name">INV-06</td><td>Marketingová agentúra</td><td>5 100 €</td><td>4 dni</td><td>—</td><td>Nie</td><td>6</td><td><span class="badge clear">V poradí</span></td></tr>
-<tr><td class="as-name">INV-08</td><td>Právne služby</td><td>9 300 €</td><td>11 dní</td><td>—</td><td>Nie</td><td>7</td><td><span class="badge clear">V poradí</span></td></tr>
-<tr><td class="as-name">INV-04</td><td>Kancelárske potreby</td><td>640 €</td><td>14 dní</td><td>—</td><td>Nie</td><td>8</td><td><span class="badge clear">V poradí</span></td></tr>
+</thead>
+<tbody id="invoiceRows">
+<tr id="row-INV-03"><td class="as-name">INV-03</td><td>Prepravca</td><td>8 750 €</td><td>1 deň</td><td>2 %/10</td><td>Nie</td><td class="rank">1</td><td><span class="badge"></span></td></tr>
+<tr id="row-INV-07"><td class="as-name">INV-07</td><td>Dodávateľ energií</td><td>1 850 €</td><td>2 dni</td><td>—</td><td>Nie</td><td class="rank">2</td><td><span class="badge"></span></td></tr>
+<tr id="row-INV-01"><td class="as-name">INV-01</td><td>Dodávateľ obalov</td><td>12 400 €</td><td>3 dni</td><td>—</td><td>Nie</td><td class="rank">3</td><td><span class="badge"></span></td></tr>
+<tr id="row-INV-06"><td class="as-name">INV-06</td><td>Marketingová agentúra</td><td>5 100 €</td><td>4 dni</td><td>—</td><td>Nie</td><td class="rank">4</td><td><span class="badge"></span></td></tr>
+<tr id="row-INV-05"><td class="as-name">INV-05</td><td>Zmluvný výrobca</td><td>41 000 €</td><td>6 dní</td><td>—</td><td>Áno</td><td class="rank">5</td><td><span class="badge"></span></td></tr>
+<tr id="row-INV-02"><td class="as-name">INV-02</td><td>Základná SaaS platforma</td><td>3 200 €</td><td>9 dní</td><td>—</td><td>Áno</td><td class="rank">6</td><td><span class="badge"></span></td></tr>
+<tr id="row-INV-08"><td class="as-name">INV-08</td><td>Právne služby</td><td>9 300 €</td><td>11 dní</td><td>—</td><td>Nie</td><td class="rank">7</td><td><span class="badge"></span></td></tr>
+<tr id="row-INV-04"><td class="as-name">INV-04</td><td>Kancelárske potreby</td><td>640 €</td><td>14 dní</td><td>—</td><td>Nie</td><td class="rank">8</td><td><span class="badge"></span></td></tr>
+</tbody>
 </table>
+<div class="bw-status" id="bwStatus"><span class="bw-status-dot"></span><span id="bwStatusText">Zoradené podľa vytlačeného dátumu splatnosti</span></div>
 </div>
 
 <h2>Ako to funguje</h2>
@@ -278,6 +294,121 @@ INV-02  Core SaaS Platform       3,200  due in 9d   CRITICAL  <span class="out-w
 <a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
 </div>
 </footer>
+
+  <script>
+  (function(){
+    var invoices = [
+      { id:'INV-05', dueDays:6  },
+      { id:'INV-02', dueDays:9  },
+      { id:'INV-03', dueDays:1  },
+      { id:'INV-07', dueDays:2  },
+      { id:'INV-01', dueDays:3  },
+      { id:'INV-06', dueDays:4  },
+      { id:'INV-08', dueDays:11 },
+      { id:'INV-04', dueDays:14 }
+    ];
+    var dueOrder = invoices.slice().sort(function(a,b){ return a.dueDays - b.dueDays; }).map(function(i){ return i.id; });
+    var suggestedOrder = ['INV-05','INV-02','INV-03','INV-07','INV-01','INV-06','INV-08','INV-04'];
+    var movedIds = ['INV-05','INV-02'];
+
+    var container = document.getElementById('invoiceRows');
+    if (!container) return;
+    var statusBar = document.getElementById('bwStatus');
+    var statusText = document.getElementById('bwStatusText');
+    var pauseBtn = document.getElementById('bwPause');
+
+    function rowEl(id){ return document.getElementById('row-' + id); }
+
+    function updateCells(order, suggested){
+      order.forEach(function(id, idx){
+        var row = rowEl(id);
+        if (!row) return;
+        var rankCell = row.querySelector('.rank');
+        var badge = row.querySelector('.badge');
+        if (rankCell) rankCell.textContent = String(idx + 1);
+        if (badge){
+          if (!suggested){
+            badge.textContent = '';
+            badge.className = 'badge';
+          } else if (movedIds.indexOf(id) !== -1){
+            badge.textContent = 'Preradené ↑';
+            badge.className = 'badge warning';
+          } else {
+            badge.textContent = 'V poradí';
+            badge.className = 'badge clear';
+          }
+        }
+      });
+    }
+
+    function applyOrder(order, animate){
+      var rows = order.map(rowEl).filter(Boolean);
+      if (!animate){
+        rows.forEach(function(el){ container.appendChild(el); });
+        return;
+      }
+      var firstRects = new Map();
+      rows.forEach(function(el){ firstRects.set(el, el.getBoundingClientRect()); });
+      rows.forEach(function(el){ container.appendChild(el); });
+      rows.forEach(function(el){
+        var first = firstRects.get(el);
+        var last = el.getBoundingClientRect();
+        var dy = first.top - last.top;
+        if (dy){
+          el.style.transition = 'none';
+          el.style.transform = 'translateY(' + dy + 'px)';
+          el.getBoundingClientRect();
+          requestAnimationFrame(function(){
+            el.style.transition = 'transform 780ms cubic-bezier(.4,0,.2,1)';
+            el.style.transform = '';
+          });
+        }
+      });
+    }
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setState(state, animate){
+      var suggested = state === 'suggested';
+      updateCells(suggested ? suggestedOrder : dueOrder, suggested);
+      applyOrder(suggested ? suggestedOrder : dueOrder, animate);
+      if (statusBar){
+        statusBar.classList.toggle('is-suggested', suggested);
+        statusText.textContent = suggested
+          ? '2 z 8 faktúr preradených pred staršiu'
+          : 'Zoradené podľa vytlačeného dátumu splatnosti';
+      }
+    }
+
+    updateCells(dueOrder, false);
+
+    if (reduceMotion){
+      setState('suggested', false);
+      if (pauseBtn) pauseBtn.style.display = 'none';
+    } else {
+      var state = 'due';
+      var running = true;
+      var timer = null;
+      function scheduleNext(){
+        var hold = state === 'due' ? 2200 : 2800;
+        timer = setTimeout(function(){
+          state = state === 'due' ? 'suggested' : 'due';
+          setState(state, true);
+          if (running) scheduleNext();
+        }, hold);
+      }
+      scheduleNext();
+      if (pauseBtn){
+        pauseBtn.addEventListener('click', function(){
+          running = !running;
+          pauseBtn.textContent = running ? 'Pauza' : 'Prehrať';
+          pauseBtn.setAttribute('aria-pressed', String(!running));
+          if (running){ scheduleNext(); } else if (timer){ clearTimeout(timer); }
+        });
+      }
+    }
+  })();
+  </script>
 
   <!-- Cloudflare Web Analytics -->
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
