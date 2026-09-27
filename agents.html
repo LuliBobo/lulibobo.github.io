@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Agent Library — CFO Unfiltered | Boris Dracka</title>
+<meta name="description" content="Five small, read-only agents from The CFO & AI Series — reporting, invoicing, FX, idle cash, and payment priority. Sample data, open source, one repository." />
+<meta property="og:title" content="Agent Library — CFO Unfiltered" />
+<meta property="og:description" content="Five small, read-only agents from The CFO & AI Series. Sample data, open source, one repository." />
+<meta property="og:image" content="https://borisdracka.com/LULI_profile_2.png" />
+<link rel="canonical" href="https://borisdracka.com/agents" />
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/agents" />
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/agents" />
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--orange-on-dark: #FF7A66;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--font-display: 'IBM Plex Serif', Georgia, serif;
+--font-body: 'IBM Plex Sans', system-ui, sans-serif;
+--font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+font-family: var(--font-body);
+background: var(--white);
+color: var(--dark);
+line-height: 1.6;
+}
+
+/* NAV */
+nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 48px;
+border-bottom: 1px solid var(--border);
+position: sticky;
+top: 0;
+background: rgba(251,249,243,0.96);
+backdrop-filter: blur(8px);
+z-index: 100;
+}
+.nav-logo {
+display: flex;
+align-items: center;
+gap: 12px;
+text-decoration: none;
+}
+.nav-name {
+font-family: var(--font-mono);
+text-transform: uppercase;
+font-weight: 800;
+font-size: 1rem;
+color: var(--dark);
+letter-spacing: -0.02em;
+}
+.nav-right {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+.nav-link {
+font-size: 0.88rem;
+font-weight: 700;
+color: var(--mid);
+text-decoration: none;
+}
+.nav-link.active { color: var(--orange); }
+.nav-x {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 0.88rem;
+font-weight: 600;
+color: var(--mid);
+text-decoration: none;
+transition: color 0.2s;
+}
+.nav-x:hover { color: var(--dark); }
+.nav-x svg { width: 16px; height: 16px; fill: currentColor; }
+.nav-subscribe {
+background: var(--orange);
+color: var(--white);
+font-size: 0.9rem;
+font-weight: 700;
+padding: 10px 20px;
+border-radius: 8px;
+text-decoration: none;
+transition: background 0.2s;
+}
+.nav-subscribe:hover { background: var(--orange-d); }
+
+/* PAGE HEADER */
+.page-header {
+padding: 64px 48px 40px;
+max-width: 1100px;
+margin: 0 auto;
+border-bottom: 1px solid var(--border);
+}
+.page-header .kicker {
+font-family: var(--font-mono);
+font-size: 0.78rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 12px;
+}
+.page-header h1 {
+font-family: var(--font-display);
+font-size: clamp(2rem, 4vw, 3rem);
+font-weight: 900;
+letter-spacing: -0.04em;
+line-height: 1.1;
+margin-bottom: 14px;
+}
+.page-header p.lede {
+font-size: 1.05rem;
+color: var(--mid);
+max-width: 560px;
+line-height: 1.7;
+}
+
+/* STRIP */
+.strip {
+max-width: 1100px;
+margin: 0 auto;
+padding: 20px 48px;
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+border-bottom: 1px solid var(--border);
+font-family: var(--font-mono);
+font-size: 0.78rem;
+color: var(--mid);
+}
+.strip span:not(:last-child)::after { content: "\00b7"; margin-left: 10px; color: var(--border); }
+
+/* AGENT LIST */
+.agent-list {
+max-width: 1100px;
+margin: 0 auto;
+padding: 48px 48px 24px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.agent-card {
+border: 2px solid var(--dark);
+border-radius: 14px;
+overflow: hidden;
+display: grid;
+grid-template-columns: 80px 1fr;
+background: var(--white);
+}
+
+.agent-num {
+background: var(--dark);
+color: var(--orange-on-dark);
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: var(--font-mono);
+font-size: 1.4rem;
+font-weight: 700;
+letter-spacing: -0.02em;
+}
+
+.agent-body {
+padding: 24px 28px;
+border-left: 2px solid var(--dark);
+}
+
+.agent-source {
+display: inline-block;
+font-family: var(--font-mono);
+font-size: 0.7rem;
+font-weight: 700;
+background: var(--orange);
+color: var(--white);
+padding: 3px 10px;
+border-radius: 4px;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+margin-bottom: 10px;
+}
+
+.agent-title {
+font-family: var(--font-display);
+font-size: 1.2rem;
+font-weight: 700;
+letter-spacing: -0.02em;
+margin-bottom: 8px;
+color: var(--dark);
+}
+
+.agent-desc {
+font-size: 0.94rem;
+color: var(--mid);
+line-height: 1.65;
+max-width: 640px;
+margin-bottom: 16px;
+}
+
+.agent-links {
+display: flex;
+flex-wrap: wrap;
+gap: 18px;
+font-family: var(--font-mono);
+font-size: 0.82rem;
+font-weight: 700;
+}
+.agent-links a {
+color: var(--orange);
+text-decoration: none;
+}
+.agent-links a:hover { text-decoration: underline; }
+.agent-links a.dim {
+color: var(--mid);
+}
+
+/* DISCLAIMER */
+.disclaimer-box {
+max-width: 1100px;
+margin: 8px auto 0;
+padding: 0 48px 40px;
+}
+.disclaimer-box p {
+font-size: 0.85rem;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 6px 0 6px 16px;
+max-width: 720px;
+}
+
+/* SUBSCRIBE CTA */
+.subscribe-cta {
+background: var(--dark);
+color: var(--white);
+margin: 0 48px 80px;
+border-radius: 14px;
+padding: 48px;
+text-align: center;
+max-width: calc(1100px - 96px);
+margin-left: auto;
+margin-right: auto;
+}
+.subscribe-cta .kicker {
+font-family: var(--font-mono);
+font-size: 0.78rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange-on-dark);
+margin-bottom: 12px;
+}
+.subscribe-cta h2 {
+font-family: var(--font-display);
+font-size: clamp(1.6rem, 3vw, 2.2rem);
+font-weight: 900;
+letter-spacing: -0.03em;
+margin-bottom: 12px;
+}
+.subscribe-cta p {
+color: #C9C2B6;
+font-size: 1rem;
+margin-bottom: 28px;
+max-width: 480px;
+margin-left: auto;
+margin-right: auto;
+}
+.btn-sub {
+display: inline-block;
+padding: 16px 40px;
+background: var(--orange);
+color: var(--white);
+font-size: 1rem;
+font-weight: 800;
+font-family: inherit;
+border-radius: 9px;
+text-decoration: none;
+transition: background 0.2s, transform 0.1s;
+}
+.btn-sub:hover { background: var(--orange-d); transform: translateY(-1px); }
+.sub-note {
+display: block;
+font-size: 0.76rem;
+color: #9A9384;
+margin-top: 12px;
+}
+
+/* FOOTER */
+footer {
+text-align: center;
+padding: 28px 48px;
+border-top: 1px solid var(--border);
+color: var(--mid);
+font-size: 0.8rem;
+}
+footer a { color: inherit; text-decoration: underline; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+nav { padding: 16px 24px; }
+.page-header { padding: 40px 24px 32px; }
+.strip { padding: 16px 24px; }
+.agent-list { padding: 32px 24px 12px; }
+.agent-card { grid-template-columns: 56px 1fr; }
+.agent-num { font-size: 1.1rem; }
+.agent-body { padding: 18px 18px; }
+.subscribe-cta { margin: 0 24px 60px; padding: 36px 24px; }
+.disclaimer-box { padding: 0 24px 32px; }
+footer { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+<a class="nav-logo" href="/">
+<span class="nav-name">CFO Unfiltered</span>
+</a>
+<div class="nav-right">
+<a class="nav-link" href="/blog">Blog</a>
+<a class="nav-link active" href="/agents">Agents</a>
+<a class="nav-x" href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer">
+<svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+@BorisDracka
+</a>
+<a class="nav-subscribe" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
+</div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+<p class="kicker">The CFO &amp; AI Series</p>
+<h1>Agent Library</h1>
+<p class="lede">Five small agents that came out of the series so far — one per post that shipped one. Every one of them reads data and reports; none of them moves money or sends anything on its own.</p>
+</div>
+
+<div class="strip">
+<span>5 agents</span>
+<span>1 repository</span>
+<span>Sample data only</span>
+<span>Python, no dependencies beyond requirements.txt</span>
+</div>
+
+<!-- AGENT LIST -->
+<div class="agent-list">
+
+<div class="agent-card">
+<div class="agent-num">01</div>
+<div class="agent-body">
+<span class="agent-source">From Post #2</span>
+<div class="agent-title">Weekly CFO Report</div>
+<p class="agent-desc">Pulls financial data from a CSV, calculates the KPIs that matter — margin, burn, DSO, operating leverage — and has Gemini write the narrative around them. Delivered by email every Monday morning.</p>
+<div class="agent-links">
+<a href="/blog/post-02">Read the post →</a>
+<a href="/blog/post-02-demo">See the walkthrough →</a>
+<a class="dim" href="https://github.com/LuliBobo/cfo-agents/blob/main/cfo_agent.py" target="_blank" rel="noopener">View script</a>
+</div>
+</div>
+</div>
+
+<div class="agent-card">
+<div class="agent-num">02</div>
+<div class="agent-body">
+<span class="agent-source">From Post #3</span>
+<div class="agent-title">Invoice Agent</div>
+<p class="agent-desc">Reads open invoices, ranks the overdue ones by risk — amount times days late — and drafts a personalized reminder per client. It writes the drafts. It doesn't send them.</p>
+<div class="agent-links">
+<a href="/blog/post-03">Read the post →</a>
+<a href="/blog/post-03-demo">See the walkthrough →</a>
+<a class="dim" href="https://github.com/LuliBobo/cfo-agents/blob/main/invoice_agent.py" target="_blank" rel="noopener">View script</a>
+</div>
+</div>
+</div>
+
+<div class="agent-card">
+<div class="agent-num">03</div>
+<div class="agent-body">
+<span class="agent-source">From Post #9</span>
+<div class="agent-title">FX Monitoring Agent</div>
+<p class="agent-desc">Compares each open FX position's booked rate against a current one and flags anything that has drifted past a threshold you set — instead of finding out at month-end close.</p>
+<div class="agent-links">
+<a href="/blog/post-09">Read the post →</a>
+<a href="/blog/post-09-demo">See the walkthrough →</a>
+<a class="dim" href="https://github.com/LuliBobo/cfo-agents/blob/main/fx_monitor_agent.py" target="_blank" rel="noopener">View script</a>
+</div>
+</div>
+</div>
+
+<div class="agent-card">
+<div class="agent-num">04</div>
+<div class="agent-body">
+<span class="agent-source">From Post #10</span>
+<div class="agent-title">Idle Cash Agent</div>
+<p class="agent-desc">Compares each account balance against its agreed buffer and estimates what the excess sitting above it could have earned, if it had been swept somewhere that pays interest.</p>
+<div class="agent-links">
+<a href="/blog/post-10">Read the post →</a>
+<a href="/blog/post-10-demo">See the walkthrough →</a>
+<a class="dim" href="https://github.com/LuliBobo/cfo-agents/blob/main/idle_cash_agent.py" target="_blank" rel="noopener">View script</a>
+</div>
+</div>
+</div>
+
+<div class="agent-card">
+<div class="agent-num">05</div>
+<div class="agent-body">
+<span class="agent-source">From Post #11</span>
+<div class="agent-title">Invoice Priority Agent</div>
+<p class="agent-desc">Reorders a payment queue by more than the printed due date — a critical-vendor flag can move an invoice ahead of an older one still waiting its turn.</p>
+<div class="agent-links">
+<a href="/blog/post-11">Read the post →</a>
+<a href="/blog/post-11-demo">See the walkthrough →</a>
+<a class="dim" href="https://github.com/LuliBobo/cfo-agents/blob/main/invoice_priority_agent.py" target="_blank" rel="noopener">View script</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="disclaimer-box">
+<p>All five are personal, non-commercial prototypes built on sample data — not connected to, and not built for, any company or client. Each one is an experiment in what a specific recurring check would actually need to compute, nothing more. One repository: <a href="https://github.com/LuliBobo/cfo-agents" target="_blank" rel="noopener">github.com/LuliBobo/cfo-agents</a>.</p>
+</div>
+
+<!-- SUBSCRIBE CTA -->
+<div class="subscribe-cta">
+<p class="kicker">Don't miss the next one</p>
+<h2>Get each post in your inbox</h2>
+<p>One email per week. No hype. Just a CFO writing what he sees.</p>
+<a class="btn-sub" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">
+Subscribe free →
+</a>
+<span class="sub-note">No spam. Unsubscribe anytime.</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+<p>© 2026 Boris Dracka · <a href="mailto:likeaCFO@borisdracka.com">likeaCFO@borisdracka.com</a> · <a href="/privacy">Privacy</a></p>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
