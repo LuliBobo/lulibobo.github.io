@@ -84,6 +84,13 @@ font-weight: 700;
 color: var(--orange);
 text-decoration: none;
 }
+.nav-plain {
+font-size: 0.88rem;
+font-weight: 700;
+color: var(--mid);
+text-decoration: none;
+}
+.nav-plain:hover { color: var(--dark); }
 .nav-x {
 display: flex;
 align-items: center;
@@ -401,7 +408,7 @@ footer a { color: inherit; text-decoration: underline; }
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
 nav { padding: 16px 24px; }
-.nav-blog { display: block; }
+.nav-blog, .nav-plain { display: block; }
 .page-header { padding: 40px 24px 32px; }
 .series-bar { padding: 20px 24px; }
 .post-list { padding: 32px 24px 60px; }
@@ -423,6 +430,7 @@ footer { padding: 24px; }
 </a>
 <div class="nav-right">
 <a class="nav-blog" href="/sk/blog">Blog</a>
+<a class="nav-plain" href="/sk/agents">Agenti</a>
 <a class="nav-x" href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer">
 <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
 @BorisDracka
