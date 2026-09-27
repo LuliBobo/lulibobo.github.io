@@ -15,6 +15,7 @@
 <meta property="og:image" content="https://borisdracka.com/LULI_profile_2.png" />
 <link rel="canonical" href="https://borisdracka.com/agents" />
 <link rel="alternate" hreflang="en" href="https://borisdracka.com/agents" />
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/agents" />
 <link rel="alternate" hreflang="x-default" href="https://borisdracka.com/agents" />
 
 <link rel="stylesheet" href="/fonts/plex.css">
@@ -107,6 +108,21 @@ text-decoration: none;
 transition: background 0.2s;
 }
 .nav-subscribe:hover { background: var(--orange-d); }
+.nav-lang {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 0.82rem;
+font-weight: 700;
+}
+.nav-lang a {
+color: var(--mid);
+text-decoration: none;
+transition: color 0.2s;
+}
+.nav-lang a.active { color: var(--orange); }
+.nav-lang a:hover { color: var(--dark); }
+.nav-lang .lang-sep { color: var(--border); }
 
 /* PAGE HEADER */
 .page-header {
@@ -349,6 +365,9 @@ footer { padding: 24px; }
 @BorisDracka
 </a>
 <a class="nav-subscribe" href="https://borisdracka.beehiiv.com/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
+<div class="nav-lang">
+<a href="/agents" class="active">EN</a><span class="lang-sep">/</span><a href="/sk/agents">SK</a>
+</div>
 </div>
 </nav>
 
