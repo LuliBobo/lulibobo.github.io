@@ -9,3 +9,12 @@ Posty-Tyzden-1-BorisDracka.md
 # macOS
 .DS_Store
 **/.DS_Store
+
+# Vývojové/deployment poznámky — obsahujú lokálne cesty, nepatria do verejného repa
+.superpowers/
+docs/superpowers/
+DEPLOYMENT_CHECKLIST.md
+DEPLOYMENT_SUMMARY.md
+QUICK_START.md
+DOCUMENTATION/
+deploy.sh
