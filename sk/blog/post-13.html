@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Čo sa zmení, keď vidíte obe strany hotovosti naraz | CFO Unfiltered</title>
+<meta name="description" content="Príspevok #13 z 50 v sérii The CFO & AI Series: čo sa naozaj zmení na tom, ako finančný tím trávi týždeň, keď sú záväzky aj pohľadávky viditeľné v rovnakom čase.">
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-13">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-13">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-13">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-13">
+
+<meta property="og:title" content="Čo sa zmení, keď vidíte obe strany hotovosti naraz">
+<meta property="og:description" content="Čo sa naozaj zmení na tom, ako finančný tím trávi týždeň, keď sú záväzky aj pohľadávky viditeľné v rovnakom čase.">
+<meta property="og:image" content="https://borisdracka.com/og/post-13.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-13">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-10-10T14:00:00+02:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Záväzky">
+<meta property="article:tag" content="Cash Flow">
+<meta property="article:tag" content="Pohľadávky">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-13.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+/* Hero */
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+/* Gap table */
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+/* GitHub / demo teaser section */
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Follow the series */
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+/* Footer */
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/sk/blog/post-13#article",
+"headline": "Čo sa zmení, keď vidíte obe strany hotovosti naraz",
+"description": "Čo sa naozaj zmení na tom, ako finančný tím trávi týždeň, keď sú záväzky aj pohľadávky viditeľné v rovnakom čase.",
+"image": "https://borisdracka.com/og/post-13.png",
+"url": "https://borisdracka.com/sk/blog/post-13",
+"datePublished": "2026-10-10T14:00:00+02:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "sk",
+"articleSection": "Finance",
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/sk/blog/post-13" }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/sk/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+<a href="https://borisdracka.com/blog/post-13">EN</a>/<a href="https://borisdracka.com/sk/blog/post-13" class="lang-active">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Cash flow · Záväzky · Pohľadávky</div>
+<h1>Čo sa zmení, keď vidíte obe strany hotovosti naraz</h1>
+<p class="hero-subtitle">Príspevok #11 zoradil peniaze, ktoré odchádzajú. Príspevok #12 zoradil peniaze, ktoré majú prísť. Tento sa pýta, čo sa zmení, keď oba zoznamy čítame tak, ako naozaj fungujú: ako dve fronty čerpajúce z jedného bankového zostatku.</p>
+<div class="hero-meta">Boris Dračka · október 2026 · 6 min čítania</div>
+<span class="series-label">Príspevok #13 z 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">Príklady a architektúry v tejto sérii vznikajú ako moje osobné vzdelávacie a nekomerčné experimenty; nejde o ponuku IT alebo poradenských služieb.</p>
+
+<p class="lead">Príspevok #11 bol o poradí platieb, ktoré odchádzajú. Príspevok #12 o poradí upomienok, ktorými sa vymáha to, čo nám dlhujú. Oba brali tieto zoznamy ako samostatné fronty. Na bankovom výpise samostatné nie sú: zostatok je jeden a obe fronty z neho čerpajú.</p>
+
+<p>Týždeň opísaný nižšie je kompozitná ilustrácia postavená na vzorcoch, ktoré som opakovane videl u finančných tímov v priebehu rokov; hodiny, stretnutie aj čísla sú ilustratívne a nepopisujú konkrétnu spoločnosť, tím ani konkrétny týždeň.</p>
+
+<h2>Dva zoznamy, jeden zostatok a stretnutie, ktoré nikto neplánoval</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">2</div><div class="label">Samostatné zoznamy v bežnom týždni: čo firma dlhuje a čo dlhujú jej</div></div>
+<div class="stat"><div class="num">1</div><div class="label">Bankový zostatok, od ktorého závisia oba zoznamy</div></div>
+<div class="stat"><div class="num">~3 h</div><div class="label">Ilustratívne: čas strávený skladaním oboch zoznamov dokopy, kým niekto vôbec rozhodne</div></div>
+</div>
+
+<h2>Ako sa tie dve fronty naozaj dotýkajú</h2>
+
+<p>Príjem, ktorý sa z utorka posunie na budúci pondelok, mení, ktoré platby môžu bezpečne odísť vo štvrtok. Dodávateľská platba, ktorá nepočká, mení, ktorému zákazníkovi sa zavolá. Žiadny zo zoznamov to nepovie, lebo každý ukazuje len svoju stranu. Prepojenie je v niekoho hlave alebo na stretnutí, kde sa oba zoznamy konečne ocitnú na jednej obrazovke.</p>
+
+<table class="gap-table">
+<tr><th>Ako to vyzerá</th><th>Ako to naozaj je</th></tr>
+<tr>
+<td>Záväzky a pohľadávky sú dva samostatné procesy</td>
+<td>Sú to dve fronty čerpajúce z toho istého zostatku; zmena v jednej pohne druhou</td>
+</tr>
+<tr>
+<td>Neskorý príjem je problém vymáhania</td>
+<td>Je to aj problém platieb: mení, čo môže tento týždeň odísť</td>
+</tr>
+<tr>
+<td>Na týždennom cash meetingu sa rozhoduje</td>
+<td>Podľa mojej skúsenosti u mnohých tímov strávi väčšinu času skladaním čísel, ktoré rozhodnutie potrebuje</td>
+</tr>
+<tr>
+<td>Častejší reporting to vyrieši</td>
+<td>Častejšie reportovanie dvoch samostatných zoznamov stále nechá niekoho, kto ich musí poskladať ručne</td>
+</tr>
+</table>
+
+<div class="pullquote">
+<p>Zostatok je jeden, takže aj rozhodnutie je v skutočnosti jedno. Tie dva zoznamy sú len dve miesta, kde sa zapisuje.</p>
+</div>
+
+<h2>Týždeň vo financiách, pred a po (ilustratívne)</h2>
+
+<table class="gap-table">
+<tr><th>Deň</th><th>Čo dnes zaberá čas</th><th>Čo sa zmení s jedným pohľadom</th></tr>
+<tr>
+<td class="num-cell">Po</td>
+<td>Vytiahnuť zoznam záväzkov na splatenie a vekovú štruktúru pohľadávok z dvoch miest a vložiť oboje do jednej tabuľky</td>
+<td>Oba zoznamy prídu už zoradené voči zostatku na každý deň</td>
+</tr>
+<tr>
+<td class="num-cell">Ut</td>
+<td>Vymáhať príjmy a potom skontrolovať, či nie je ohrozená niektorá platba</td>
+<td>Vymáhanie aj platby sa posudzujú voči tomu istému projektovanému zostatku</td>
+</tr>
+<tr>
+<td class="num-cell">St</td>
+<td>Dohadovať sa, ktoré platby môžu počkať</td>
+<td>Rozhodnúť z jedného zoznamu, čo môže počkať a čo také čakanie stojí</td>
+</tr>
+<tr>
+<td class="num-cell">Št</td>
+<td>Cash meeting: potvrdiť čísla</td>
+<td>Cash meeting: rozhodnúť, čo s medzerou</td>
+</tr>
+<tr>
+<td class="num-cell">Pi</td>
+<td>Prepočítať všetko znova, lebo sa posunul jeden príjem</td>
+<td>Aktualizovať jeden pohľad; vedľajší efekt je vidno hneď</td>
+</tr>
+</table>
+
+<h2>Čo by kombinovaný pohľad musel reálne ukázať</h2>
+
+<p>Potrebuje rovnaký typ mechanizmu ako posledné dva príspevky, len namierený na zostatok namiesto jedného zoznamu. Používa signály, o ktoré sa tie príspevky už opierali, a pridáva jeden: ako pravdepodobne dorazí každý očakávaný príjem načas.</p>
+
+<table class="gap-table">
+<tr><th>Signál</th><th>Odkiaľ pochádza</th><th>Čo robí s pohľadom</th></tr>
+<tr>
+<td>Platby na splatenie, po dňoch</td>
+<td>Logika priority platieb z príspevku #11</td>
+<td>Odoberie peniaze z projektovaného zostatku v deň splatnosti</td>
+</tr>
+<tr>
+<td>Očakávané príjmy, po dňoch</td>
+<td>Poradie vymáhania z príspevku #12</td>
+<td>Pridá peniaze k zostatku, so zrážkou, keď blokácia alebo ticho naznačujú, že sa môžu posunúť</td>
+</tr>
+<tr>
+<td>Minimálna rezerva</td>
+<td>Kontrola nečinnej hotovosti z príspevku #10</td>
+<td>Vyznačí hranicu, pod ktorú by projektovaný zostatok nemal klesnúť</td>
+</tr>
+<tr>
+<td>Medzera</td>
+<td>Rozdiel medzi oboma v ktorýkoľvek deň</td>
+<td>Jediné číslo, ktoré tímu povie, či oneskorenie na jednej strane vynúti rozhodnutie na druhej</td>
+</tr>
+</table>
+
+<p>Tentoraz som za tým zámerne žiadny skript nepripravil. Zaujímavé nie je ďalšie prepočítavanie, ale uvedomenie, že dva zoznamy, ktoré som doteraz bral zvlášť, nikdy zvlášť neboli. Prvý test, ktorý by som spravil, je jednoduchý: zobrať jeden týždeň vlastných záväzkov a pohľadávok, zoradiť ich voči počiatočnému zostatku deň po dni a spočítať, koľko rozhodnutí sa zmení.</p>
+
+<div class="followup">
+<h4>Sledujte sériu</h4>
+<p>Príspevok #14 sa pozrie na to, čo sa stane, keď obe strany nesedia: keď hotovosť odchádza rýchlejšie, než prichádza, a medzeru potichu vypĺňa revolvingový úver — a čo tá medzera naozaj stojí.</p>
+</div>
+
+<div class="cta-box">
+<h3>Keď sa jeden príjem posunie o týždeň, ako dlho tímu trvá zistiť, ktorú platbu to ovplyvní — a kto si to všimne prvý?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Odoberať zadarmo</a>
+<div class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhlásenie kedykoľvek.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Ochrana súkromia</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/sk/">Domov</a>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-13">English version</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+</div>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
