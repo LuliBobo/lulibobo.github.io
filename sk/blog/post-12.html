@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Upomienka, ktorá naozaj zaberie, nie je tá prvá, ktorú odošlete | CFO Unfiltered</title>
+<meta name="description" content="Príspevok #12 z 50 v sérii The CFO & AI Series: peniaze, ktoré dlhujú vám, a prečo niektoré upomienky vyberú peniaze do pár dní, kým iné ignorujú mesiace.">
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-12">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-12">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-12">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-12">
+
+<meta property="og:title" content="Upomienka, ktorá naozaj zaberie, nie je tá prvá, ktorú odošlete">
+<meta property="og:description" content="Peniaze, ktoré dlhujú vám, a prečo niektoré upomienky vyberú peniaze do pár dní, kým iné ignorujú mesiace.">
+<meta property="og:image" content="https://borisdracka.com/og/post-12.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-12">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-10-03T14:00:00+02:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Pohľadávky">
+<meta property="article:tag" content="Cash Flow">
+<meta property="article:tag" content="Real-Time Finance">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-12.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+/* Hero */
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+/* Gap table */
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+/* GitHub / demo teaser section */
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Follow the series */
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+/* Footer */
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/sk/blog/post-12#article",
+"headline": "Upomienka, ktorá naozaj zaberie, nie je tá prvá, ktorú odošlete",
+"description": "Peniaze, ktoré dlhujú vám, a prečo niektoré upomienky vyberú peniaze do pár dní, kým iné ignorujú mesiace.",
+"image": "https://borisdracka.com/og/post-12.png",
+"url": "https://borisdracka.com/sk/blog/post-12",
+"datePublished": "2026-10-03T14:00:00+02:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "sk",
+"articleSection": "Finance",
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/sk/blog/post-12" }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/sk/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+<a href="https://borisdracka.com/blog/post-12">EN</a>/<a href="https://borisdracka.com/sk/blog/post-12" class="lang-active">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Pohľadávky · Cash flow · Financie v reálnom čase</div>
+<h1>Upomienka, ktorá naozaj zaberie, nie je tá prvá, ktorú odošlete</h1>
+<p class="hero-subtitle">Príspevok #11 bol o peniazoch, ktoré firma odosiela, a v akom poradí. Tento je o peniazoch, ktoré jej dlhujú — a prečo upomienka, ktorá naozaj zaberie, len málokedy vyzerá ako tá prvá odoslaná.</p>
+<div class="hero-meta">Boris Dračka · október 2026 · 6 min čítania</div>
+<span class="series-label">Príspevok #12 z 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">Príklady a architektúry v tejto sérii vznikajú ako moje osobné vzdelávacie a nekomerčné experimenty; nejde o ponuku IT alebo poradenských služieb.</p>
+
+<p class="lead">Príspevok #11 bol o peniazoch, ktoré firma odosiela, a v akom poradí. Tento je o peniazoch, ktoré majú prísť dovnútra — a väčšinou aj prídu, kým ticho neprestanú, z dôvodov, ktoré nikto nikde nezapísal.</p>
+
+<p>Zákazníci, sumy aj poradie vymáhania nižšie sú kompozitnou ilustráciou postavenou na vzorcoch, ktoré som opakovane videl u finančných tímov v priebehu rokov; nepopisujú konkrétnu spoločnosť, zákazníka ani konkrétny beh vymáhania.</p>
+
+<h2>Jedna kontrola pohľadávok, osemnásť faktúr po splatnosti, jedno poradie, ktoré nikto vedome nerozhodol</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">18</div><div class="label">Faktúr zákazníkov po splatnosti otvorených v tomto kompozitnom scenári</div></div>
+<div class="stat"><div class="num">5</div><div class="label">Zaplatených do pár dní, len čo upomienka naozaj ohrozila niečo, čo zákazník potreboval</div></div>
+<div class="stat"><div class="num">52 000 €</div><div class="label">Ilustratívna suma stále nesplatená po 90 dňoch, napriek už odoslaným upomienkam</div></div>
+</div>
+
+<h2>Čo ukazuje prehľad pohľadávok podľa splatnosti, a čo neukazuje</h2>
+
+<p>Počet dní po splatnosti nie je nikde skrytý. Je to prvý stĺpec na každom prehľade pohľadávok, nanovo zoradený každý týždeň pre každého, kto si chce pozrieť. Chýba iný záznam — ktoré upomienky skutočne priniesli peniaze, a ako zriedka to sedí s tým, ktoré faktúry sú jednoducho najstaršie.</p>
+
+<table class="gap-table">
+<tr><th>Ako to vyzerá</th><th>Ako to naozaj je</th></tr>
+<tr>
+<td>Upomienky vyberú peniaze v poradí, v akom boli odoslané</td>
+<td>Vyberú peniaze podľa toho, čo upomienka skutočne ohrozuje — nie podľa toho, kedy odišla</td>
+</tr>
+<tr>
+<td>Najstaršia faktúra sa vymáha najhoršie</td>
+<td>Čerstvá faktúra od pomaly platiaceho zákazníka sa môže vymáhať horšie než stará faktúra od spoľahlivého platcu</td>
+</tr>
+<tr>
+<td>Väčšie faktúry sa vymáhajú dôraznejšie</td>
+<td>Podľa mojej skúsenosti sa menšie faktúry často vyberú rýchlejšie, pretože nikto nechce kvôli peniazom riskovať väčší vzťah</td>
+</tr>
+<tr>
+<td>Počet dní po splatnosti predpovedá, koľko pozornosti faktúra dostane</td>
+<td>Počet dní po splatnosti väčšinou len určuje, ako vyzerá v prehľade — nie to, čo sa stane ďalej</td>
+</tr>
+</table>
+
+<h2>Prečo poradie nie je počet dní po splatnosti</h2>
+
+<p>Zvyčajne nič z toho nie je preto, že by niekto nerozumel platobným podmienkam. Deje sa to preto, že „rozhodnúť, ktorého zákazníka tento týždeň upomenúť" zvyčajne nie je jeden konkrétny, niekým vlastnený krok — je to výsledný efekt toho, kto si náhodou všimol pohľadávku, a toho, či sa jej vymáhanie zdalo stáť za riziko pre vzťah. Zákazník, ktorému je blokovaná nová objednávka, sa zvykne upomenúť do hodiny, pretože blokácia je páka už dnes; tichý, väčší účet s deväťdesiatimi dňami po splatnosti ostane nedotknutý ešte mesiac, pretože nikto nechce byť ten, kto to vyhrotí.</p>
+
+<div class="pullquote">
+<p>Počet dní po splatnosti je fakt o faktúre. Či peniaze naozaj prídu, je fakt o tom, kto sa pýta a čo pri tom žiada.</p>
+</div>
+
+<h2>Čo v skutočnosti rozhoduje o tom, ktorá upomienka zaberie</h2>
+
+<table class="gap-table">
+<tr><th>Signál</th><th>Čo to spraví s poradím</th></tr>
+<tr>
+<td>Aktívna blokácia kreditu, ktorá bráni novej objednávke zákazníka</td>
+<td>Preskočí frontu, bez ohľadu na to, ako stará je pohľadávka</td>
+</tr>
+<tr>
+<td>Veľkosť účtu</td>
+<td>Podľa mojej skúsenosti najväčší zákazníci často dostávajú najmiernejšie a najnekonzistentnejšie upomienky — nikto nechce byť ten, kto tlačí</td>
+</tr>
+<tr>
+<td>Kto upomienku odosiela</td>
+<td>Upomienka od obchodníka, ktorý účet vlastní, zaberie inak než automatická upomienka z pohľadávok</td>
+</tr>
+<tr>
+<td>Osobná upomienka, ktorá odkazuje na skutočný vzťah</td>
+<td>Zvykne dostať odpoveď častejšie než šablónová</td>
+</tr>
+<tr>
+<td>Vytlačený počet dní po splatnosti</td>
+<td>Väčšinou určuje len miesto faktúry v prehľade. Zriedka určuje, čo sa stane ďalej</td>
+</tr>
+</table>
+
+<p class="disclaimer">Ide o vzorce, ktoré som videl, nie o namerané benchmarky.</p>
+
+<h2>Čo by kontrola priority vymáhania musela reálne robiť</h2>
+
+<p>Potrebuje rovnaký typ mechanizmu ako kontrola priority platieb z minulého príspevku, len namierený na druhú stranu súvahy: súbor signálov na porovnanie s pravidlom a výstup, ktorý zoradí, koho upomenúť, namiesto toho, aby len vypísal, kto je po splatnosti. Tu sú signálmi počet dní po splatnosti, aktívna blokácia kreditu a to, koľko upomienok už bolo odoslaných bez odpovede — a pravidlom je, ktorý z týchto signálov, ak vôbec niektorý, má zákazníka posunúť pred staršiu pohľadávku.</p>
+
+<p>Pripravil som si na to malý skript, ktorý presne toto robí nad vzorovými dátami: načíta zoznam otvorených pohľadávok, skontroluje pri každej blokáciu kreditu a počet upomienok a vypíše navrhované poradie vymáhania — nič naviazané na reálny zoznam zákazníkov, žiadny živý prístup k CRM či banke, len samotná logika zoraďovania. Je v tom istom osobnom, nekomerčnom repozitári ako predchádzajúce demá z tejto série.</p>
+
+<div class="github-section">
+<h3>Existuje na to malý prototyp</h3>
+<p><code>collections_priority_agent.py</code> načíta CSV s otvorenými pohľadávkami a vypíše navrhované poradie vymáhania, ktoré nie je zoradené len podľa počtu dní po splatnosti — rovnaká logika ako vyššie, spustená nad vzorovými dátami.</p>
+<a class="btn-primary" href="https://borisdracka.com/sk/blog/post-12-demo">Pozrieť si postup</a>
+<a class="btn-secondary" href="https://github.com/LuliBobo/cfo-agents">Zobraziť na GitHub</a>
+</div>
+
+<div class="followup">
+<h4>Sledujte sériu</h4>
+<p>Príspevok #13 sa odpojí od jednotlivej položky v knihe a pýta sa na ťažšiu otázku: keď sú obe strany hotovosti — čo firma dlhuje, aj čo jej dlhujú — viditeľné v rovnakom čase, čo sa naozaj zmení na tom, ako finančný tím trávi svoj týždeň?</p>
+</div>
+
+<div class="cta-box">
+<h3>Koľko vašich faktúr po splatnosti sa vymáha v poradí, ktoré naozaj vyberie peniaze — a všimol by si to vôbec niekto, keby to tak nebolo?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Odoberať zadarmo</a>
+<div class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhlásenie kedykoľvek.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Ochrana súkromia</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/sk/">Domov</a>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-12">English version</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+</div>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
