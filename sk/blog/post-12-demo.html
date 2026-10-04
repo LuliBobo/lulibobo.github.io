@@ -209,7 +209,7 @@ footer { padding: 24px 20px; flex-direction: column; }
 <div class="pipeline">
 <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Načítanie pohľadávok</strong><span>Načíta CSV s jedným riadkom na faktúru: zákazník, suma, dni po splatnosti, odoslané upomienky, príznak blokácie kreditu.</span></div></div>
 <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Zoradenie podľa dní po splatnosti</strong><span>Pre každú pohľadávku vypočíta, ako dlho je už po termíne splatnosti.</span></div></div>
-<div class="step"><div class="step-num">3</div><div class="step-text"><strong>Aplikovanie prioritných signálov</strong><span>Skontroluje dva prepínače: aktívnu blokáciu kreditu a počet upomienok bez odpovede.</span></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text"><strong>Aplikovanie prioritných signálov</strong><span>Skontroluje príznak blokácie kreditu a načíta počet upomienok pri každej pohľadávke. Blokácia posúva pohľadávku dopredu vždy; upomienky len vtedy, ak nastavíte prah.</span></div></div>
 <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Preusporiadanie fronty</strong><span>Pohľadávky s prioritným signálom sa posunú dopredu; ostatné si zachovajú poradie podľa dní po splatnosti.</span></div></div>
 <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Výpis navrhovaného behu</strong><span>Vypíše pohľadávky v navrhovanom poradí vymáhania a označí, ktoré sa posunuli.</span></div></div>
 </div>
@@ -248,9 +248,15 @@ CUST-03,Growth-Stage Customer,4100,10,0,true
 
 CUST-05  Key Account Co.         27,500  20d overdue  HOLD  <span class="out-warn">⚠ REORDERED → #1</span>
 CUST-03  Growth-Stage Customer    4,100  10d overdue  HOLD  <span class="out-warn">⚠ REORDERED → #2</span>
+CUST-04  Manufacturing Client    18,200  95d overdue
+CUST-07  Regional Distributor     3,400  80d overdue
+CUST-02  Wholesale Partner        9,800  60d overdue
+CUST-08  Retail Chain             1,250  45d overdue
+CUST-01  Specialty Retailer       6,700  30d overdue
+CUST-06  New Customer               950  5d overdue
 
 [Step 4] <span class="out-warn">2 of 8</span> receivable(s) reordered ahead of an older balance
-[Step 5] <span class="out-ok">Suggested collections order printed above — overdue-days order alone would have missed both</span></div>
+[Step 5] <span class="out-ok">Suggested collections order printed above</span></div>
 </div>
 
 <h2>Z čoho je postavený</h2>

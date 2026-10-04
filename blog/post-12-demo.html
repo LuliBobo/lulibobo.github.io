@@ -209,7 +209,7 @@ footer { padding: 24px 20px; flex-direction: column; }
 <div class="pipeline">
 <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Load the receivables</strong><span>Reads a CSV with one row per open invoice: customer, amount, days overdue, reminders sent, credit-hold flag.</span></div></div>
 <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Rank by days overdue</strong><span>For each receivable, ranks it by how long it's been past the due date.</span></div></div>
-<div class="step"><div class="step-num">3</div><div class="step-text"><strong>Apply priority signals</strong><span>Checks two overrides: an active credit-hold flag, and how many reminders have already gone unanswered.</span></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text"><strong>Apply priority signals</strong><span>Checks the credit-hold flag and reads each receivable's reminder count. A hold always moves a receivable forward; reminders only do if you set a threshold.</span></div></div>
 <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Re-rank the queue</strong><span>Receivables carrying a priority signal move to the front; everything else keeps its overdue-based order.</span></div></div>
 <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Print the suggested run</strong><span>Lists the receivables in suggested collections order, flagging which ones moved.</span></div></div>
 </div>
@@ -248,9 +248,15 @@ CUST-03,Growth-Stage Customer,4100,10,0,true
 
 CUST-05  Key Account Co.         27,500  20d overdue  HOLD  <span class="out-warn">⚠ REORDERED → #1</span>
 CUST-03  Growth-Stage Customer    4,100  10d overdue  HOLD  <span class="out-warn">⚠ REORDERED → #2</span>
+CUST-04  Manufacturing Client    18,200  95d overdue
+CUST-07  Regional Distributor     3,400  80d overdue
+CUST-02  Wholesale Partner        9,800  60d overdue
+CUST-08  Retail Chain             1,250  45d overdue
+CUST-01  Specialty Retailer       6,700  30d overdue
+CUST-06  New Customer               950  5d overdue
 
 [Step 4] <span class="out-warn">2 of 8</span> receivable(s) reordered ahead of an older balance
-[Step 5] <span class="out-ok">Suggested collections order printed above — overdue-days order alone would have missed both</span></div>
+[Step 5] <span class="out-ok">Suggested collections order printed above</span></div>
 </div>
 
 <h2>What it's built from</h2>
