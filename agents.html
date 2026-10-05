@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
-<title>Agent Library — CFO Unfiltered | Boris Dracka</title>
+<title>Agent Library — CFO Unfiltered | Boris Dračka</title>
 <meta name="description" content="Six small, read-only agents from The CFO & AI Series — reporting, invoicing, FX, idle cash, payment priority, and collections priority. Sample data, open source, one repository." />
 <meta property="og:title" content="Agent Library — CFO Unfiltered" />
 <meta property="og:description" content="Six small, read-only agents from The CFO & AI Series. Sample data, open source, one repository." />
@@ -349,6 +349,112 @@ nav { padding: 16px 24px; }
 footer { padding: 24px; }
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://borisdracka.com/agents#page",
+  "name": "Agent Library — CFO Unfiltered",
+  "url": "https://borisdracka.com/agents",
+  "description": "Six small, read-only agents from The CFO & AI Series — reporting, invoicing, FX, idle cash, payment priority, and collections priority. Sample data, open source, one repository.",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "@id": "https://borisdracka.com/blog#series",
+    "name": "The CFO & AI Series",
+    "url": "https://borisdracka.com/blog"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Weekly CFO Report",
+          "description": "Pulls financial data from a CSV, calculates the KPIs that matter — margin, burn, DSO, operating leverage — and has Gemini write the narrative around them. Delivered by email every Monday morning.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/cfo_agent.py",
+          "isBasedOn": "https://borisdracka.com/blog/post-02",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Invoice Agent",
+          "description": "Reads open invoices, ranks the overdue ones by risk — amount times days late — and drafts a personalized reminder per client. It writes the drafts. It doesn't send them.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/invoice_agent.py",
+          "isBasedOn": "https://borisdracka.com/blog/post-03",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "FX Monitoring Agent",
+          "description": "Compares each open FX position's booked rate against a current one and flags anything that has drifted past a threshold you set — instead of finding out at month-end close.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/fx_monitor_agent.py",
+          "isBasedOn": "https://borisdracka.com/blog/post-09",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Idle Cash Agent",
+          "description": "Compares each account balance against its agreed buffer and estimates what the excess sitting above it could have earned, if it had been swept somewhere that pays interest.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/idle_cash_agent.py",
+          "isBasedOn": "https://borisdracka.com/blog/post-10",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Invoice Priority Agent",
+          "description": "Reorders a payment queue by more than the printed due date — a critical-vendor flag can move an invoice ahead of an older one still waiting its turn.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/invoice_priority_agent.py",
+          "isBasedOn": "https://borisdracka.com/blog/post-11",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Collections Priority Agent",
+          "description": "Reorders a collections list by more than days overdue — an active credit hold can move a receivable ahead of an older one still waiting its turn.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/collections_priority_agent.py",
+          "isBasedOn": "https://borisdracka.com/blog/post-12",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      }
+    ]
+  }
+}
+</script>
 </head>
 <body>
 
@@ -491,7 +597,7 @@ Subscribe free →
 
 <!-- FOOTER -->
 <footer>
-<p>© 2026 Boris Dracka · <a href="mailto:likeaCFO@borisdracka.com">likeaCFO@borisdracka.com</a> · <a href="/privacy">Privacy</a></p>
+<p>© 2026 Boris Dračka · <a href="mailto:likeaCFO@borisdracka.com">likeaCFO@borisdracka.com</a> · <a href="/privacy">Privacy</a></p>
 </footer>
 
   <!-- Cloudflare Web Analytics -->

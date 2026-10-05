@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <id>https://borisdracka.com/feed.xml</id>
+  <title>CFO Unfiltered — The CFO &amp; AI Series</title>
+  <subtitle>One CFO&#x27;s honest account of testing AI in finance.</subtitle>
+  <link rel="self" type="application/atom+xml" href="https://borisdracka.com/feed.xml" />
+  <link rel="alternate" type="text/html" href="https://borisdracka.com/blog" />
+  <updated>2026-10-03T23:39:07-07:00</updated>
+  <author><name>Boris Dračka</name><uri>https://borisdracka.com/</uri></author>
+  <entry>
+    <id>https://borisdracka.com/blog/post-12</id>
+    <title>The Collection Reminder That Works Isn&#x27;t the First One You Send</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-12" />
+    <published>2026-10-03T14:00:00+02:00</published>
+    <updated>2026-10-03T23:39:07-07:00</updated>
+    <summary>Money owed to the company, and why some collection reminders get paid within days while others get ignored for months.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-11</id>
+    <title>The Invoice That Gets Paid First Isn&#x27;t the One That&#x27;s Due First</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-11" />
+    <published>2026-09-01T14:00:00+02:00</published>
+    <updated>2026-09-26T01:11:05-07:00</updated>
+    <summary>Which invoices actually get paid first, and why the answer usually has nothing to do with the due date printed on them.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-10</id>
+    <title>The Cash That Just Sits There</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-10" />
+    <published>2026-08-25T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Money that&#x27;s already in the account can cost you exactly like money that&#x27;s late — it just does it quietly, one basis point at a time.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-09</id>
+    <title>The FX Loss Nobody Sees Until Month-End</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-09" />
+    <published>2026-08-18T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>A currency move spread across thirty ordinary days can quietly cost more than most invoices are worth — and nobody notices until the books close.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-08</id>
+    <title>The Alert That Was Wrong</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-08" />
+    <published>2026-08-04T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>A sanity-check rule flagged a problem that turned out not to be one — and what that taught me about tuning alerts before people start ignoring them.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-07</id>
+    <title>The First Report Landed at 6am. One Number Was Wrong.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-07" />
+    <published>2026-07-21T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Post #6 covered the architecture. This post covers what happened when it ran for real — and the data-quality problem it quietly exposed.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-06</id>
+    <title>Inside the Architecture: How an AI CFO Agent Actually Gets Built</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-06" />
+    <published>2026-06-05T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Most descriptions of AI CFO agents are too abstract. Here&#x27;s the actual plumbing — what connects to what, and what runs without anyone pressing a button.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-05</id>
+    <title>CEO Calls Friday at 4pm. The Accountant Hasn&#x27;t Closed the Month.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-05" />
+    <published>2026-05-29T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>This conversation happens often, in many companies under 200 people. It&#x27;s not the accountant&#x27;s fault. It&#x27;s a systems problem.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-04</id>
+    <title>Plenty of Cash on Wednesday. Missed Payroll on Friday.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-04" />
+    <published>2026-05-22T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>A company with €2M revenue can look completely healthy on Monday and be in crisis by Friday. Not because they&#x27;re losing money — but because no one was watching.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-03</id>
+    <title>50 People. €15M Revenue. 1 Accountant. This Is Normal.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-03" />
+    <published>2026-05-15T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>The most common finance setup in small business is also the most invisible. One person. Too much work. No budget for more. Here&#x27;s why AI changes the math — without changing the headcount.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-02</id>
+    <title>An AI CFO Agent Is Not a Chatbot. Here&#x27;s What It Actually Is.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-02" />
+    <published>2026-05-08T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Most people imagine AI in finance as a chatbot you ask questions. That&#x27;s not what an AI CFO agent is. Here&#x27;s the real architecture — and why the difference matters.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/blog/post-01</id>
+    <title>30 Years as a CFO. Now I&#x27;m Exploring How Much of the Job AI Can Take Over.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-01" />
+    <published>2026-05-01T14:00:00+02:00</published>
+    <updated>2026-09-29T11:29:32-07:00</updated>
+    <summary>A 30-year CFO explores how much of his own job AI agents can actually take over — and what that means for every finance leader paying attention.</summary>
+  </entry>
+</feed>

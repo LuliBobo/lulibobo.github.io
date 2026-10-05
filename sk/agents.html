@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
-<title>Knižnica agentov — CFO Unfiltered | Boris Dracka</title>
+<title>Knižnica agentov — CFO Unfiltered | Boris Dračka</title>
 <meta name="description" content="Šesť malých, read-only agentov zo Série CFO & AI — reporting, faktúry, FX, voľná hotovosť, priorita platieb a priorita vymáhania. Vzorové dáta, open source, jeden repozitár." />
 <meta property="og:title" content="Knižnica agentov — CFO Unfiltered" />
 <meta property="og:description" content="Šesť malých, read-only agentov zo Série CFO & AI. Vzorové dáta, open source, jeden repozitár." />
@@ -349,6 +349,112 @@ nav { padding: 16px 24px; }
 footer { padding: 24px; }
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://borisdracka.com/sk/agents#page",
+  "name": "Knižnica agentov — CFO Unfiltered",
+  "url": "https://borisdracka.com/sk/agents",
+  "description": "Šesť malých, read-only agentov zo Série CFO & AI — reporting, faktúry, FX, voľná hotovosť, priorita platieb a priorita vymáhania. Vzorové dáta, open source, jeden repozitár.",
+  "inLanguage": "sk",
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "@id": "https://borisdracka.com/sk/blog#series",
+    "name": "The CFO & AI Series",
+    "url": "https://borisdracka.com/sk/blog"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Weekly CFO Report",
+          "description": "Načíta finančné dáta z CSV, vypočíta kľúčové KPI — maržu, burn rate, DSO, prevádzkovú páku — a necháva Gemini napísať naratív okolo nich. Doručené e-mailom každé pondelkové ráno.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/cfo_agent.py",
+          "isBasedOn": "https://borisdracka.com/sk/blog/post-02",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Invoice Agent",
+          "description": "Nájde faktúry po splatnosti, zoradí ich podľa rizika — suma krát počet dní meškania — a pripraví personalizovaný upomienkový e-mail pre každého klienta. Píše návrhy. Neodosiela ich.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/invoice_agent.py",
+          "isBasedOn": "https://borisdracka.com/sk/blog/post-03",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "FX Monitoring Agent",
+          "description": "Porovná kurz, za ktorý bola otvorená FX pozícia, s aktuálnym kurzom, a označí všetko, čo sa posunulo nad nastavenú hranicu — namiesto toho, aby sa to zistilo až pri uzávierke mesiaca.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/fx_monitor_agent.py",
+          "isBasedOn": "https://borisdracka.com/sk/blog/post-09",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Idle Cash Agent",
+          "description": "Porovná zostatok každého účtu s dohodnutým rezervným pásmom a odhadne, koľko mohol prebytok nad ním zarobiť, keby sa presunul niekam, kde nesie úrok.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/idle_cash_agent.py",
+          "isBasedOn": "https://borisdracka.com/sk/blog/post-10",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Invoice Priority Agent",
+          "description": "Zoradí frontu platieb podľa viac než len vytlačeného dátumu splatnosti — príznak kritického dodávateľa dokáže posunúť faktúru pred staršiu, ktorá ešte čaká na rad.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/invoice_priority_agent.py",
+          "isBasedOn": "https://borisdracka.com/sk/blog/post-11",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+          "@type": "SoftwareSourceCode",
+          "name": "Collections Priority Agent",
+          "description": "Zoradí zoznam pohľadávok podľa viac než len počtu dní po splatnosti — aktívna blokácia kreditu dokáže posunúť pohľadávku pred staršiu, ktorá ešte čaká na rad.",
+          "programmingLanguage": "Python",
+          "codeRepository": "https://github.com/LuliBobo/cfo-agents",
+          "url": "https://github.com/LuliBobo/cfo-agents/blob/main/collections_priority_agent.py",
+          "isBasedOn": "https://borisdracka.com/sk/blog/post-12",
+          "author": { "@type": "Person", "@id": "https://borisdracka.com/#person", "name": "Boris Dračka", "url": "https://borisdracka.com/" }
+        }
+      }
+    ]
+  }
+}
+</script>
 </head>
 <body>
 
@@ -491,7 +597,7 @@ Odoberať zadarmo →
 
 <!-- FOOTER -->
 <footer>
-<p>© 2026 Boris Dracka · <a href="mailto:likeaCFO@borisdracka.com">likeaCFO@borisdracka.com</a> · <a href="/sk/privacy">Ochrana súkromia</a></p>
+<p>© 2026 Boris Dračka · <a href="mailto:likeaCFO@borisdracka.com">likeaCFO@borisdracka.com</a> · <a href="/sk/privacy">Ochrana súkromia</a></p>
 </footer>
 
   <!-- Cloudflare Web Analytics -->

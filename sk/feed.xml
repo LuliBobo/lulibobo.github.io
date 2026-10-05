@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="sk">
+  <id>https://borisdracka.com/sk/feed.xml</id>
+  <title>CFO Unfiltered — The CFO &amp; AI Series (SK)</title>
+  <subtitle>Úprimný denník jedného CFO o testovaní AI vo financiách.</subtitle>
+  <link rel="self" type="application/atom+xml" href="https://borisdracka.com/sk/feed.xml" />
+  <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog" />
+  <updated>2026-10-03T23:39:07-07:00</updated>
+  <author><name>Boris Dračka</name><uri>https://borisdracka.com/</uri></author>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-12</id>
+    <title>Upomienka, ktorá naozaj zaberie, nie je tá prvá, ktorú odošlete</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-12" />
+    <published>2026-10-03T14:00:00+02:00</published>
+    <updated>2026-10-03T23:39:07-07:00</updated>
+    <summary>Peniaze, ktoré dlhujú vám, a prečo niektoré upomienky vyberú peniaze do pár dní, kým iné ignorujú mesiace.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-11</id>
+    <title>Faktúra, ktorá sa zaplatí prvá, nie je tá s najbližšou splatnosťou</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-11" />
+    <published>2026-09-01T14:00:00+02:00</published>
+    <updated>2026-09-26T01:11:45-07:00</updated>
+    <summary>Ktoré faktúry sa v skutočnosti platia ako prvé, a prečo odpoveď zväčša nemá nič spoločné s dátumom splatnosti, ktorý je na nich vytlačený.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-10</id>
+    <title>Hotovosť, ktorá len tak leží na účte</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-10" />
+    <published>2026-08-25T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Peniaze, ktoré už sú na účte, vás môžu stáť rovnako ako peniaze, ktoré meškajú — len to robia potichu, jeden bázický bod za druhým.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-09</id>
+    <title>FX strata, ktorú nikto nevidí do konca mesiaca</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-09" />
+    <published>2026-08-18T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Pohyb kurzu rozložený do tridsiatich bežných dní môže potichu stáť viac než mnohé faktúry — a nikto si to nevšimne, kým sa nezavrú knihy.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-08</id>
+    <title>Alert, ktorý bol falošný</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-08" />
+    <published>2026-08-04T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Pravidlo zdravého rozumu označilo problém, ktorý napokon žiadnym problémom nebol — a čo ma to naučilo o ladení upozornení.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-07</id>
+    <title>Prvý report prišiel o 6:00. Jedno číslo bolo zlé.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-07" />
+    <published>2026-07-21T14:00:00+02:00</published>
+    <updated>2026-09-26T02:52:58-07:00</updated>
+    <summary>Príspevok #6 opísal architektúru. Toto je, čo sa stalo, keď naozaj bežala — a aký problém s kvalitou dát to potichu odhalilo.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-06</id>
+    <title>Pod kapotou architektúry: Ako sa naozaj postaví AI CFO agent</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-06" />
+    <published>2026-06-05T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Väčšina popisov AI CFO agentov je príliš abstraktná. Toto je skutočná inštalatérska práca — čo je prepojené s čím a čo bežia bez toho, aby na to niekto musel kliknúť.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-05</id>
+    <title>CEO volá v piatok o 16:00. Účtovník ešte nemá uzavretý mesiac.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-05" />
+    <published>2026-05-29T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Tento rozhovor sa často odohráva v mnohých firmách do 200 ľudí. Nie je to chyba účtovníka. Je to systémový problém.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-04</id>
+    <title>V stredu dosť hotovosti. V piatok nezaplatené mzdy.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-04" />
+    <published>2026-05-22T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Firma s obratom 2 mil. € môže v pondelok vyzerať úplne zdravo a v piatok byť v kríze. Nie preto, že by strácala peniaze — ale preto, že to nikto nesledoval.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-03</id>
+    <title>50 ľudí. 15 mil. € obratu. 1 účtovník. Toto je normálne.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-03" />
+    <published>2026-05-15T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Najčastejšie finančné usporiadanie v malých firmách je aj najneviditeľnejšie. Jeden človek. Príliš mnoho práce. Žiadny rozpočet na viac ľudí. Tu je dôvod, prečo AI mení matematiku — bez zmeny počtu ľudí.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-02</id>
+    <title>AI CFO agent nie je chatbot. Toto v skutočnosti je.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-02" />
+    <published>2026-05-08T14:00:00+02:00</published>
+    <updated>2026-09-21T17:38:46+00:00</updated>
+    <summary>Väčšina ľudí si predstavuje AI vo financiách ako chatbot, ktorému kladiete otázky. AI CFO agent to ale nie je. Toto je jeho skutočná architektúra — a prečo na tom rozdiele záleží.</summary>
+  </entry>
+  <entry>
+    <id>https://borisdracka.com/sk/blog/post-01</id>
+    <title>30 rokov ako CFO. Teraz skúmam, koľko z tejto práce dokáže prevziať AI.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/sk/blog/post-01" />
+    <published>2026-05-01T14:00:00+02:00</published>
+    <updated>2026-09-29T11:29:32-07:00</updated>
+    <summary>CFO s 30-ročnou praxou skúma, koľko z jeho práce dokážu prevziať AI agenti — a čo to znamená pre každého finančného lídra, ktorý dáva pozor.</summary>
+  </entry>
+</feed>
