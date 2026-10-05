@@ -192,18 +192,18 @@
     .hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 73px);
-      max-height: 780px;
+      min-height: 0;
     }
 
     .hero-visual {
       background: var(--light);
       background-image: repeating-linear-gradient(to bottom, transparent, transparent 33px, rgba(26,23,20,0.045) 33px, rgba(26,23,20,0.045) 34px);
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;
       justify-content: center;
       overflow: hidden;
       position: relative;
+      padding-top: 72px;
     }
     .hero-visual::before {
       content: "";
@@ -239,7 +239,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 60px 64px;
+      padding: 44px 64px;
     }
 
     .hero-kicker {
