@@ -5,8 +5,16 @@
   <subtitle>One CFO&#x27;s honest account of testing AI in finance.</subtitle>
   <link rel="self" type="application/atom+xml" href="https://borisdracka.com/feed.xml" />
   <link rel="alternate" type="text/html" href="https://borisdracka.com/blog" />
-  <updated>2026-10-03T23:39:07-07:00</updated>
+  <updated>2026-10-10T14:00:00+02:00</updated>
   <author><name>Boris Dračka</name><uri>https://borisdracka.com/</uri></author>
+  <entry>
+    <id>https://borisdracka.com/blog/post-13</id>
+    <title>What Changes When You Can See Both Sides of Cash at Once</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-13" />
+    <published>2026-10-10T14:00:00+02:00</published>
+    <updated>2026-10-10T14:00:00+02:00</updated>
+    <summary>What actually changes about how a finance team spends its week when payables and receivables are visible at the same time.</summary>
+  </entry>
   <entry>
     <id>https://borisdracka.com/blog/post-12</id>
     <title>The Collection Reminder That Works Isn&#x27;t the First One You Send</title>
