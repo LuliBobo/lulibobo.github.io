@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>What the Gap Between Two Lists Quietly Costs | CFO Unfiltered</title>
+<meta name="description" content="Post #14 of 50 in The CFO & AI Series: what a revolving credit line quietly costs when a gap between payments and receipts is only seen on the day it has to be paid.">
+<link rel="canonical" href="https://borisdracka.com/blog/post-14">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-14">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-14">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-14">
+
+<meta property="og:title" content="What the Gap Between Two Lists Quietly Costs">
+<meta property="og:description" content="What a revolving credit line quietly costs when a gap between payments and receipts is only seen on the day it has to be paid.">
+<meta property="og:image" content="https://borisdracka.com/og/post-14.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/blog/post-14">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-10-17T14:00:00+02:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Revolving Credit">
+<meta property="article:tag" content="Cash Flow">
+<meta property="article:tag" content="Visibility">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-14.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+/* Hero */
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+/* Gap table */
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+/* GitHub / demo teaser section */
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Follow the series */
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+/* Footer */
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/blog/post-14#article",
+"headline": "What the Gap Between Two Lists Quietly Costs",
+"description": "What a revolving credit line quietly costs when a gap between payments and receipts is only seen on the day it has to be paid.",
+"image": "https://borisdracka.com/og/post-14.png",
+"url": "https://borisdracka.com/blog/post-14",
+"datePublished": "2026-10-17T14:00:00+02:00",
+"dateModified": "2026-10-17T14:00:00+02:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "en",
+"articleSection": "Finance",
+"position": 13,
+"isPartOf": { "@type": "CreativeWorkSeries", "@id": "https://borisdracka.com/blog#series", "name": "The CFO & AI Series", "url": "https://borisdracka.com/blog" },
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/blog/post-14" }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+<a href="https://borisdracka.com/blog/post-14" class="lang-active">EN</a>/<a href="https://borisdracka.com/sk/blog/post-14">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Cash Flow · Revolving Credit · Visibility</div>
+<h1>What the Gap Between Two Lists Quietly Costs</h1>
+<p class="hero-subtitle">Post #13 ended on a payment the balance couldn't carry. This one follows the money after that: the short drawdown that just happens, and what the days it stays open actually cost.</p>
+<div class="hero-meta">Boris Dračka · October 2026 · 6 min read</div>
+<span class="series-label">Post #14 of 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">The examples and architectures in this series are my personal educational, non-commercial experiments; they are not an offer of IT or consulting services.</p>
+
+<p class="lead">Post #13 ended on a Thursday payment the balance couldn't carry. What happened next wasn't on anyone's calendar. Nobody puts "draw €200,000 for nine days" on an agenda. It happens in the gap between two spreadsheets, which is where most of finance's quiet decisions live.</p>
+
+<p>The month described below is a composite built from patterns I've seen repeat across finance teams over the years. The amounts, the days and the interest rate are illustrative; they don't describe a specific company, bank, or credit line, and your own rate will differ.</p>
+
+<h2>Three short drawdowns, one invisible month</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">3</div><div class="label">Short drawdowns in this composite month</div></div>
+<div class="stat"><div class="num">28</div><div class="label">Days the line was open in total (5 + 9 + 14)</div></div>
+<div class="stat"><div class="num">≈ €684</div><div class="label">Illustrative interest for the month, at an illustrative 7% a year</div></div>
+</div>
+
+<h2>The arithmetic is small. That's the first thing worth saying.</h2>
+
+<p>Interest on a short draw is roughly amount × annual rate × days ÷ 360. Nothing in that formula is frightening, which is exactly why it goes unnoticed: each draw is too small to deserve an agenda item and too routine to deserve a second look.</p>
+
+<table class="gap-table">
+<tr><th>Draw</th><th>Amount</th><th>Days open</th><th>Illustrative interest</th></tr>
+<tr><td class="num-cell">1</td><td>€120,000</td><td>5</td><td>≈ €117</td></tr>
+<tr><td class="num-cell">2</td><td>€200,000</td><td>9</td><td>≈ €350</td></tr>
+<tr><td class="num-cell">3</td><td>€80,000</td><td>14</td><td>≈ €218</td></tr>
+<tr><td class="num-cell">Month</td><td>—</td><td class="num-cell">28</td><td class="num-cell">≈ €684</td></tr>
+</table>
+
+<p>Against the size of a business that would sit behind draws like these, the month's interest is a rounding error. That isn't the point. The point is the days column.</p>
+
+<h2>Why the days are the only lever</h2>
+
+<p>The amount is set by the payment that has to go out. The rate is set by a contract that doesn't get reopened mid-month. The days are the only part of the cost that responds to what you know, and when you know it.</p>
+
+<table class="gap-table">
+<tr><th>What it looks like</th><th>What's actually true</th></tr>
+<tr>
+<td>A credit line costs nothing until you need it</td>
+<td>It costs by the day, including the days nobody decided to need it</td>
+</tr>
+<tr>
+<td>The line gets drawn because there's no alternative</td>
+<td>Often it gets drawn because the gap was only visible on the day the payment was due</td>
+</tr>
+<tr>
+<td>A three-day drawdown is a treasury decision</td>
+<td>In many teams I've seen, it's a side effect of a payment run that never got checked against the balance</td>
+</tr>
+<tr>
+<td>The interest line is the cost of the gap</td>
+<td>It's the cost of the days, and the days depend on how early the gap was seen</td>
+</tr>
+</table>
+
+<h2>What changes if the gap is seen three days earlier (illustrative)</h2>
+
+<p>Seeing a gap earlier doesn't make it disappear. It gives you options that don't exist on the day itself: move a payment within its terms, chase the receipt that slipped, draw a smaller amount for fewer days. Suppose each of the three draws above ends three days sooner.</p>
+
+<table class="gap-table">
+<tr><th>Scenario</th><th>Days open</th><th>Illustrative interest</th></tr>
+<tr><td>Gap seen on the day the payment is due</td><td class="num-cell">28</td><td class="num-cell">≈ €684</td></tr>
+<tr><td>Gap seen three days earlier</td><td class="num-cell">19</td><td class="num-cell">≈ €451</td></tr>
+</table>
+
+<p>That's roughly €233 a month, or about €2,800 a year. Not a saving to build a department around. It's a useful measure of what a few days of visibility are worth, on one line, in one illustrative month, and the same logic applies to anything that's priced by the day.</p>
+
+<div class="pullquote">
+<p>The cost of a gap isn't paid on the day of the draw. It's paid in the days nobody knew it was coming.</p>
+</div>
+
+<div class="obl" role="group" aria-label="Motion graphic">
+<div class="window">
+    <div class="head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="title">drawdowns — illustrative composite</span><button class="pause" id="obl-pause" type="button" aria-pressed="false">Pause</button></div>
+
+    <div class="counters">
+      <div class="counter"><div class="n" id="obl-nDays">28</div><div class="l">Days the line is open</div></div>
+      <div class="counter"><div class="n" id="obl-nInt">≈ €684</div><div class="l">Illustrative interest for the month</div></div>
+      <div class="counter" id="obl-cSave"><div class="n" id="obl-nSave">—</div><div class="l">Difference when the gap is seen earlier</div></div>
+    </div>
+
+    <div class="chart" id="obl-chart" role="img" aria-label="Three drawdowns drawn as bars. Bar height is the amount and bar width is the days open, so each bar's area is its interest. When the gap is seen three days earlier, every bar shortens by three days."></div>
+    <div class="axis"><div></div><div class="ticks" id="obl-ticks"></div><div class="cap">days open</div></div>
+
+    <div class="caption" aria-live="polite">
+      <div class="scene" id="obl-scene"></div>
+      <div class="line" id="obl-line"></div>
+    </div>
+  </div>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw cost"></i>Interest (amount × days)</span>
+    <span><i class="sw sw-saved"></i>Days saved</span>
+    <span><i class="sw sw-ghost"></i>Where the bar ended before</span>
+  </div>
+  <p class="note">Illustrative composite from Post #14. The amounts, days and 7% a year are made-up for the example; they do not describe a specific company, bank or credit line.</p>
+</div>
+<style>
+.obl{
+    --muted: #4E483F; --line: #DCD5C7;
+  --card: #1A1714; --card-head: #111111; --card-line: #2a2a2a;
+  --ink: #dddddd; --ink-dim: #8a8a8a;
+  --accent: #C21F2F; --accent-on-dark: #ff7a7a; --good: #7fd99a;
+  --f-serif: 'IBM Plex Serif', Georgia, serif;
+  --f-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
+.obl .window{ background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-line); }
+.obl .head{ background: var(--card-head); padding: 12px 16px; display: flex; align-items: center; gap: 8px; font: 500 12px var(--f-mono); color: #888; }
+.obl .dot{ width: 9px; height: 9px; border-radius: 50%; background: #444; flex: 0 0 auto; }
+.obl .head .title{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.obl .pause{ margin-left: auto; background: none; border: 1px solid #333; color: #999; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+.obl .pause:hover{ color: #fff; border-color: #555; }
+.obl .pause:focus-visible{ outline: 2px solid var(--accent-on-dark); outline-offset: 2px; }
+.obl .counters{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--card-line); }
+.obl .counter{ padding: 14px 16px; border-right: 1px solid var(--card-line); min-width: 0; }
+.obl .counter:last-child{ border-right: 0; }
+.obl .counter .n{ font: 700 24px/1 var(--f-mono); color: #fff; font-variant-numeric: tabular-nums; transition: color .3s; }
+.obl .counter .l{ font-size: 11.5px; color: var(--ink-dim); margin-top: 7px; line-height: 1.35; }
+.obl .counter.good .n{ color: var(--good); }
+.obl .chart{ padding: 18px 16px 6px; display: flex; flex-direction: column; gap: 14px; }
+.obl .row{ display: grid; grid-template-columns: 92px minmax(0, 1fr) 74px; align-items: center; column-gap: 10px; }
+.obl .lab{ font: 600 11px/1.3 var(--f-mono); color: var(--ink-dim); letter-spacing: .03em; }
+.obl .lab b{ display: block; color: var(--ink); font-weight: 700; font-size: 12px; }
+.obl .plot{ position: relative; }
+.obl .bar, .obl .ghost, .obl .saved{ position: absolute; left: 0; top: 0; height: 100%; border-radius: 4px; }
+.obl .bar{ background: rgba(194,31,47,.24); box-shadow: inset 0 0 0 1.5px rgba(255,122,122,.7); transition: width .9s cubic-bezier(.4,0,.2,1); }
+.obl .ghost{ border: 1.5px dashed #5a554d; opacity: 0; transition: opacity .5s; }
+.obl .saved{ background: rgba(90,180,120,.16); box-shadow: inset 0 0 0 1.5px rgba(127,217,154,.45); opacity: 0; transition: opacity .5s, left .9s cubic-bezier(.4,0,.2,1), width .9s cubic-bezier(.4,0,.2,1); }
+.obl .val small{ display: block; font: 500 10px var(--f-mono); color: var(--ink-dim); margin-top: 2px; }
+.obl .val{ font: 700 14px var(--f-mono); color: #fff; text-align: right; font-variant-numeric: tabular-nums; }
+.obl .axis{ display: grid; grid-template-columns: 92px minmax(0, 1fr) 74px; column-gap: 10px; padding: 0 16px 14px; }
+.obl .ticks{ position: relative; height: 22px; border-top: 1px solid #3a3a3a; font: 500 10px var(--f-mono); color: #777; }
+.obl .ticks span{ position: absolute; top: 5px; transform: translateX(-50%); }
+.obl .axis .cap{ align-self: start; padding-top: 5px; font: 500 10px var(--f-mono); color: #777; text-align: right; grid-column: 3; }
+.obl .caption{ border-top: 1px solid var(--card-line); padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; min-height: 86px; }
+.obl .scene{ font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-on-dark); }
+.obl .line{ font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.obl .legend{ display: flex; flex-wrap: wrap; gap: 6px 16px; font: 500 12px var(--f-mono); color: var(--muted); }
+.obl .legend span{ display: inline-flex; align-items: center; gap: 7px; }
+.obl .sw{ width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto; border: 1.5px solid; }
+.obl .sw.cost{ background: rgba(194,31,47,.24); border-color: rgba(255,122,122,.8); }
+.obl .sw.sw-saved{ background: rgba(90,180,120,.35); border-color: #4a9a66; }
+.obl .sw.sw-ghost{ border-style: dashed; border-color: #8a8478; background: transparent; }
+.obl .note{ font-size: 12.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; }
+@media (max-width: 560px){.obl .row, .obl .axis{ grid-template-columns: 60px minmax(0, 1fr) 56px; column-gap: 8px; }.obl .lab{ font-size: 9.5px; }.obl .lab b{ font-size: 10.5px; }.obl .val{ font-size: 12px; }.obl .counter{ padding: 12px 10px; }.obl .counter .n{ font-size: 17px; }.obl .counter .l{ font-size: 10.5px; }}
+@media (prefers-reduced-motion: reduce){.obl .bar, .obl .ghost, .obl .saved{ transition: none !important; }}
+.obl{display:flex;flex-direction:column;gap:14px;margin:8px 0 36px;font-family:var(--f-sans)}
+</style>
+<script>
+
+(function () {
+  var RATE = 0.07, MAXD = 14, EARLY = 3;
+  var DRAWS = [{ n: 'Draw 1', a: 120000, d: 5 }, { n: 'Draw 2', a: 200000, d: 9 }, { n: 'Draw 3', a: 80000, d: 14 }];
+  var PX_PER_K = 0.4;                                   // row height: 0.4 px per €1,000
+  function cost(a, d) { return a * RATE * d / 360; }
+  function eur(v) { return '≈ €' + Math.round(v).toLocaleString('en-US'); }
+
+  var chart = document.getElementById('obl-chart'), ticks = document.getElementById('obl-ticks');
+  var nDays = document.getElementById('obl-nDays'), nInt = document.getElementById('obl-nInt'), nSave = document.getElementById('obl-nSave'), cSave = document.getElementById('obl-cSave');
+  var sceneEl = document.getElementById('obl-scene'), lineEl = document.getElementById('obl-line'), pauseBtn = document.getElementById('obl-pause');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  for (var t = 0; t <= MAXD; t += 2) { var s = document.createElement('span'); s.style.left = (t / MAXD * 100) + '%'; s.textContent = t; ticks.appendChild(s); }
+
+  var rows = DRAWS.map(function (r) {
+    var row = document.createElement('div'); row.className = 'row';
+    row.innerHTML = '<div class="lab"><b>' + r.n + '</b>€' + r.a.toLocaleString('en-US') + '</div>' +
+      '<div class="plot" style="height:' + Math.round(r.a / 1000 * PX_PER_K) + 'px"><div class="ghost"></div><div class="saved"></div><div class="bar"></div></div>' +
+      '<div class="val"></div>';
+    chart.appendChild(row);
+    return { r: r, bar: row.querySelector('.bar'), ghost: row.querySelector('.ghost'), saved: row.querySelector('.saved'), val: row.querySelector('.val') };
+  });
+
+  var curDays = DRAWS.map(function (r) { return r.d; });
+  function pct(d) { return (d / MAXD * 100) + '%'; }
+  function paint(days, ghostOn, savedOn) {
+    rows.forEach(function (x, i) {
+      var d = days[i], d0 = x.r.d;
+      x.bar.style.width = pct(d);
+      x.ghost.style.width = pct(d0); x.ghost.style.opacity = ghostOn ? 1 : 0;
+      x.saved.style.left = pct(d); x.saved.style.width = pct(d0 - d); x.saved.style.opacity = savedOn && d0 > d ? 1 : 0;
+      x.val.innerHTML = eur(cost(x.r.a, d)) + '<small>' + d + (d === 1 ? ' day' : ' days') + '</small>';
+    });
+    var total = 0, tot0 = 0, sumD = 0;
+    rows.forEach(function (x, i) { total += cost(x.r.a, days[i]); tot0 += cost(x.r.a, x.r.d); sumD += days[i]; });
+    nDays.textContent = String(sumD); nInt.textContent = eur(total);
+    nSave.textContent = savedOn ? '≈ €' + Math.round(tot0 - total) : '—'; cSave.classList.toggle('good', !!savedOn);
+  }
+
+  var COPY = [
+    ['1 · The gap is seen on the day', 'Three short drawdowns. Each bar is amount times days, and its area is the interest.'],
+    ['2 · The gap is seen three days earlier', 'Same amounts, same rate. Every draw ends three days sooner.'],
+    ['3 · What the days were worth', 'About €233 less in this illustrative month. Only the days changed.']
+  ];
+  function copy(n) { sceneEl.textContent = COPY[n][0]; lineEl.textContent = COPY[n][1]; }
+  var BASE = DRAWS.map(function (r) { return r.d; });
+  var EARLYD = DRAWS.map(function (r) { return Math.max(r.d - EARLY, 0); });
+
+  function sceneOne() { copy(0); rows.forEach(function (x) { x.bar.style.transition = 'none'; x.bar.style.width = '0%'; x.bar.getBoundingClientRect(); x.bar.style.transition = ''; }); paint(BASE, false, false); }
+  function sceneTwo() { copy(1); paint(BASE, true, false); setTimeout(function () { paint(EARLYD, true, true); }, 500); }
+  function sceneThree() { copy(2); paint(EARLYD, true, true); }
+  function finalState() { copy(2); paint(EARLYD, true, true); }
+
+  var idx = 0, running = true, timer = null;
+  var steps = [[sceneOne, 3800], [sceneTwo, 4800], [sceneThree, 4200]];
+  function run() { steps[idx][0](); if (!running) return; timer = setTimeout(function () { idx = (idx + 1) % steps.length; run(); }, steps[idx][1]); }
+
+  if (reduce) { finalState(); pauseBtn.hidden = true; }
+  else {
+    sceneOne();
+    timer = setTimeout(function () { idx = 1; run(); }, steps[0][1]);
+    pauseBtn.addEventListener('click', function () {
+      running = !running; pauseBtn.textContent = running ? 'Pause' : 'Play'; pauseBtn.setAttribute('aria-pressed', String(!running));
+      if (running) { idx = (idx + 1) % steps.length; run(); } else { clearTimeout(timer); }
+    });
+  }
+})();
+
+</script>
+
+<h2>What a gap check would actually have to show</h2>
+
+<p>It needs the signals from Post #13 (payments due by day, expected receipts with a view on how likely they are to slip, and the minimum buffer) and adds two more.</p>
+
+<table class="gap-table">
+<tr><th>Signal</th><th>What it tells the team</th></tr>
+<tr>
+<td>First day below the buffer</td>
+<td>When a decision is needed</td>
+</tr>
+<tr>
+<td>Lead time</td>
+<td>How many days ahead that day is visible, which is how many options are still open</td>
+</tr>
+<tr>
+<td>Cost per day of the gap</td>
+<td>Amount × rate ÷ 360, so the team can see what each day of waiting is worth (use your own rate)</td>
+</tr>
+</table>
+
+<p>I haven't put a script behind this one. The formula fits on one line, and the hard part isn't the arithmetic: it's knowing about the gap early enough for the arithmetic to matter. The first test I'd run is a simple one: take last quarter's drawdowns, write down the day each gap first became visible, and compare it with the day you drew.</p>
+
+<div class="followup">
+<h4>Follow the series</h4>
+<p>Post #15 asks how far ahead a gap has to be visible to change the decision, and what a 13-week rolling cash forecast actually has to contain to show it.</p>
+</div>
+
+<div class="cta-box">
+<h3>The last time your credit line was drawn, how many days earlier could someone have seen it coming — and did anyone look?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Subscribe free</a>
+<div class="cta-note">No spam. One post per week. Unsubscribe any time.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Privacy</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/">Home</a>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://borisdracka.com/sk/blog/post-14">Slovenská verzia</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+</div>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
