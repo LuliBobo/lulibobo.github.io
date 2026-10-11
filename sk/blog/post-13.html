@@ -461,6 +461,218 @@ h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
 </tr>
 </table>
 
+<div class="obl" role="group" aria-label="Motion graphic">
+<div class="window">
+    <div class="head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="title">projected_balance — ilustratívna kompozícia</span><button class="pause" id="obl-pause" type="button" aria-pressed="false">Pauza</button></div>
+
+    <div class="counters">
+      <div class="counter"><div class="n">3</div><div class="l">Platby na splatenie tento týždeň</div></div>
+      <div class="counter"><div class="n" id="obl-nRec">2</div><div class="l" id="obl-lRec">Očakávané príjmy</div></div>
+      <div class="counter" id="obl-cLow"><div class="n" id="obl-nLow">—</div><div class="l">Najnižší projektovaný zostatok (ilustratívne jednotky)</div></div>
+    </div>
+
+    <div class="stage" id="obl-stage" role="img" aria-label="Platby a príjmy najprv ako dva samostatné zoznamy, potom zoradené po dňoch voči jednému projektovanému zostatku a nakoniec s jedným príjmom posunutým o týždeň, takže štvrtková platba zráža zostatok pod minimálnu rezervu">
+      <div class="days" id="obl-days"><span>Po</span><span>Ut</span><span>St</span><span>Št</span><span>Pi</span></div>
+      <svg class="chart" id="obl-chart" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+        <line id="obl-zero" x1="0" x2="1000" stroke="#3a3a3a" stroke-width="1" vector-effect="non-scaling-stroke"/>
+        <line id="obl-buf" x1="0" x2="1000" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="5 5" vector-effect="non-scaling-stroke"/>
+        <path id="obl-path" fill="none" stroke="#dddddd" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <div class="buffer-label" id="obl-bufLabel">Minimálna rezerva</div>
+      <div class="zero-label" id="obl-zeroLabel">0</div>
+    </div>
+
+    <div class="caption" aria-live="polite">
+      <div class="scene" id="obl-scene"></div>
+      <div class="line" id="obl-line"></div>
+    </div>
+  </div>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw pay"></i>Platba von</span>
+    <span><i class="sw rec"></i>Príjem dnu</span>
+    <span>Čiarkovaná čiara: minimálna rezerva</span>
+  </div>
+  <p class="note">Ilustratívna kompozícia k Príspevku #13. Týždeň, sumy a rezerva sú vymyslené jednotky a nepopisujú konkrétnu spoločnosť ani tím.</p>
+</div>
+<style>
+.obl{
+    --muted: #4E483F; --line: #DCD5C7;
+  --card: #1A1714; --card-head: #111111; --card-line: #2a2a2a;
+  --ink: #dddddd; --ink-dim: #8a8a8a;
+  --accent: #C21F2F; --accent-on-dark: #ff7a7a; --good: #7fd99a;
+  --f-serif: 'IBM Plex Serif', Georgia, serif;
+  --f-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
+.obl .window{ background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-line); }
+.obl .head{ background: var(--card-head); padding: 12px 16px; display: flex; align-items: center; gap: 8px; font: 500 12px var(--f-mono); color: #888; }
+.obl .dot{ width: 9px; height: 9px; border-radius: 50%; background: #444; flex: 0 0 auto; }
+.obl .head .title{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.obl .pause{ margin-left: auto; background: none; border: 1px solid #333; color: #999; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+.obl .pause:hover{ color: #fff; border-color: #555; }
+.obl .pause:focus-visible{ outline: 2px solid var(--accent-on-dark); outline-offset: 2px; }
+.obl .counters{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--card-line); }
+.obl .counter{ padding: 14px 16px; border-right: 1px solid var(--card-line); min-width: 0; }
+.obl .counter:last-child{ border-right: 0; }
+.obl .counter .n{ font: 700 24px/1 var(--f-mono); color: #fff; font-variant-numeric: tabular-nums; transition: color .3s; }
+.obl .counter .l{ font-size: 11.5px; color: var(--ink-dim); margin-top: 7px; line-height: 1.35; }
+.obl .counter.bad .n{ color: var(--accent-on-dark); }
+.obl .stage{ position: relative; height: 300px; margin: 8px 16px 6px; }
+.obl .days{ position: absolute; left: 0; right: 0; top: 4px; display: grid; grid-template-columns: repeat(5, 1fr); font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-dim); text-align: center; transition: opacity .5s; }
+.obl svg.chart{ position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transition: opacity .5s; }
+.obl .buffer-label{ position: absolute; left: 0; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-dim); transition: opacity .5s; }
+.obl .zero-label{ position: absolute; left: 0; font: 600 10px var(--f-mono); color: #666; transition: opacity .5s; }
+.obl .pt{ position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--good); border: 2px solid var(--card); transition: opacity .5s, background .3s; }
+.obl .pt.low{ background: var(--accent-on-dark); }
+.obl .ptv{ position: absolute; transform: translate(-50%, -150%); font: 600 11px var(--f-mono); color: var(--ink); font-variant-numeric: tabular-nums; transition: opacity .5s; white-space: nowrap; }
+.obl .ptv.low{ color: var(--accent-on-dark); }
+.obl .chip{ position: absolute; transform: translate(-50%, -50%); font: 700 12px var(--f-mono); font-variant-numeric: tabular-nums; padding: 5px 0; width: 66px; text-align: center; border-radius: 6px; border: 1.5px solid; transition: left .9s cubic-bezier(.4,0,.2,1), top .9s cubic-bezier(.4,0,.2,1), opacity .5s, box-shadow .3s; }
+.obl .chip.pay{ color: var(--accent-on-dark); background: rgba(194,31,47,.16); border-color: rgba(255,122,122,.5); }
+.obl .chip.rec{ color: var(--good); background: rgba(90,180,120,.14); border-color: rgba(127,217,154,.5); }
+.obl .chip.risk{ box-shadow: 0 0 0 2px var(--accent-on-dark); }
+.obl .chip small{ display: block; font: 500 9px var(--f-mono); letter-spacing: .03em; opacity: .8; margin-top: 1px; text-transform: uppercase; }
+.obl .listlabel{ position: absolute; transform: translateX(-50%); font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-dim); transition: opacity .5s; white-space: nowrap; }
+.obl .caption{ border-top: 1px solid var(--card-line); padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; min-height: 86px; }
+.obl .scene{ font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-on-dark); }
+.obl .line{ font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.obl .legend{ display: flex; flex-wrap: wrap; gap: 6px 16px; font: 500 12px var(--f-mono); color: var(--muted); }
+.obl .legend span{ display: inline-flex; align-items: center; gap: 7px; }
+.obl .sw{ width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto; border: 1.5px solid; }
+.obl .sw.pay{ background: rgba(194,31,47,.16); border-color: rgba(255,122,122,.7); }
+.obl .sw.rec{ background: rgba(90,180,120,.14); border-color: rgba(127,217,154,.7); }
+.obl .note{ font-size: 12.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; }
+@media (max-width: 560px){.obl .stage{ margin-inline: 8px; }.obl .chip{ width: 50px; font-size: 11px; }.obl .chip small{ font-size: 8px; }.obl .counter{ padding: 12px 10px; }.obl .counter .n{ font-size: 19px; }.obl .counter .l{ font-size: 10.5px; }}
+@media (prefers-reduced-motion: reduce){.obl .chip, .obl .pt, .obl .ptv, .obl svg.chart, .obl .days{ transition: none !important; }}
+.obl{display:flex;flex-direction:column;gap:14px;margin:8px 0 36px;font-family:var(--f-sans)}
+.obl .legend,.obl .note{max-width:100%}
+</style>
+<script>
+
+(function () {
+  var DAYX = [10, 30, 50, 70, 90];          // day column centres, % of stage width
+  var OPEN = 100, BUF = 30, VMIN = -40, VMAX = 160, CH_TOP = 44, CH_BOT = 204, H = 300;
+  var NORMAL = [80, 140, 100, 40, 70];       // day-end balances: opening 100; −20, +60, −40, −60, +30
+  var SLIP   = [80, 80, 40, -20, 10];        // receipt of +60 moves to next Monday
+
+  var stage = document.getElementById('obl-stage');
+  var pathEl = document.getElementById('obl-path'), bufEl = document.getElementById('obl-buf'), zeroEl = document.getElementById('obl-zero');
+  var bufLabel = document.getElementById('obl-bufLabel'), zeroLabel = document.getElementById('obl-zeroLabel');
+  var daysEl = document.getElementById('obl-days'), chartEl = document.getElementById('obl-chart');
+  var sceneEl = document.getElementById('obl-scene'), lineEl = document.getElementById('obl-line');
+  var nLow = document.getElementById('obl-nLow'), cLow = document.getElementById('obl-cLow'), nRec = document.getElementById('obl-nRec'), lRec = document.getElementById('obl-lRec');
+  var pauseBtn = document.getElementById('obl-pause');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function yOf(v) { return CH_BOT - ((v - VMIN) / (VMAX - VMIN)) * (CH_BOT - CH_TOP); }
+  var Y_BUF = yOf(BUF), Y_ZERO = yOf(0);
+  bufEl.setAttribute('y1', Y_BUF); bufEl.setAttribute('y2', Y_BUF);
+  zeroEl.setAttribute('y1', Y_ZERO); zeroEl.setAttribute('y2', Y_ZERO);
+  bufLabel.style.top = (Y_BUF - 17) + 'px'; zeroLabel.style.top = (Y_ZERO + 3) + 'px';
+
+  // chips: type, label, day index, text
+  var CHIPS = [
+    { id: 'p1', t: 'pay', v: '−20', d: 0, k: 'Platba' },
+    { id: 'r1', t: 'rec', v: '+60', d: 1, k: 'Príjem' },
+    { id: 'p2', t: 'pay', v: '−40', d: 2, k: 'Platba' },
+    { id: 'p3', t: 'pay', v: '−60', d: 3, k: 'Platba' },
+    { id: 'r2', t: 'rec', v: '+30', d: 4, k: 'Príjem' }
+  ];
+  var els = {};
+  CHIPS.forEach(function (c) {
+    var e = document.createElement('div'); e.className = 'chip ' + c.t;
+    e.innerHTML = c.v + '<small>' + c.k + '</small>'; stage.appendChild(e); els[c.id] = e;
+  });
+  var labPay = mk('listlabel', 'Záväzky na splatenie'), labRec = mk('listlabel', 'Očakávané príjmy');
+  function mk(cls, txt) { var e = document.createElement('div'); e.className = cls; e.textContent = txt; stage.appendChild(e); return e; }
+  var pts = [], vals = [];
+  DAYX.forEach(function () {
+    var p = document.createElement('div'); p.className = 'pt'; stage.appendChild(p); pts.push(p);
+    var v = document.createElement('div'); v.className = 'ptv'; stage.appendChild(v); vals.push(v);
+  });
+
+  function put(id, xPct, y, opacity) { var e = els[id]; e.style.left = xPct + '%'; e.style.top = y + 'px'; e.style.opacity = opacity == null ? 1 : opacity; }
+  var LIST = { p1: [24, 108], p2: [24, 160], p3: [24, 212], r1: [76, 108], r2: [76, 160] };
+
+  var cur = NORMAL.slice();
+  function draw(arr) {
+    var d = arr.map(function (v, i) { return (i ? 'L' : 'M') + (DAYX[i] * 10) + ' ' + yOf(v); }).join(' ');
+    pathEl.setAttribute('d', d);
+    arr.forEach(function (v, i) {
+      var low = v < BUF;
+      pts[i].style.left = DAYX[i] + '%'; pts[i].style.top = yOf(v) + 'px'; pts[i].classList.toggle('low', low);
+      vals[i].style.left = DAYX[i] + '%'; vals[i].style.top = yOf(v) + 'px'; vals[i].classList.toggle('low', low);
+      vals[i].textContent = String(v).replace('-', '−');
+    });
+  }
+  var raf = null;
+  function tween(to, ms) {
+    cancelAnimationFrame(raf);
+    var from = cur.slice(), t0 = null;
+    if (reduce || !ms) { cur = to.slice(); draw(cur); return; }
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var k = Math.min(1, (t - t0) / ms), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      cur = from.map(function (a, i) { return Math.round(a + (to[i] - a) * e); }); draw(cur);
+      if (k < 1) raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+  }
+  function chartVis(on) {
+    var o = on ? 1 : 0;
+    daysEl.style.opacity = o; chartEl.style.opacity = o; bufLabel.style.opacity = o; zeroLabel.style.opacity = o;
+    pts.concat(vals).forEach(function (e) { e.style.opacity = o; });
+  }
+  function listsVis(on) { labPay.style.opacity = on ? 1 : 0; labRec.style.opacity = on ? 1 : 0; }
+  labPay.style.left = '24%'; labPay.style.top = '72px'; labRec.style.left = '76%'; labRec.style.top = '72px';
+
+  var COPY = [
+    ['1 · Dva zoznamy', 'Záväzky a pohľadávky sú v samostatných zoznamoch. Každý ukazuje len svoju stranu.'],
+    ['2 · Jeden zostatok', 'Zoradené po dňoch voči tomu istému zostatku, oba zoznamy z neho čerpajú. Týždeň ostáva nad rezervou.'],
+    ['3 · Príjem sa posunie', 'Jeden príjem sa posunie o týždeň. Štvrtková platba teraz zráža zostatok pod rezervu a ani jeden zo zoznamov to nepovedal.']
+  ];
+  function copy(n) { sceneEl.textContent = COPY[n][0]; lineEl.textContent = COPY[n][1]; }
+  function low(arr) { return Math.min.apply(null, arr); }
+  function counters(arr, slipped) {
+    var m = low(arr); nLow.textContent = String(m).replace('-', '−'); cLow.classList.toggle('bad', m < BUF);
+    nRec.textContent = slipped ? '1 z 2 načas' : '2'; lRec.textContent = slipped ? 'Príjmy, ktoré dorazia načas' : 'Očakávané príjmy';
+  }
+
+  function sceneOne() {
+    copy(0); chartVis(false); listsVis(true);
+    CHIPS.forEach(function (c) { els[c.id].classList.remove('risk'); put(c.id, LIST[c.id][0], LIST[c.id][1], 1); });
+    cur = NORMAL.slice(); draw(cur); counters(NORMAL, false); nLow.textContent = '—'; cLow.classList.remove('bad');
+  }
+  function sceneTwo() {
+    copy(1); listsVis(false); chartVis(true);
+    CHIPS.forEach(function (c) { put(c.id, DAYX[c.d], 252, 1); });
+    tween(NORMAL, 900); counters(NORMAL, false);
+  }
+  function sceneThree() {
+    copy(2);
+    put('r1', 118, 252, 0);                                   // slides off to next week
+    tween(SLIP, 1000); counters(SLIP, true);
+    els.p3.classList.add('risk');
+  }
+  function finalState() { sceneTwo(); sceneThree(); cur = SLIP.slice(); draw(cur); }
+
+  var idx = 0, running = true, timer = null;
+  var steps = [[sceneOne, 3600], [sceneTwo, 4400], [sceneThree, 4600]];
+  function run() { steps[idx][0](); if (!running) return; timer = setTimeout(function () { idx = (idx + 1) % steps.length; run(); }, steps[idx][1]); }
+
+  if (reduce) { finalState(); pauseBtn.hidden = true; }
+  else {
+    sceneOne();
+    timer = setTimeout(function () { idx = 1; run(); }, steps[0][1]);
+    pauseBtn.addEventListener('click', function () {
+      running = !running; pauseBtn.textContent = running ? 'Pauza' : 'Prehrať'; pauseBtn.setAttribute('aria-pressed', String(!running));
+      if (running) { idx = (idx + 1) % steps.length; run(); } else { clearTimeout(timer); }
+    });
+  }
+})();
+
+</script>
+
 <h2>Čo by kombinovaný pohľad musel reálne ukázať</h2>
 
 <p>Potrebuje rovnaký typ mechanizmu ako posledné dva príspevky, len namierený na zostatok namiesto jedného zoznamu. Používa signály, o ktoré sa tie príspevky už opierali, a pridáva jeden: ako pravdepodobne dorazí každý očakávaný príjem načas.</p>
