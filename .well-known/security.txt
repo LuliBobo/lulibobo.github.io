@@ -1,0 +1,4 @@
+Contact: mailto:likeaCFO@borisdracka.com
+Expires: 2027-10-16T00:00:00Z
+Preferred-Languages: en, sk
+Canonical: https://borisdracka.com/.well-known/security.txt
