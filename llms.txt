@@ -1,0 +1,17 @@
+# Boris Dračka — CFO Unfiltered
+
+> Personal site of Boris Dračka, a CFO with 30 years of experience, testing what happens when AI enters the finance department: practical experiments in reporting, forecasting, controls and CFO decision-making.
+
+The site is a personal, non-commercial project. Content is available in English and Slovak.
+
+## Main sections
+
+- [Home](https://borisdracka.com/): who Boris is and what the site covers
+- [Blog](https://borisdracka.com/blog): "The CFO & AI Series" — posts with practical AI experiments for finance leaders
+- [Agents](https://borisdracka.com/agents): the library of AI agent examples referenced in the blog
+- [Slovenská verzia](https://borisdracka.com/sk/): Slovak version of the site
+
+## Feeds
+
+- [RSS feed](https://borisdracka.com/feed.xml)
+- [Sitemap](https://borisdracka.com/sitemap.xml)

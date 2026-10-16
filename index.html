@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
-  <title>Boris Dračka — CFO Unfiltered</title>
+  <title>Boris Dračka — CFO Unfiltered | AI in the Finance Department</title>
   <meta name="description" content="30 years as CFO. Now testing what happens when AI enters the finance department — practical experiments in reporting, forecasting, controls and CFO decision-making. Weekly insights for finance leaders." />
   <meta property="og:title" content="Boris Dračka — CFO Unfiltered" />
   <meta property="og:description" content="30 years as CFO. Now testing what happens when AI enters the finance department." />
@@ -23,6 +23,7 @@
   <!-- Security headers -->
   <meta http-equiv="X-Frame-Options" content="DENY" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
 
@@ -109,6 +110,9 @@
       gap: 20px;
     }
     .nav-blog {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
       font-size: 0.88rem;
       font-weight: 600;
       color: var(--mid);
@@ -119,6 +123,7 @@
     .nav-x {
       display: flex;
       align-items: center;
+      min-height: 24px;
       gap: 6px;
       font-size: 0.88rem;
       font-weight: 600;
@@ -147,6 +152,11 @@
       font-weight: 700;
     }
     .nav-lang a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      min-height: 24px;
       color: var(--mid);
       text-decoration: none;
       transition: color 0.2s;
@@ -465,6 +475,7 @@
     .x-link {
       display: inline-flex;
       align-items: center;
+      min-height: 24px;
       gap: 8px;
       margin-top: 28px;
       color: var(--mid);
@@ -484,7 +495,7 @@
       color: var(--mid);
       font-size: 0.8rem;
     }
-    footer a { color: inherit; text-decoration: underline; }
+    footer a { color: inherit; text-decoration: underline; display: inline-block; padding: 4px 0; }
 
     /* ── PROOF STRIP ── */
     .proof-strip {
@@ -611,6 +622,7 @@
     .article-link {
       display: inline-flex;
       align-items: center;
+      min-height: 24px;
       gap: 6px;
       color: var(--orange);
       text-decoration: none;
