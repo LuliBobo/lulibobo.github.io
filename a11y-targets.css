@@ -1,0 +1,14 @@
+/* WCAG 2.2 AA 2.5.8: ovládacie prvky v hlavičke, nav a pätičke aspoň 24x24 px.
+   Padding zväčší klikateľnú plochu bez posunu textu pri inline odkazoch. */
+header a, nav a, footer a, .nav-lang a, .agent-links a, button.bw-pause {
+  min-height: 24px;
+  box-sizing: border-box;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+a[data-lang] {
+  display: inline-block;
+  min-width: 24px;
+  margin-inline: -3.5px;
+  text-align: center;
+}
