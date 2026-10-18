@@ -5,8 +5,16 @@
   <subtitle>One CFO&#x27;s honest account of testing AI in finance.</subtitle>
   <link rel="self" type="application/atom+xml" href="https://borisdracka.com/feed.xml" />
   <link rel="alternate" type="text/html" href="https://borisdracka.com/blog" />
-  <updated>2026-10-10T14:00:00+02:00</updated>
+  <updated>2026-10-17T14:00:00+02:00</updated>
   <author><name>Boris Dračka</name><uri>https://borisdracka.com/</uri></author>
+  <entry>
+    <id>https://borisdracka.com/blog/post-14</id>
+    <title>What the Gap Between Two Lists Quietly Costs</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-14" />
+    <published>2026-10-17T14:00:00+02:00</published>
+    <updated>2026-10-17T14:00:00+02:00</updated>
+    <summary>What a revolving credit line quietly costs when a gap between payments and receipts is only seen on the day it has to be paid.</summary>
+  </entry>
   <entry>
     <id>https://borisdracka.com/blog/post-13</id>
     <title>What Changes When You Can See Both Sides of Cash at Once</title>
