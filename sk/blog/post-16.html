@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Platba, ktorá nevyzerala ako ostatné | CFO Unfiltered</title>
+<meta name="description" content="Príspevok #16 z 50 v sérii The CFO & AI Series: ako vlastná história každého dodávateľa, nie jeden spoločný limit, ukáže, ktorá platba vyčnieva, a ako musí vyzerať bežný týždeň, aby tá nezvyčajná vynikla.">
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-16">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-16">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-16">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-16">
+
+<meta property="og:title" content="Platba, ktorá nevyzerala ako ostatné">
+<meta property="og:description" content="Ako vlastná história každého dodávateľa, nie jeden spoločný limit, ukáže, ktorá platba vyčnieva, a ako musí vyzerať bežný týždeň, aby tá nezvyčajná vynikla.">
+<meta property="og:image" content="https://borisdracka.com/og/post-16.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-16">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-10-31T09:00:00+02:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Záväzky">
+<meta property="article:tag" content="Kontroly">
+<meta property="article:tag" content="Základňa">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-16.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+/* Hero */
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+/* Gap table */
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+/* GitHub / demo teaser section */
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Follow the series */
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+/* Footer */
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/sk/blog/post-16#article",
+"headline": "Platba, ktorá nevyzerala ako ostatné",
+"description": "Ako vlastná história každého dodávateľa, nie jeden spoločný limit, ukáže, ktorá platba vyčnieva, a ako musí vyzerať bežný týždeň, aby tá nezvyčajná vynikla.",
+"image": "https://borisdracka.com/og/post-16.png",
+"url": "https://borisdracka.com/sk/blog/post-16",
+"datePublished": "2026-10-31T09:00:00+02:00",
+"dateModified": "2026-10-31T09:00:00+02:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "sk",
+"articleSection": "Finance",
+"position": 16,
+"isPartOf": { "@type": "CreativeWorkSeries", "@id": "https://borisdracka.com/sk/blog#series", "name": "The CFO & AI Series", "url": "https://borisdracka.com/sk/blog" },
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/sk/blog/post-16" }
+}
+</script>
+<link rel="stylesheet" href="/a11y-targets.css">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/sk/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+<a data-lang href="https://borisdracka.com/blog/post-16">EN</a>/<a data-lang href="https://borisdracka.com/sk/blog/post-16" class="lang-active">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Záväzky · Kontroly · Základňa</div>
+<h1>Platba, ktorá nevyzerala ako ostatné</h1>
+<p class="hero-subtitle">Príspevok #8 ukázal poplach, ktorý bol zlý. Tento sa pýta, čo potrebuje poplach, aby mal právo spustiť sa: obraz toho, ako vyzerá bežný týždeň.</p>
+<div class="hero-meta">Boris Dračka · október 2026 · 6 min čítania</div>
+<span class="series-label">Príspevok #16 z 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">Príklady a architektúry v tejto sérii vznikajú ako moje osobné vzdelávacie a nekomerčné experimenty; nejde o ponuku IT alebo poradenských služieb.</p>
+
+<p class="lead">Nikto si nevšimne platbu, ktorá vyzerá ako predchádzajúcich štyridsať. Práve preto je tá štyridsiata prvá zaujímavá.</p>
+
+<p>Týždeň nižšie je kompozitná ilustrácia postavená na vzorcoch, ktoré som opakovane videl u finančných tímov v priebehu rokov. Dodávatelia, sumy aj signály sú vymyslené; nepopisujú konkrétnu spoločnosť, dodávateľa ani incident.</p>
+
+<h2>Štyridsaťdva platieb, jedna vyzerá inak</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">42</div><div class="label">Platieb v tomto kompozitnom týždni</div></div>
+<div class="stat"><div class="num">1</div><div class="label">Označená na druhý pohľad</div></div>
+<div class="stat"><div class="num">3</div><div class="label">Signály, ktoré ju odlíšili: suma, účet, deň</div></div>
+</div>
+
+<h2>Nezvyčajné neuvidíte, kým nepoznáte bežné</h2>
+
+<p>Jeden limit, povedzme „všetko nad 10 000 €", vidí v každom dodávateľovi to isté: číslo. Lenže 10 000 € je pri jednom dodávateľovi rutina a pri inom obrovská suma. Vyčnieva platba, ktorá sa líši od vlastnej histórie toho dodávateľa.</p>
+
+<div style="overflow-x:auto"><table class="gap-table">
+<tr><th>Dodávateľ (vymyslený)</th><th>Obvyklá suma</th><th>Obvyklý deň</th><th>Známe účty</th></tr>
+<tr><td>Suroviny</td><td class="num-cell">≈ 18 300 €</td><td>Ut</td><td>1</td></tr>
+<tr><td>Dopravca</td><td class="num-cell">≈ 2 850 €</td><td>Št</td><td>1</td></tr>
+<tr><td>Dodávateľ údržby</td><td class="num-cell">≈ 4 200 €</td><td>Ut</td><td>1</td></tr>
+<tr><td>Softvérová platforma</td><td class="num-cell">2 400 € (pevná)</td><td>Ut</td><td>1</td></tr>
+<tr><td>Kuriérske služby</td><td class="num-cell">≈ 415 €</td><td>Št</td><td>1</td></tr>
+<tr><td>Poisťovací maklér</td><td class="num-cell">5 200 € (pevná)</td><td>Št</td><td>1</td></tr>
+</table></div>
+
+<h2>Tá, ktorá vyčnievala</h2>
+
+<table class="gap-table">
+<tr><th>Signál</th><th>Obvyklé pre tohto dodávateľa</th><th>Táto platba</th></tr>
+<tr><td>Suma</td><td>≈ 4 200 €</td><td class="num-cell">14 400 € (3,4×)</td></tr>
+<tr><td>Účet</td><td>Ten, ktorý sa používal doteraz</td><td class="num-cell">Nový</td></tr>
+<tr><td>Deň</td><td>Utorok</td><td class="num-cell">Piatok</td></tr>
+</table>
+
+<p>Žiadny z tých troch nie je sám o sebe usvedčujúci. Dodávateľ môže poslať vyššiu faktúru, zmeniť banku a požiadať o platbu v piatok. Dokopy stoja za telefonát na číslo, ktoré už máte.</p>
+
+<h2>Väčšina nezvyčajných platieb sú chyby</h2>
+
+<table class="gap-table">
+<tr><th>Ako to vyzerá</th><th>Ako to naozaj je</th></tr>
+<tr>
+<td>Kontrola platieb slúži na odhaľovanie podvodov</td>
+<td>V mnohých tímoch, ktoré poznám, sa väčšina nezvyčajných platieb ukáže ako chyba: duplicita, preklep v sume, zlý dátum</td>
+</tr>
+<tr>
+<td>Jeden limit pre všetkých dodávateľov stačí</td>
+<td>Jeden limit je príliš vysoký pre malých dodávateľov a príliš nízky pre veľkých. Lepšou mierkou je história každého dodávateľa</td>
+</tr>
+<tr>
+<td>Upozornenie má byť zriedkavé</td>
+<td>Upozornenie, ktoré sa spúšťa každý deň, je len veľmi drahý kalendár</td>
+</tr>
+<tr>
+<td>Citlivejšie je bezpečnejšie</td>
+<td>Citlivejšie znamená viac falošných poplachov, a príspevok #8 ukázal, čo príde potom: ľudia ich prestanú čítať</td>
+</tr>
+</table>
+
+<h2>Príliš úzke, príliš voľné, tak akurát</h2>
+
+<p>Tolerancia je rozhodnutie, nie nastavenie. V tomto kompozitnom týždni úzke pásmo označí deväť platieb, voľné pásmo žiadnu (ani tú nezvyčajnú) a pásmo uprostred presne jednu.</p>
+
+<table class="gap-table">
+<tr><th>Pásmo</th><th>Označených platieb</th><th>Čo sa stane</th></tr>
+<tr><td>Príliš úzke</td><td class="num-cell">9</td><td>Osem falošných poplachov a ľudia ich prestanú čítať</td></tr>
+<tr><td>Príliš voľné</td><td class="num-cell">0</td><td>Nezvyčajná platba prejde bez povšimnutia</td></tr>
+<tr><td>Tak akurát</td><td class="num-cell">1</td><td>Jeden telefonát</td></tr>
+</table>
+
+<div class="obl" role="group" aria-label="Motion graphic">
+<div class="window">
+    <div class="head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="title">platby — jeden dodávateľ, ilustratívna kompozícia</span><button class="pause" id="obl-pause" type="button" aria-pressed="false">Pauza</button></div>
+
+    <div class="counters">
+      <div class="counter"><div class="n">42</div><div class="l">Platieb v týždni (všetci dodávatelia)</div></div>
+      <div class="counter" id="obl-cFlag"><div class="n" id="obl-nFlag">—</div><div class="l">Označené tento týždeň</div></div>
+      <div class="counter"><div class="n" id="obl-nTol">—</div><div class="l">Tolerancia (rozptyly od obvyklého)</div></div>
+    </div>
+
+    <div class="stage" id="obl-stage" role="img" aria-label="Osemnásť platieb jednému dodávateľovi za deväť týždňov ako body. Tieňované pásmo ukazuje obvyklý rozsah dodávateľa. V deviatom týždni pristane jedna platba ďaleko nad pásmom, na nový účet a v nezvyčajný deň. Úzke pásmo označí za týždeň deväť platieb, veľmi voľné žiadnu a pásmo uprostred presne jednu."></div>
+
+    <div class="caption" aria-live="polite">
+      <div class="scene" id="obl-scene"></div>
+      <div class="line" id="obl-line"></div>
+    </div>
+  </div>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw dotc"></i>Platba</span>
+    <span><i class="sw dotr"></i>Mimo pásma</span>
+    <span><i class="sw bandc"></i>Obvyklé pásmo tohto dodávateľa</span>
+  </div>
+  <p class="note">Ilustratívna kompozícia k Príspevku #16. Dodávateľ, sumy a týždne sú vymyslené vzorové dáta a nepopisujú konkrétnu spoločnosť, dodávateľa ani incident.</p>
+</div>
+<style>
+.obl{
+    --muted: #4E483F; --line: #DCD5C7;
+  --card: #1A1714; --card-head: #111111; --card-line: #2a2a2a;
+  --ink: #dddddd; --ink-dim: #8a8a8a;
+  --accent: #C21F2F; --accent-on-dark: #ff7a7a; --good: #7fd99a;
+  --f-serif: 'IBM Plex Serif', Georgia, serif;
+  --f-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
+.obl .window{ background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-line); }
+.obl .head{ background: var(--card-head); padding: 12px 16px; display: flex; align-items: center; gap: 8px; font: 500 12px var(--f-mono); color: #888; }
+.obl .dot{ width: 9px; height: 9px; border-radius: 50%; background: #444; flex: 0 0 auto; }
+.obl .head .title{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.obl .pause{ margin-left: auto; background: none; border: 1px solid #333; color: #999; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+.obl .pause:hover{ color: #fff; border-color: #555; }
+.obl .pause:focus-visible{ outline: 2px solid var(--accent-on-dark); outline-offset: 2px; }
+.obl .counters{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--card-line); }
+.obl .counter{ padding: 14px 16px; border-right: 1px solid var(--card-line); min-width: 0; }
+.obl .counter:last-child{ border-right: 0; }
+.obl .counter .n{ font: 700 24px/1 var(--f-mono); color: #fff; font-variant-numeric: tabular-nums; transition: color .3s; white-space: nowrap; }
+.obl .counter .l{ font-size: 11.5px; color: var(--ink-dim); margin-top: 7px; line-height: 1.35; }
+.obl .counter.bad .n{ color: var(--accent-on-dark); }
+.obl .counter.good .n{ color: var(--good); }
+.obl .stage{ position: relative; height: 290px; margin: 12px 16px 6px; }
+.obl .band{ position: absolute; left: 0; right: 0; background: rgba(127,217,154,.14); border-top: 1.5px dashed rgba(127,217,154,.6); border-bottom: 1.5px dashed rgba(127,217,154,.6); transition: top .8s cubic-bezier(.4,0,.2,1), height .8s cubic-bezier(.4,0,.2,1), opacity .5s; }
+.obl .bandlab{ position: absolute; left: 34px; transform: translateY(-100%); font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--good); padding-bottom: 3px; transition: top .8s cubic-bezier(.4,0,.2,1), opacity .5s; }
+.obl .pt{ position: absolute; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: #dddddd; border: 2px solid var(--card); opacity: 0; transform: scale(.4); transition: opacity .3s, transform .3s, background .3s; }
+.obl .pt.on{ opacity: 1; transform: scale(1); }
+.obl .pt.out{ background: var(--accent-on-dark); }
+.obl .pt.odd{ width: 15px; height: 15px; margin: -7.5px 0 0 -7.5px; box-shadow: 0 0 0 4px rgba(255,122,122,.25); }
+.obl .wk{ position: absolute; bottom: 0; transform: translateX(-50%); font: 600 10px var(--f-mono); color: var(--ink-dim); }
+.obl .yl{ position: absolute; left: 0; font: 500 10px var(--f-mono); color: #666; transform: translateY(-50%); }
+.obl .grid{ position: absolute; left: 0; right: 0; border-top: 1px solid #262626; }
+.obl .call{ position: absolute; font: 700 10px var(--f-mono); letter-spacing: .03em; text-transform: uppercase; color: var(--accent-on-dark); background: rgba(194,31,47,.18); border: 1px solid rgba(255,122,122,.5); border-radius: 4px; padding: 3px 7px; white-space: nowrap; opacity: 0; transform: translateX(6px); transition: opacity .35s, transform .35s; }
+.obl .call.on{ opacity: 1; transform: none; }
+.obl .caption{ border-top: 1px solid var(--card-line); padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; min-height: 86px; }
+.obl .scene{ font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-on-dark); }
+.obl .line{ font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.obl .legend{ display: flex; flex-wrap: wrap; gap: 6px 16px; font: 500 12px var(--f-mono); color: var(--muted); }
+.obl .legend span{ display: inline-flex; align-items: center; gap: 7px; }
+.obl .sw{ width: 12px; height: 12px; flex: 0 0 auto; }
+.obl .sw.dotc{ border-radius: 50%; background: #8a8478; }
+.obl .sw.dotr{ border-radius: 50%; background: #c8454f; }
+.obl .sw.bandc{ border-radius: 3px; background: rgba(90,180,120,.3); border: 1.5px dashed #4a9a66; }
+.obl .note{ font-size: 12.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; }
+@media (max-width: 560px){.obl .stage{ margin-inline: 10px; }.obl .counter{ padding: 12px 10px; }.obl .counter .n{ font-size: 19px; }.obl .counter .l{ font-size: 10.5px; }.obl .call{ font-size: 8.5px; padding: 2px 5px; }}
+@media (prefers-reduced-motion: reduce){.obl .band, .obl .bandlab, .obl .pt, .obl .call{ transition: none !important; }}
+.obl{display:flex;flex-direction:column;gap:14px;margin:8px 0 36px;font-family:var(--f-sans)}
+</style>
+<script>
+
+(function () {
+  var PTS = [[1,4252,0],[1,4134,0],[2,3727,0],[2,4210,0],[3,4357,0],[3,4493,0],[4,4218,0],[4,3994,0],[5,4218,0],[5,4470,0],[6,3960,0],[6,4448,0],[7,4026,0],[7,4075,0],[8,4391,0],[8,4039,0],[9,3997,0],[9,14400,1]];
+  var MED = 4214, SCALE = 261;                       // this supplier's median and robust spread (from the sample data)
+  var VMAX = 16000, TOP = 6, H = 252, WEEKS = 9;
+  var stage = document.getElementById('obl-stage');
+  var nFlag = document.getElementById('obl-nFlag'), nTol = document.getElementById('obl-nTol'), cFlag = document.getElementById('obl-cFlag');
+  var sceneEl = document.getElementById('obl-scene'), lineEl = document.getElementById('obl-line'), pauseBtn = document.getElementById('obl-pause');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function y(v) { return TOP + (1 - v / VMAX) * H; }
+  [0, 4000, 8000, 12000, 16000].forEach(function (v) {
+    var g = document.createElement('div'); g.className = 'grid'; g.style.top = y(v) + 'px'; stage.appendChild(g);
+    var l = document.createElement('div'); l.className = 'yl'; l.style.top = y(v) + 'px'; l.textContent = v ? (v / 1000) + 'k' : '0'; l.style.left = '0'; stage.appendChild(l);
+  });
+  for (var w = 1; w <= WEEKS; w++) { var e = document.createElement('div'); e.className = 'wk'; e.style.left = ((w - 0.5) / WEEKS * 100) + '%'; e.textContent = 'T' + w; stage.appendChild(e); }
+  var band = document.createElement('div'); band.className = 'band'; stage.appendChild(band);
+  var bandlab = document.createElement('div'); bandlab.className = 'bandlab'; bandlab.textContent = 'Obvyklé pásmo'; stage.appendChild(bandlab);
+
+  var dots = PTS.map(function (p, i) {
+    var d = document.createElement('div'); d.className = 'pt' + (p[1] > 10000 ? ' odd' : '');
+    var off = (i % 2 === 0 ? -1 : 1) * 0.16;
+    d.style.left = ((p[0] - 0.5 + off) / WEEKS * 100) + '%'; d.style.top = y(p[1]) + 'px'; stage.appendChild(d); return d;
+  });
+  var odd = dots[dots.length - 1];
+  var calls = ['Suma 3,4× obvyklá', 'Nový účet', 'Piatok, obvykle utorok'].map(function (t, k) {
+    var c = document.createElement('div'); c.className = 'call'; c.textContent = t; c.style.top = (y(14400) - 8 + k * 24) + 'px'; stage.appendChild(c); return c;
+  });
+  function placeCalls() { var left = parseFloat(odd.style.left); calls.forEach(function (c) { c.style.right = 'auto'; c.style.left = 'calc(' + left + '% - ' + c.offsetWidth + 'px - 18px)'; }); }
+  window.addEventListener('resize', placeCalls);
+
+  function setBand(tol, on) {
+    var lo = MED - tol * SCALE, hi = MED + tol * SCALE;
+    var yt = y(Math.min(hi, VMAX)), yb = y(Math.max(lo, 0));
+    band.style.top = yt + 'px'; band.style.height = Math.max(yb - yt, 2) + 'px'; band.style.opacity = on ? 1 : 0;
+    bandlab.style.top = (yt - 1) + 'px'; bandlab.style.opacity = on ? 1 : 0;
+    dots.forEach(function (d, i) { var v = PTS[i][1]; d.classList.toggle('out', on && (v < lo || v > hi)); });
+  }
+  var COPY = [
+    ['1 · Naučiť sa, čo je bežné', 'Deväť týždňov platieb jedného dodávateľa. Zhlukujú sa a ten zhluk je vlastné obvyklé pásmo dodávateľa.'],
+    ['2 · Nezvyčajná vyčnieva', 'V 9. týždni príde platba ďaleko nad pásmom, na nový účet a v nezvyčajný deň. Každý signál sám osebe je vysvetliteľný.'],
+    ['3 · Príliš úzke, príliš voľné, tak akurát', '']
+  ];
+  function copy(n, t) { sceneEl.textContent = COPY[n][0]; lineEl.textContent = t || COPY[n][1]; }
+  var timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function cancel() { timers.forEach(clearTimeout); timers = []; }
+  function showDots(upTo) { dots.forEach(function (d, i) { d.classList.toggle('on', i < upTo); }); }
+  function setFlags(n, tol, bad) { nFlag.textContent = n === null ? '—' : String(n); nTol.textContent = tol === null ? '—' : String(tol).replace('.', ','); cFlag.classList.toggle('bad', !!bad); cFlag.classList.toggle('good', n === 1); }
+
+  function sceneOne() {
+    cancel(); copy(0); showDots(0); calls.forEach(function (c) { c.classList.remove('on'); }); setBand(3.5, false); setFlags(null, null);
+    var upTo = dots.length - 2;                       // weeks 1–8 (16 points) + the ordinary week-9 point
+    for (var i = 1; i <= upTo; i++) (function (i) { later(function () { showDots(i); }, 240 * i); })(i);
+    later(function () { setBand(3.5, true); setFlags(null, 3.5); }, 240 * upTo + 400);
+  }
+  function sceneTwo() {
+    cancel(); copy(1); showDots(dots.length - 1); setBand(3.5, true); setFlags(0, 3.5);
+    later(function () { showDots(dots.length); placeCalls(); }, 500);
+    calls.forEach(function (c, k) { later(function () { c.classList.add('on'); }, 1100 + 450 * k); });
+    later(function () { setFlags(1, 3.5); }, 1100);
+  }
+  function sceneThree() {
+    cancel(); showDots(dots.length); placeCalls(); calls.forEach(function (c) { c.classList.remove('on'); });
+    copy(2, 'Úzke pásmo označí za týždeň deväť platieb, väčšinou falošné poplachy.'); setBand(1.5, true); setFlags(9, 1.5, true);
+    later(function () { copy(2, 'Veľmi voľné pásmo neoznačí žiadnu a nezvyčajná platba prejde bez povšimnutia.'); setBand(60, true); setFlags(0, 60, true); }, 1500);
+    later(function () { copy(2, 'Pásmo uprostred označí presne jednu: platbu, ktorá si zaslúži telefonát.'); setBand(3.5, true); setFlags(1, 3.5, false); calls.forEach(function (c) { c.classList.add('on'); }); }, 3000);
+  }
+  function finalState() { cancel(); copy(2, 'Pásmo uprostred označí presne jednu: platbu, ktorá si zaslúži telefonát.'); showDots(dots.length); setBand(3.5, true); setFlags(1, 3.5, false); placeCalls(); calls.forEach(function (c) { c.classList.add('on'); }); }
+
+  var idx = 0, running = true, timer = null;
+  var steps = [[sceneOne, 4600], [sceneTwo, 4200], [sceneThree, 4800]];
+  function run() { steps[idx][0](); if (!running) return; timer = setTimeout(function () { idx = (idx + 1) % steps.length; run(); }, steps[idx][1]); }
+
+  if (reduce) { finalState(); pauseBtn.hidden = true; }
+  else {
+    run();
+    pauseBtn.addEventListener('click', function () {
+      running = !running; pauseBtn.textContent = running ? 'Pauza' : 'Prehrať'; pauseBtn.setAttribute('aria-pressed', String(!running));
+      if (running) { idx = (idx + 1) % steps.length; run(); } else { clearTimeout(timer); cancel(); }
+    });
+  }
+})();
+
+</script>
+
+<div class="pullquote">
+<p>Upozornenie je také dobré, aké dobré je „bežné", s ktorým sa porovnáva.</p>
+</div>
+
+<h2>Čo musí taká kontrola obsahovať</h2>
+
+<table class="gap-table">
+<tr><th>Časť</th><th>Čo robí</th></tr>
+<tr>
+<td>Základňa pre každého dodávateľa</td>
+<td>Obvyklá suma a rozptyl, obvyklý deň v týždni a známe účty, z posledných mesiacov</td>
+</tr>
+<tr>
+<td>Tolerancia</td>
+<td>Ako ďaleko od obvyklého sa ráta za nezvyčajné, vyladená na minulých týždňoch, nie odhadnutá</td>
+</tr>
+<tr>
+<td>Dôvody</td>
+<td>Každé označenie povie prečo, jednoduchými slovami</td>
+</tr>
+<tr>
+<td>Ľudský krok</td>
+<td>Kontrola len hlási. O ďalšom kroku rozhoduje človek</td>
+</tr>
+</table>
+
+<p>Pripravil som si na to malý skript, ktorý robí presne toto nad vymyslenými platbami: z predchádzajúcich týždňov postaví základňu každého dodávateľa, skontroluje voči nej jeden týždeň a vypíše, čo vyzerá inak, aj s dôvodom. Len číta a hlási a nenahrádza kontroly, ktoré vaša organizácia už má. Je v tom istom osobnom, nekomerčnom repozitári ako predchádzajúce demá z tejto série.</p>
+
+<div class="github-section">
+<h3>Existuje na to malý prototyp</h3>
+<p><code>anomaly_watch_agent.py</code> načíta CSV s platbami a vypíše tie, ktoré nevyzerajú ako história ich dodávateľa, aj s dôvodom, nad vzorovými dátami.</p>
+<a class="btn-primary" href="https://borisdracka.com/sk/blog/post-16-demo">Pozrieť si postup</a>
+<a class="btn-secondary" href="https://github.com/LuliBobo/cfo-agents">Zobraziť na GitHub</a>
+</div>
+
+<p>Prvý test, ktorý by som spravil, je jednoduchý: zobrať platby za minulý mesiac, zoradiť ich podľa vzdialenosti od vlastnej histórie dodávateľa a prečítať prvých desať. Spočítajte, koľko je chýb, koľko je vysvetlených a koľko si zaslúži telefonát.</p>
+
+<div class="followup">
+<h4>Sledujte sériu</h4>
+<p>Príspevok #17 sa pozrie na iné slepé miesto: maržu na jednom produkte alebo zákazníkovi a ako sa môže prepadnúť do mínusu, bez toho, aby si to niekto všimol v mesačnom priemere.</p>
+</div>
+
+<div class="cta-box">
+<h3>Kedy sa váš tím naposledy pozrel na platbu, lebo nevyzerala ako ostatné, a čo sa z toho vyklubalo?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Odoberať zadarmo</a>
+<div class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhlásenie kedykoľvek.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Ochrana súkromia</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/sk/">Domov</a>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-16">English version</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+</div>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>

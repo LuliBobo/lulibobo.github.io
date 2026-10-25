@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>The Script That Knows What a Normal Week Looks Like | CFO Unfiltered</title>
+<meta name="description" content="A walkthrough of a small script that checks each payment against its own supplier's history and prints the ones that look different — the Post #16 companion demo.">
+<link rel="canonical" href="https://borisdracka.com/blog/post-16-demo">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-16-demo">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-16-demo">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-16-demo">
+
+<meta property="og:title" content="The Script That Knows What a Normal Week Looks Like">
+<meta property="og:description" content="A small script that builds a baseline per supplier and prints the payments that don't look like their own history, with the reason.">
+<meta property="og:image" content="https://borisdracka.com/og/post-16.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/blog/post-16-demo">
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-16.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--white); color: var(--dark); font-family: 'IBM Plex Sans', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--orange); }
+.site-header { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; z-index: 100; }
+.site-header .logo { font-size: 15px; font-weight: 700; color: #1A1714; text-decoration: none; letter-spacing: -0.02em; }
+.site-header nav a { font-size: 13px; color: #666; text-decoration: none; margin-left: 20px; }
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+
+.hero { background: var(--dark); padding: 56px 24px 48px; text-align: center; }
+.hero-inner { max-width: 760px; margin: 0 auto; }
+.hero-tag { display: inline-block; background: var(--orange); color: white; font-size: 12px; font-weight: 700; border-radius: 4px; padding: 3px 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
+.hero h1 { color: white; font-family: 'IBM Plex Serif', Georgia, serif; font-size: clamp(26px, 5vw, 42px); font-weight: 900; line-height: 1.2; letter-spacing: -1px; margin: 0 0 14px; }
+.hero h1 span { color: var(--orange); }
+.hero-subtitle { color: #bbb; font-size: 1.05rem; line-height: 1.6; margin: 0 auto 20px; max-width: 600px; }
+.hero-meta { font-size: 13px; color: #999; }
+
+.content { max-width: 760px; margin: 0 auto; padding: 52px 24px 80px; }
+.content p { font-size: 17px; line-height: 1.75; margin: 0 0 22px; color: var(--dark); }
+.content p.disclaimer { font-size: 14px; font-style: italic; color: var(--mid); border-left: 3px solid var(--border); padding: 4px 0 4px 16px; margin: 0 0 32px; }
+.content h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: var(--dark); margin: 44px 0 18px; }
+.content h3 { font-size: 18px; font-weight: 700; color: var(--dark); margin: 30px 0 12px; }
+
+.stat-strip { display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-around; background: var(--light); border: 1px solid var(--border); border-radius: 14px; padding: 26px 20px; margin: 32px 0 40px; }
+.stat-strip .stat { text-align: center; flex: 1 1 160px; }
+.stat-strip .num { font-size: 26px; font-weight: 900; color: var(--orange-d); line-height: 1; font-family: 'IBM Plex Mono', monospace; }
+.stat-strip .label { font-size: 12px; color: var(--mid); margin-top: 8px; }
+
+.pullquote { border-left: 4px solid #C21F2F; background: #F3F0E7; border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 32px 0; }
+.pullquote p { font-size: 19px; font-style: italic; color: #333; line-height: 1.6; margin: 0; }
+
+.balance-window { background: var(--dark); border-radius: 14px; overflow: hidden; margin: 28px 0 40px; }
+.balance-window .bw-header { background: #111; padding: 12px 18px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #888; display: flex; gap: 8px; align-items: center; }
+.balance-window .bw-dot { width: 9px; height: 9px; border-radius: 50%; background: #444; display: inline-block; }
+.balance-window table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Mono', monospace; font-size: 13px; }
+.balance-window th { text-align: left; padding: 10px 16px; color: #888; font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.06em; border-bottom: 1px solid #2a2a2a; }
+.balance-window td { padding: 12px 16px; color: #ddd; border-bottom: 1px solid #232323; }
+.balance-window .as-name { color: #fff; font-weight: 600; }
+.balance-window .badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.balance-window .badge.warning { background: rgba(194,31,47,0.18); color: #ff7a7a; }
+.balance-window .badge.clear { background: rgba(90,180,120,0.15); color: #7fd99a; }
+.balance-window tbody tr { will-change: transform; }
+.balance-window .bw-pause { margin-left: auto; background: none; border: 1px solid #333; color: #999; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 9px; border-radius: 5px; cursor: pointer; }
+.balance-window .bw-pause:hover { color: #fff; border-color: #555; }
+.balance-window .bw-pause:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.balance-window .bw-status { display: flex; align-items: center; gap: 9px; padding: 11px 16px 13px; border-top: 1px solid #2a2a2a; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #aaa; }
+.balance-window .bw-status .bw-status-dot { width: 7px; height: 7px; border-radius: 50%; background: #666; flex: 0 0 auto; transition: background 300ms ease; }
+.balance-window .bw-status.is-suggested { color: #e8c9c9; }
+.balance-window .bw-status.is-suggested .bw-status-dot { background: var(--orange); }
+@media (prefers-reduced-motion: reduce) {
+.balance-window tbody tr { transition: none !important; }
+}
+
+.pipeline { display: flex; flex-direction: column; gap: 0; margin: 28px 0 40px; }
+.pipeline .step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.pipeline .step:last-child { border-bottom: none; }
+.pipeline .step-num { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--orange); color: white; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; }
+.pipeline .step-text strong { display: block; font-size: 15px; color: var(--dark); margin-bottom: 3px; }
+.pipeline .step-text span { font-size: 14px; color: var(--mid); }
+
+.tutorial-step { margin: 0 0 26px; }
+.tutorial-step h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin: 0 0 10px; font-family: 'IBM Plex Mono', monospace; }
+.code-block { background: #1A1714; color: #e8e4da; border-radius: 10px; padding: 18px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.65; overflow-x: auto; white-space: pre; }
+.code-block .cmt { color: #888; }
+.code-block .out-ok { color: #7fd99a; }
+.code-block .out-warn { color: #ff9d8a; }
+
+.tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 28px 0 40px; }
+.tech-card { border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.tech-card h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin: 0 0 6px; }
+.tech-card p { font-size: 13px; color: var(--mid); margin: 0; line-height: 1.55; }
+
+.github-section { background: var(--light); border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin: 40px 0; }
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 16px; }
+.github-section ul { margin: 0 0 20px; padding-left: 20px; }
+.github-section li { font-size: 14px; color: var(--mid); margin-bottom: 6px; }
+.repo-name { font-family: 'IBM Plex Mono', monospace; background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; font-size: 13px; }
+.btn-primary { background: var(--orange); color: white; padding: 14px 28px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; border: none; text-decoration: none; display: inline-block; cursor: pointer; }
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary { background: transparent; color: var(--dark); border: 2px solid var(--border); padding: 12px 26px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-block; margin-left: 10px; }
+.btn-secondary:hover { border-color: var(--dark); }
+
+.cta-box { background: #1A1714; border-radius: 14px; padding: 40px 36px; text-align: center; margin-top: 40px; }
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 10px; line-height: 1.4; }
+.cta-box p { font-size: 15px; color: #bbb; margin: 0 0 22px; }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+footer { background: var(--dark); padding: 28px 48px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid #222; }
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+@media (max-width: 700px) {
+.tech-grid { grid-template-columns: 1fr; }
+.hero { padding: 40px 20px; }
+.content { padding: 36px 16px 60px; }
+.balance-window { overflow-x: auto; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+</style>
+<link rel="stylesheet" href="/a11y-targets.css">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-16">← Back to Post #16</a>
+<a data-lang href="https://borisdracka.com/blog/post-16-demo" class="lang-active">EN</a>/<a data-lang href="https://borisdracka.com/sk/blog/post-16-demo">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<span class="hero-tag">Post #16 Companion — The CFO & AI Series</span>
+<h1>The Script That Knows What a <span>Normal Week</span><br>Looks Like</h1>
+<p class="hero-subtitle">A small script that checks each payment against its own supplier's history and prints the ones that look different — with the reason, before anyone approves the run.</p>
+<div class="hero-meta">Boris Dračka · October 2026 · Companion demo</div>
+</div>
+</section>
+
+<div class="content">
+
+<p class="disclaimer">This is a personal, non-commercial side project I put together to learn — not a product or service.</p>
+
+<p>Post #16 argued that an odd payment only stands out against a normal one. Below is a small prototype that builds that normal from sample data and checks one week against it.</p>
+
+<div class="stat-strip">
+<div class="stat"><div class="num">42</div><div class="label">Sample payments checked</div></div>
+<div class="stat"><div class="num">1</div><div class="label">Flagged for a second look</div></div>
+<div class="stat"><div class="num">3.4×</div><div class="label">Flagged amount against the supplier's usual</div></div>
+</div>
+
+<div class="pullquote">
+<p>The script doesn't decide whether a payment is fine. It writes down, in one place, what each supplier's own history says is normal, and shows where this week disagrees.</p>
+</div>
+
+<h2>The sample data</h2>
+<p>Eighteen made-up suppliers, nine weeks of payments, and one week to check. For each supplier the script builds a baseline from the earlier weeks: the usual amount and spread, the usual weekday and the accounts it has used.</p>
+
+<div class="balance-window">
+<div class="bw-header"><span class="bw-dot"></span><span class="bw-dot"></span><span class="bw-dot"></span>&nbsp;&nbsp;payments.csv — sample data, six of eighteen suppliers</div>
+<table>
+<thead>
+<tr><th>Supplier</th><th>Usual amount</th><th>Usual day</th><th>This week</th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr><td class="as-name">Raw Materials Supplier</td><td>≈ 18,262</td><td>Tue</td><td>3 payments</td><td><span class="badge clear">In band</span></td></tr>
+<tr><td class="as-name">Freight Carrier</td><td>≈ 2,853</td><td>Thu</td><td>4 payments</td><td><span class="badge clear">In band</span></td></tr>
+<tr><td class="as-name">Maintenance Contractor</td><td>≈ 4,214</td><td>Tue</td><td>2 payments</td><td><span class="badge warning">Flagged</span></td></tr>
+<tr><td class="as-name">Software Platform</td><td>2,400 (fixed)</td><td>Tue</td><td>1 payment</td><td><span class="badge clear">In band</span></td></tr>
+<tr><td class="as-name">Courier Services</td><td>≈ 415</td><td>Thu</td><td>4 payments</td><td><span class="badge clear">In band</span></td></tr>
+<tr><td class="as-name">Insurance Broker</td><td>5,200 (fixed)</td><td>Thu</td><td>1 payment</td><td><span class="badge clear">In band</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>How it works</h2>
+<div class="pipeline">
+<div class="step"><div class="step-num">1</div><div class="step-text"><strong>Load the payments</strong><span>Reads a CSV with one row per payment: id, date, supplier, amount, account.</span></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text"><strong>Build a baseline per supplier</strong><span>From the payments before the week: median amount, a robust spread, the usual weekday, the known accounts.</span></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text"><strong>Check the week</strong><span>Each payment is compared with its own supplier's baseline, not with a global limit.</span></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text"><strong>Flag and explain</strong><span>An amount outside the band, a repeated amount or a new account flags a payment. An unusual weekday is shown as context only.</span></div></div>
+<div class="step"><div class="step-num">5</div><div class="step-text"><strong>Print the result</strong><span>Lists each flagged payment with its reasons. Nothing is blocked, held or sent.</span></div></div>
+</div>
+
+<h2>Try it yourself</h2>
+
+<div class="tutorial-step">
+<h4>1 — Clone the repository</h4>
+<div class="code-block"><span class="cmt"># same personal, non-commercial repo as the earlier demos in this series</span>
+git clone https://github.com/LuliBobo/cfo-agents.git
+cd cfo-agents</div>
+</div>
+
+<div class="tutorial-step">
+<h4>2 — Add your own payments (optional)</h4>
+<div class="code-block">id,date,supplier,amount,account
+P0004,2026-08-04,Packaging Supplier,6581,ACC-PAC1
+P0349,2026-10-02,Maintenance Contractor,14400,ACC-MAI2
+<span class="cmt"># ...add as many rows as you have payments; keep a few weeks of history before the week you check</span></div>
+</div>
+
+<div class="tutorial-step">
+<h4>3 — Run it</h4>
+<div class="code-block">python anomaly_watch_agent.py data/payments.csv</div>
+</div>
+
+<div class="tutorial-step">
+<h4>4 — Read the output</h4>
+<div class="code-block">================================================================
+  Anomaly Watch Agent — Unusual Payment Check
+================================================================
+
+[Step 1] Loaded 378 payment(s) from CSV
+[Step 2] Built a baseline per supplier from 336 payment(s) before 2026-09-28
+[Step 3] Checking 42 payment(s) in the week of 2026-09-28 against each supplier's own history
+
+P0349  2026-10-02 Fri  Maintenance Contractor   14,400  <span class="out-warn">⚠ amount 3.4x usual (4,214 +/- 261) · new account for this supplier · usual day Tue</span>
+
+[Step 4] <span class="out-warn">1 of 42</span> payment(s) flagged
+[Step 5] <span class="out-ok">Nothing is blocked or sent — a person looks at each flag</span></div>
+</div>
+
+<div class="tutorial-step">
+<h4>5 — Change the tolerance</h4>
+<div class="code-block"><span class="cmt"># a tight band, amount check only</span>
+python anomaly_watch_agent.py data/payments.csv --tolerance 1.5 --signals amount
+[Step 4] 9 of 42 payment(s) flagged
+
+<span class="cmt"># a very loose band, amount check only</span>
+python anomaly_watch_agent.py data/payments.csv --tolerance 60 --signals amount
+[Step 4] 0 of 42 payment(s) flagged</div>
+</div>
+
+<h2>What it's made of</h2>
+<div class="tech-grid">
+<div class="tech-card"><h4>Data source</h4><p>A plain CSV of payments — no bank connection, no ERP, nothing beyond sample data.</p></div>
+<div class="tech-card"><h4>Calculation</h4><p>Standard Python, no external dependencies — a median, a robust spread and three checks.</p></div>
+<div class="tech-card"><h4>Configurable</h4><p>The tolerance, the repeat window and which signals to use are command-line arguments, not hardcoded.</p></div>
+<div class="tech-card"><h4>Read-only by design</h4><p>The script only reads and reports. It doesn't hold, block or send a single payment, and it is not a substitute for the controls an organisation already has.</p></div>
+</div>
+
+<div class="github-section">
+<h3>What's in the repository</h3>
+<p>The same personal, non-commercial repository as the earlier demos in this series:</p>
+<ul>
+<li><span class="repo-name">anomaly_watch_agent.py</span> — the full script used above</li>
+<li><span class="repo-name">data/payments.csv</span> — the sample data from this walkthrough</li>
+<li>The <strong>Collections Priority Agent</strong> from Post #12, the <strong>Invoice Priority Agent</strong> from Post #11, the <strong>Idle Cash Agent</strong> from Post #10, the <strong>FX Monitoring Agent</strong> from Post #9 and the <strong>Invoice Agent</strong> from Post #3</li>
+</ul>
+<a class="btn-primary" href="https://github.com/LuliBobo/cfo-agents">View on GitHub</a>
+<a class="btn-secondary" href="https://borisdracka.com/blog/post-16">Back to Post #16</a>
+</div>
+
+<div class="cta-box">
+<h3>Follow the series</h3>
+<p>Post #17 looks at a different blind spot: the margin on a single product or customer, and how it can turn negative without anyone seeing it in the monthly average.</p>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Subscribe free</a>
+<div class="cta-note">No spam. One post per week. Unsubscribe any time.</div>
+</div>
+
+</div>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Privacy</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/">Home</a>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://borisdracka.com/sk/blog/post-16-demo">Slovenská verzia</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+</div>
+</footer>
+
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>

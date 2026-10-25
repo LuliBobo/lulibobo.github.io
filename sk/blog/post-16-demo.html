@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Skript, ktorý vie, ako vyzerá bežný týždeň | CFO Unfiltered</title>
+<meta name="description" content="Postup malého skriptu, ktorý skontroluje každú platbu voči histórii jej dodávateľa a vypíše tie, ktoré vyzerajú inak — sprievodné demo k príspevku #16.">
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-16-demo">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-16-demo">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-16-demo">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-16-demo">
+
+<meta property="og:title" content="Skript, ktorý vie, ako vyzerá bežný týždeň">
+<meta property="og:description" content="Malý skript, ktorý postaví základňu pre každého dodávateľa a vypíše platby, ktoré nevyzerajú ako ich vlastná história, aj s dôvodom.">
+<meta property="og:image" content="https://borisdracka.com/og/post-16.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-16-demo">
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-16.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--white); color: var(--dark); font-family: 'IBM Plex Sans', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--orange); }
+.site-header { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; z-index: 100; }
+.site-header .logo { font-size: 15px; font-weight: 700; color: #1A1714; text-decoration: none; letter-spacing: -0.02em; }
+.site-header nav a { font-size: 13px; color: #666; text-decoration: none; margin-left: 20px; }
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+
+.hero { background: var(--dark); padding: 56px 24px 48px; text-align: center; }
+.hero-inner { max-width: 760px; margin: 0 auto; }
+.hero-tag { display: inline-block; background: var(--orange); color: white; font-size: 12px; font-weight: 700; border-radius: 4px; padding: 3px 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
+.hero h1 { color: white; font-family: 'IBM Plex Serif', Georgia, serif; font-size: clamp(26px, 5vw, 42px); font-weight: 900; line-height: 1.2; letter-spacing: -1px; margin: 0 0 14px; }
+.hero h1 span { color: var(--orange); }
+.hero-subtitle { color: #bbb; font-size: 1.05rem; line-height: 1.6; margin: 0 auto 20px; max-width: 600px; }
+.hero-meta { font-size: 13px; color: #999; }
+
+.content { max-width: 760px; margin: 0 auto; padding: 52px 24px 80px; }
+.content p { font-size: 17px; line-height: 1.75; margin: 0 0 22px; color: var(--dark); }
+.content p.disclaimer { font-size: 14px; font-style: italic; color: var(--mid); border-left: 3px solid var(--border); padding: 4px 0 4px 16px; margin: 0 0 32px; }
+.content h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: var(--dark); margin: 44px 0 18px; }
+.content h3 { font-size: 18px; font-weight: 700; color: var(--dark); margin: 30px 0 12px; }
+
+.stat-strip { display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-around; background: var(--light); border: 1px solid var(--border); border-radius: 14px; padding: 26px 20px; margin: 32px 0 40px; }
+.stat-strip .stat { text-align: center; flex: 1 1 160px; }
+.stat-strip .num { font-size: 26px; font-weight: 900; color: var(--orange-d); line-height: 1; font-family: 'IBM Plex Mono', monospace; }
+.stat-strip .label { font-size: 12px; color: var(--mid); margin-top: 8px; }
+
+.pullquote { border-left: 4px solid #C21F2F; background: #F3F0E7; border-radius: 0 8px 8px 0; padding: 20px 24px; margin: 32px 0; }
+.pullquote p { font-size: 19px; font-style: italic; color: #333; line-height: 1.6; margin: 0; }
+
+.balance-window { background: var(--dark); border-radius: 14px; overflow: hidden; margin: 28px 0 40px; }
+.balance-window .bw-header { background: #111; padding: 12px 18px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #888; display: flex; gap: 8px; align-items: center; }
+.balance-window .bw-dot { width: 9px; height: 9px; border-radius: 50%; background: #444; display: inline-block; }
+.balance-window table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Mono', monospace; font-size: 13px; }
+.balance-window th { text-align: left; padding: 10px 16px; color: #888; font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.06em; border-bottom: 1px solid #2a2a2a; }
+.balance-window td { padding: 12px 16px; color: #ddd; border-bottom: 1px solid #232323; }
+.balance-window .as-name { color: #fff; font-weight: 600; }
+.balance-window .badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.balance-window .badge.warning { background: rgba(194,31,47,0.18); color: #ff7a7a; }
+.balance-window .badge.clear { background: rgba(90,180,120,0.15); color: #7fd99a; }
+.balance-window tbody tr { will-change: transform; }
+.balance-window .bw-pause { margin-left: auto; background: none; border: 1px solid #333; color: #999; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 9px; border-radius: 5px; cursor: pointer; }
+.balance-window .bw-pause:hover { color: #fff; border-color: #555; }
+.balance-window .bw-pause:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.balance-window .bw-status { display: flex; align-items: center; gap: 9px; padding: 11px 16px 13px; border-top: 1px solid #2a2a2a; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #aaa; }
+.balance-window .bw-status .bw-status-dot { width: 7px; height: 7px; border-radius: 50%; background: #666; flex: 0 0 auto; transition: background 300ms ease; }
+.balance-window .bw-status.is-suggested { color: #e8c9c9; }
+.balance-window .bw-status.is-suggested .bw-status-dot { background: var(--orange); }
+@media (prefers-reduced-motion: reduce) {
+.balance-window tbody tr { transition: none !important; }
+}
+
+.pipeline { display: flex; flex-direction: column; gap: 0; margin: 28px 0 40px; }
+.pipeline .step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.pipeline .step:last-child { border-bottom: none; }
+.pipeline .step-num { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--orange); color: white; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; }
+.pipeline .step-text strong { display: block; font-size: 15px; color: var(--dark); margin-bottom: 3px; }
+.pipeline .step-text span { font-size: 14px; color: var(--mid); }
+
+.tutorial-step { margin: 0 0 26px; }
+.tutorial-step h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin: 0 0 10px; font-family: 'IBM Plex Mono', monospace; }
+.code-block { background: #1A1714; color: #e8e4da; border-radius: 10px; padding: 18px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.65; overflow-x: auto; white-space: pre; }
+.code-block .cmt { color: #888; }
+.code-block .out-ok { color: #7fd99a; }
+.code-block .out-warn { color: #ff9d8a; }
+
+.tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 28px 0 40px; }
+.tech-card { border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.tech-card h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin: 0 0 6px; }
+.tech-card p { font-size: 13px; color: var(--mid); margin: 0; line-height: 1.55; }
+
+.github-section { background: var(--light); border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin: 40px 0; }
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 16px; }
+.github-section ul { margin: 0 0 20px; padding-left: 20px; }
+.github-section li { font-size: 14px; color: var(--mid); margin-bottom: 6px; }
+.repo-name { font-family: 'IBM Plex Mono', monospace; background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; font-size: 13px; }
+.btn-primary { background: var(--orange); color: white; padding: 14px 28px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; border: none; text-decoration: none; display: inline-block; cursor: pointer; }
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary { background: transparent; color: var(--dark); border: 2px solid var(--border); padding: 12px 26px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-block; margin-left: 10px; }
+.btn-secondary:hover { border-color: var(--dark); }
+
+.cta-box { background: #1A1714; border-radius: 14px; padding: 40px 36px; text-align: center; margin-top: 40px; }
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 10px; line-height: 1.4; }
+.cta-box p { font-size: 15px; color: #bbb; margin: 0 0 22px; }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+footer { background: var(--dark); padding: 28px 48px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid #222; }
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+@media (max-width: 700px) {
+.tech-grid { grid-template-columns: 1fr; }
+.hero { padding: 40px 20px; }
+.content { padding: 36px 16px 60px; }
+.balance-window { overflow-x: auto; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+</style>
+<link rel="stylesheet" href="/a11y-targets.css">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/sk/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://borisdracka.com/sk/blog/post-16">← Späť na príspevok #16</a>
+<a data-lang href="https://borisdracka.com/blog/post-16-demo">EN</a>/<a data-lang href="https://borisdracka.com/sk/blog/post-16-demo" class="lang-active">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<span class="hero-tag">Sprievodné demo k príspevku #16 — The CFO & AI Series</span>
+<h1>Skript, ktorý vie, ako vyzerá <span>bežný týždeň</span></h1>
+<p class="hero-subtitle">Malý skript, ktorý skontroluje každú platbu voči histórii jej dodávateľa a vypíše tie, ktoré vyzerajú inak — aj s dôvodom, skôr než niekto schváli platobný beh.</p>
+<div class="hero-meta">Boris Dračka · október 2026 · Sprievodné demo</div>
+</div>
+</section>
+
+<div class="content">
+
+<p class="disclaimer">Toto je osobný, nekomerčný vedľajší projekt, ktorý som si pripravil na učenie — nie je to produkt ani služba.</p>
+
+<p>Príspevok #16 tvrdil, že nezvyčajná platba vynikne len voči bežnej. Nižšie je malý prototyp, ktorý z vzorových dát postaví to „bežné" a skontroluje voči nemu jeden týždeň.</p>
+
+<div class="stat-strip">
+<div class="stat"><div class="num">42</div><div class="label">Skontrolovaných vzorových platieb</div></div>
+<div class="stat"><div class="num">1</div><div class="label">Označená na druhý pohľad</div></div>
+<div class="stat"><div class="num">3,4×</div><div class="label">Označená suma oproti obvyklej u dodávateľa</div></div>
+</div>
+
+<div class="pullquote">
+<p>Skript nerozhoduje, či je platba v poriadku. Len zapíše na jedno miesto, čo za bežné považuje história každého dodávateľa, a ukáže, kde s tým tento týždeň nesúhlasí.</p>
+</div>
+
+<h2>Vzorové dáta</h2>
+<p>Osemnásť vymyslených dodávateľov, deväť týždňov platieb a jeden týždeň na kontrolu. Pre každého dodávateľa skript postaví základňu z predchádzajúcich týždňov: obvyklú sumu a rozptyl, obvyklý deň v týždni a účty, ktoré používal.</p>
+
+<div class="balance-window">
+<div class="bw-header"><span class="bw-dot"></span><span class="bw-dot"></span><span class="bw-dot"></span>&nbsp;&nbsp;payments.csv — vzorové dáta, šesť z osemnástich dodávateľov</div>
+<table>
+<thead>
+<tr><th>Dodávateľ</th><th>Obvyklá suma</th><th>Obvyklý deň</th><th>Tento týždeň</th><th>Výsledok</th></tr>
+</thead>
+<tbody>
+<tr><td class="as-name">Raw Materials Supplier</td><td>≈ 18 262</td><td>Ut</td><td>3 platby</td><td><span class="badge clear">V pásme</span></td></tr>
+<tr><td class="as-name">Freight Carrier</td><td>≈ 2 853</td><td>Št</td><td>4 platby</td><td><span class="badge clear">V pásme</span></td></tr>
+<tr><td class="as-name">Maintenance Contractor</td><td>≈ 4 214</td><td>Ut</td><td>2 platby</td><td><span class="badge warning">Označená</span></td></tr>
+<tr><td class="as-name">Software Platform</td><td>2 400 (pevná)</td><td>Ut</td><td>1 platba</td><td><span class="badge clear">V pásme</span></td></tr>
+<tr><td class="as-name">Courier Services</td><td>≈ 415</td><td>Št</td><td>4 platby</td><td><span class="badge clear">V pásme</span></td></tr>
+<tr><td class="as-name">Insurance Broker</td><td>5 200 (pevná)</td><td>Št</td><td>1 platba</td><td><span class="badge clear">V pásme</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Ako to funguje</h2>
+<div class="pipeline">
+<div class="step"><div class="step-num">1</div><div class="step-text"><strong>Načítanie platieb</strong><span>Načíta CSV s jedným riadkom na platbu: id, dátum, dodávateľ, suma, účet.</span></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text"><strong>Základňa pre každého dodávateľa</strong><span>Z platieb pred kontrolovaným týždňom: medián sumy, robustný rozptyl, obvyklý deň v týždni, známe účty.</span></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text"><strong>Kontrola týždňa</strong><span>Každá platba sa porovná so základňou vlastného dodávateľa, nie s globálnym limitom.</span></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text"><strong>Označenie a vysvetlenie</strong><span>Platbu označí suma mimo pásma, opakovaná suma alebo nový účet. Nezvyčajný deň v týždni sa zobrazí len ako kontext.</span></div></div>
+<div class="step"><div class="step-num">5</div><div class="step-text"><strong>Výpis výsledku</strong><span>Vypíše každú označenú platbu s dôvodmi. Nič sa neblokuje, nezadržiava ani neodosiela.</span></div></div>
+</div>
+
+<h2>Vyskúšajte si to</h2>
+
+<div class="tutorial-step">
+<h4>1 — Naklonujte repozitár</h4>
+<div class="code-block"><span class="cmt"># ten istý osobný, nekomerčný repozitár ako pri predchádzajúcich demách v tejto sérii</span>
+git clone https://github.com/LuliBobo/cfo-agents.git
+cd cfo-agents</div>
+</div>
+
+<div class="tutorial-step">
+<h4>2 — Pridajte vlastné platby (voliteľné)</h4>
+<div class="code-block">id,date,supplier,amount,account
+P0004,2026-08-04,Packaging Supplier,6581,ACC-PAC1
+P0349,2026-10-02,Maintenance Contractor,14400,ACC-MAI2
+<span class="cmt"># ...pridajte toľko riadkov, koľko máte platieb; nechajte pár týždňov histórie pred kontrolovaným týždňom</span></div>
+</div>
+
+<div class="tutorial-step">
+<h4>3 — Spustite skript</h4>
+<div class="code-block">python anomaly_watch_agent.py data/payments.csv</div>
+</div>
+
+<div class="tutorial-step">
+<h4>4 — Prečítajte si výstup</h4>
+<div class="code-block">================================================================
+  Anomaly Watch Agent — Unusual Payment Check
+================================================================
+
+[Step 1] Loaded 378 payment(s) from CSV
+[Step 2] Built a baseline per supplier from 336 payment(s) before 2026-09-28
+[Step 3] Checking 42 payment(s) in the week of 2026-09-28 against each supplier's own history
+
+P0349  2026-10-02 Fri  Maintenance Contractor   14,400  <span class="out-warn">⚠ amount 3.4x usual (4,214 +/- 261) · new account for this supplier · usual day Tue</span>
+
+[Step 4] <span class="out-warn">1 of 42</span> payment(s) flagged
+[Step 5] <span class="out-ok">Nothing is blocked or sent — a person looks at each flag</span></div>
+</div>
+
+<div class="tutorial-step">
+<h4>5 — Zmeňte toleranciu</h4>
+<div class="code-block"><span class="cmt"># úzke pásmo, len kontrola sumy</span>
+python anomaly_watch_agent.py data/payments.csv --tolerance 1.5 --signals amount
+[Step 4] 9 of 42 payment(s) flagged
+
+<span class="cmt"># veľmi voľné pásmo, len kontrola sumy</span>
+python anomaly_watch_agent.py data/payments.csv --tolerance 60 --signals amount
+[Step 4] 0 of 42 payment(s) flagged</div>
+</div>
+
+<h2>Z čoho je vyrobený</h2>
+<div class="tech-grid">
+<div class="tech-card"><h4>Zdroj dát</h4><p>Obyčajné CSV s platbami — žiadne prepojenie na banku ani ERP, nič nad rámec vzorových dát.</p></div>
+<div class="tech-card"><h4>Výpočet</h4><p>Bežný Python bez externých knižníc — medián, robustný rozptyl a tri kontroly.</p></div>
+<div class="tech-card"><h4>Nastaviteľné</h4><p>Tolerancia, okno opakovania a použité signály sú parametre príkazového riadku, nie pevne zadané hodnoty.</p></div>
+<div class="tech-card"><h4>Len na čítanie</h4><p>Skript iba číta a reportuje. Nezadrží, neblokuje ani neodošle ani jednu platbu a nenahrádza kontroly, ktoré organizácia už má.</p></div>
+</div>
+
+<div class="github-section">
+<h3>Čo je v repozitári</h3>
+<p>Ten istý osobný, nekomerčný repozitár ako pri predchádzajúcich demách v tejto sérii:</p>
+<ul>
+<li><span class="repo-name">anomaly_watch_agent.py</span> — celý skript použitý vyššie</li>
+<li><span class="repo-name">data/payments.csv</span> — vzorové dáta z tohto postupu</li>
+<li><strong>Collections Priority Agent</strong> z príspevku #12, <strong>Invoice Priority Agent</strong> z príspevku #11, <strong>Idle Cash Agent</strong> z príspevku #10, <strong>FX Monitoring Agent</strong> z príspevku #9 a <strong>Invoice Agent</strong> z príspevku #3</li>
+</ul>
+<a class="btn-primary" href="https://github.com/LuliBobo/cfo-agents">Zobraziť na GitHub</a>
+<a class="btn-secondary" href="https://borisdracka.com/sk/blog/post-16">Späť na príspevok #16</a>
+</div>
+
+<div class="cta-box">
+<h3>Sledujte sériu</h3>
+<p>Príspevok #17 sa pozrie na iné slepé miesto: maržu na jednom produkte alebo zákazníkovi a ako sa môže prepadnúť do mínusu, bez toho, aby si to niekto všimol v mesačnom priemere.</p>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Odoberať zadarmo</a>
+<div class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhlásenie kedykoľvek.</div>
+</div>
+
+</div>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Ochrana súkromia</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/sk/">Domov</a>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-16-demo">English version</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+</div>
+</footer>
+
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
