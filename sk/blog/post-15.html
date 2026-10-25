@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Ako ďaleko dopredu musí byť medzera vidieť? | CFO Unfiltered</title>
+<meta name="description" content="Príspevok #15 z 50 v sérii The CFO & AI Series: o koľko týždňov dopredu musí byť cash medzera vidieť, aby zmenila rozhodnutie, a čo musí obsahovať 13-týždňový rolling cash forecast, aby ju ukázal.">
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-15">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-15">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-15">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-15">
+
+<meta property="og:title" content="Ako ďaleko dopredu musí byť medzera vidieť?">
+<meta property="og:description" content="O koľko týždňov dopredu musí byť cash medzera vidieť, aby zmenila rozhodnutie, a čo musí obsahovať 13-týždňový rolling cash forecast, aby ju ukázal.">
+<meta property="og:image" content="https://borisdracka.com/og/post-15.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-15">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-10-25T09:00:00+02:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Forecasting">
+<meta property="article:tag" content="Cash Flow">
+<meta property="article:tag" content="Predstih">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-15.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+/* Hero */
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+/* Gap table */
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+/* GitHub / demo teaser section */
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Follow the series */
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+/* Footer */
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/sk/blog/post-15#article",
+"headline": "Ako ďaleko dopredu musí byť medzera vidieť?",
+"description": "O koľko týždňov dopredu musí byť cash medzera vidieť, aby zmenila rozhodnutie, a čo musí obsahovať 13-týždňový rolling cash forecast, aby ju ukázal.",
+"image": "https://borisdracka.com/og/post-15.png",
+"url": "https://borisdracka.com/sk/blog/post-15",
+"datePublished": "2026-10-25T09:00:00+02:00",
+"dateModified": "2026-10-25T09:00:00+02:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "sk",
+"articleSection": "Finance",
+"position": 15,
+"isPartOf": { "@type": "CreativeWorkSeries", "@id": "https://borisdracka.com/sk/blog#series", "name": "The CFO & AI Series", "url": "https://borisdracka.com/sk/blog" },
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/sk/blog/post-15" }
+}
+</script>
+<link rel="stylesheet" href="/a11y-targets.css">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/sk/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+<a data-lang href="https://borisdracka.com/blog/post-15">EN</a>/<a data-lang href="https://borisdracka.com/sk/blog/post-15" class="lang-active">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Cash flow · Forecasting · Predstih</div>
+<h1>Ako ďaleko dopredu musí byť medzera vidieť?</h1>
+<p class="hero-subtitle">Príspevok #14 ocenil dni, počas ktorých medzera ostáva otvorená. Tento sa pýta, koľko týždňov dopredu ju treba vidieť a čo musí obsahovať 13-týždňový rolling forecast, aby ju ukázal.</p>
+<div class="hero-meta">Boris Dračka · október 2026 · 6 min čítania</div>
+<span class="series-label">Príspevok #15 z 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">Príklady a architektúry v tejto sérii vznikajú ako moje osobné vzdelávacie a nekomerčné experimenty; nejde o ponuku IT alebo poradenských služieb.</p>
+
+<p class="lead">Každý forecast je nesprávny. Užitočné sú tie, ktoré sú nesprávne dosť skoro na to, aby sa s tým dalo niečo urobiť. Príspevok #14 ocenil dni, počas ktorých medzera ostáva otvorená, a najlacnejší spôsob, ako ich skrátiť, je vidieť medzeru skôr, než príde. Otázka je, o koľko skôr.</p>
+
+<p>13 týždňov nižšie je kompozitná ilustrácia postavená na vzorcoch, ktoré som opakovane videl u finančných tímov v priebehu rokov. Týždne, medzera aj úrovne istoty sú ilustratívne; nepopisujú konkrétnu spoločnosť ani konkrétny forecast.</p>
+
+<h2>Jedna medzera, tri spôsoby pohľadu</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">13</div><div class="label">Týždňov v horizonte rolling forecastu</div></div>
+<div class="stat"><div class="num">6. týždeň</div><div class="label">Ilustratívny týždeň, v ktorom sa medzera objaví</div></div>
+<div class="stat"><div class="num">5 týždňov</div><div class="label">Ilustratívne varovanie pri 13-týždňovom pohľade, oproti 0 pri pohľade na jeden týždeň</div></div>
+</div>
+
+<h2>Na predstih je forecast určený</h2>
+
+<p>Pohľad na jeden týždeň ukáže medzeru v týždni, keď príde, čo je obraz „v deň platby" z príspevku #14. Štvortýždňový pohľad ju ukáže o tri týždne vopred. Trinásťtýždňový o päť týždňov vopred, dosť dlho na to, aby sa dalo prerokovať posunutie platby, urýchliť príjem alebo dohodnúť financovanie za podmienok, nie v zhone.</p>
+
+<table class="gap-table">
+<tr><th>Pohľad</th><th>Medzera prvýkrát vidieť</th><th>Varovanie</th></tr>
+<tr><td>1 týždeň</td><td class="num-cell">6. týždeň</td><td class="num-cell">0 týždňov</td></tr>
+<tr><td>4 týždne</td><td class="num-cell">3. týždeň</td><td class="num-cell">3 týždne</td></tr>
+<tr><td>13 týždňov</td><td class="num-cell">1. týždeň</td><td class="num-cell">5 týždňov</td></tr>
+</table>
+
+<div class="obl" role="group" aria-label="Motion graphic">
+<div class="window">
+    <div class="head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="title">rolling_forecast — ilustratívna kompozícia</span><button class="pause" id="obl-pause" type="button" aria-pressed="false">Pauza</button></div>
+
+    <div class="counters">
+      <div class="counter"><div class="n" id="obl-nH">1</div><div class="l">Týždne, ktoré vidíte dopredu</div></div>
+      <div class="counter" id="obl-cSee"><div class="n" id="obl-nSee">—</div><div class="l">Týždeň, v ktorom je medzera prvýkrát vidieť</div></div>
+      <div class="counter" id="obl-cWarn"><div class="n" id="obl-nWarn">—</div><div class="l">Týždne varovania pred medzerou</div></div>
+    </div>
+
+    <div class="stage" id="obl-stage" role="img" aria-label="Trinásť týždenných konečných zostatkov s čiarou minimálnej rezervy. Rámček ukazuje, koľko týždňov dopredu vidíte. Pri pohľade na jeden týždeň sa medzera v šiestom týždni ukáže, až keď šiesty týždeň príde, pri štyroch týždňoch o tri týždne skôr a pri trinástich týždňoch o päť týždňov skôr.">
+      <div class="weeks" id="obl-weeks"></div>
+    </div>
+
+    <div class="caption" aria-live="polite">
+      <div class="scene" id="obl-scene"></div>
+      <div class="line" id="obl-line"></div>
+    </div>
+  </div>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw ok"></i>Konečný zostatok nad rezervou</span>
+    <span><i class="sw gap"></i>Pod rezervou (medzera)</span>
+    <span><i class="sw win2"></i>Čo vidíte</span>
+    <span>Bledšie pruhy: menej isté</span>
+  </div>
+  <p class="note">Ilustratívna kompozícia k Príspevku #15. Týždne, zostatky a medzera sú vymyslené jednotky a nepopisujú konkrétnu spoločnosť ani forecast.</p>
+</div>
+<style>
+.obl{
+    --muted: #4E483F; --line: #DCD5C7;
+  --card: #1A1714; --card-head: #111111; --card-line: #2a2a2a;
+  --ink: #dddddd; --ink-dim: #8a8a8a;
+  --accent: #C21F2F; --accent-on-dark: #ff7a7a; --good: #7fd99a;
+  --f-serif: 'IBM Plex Serif', Georgia, serif;
+  --f-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
+.obl .window{ background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-line); }
+.obl .head{ background: var(--card-head); padding: 12px 16px; display: flex; align-items: center; gap: 8px; font: 500 12px var(--f-mono); color: #888; }
+.obl .dot{ width: 9px; height: 9px; border-radius: 50%; background: #444; flex: 0 0 auto; }
+.obl .head .title{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.obl .pause{ margin-left: auto; background: none; border: 1px solid #333; color: #999; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+.obl .pause:hover{ color: #fff; border-color: #555; }
+.obl .pause:focus-visible{ outline: 2px solid var(--accent-on-dark); outline-offset: 2px; }
+.obl .counters{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--card-line); }
+.obl .counter{ padding: 14px 16px; border-right: 1px solid var(--card-line); min-width: 0; }
+.obl .counter:last-child{ border-right: 0; }
+.obl .counter .n{ font: 700 24px/1 var(--f-mono); color: #fff; font-variant-numeric: tabular-nums; transition: color .3s; white-space: nowrap; }
+.obl .counter .l{ font-size: 11.5px; color: var(--ink-dim); margin-top: 7px; line-height: 1.35; }
+.obl .counter.good .n{ color: var(--good); }
+.obl .counter.bad .n{ color: var(--accent-on-dark); }
+.obl .stage{ position: relative; height: 270px; margin: 8px 16px 6px; }
+.obl .weeks{ position: absolute; left: 0; right: 0; bottom: 0; top: 0; display: grid; grid-template-columns: repeat(13, 1fr); gap: 4px; }
+.obl .col{ position: relative; transition: opacity .35s; }
+.obl .col .num{ position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 600 10px var(--f-mono); color: var(--ink-dim); }
+.obl .col .bar{ position: absolute; left: 12%; right: 12%; bottom: 22px; border-radius: 3px 3px 0 0; background: rgba(127,217,154,.35); box-shadow: inset 0 0 0 1.5px rgba(127,217,154,.7); transition: height .4s, background .3s; }
+.obl .col.low .bar{ background: rgba(194,31,47,.32); box-shadow: inset 0 0 0 1.5px rgba(255,122,122,.85); }
+.obl .col.dim{ opacity: .14; }
+.obl .col.far .bar{ opacity: .55; }
+.obl .buf{ position: absolute; left: 0; right: 0; height: 0; border-top: 1.5px dashed #8a8a8a; }
+.obl .buflab{ position: absolute; left: 0; background: var(--card); padding: 0 4px; border-radius: 2px; z-index: 2; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-dim); }
+.obl .win{ position: absolute; top: -2px; bottom: 16px; border: 2px solid #dddddd; border-radius: 8px; pointer-events: none; transition: left .45s cubic-bezier(.4,0,.2,1), width .45s cubic-bezier(.4,0,.2,1); }
+.obl .win span{ position: absolute; top: -9px; left: 8px; white-space: nowrap; background: var(--card); padding: 0 6px; font: 700 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: #ddd; }
+.obl .flag{ position: absolute; transform: translateX(-50%); font: 700 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--accent-on-dark); opacity: 0; transition: opacity .3s; white-space: nowrap; }
+.obl .flag.on{ opacity: 1; }
+.obl .caption{ border-top: 1px solid var(--card-line); padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; min-height: 86px; }
+.obl .scene{ font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-on-dark); }
+.obl .line{ font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.obl .legend{ display: flex; flex-wrap: wrap; gap: 6px 16px; font: 500 12px var(--f-mono); color: var(--muted); }
+.obl .legend span{ display: inline-flex; align-items: center; gap: 7px; }
+.obl .sw{ width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto; border: 1.5px solid; }
+.obl .sw.ok{ background: rgba(90,180,120,.35); border-color: #4a9a66; }
+.obl .sw.gap{ background: rgba(194,31,47,.3); border-color: #c8454f; }
+.obl .sw.win2{ border-color: #8a8478; border-radius: 4px; background: transparent; }
+.obl .note{ font-size: 12.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; }
+@media (max-width: 560px){.obl .stage{ margin-inline: 8px; }.obl .weeks{ gap: 2px; }.obl .col .num{ font-size: 8px; }.obl .counter{ padding: 12px 10px; }.obl .counter .n{ font-size: 17px; }.obl .counter .l{ font-size: 10.5px; }.obl .flag{ font-size: 8.5px; }}
+@media (prefers-reduced-motion: reduce){.obl .col, .obl .win, .obl .flag{ transition: none !important; }}
+.obl{display:flex;flex-direction:column;gap:14px;margin:8px 0 36px;font-family:var(--f-sans)}
+</style>
+<script>
+
+(function () {
+  var N = 13, GAP = 6, BUF = 30, VMAX = 110, STAGE_H = 270, BAR_BOTTOM = 22, BAR_MAXH = 200;
+  var BAL = [90, 95, 85, 70, 55, 15, 25, 50, 60, 65, 70, 75, 80];    // closing balance per week (illustrative units)
+
+  var stage = document.getElementById('obl-stage'), weeks = document.getElementById('obl-weeks');
+  var nH = document.getElementById('obl-nH'), nSee = document.getElementById('obl-nSee'), nWarn = document.getElementById('obl-nWarn');
+  var cSee = document.getElementById('obl-cSee'), cWarn = document.getElementById('obl-cWarn');
+  var sceneEl = document.getElementById('obl-scene'), lineEl = document.getElementById('obl-line'), pauseBtn = document.getElementById('obl-pause');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var cols = BAL.map(function (v, i) {
+    var c = document.createElement('div'); c.className = 'col' + (v < BUF ? ' low' : '') + (i >= 6 ? ' far' : '');
+    c.innerHTML = '<div class="bar" style="height:' + Math.round(v / VMAX * BAR_MAXH) + 'px"></div><div class="num">' + (i + 1) + '</div>';
+    weeks.appendChild(c); return c;
+  });
+  var buf = document.createElement('div'); buf.className = 'buf'; buf.style.bottom = (BAR_BOTTOM + BUF / VMAX * BAR_MAXH) + 'px'; stage.appendChild(buf);
+  var buflab = document.createElement('div'); buflab.className = 'buflab'; buflab.textContent = 'Minimálna rezerva'; buflab.style.bottom = (BAR_BOTTOM + BUF / VMAX * BAR_MAXH + 4) + 'px'; stage.appendChild(buflab);
+  var win = document.createElement('div'); win.className = 'win'; win.innerHTML = '<span id="winlab"></span>'; stage.appendChild(win);
+  var flag = document.createElement('div'); flag.className = 'flag'; flag.textContent = 'Medzera'; stage.appendChild(flag);
+  var winlab = document.getElementById('winlab');
+
+  var last = [1, 1, null];
+  function layout() {
+    var c = cols[GAP - 1];
+    flag.style.left = (c.offsetLeft + c.offsetWidth / 2) + 'px'; flag.style.bottom = (BAR_BOTTOM + BAL[GAP - 1] / VMAX * BAR_MAXH + 8) + 'px';
+    var t = last[0], h = last[1], end = Math.min(t + h - 1, N), a = cols[t - 1], b = cols[end - 1];
+    win.style.transition = 'none'; win.style.left = (a.offsetLeft - 3) + 'px'; win.style.width = (b.offsetLeft + b.offsetWidth - a.offsetLeft + 6) + 'px'; win.getBoundingClientRect(); win.style.transition = '';
+  }
+  window.addEventListener('resize', layout);
+
+  layout();
+  function wk(n) { return n + (n === 1 ? ' týždeň' : (n >= 2 && n <= 4 ? ' týždne' : ' týždňov')); }
+  var seen = null;
+  function show(t, h, label) {                      // window starts at week t (1-based), spans h weeks
+    var end = Math.min(t + h - 1, N);
+    last = [t, h, label]; var a = cols[t - 1], b = cols[end - 1];
+    win.style.left = (a.offsetLeft - 3) + 'px'; win.style.width = (b.offsetLeft + b.offsetWidth - a.offsetLeft + 6) + 'px';
+    winlab.textContent = label || wk(h);
+    cols.forEach(function (c, i) { c.classList.toggle('dim', i + 1 < t || i + 1 > end); });
+    var visible = GAP >= t && GAP <= end;
+    flag.classList.toggle('on', visible);
+    nH.textContent = String(h);
+    if (visible && seen === null) { seen = t; nSee.textContent = 'Týždeň ' + t; nWarn.textContent = wk(GAP - t); cSee.classList.add('good'); cWarn.classList.toggle('bad', GAP - t === 0); cWarn.classList.toggle('good', GAP - t > 0); }
+  }
+  function reset() { seen = null; nSee.textContent = '—'; nWarn.textContent = '—'; cSee.classList.remove('good'); cWarn.classList.remove('good', 'bad'); }
+
+  var COPY = [
+    ['1 · Pohľad na jeden týždeň', 'Pozeráte sa len na aktuálny týždeň. Medzera v 6. týždni sa ukáže, keď 6. týždeň príde. To je obraz „v deň platby“.'],
+    ['2 · Pohľad na štyri týždne', 'Tá istá medzera vstúpi do okna v 3. týždni, tri týždne predtým, než nastane. Dosť času na posunutie platby.'],
+    ['3 · Pohľad na trinásť týždňov', 'Medzeru vidno od 1. týždňa, päť týždňov dopredu. Vzdialenejšie týždne sú bledšie, lebo sú menej isté.']
+  ];
+  function copy(n) { sceneEl.textContent = COPY[n][0]; lineEl.textContent = COPY[n][1]; }
+
+  var timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function cancel() { timers.forEach(clearTimeout); timers = []; }
+
+  function sceneOne() { cancel(); reset(); copy(0); show(1, 1); for (var t = 2; t <= GAP; t++) (function (t) { later(function () { show(t, 1); }, 380 * (t - 1) + 500); })(t); }
+  function sceneTwo() { cancel(); reset(); copy(1); show(1, 4); for (var t = 2; t <= 3; t++) (function (t) { later(function () { show(t, 4); }, 700 * (t - 1) + 400); })(t); }
+  function sceneThree() { cancel(); reset(); copy(2); show(1, 13); }
+  function finalState() { reset(); copy(2); show(1, 13); }
+
+  var idx = 0, running = true, timer = null;
+  var steps = [[sceneOne, 4200], [sceneTwo, 4200], [sceneThree, 4200]];
+  function run() { steps[idx][0](); if (!running) return; timer = setTimeout(function () { idx = (idx + 1) % steps.length; run(); }, steps[idx][1]); }
+
+  if (reduce) { finalState(); pauseBtn.hidden = true; }
+  else {
+    idx = 0; run();
+    pauseBtn.addEventListener('click', function () {
+      running = !running; pauseBtn.textContent = running ? 'Pauza' : 'Prehrať'; pauseBtn.setAttribute('aria-pressed', String(!running));
+      if (running) { idx = (idx + 1) % steps.length; run(); } else { clearTimeout(timer); cancel(); }
+    });
+  }
+})();
+
+</script>
+
+<h2>Čo musí obsahovať 13 stĺpcov</h2>
+
+<p>Sú to rovnaké signály z posledných piatich príspevkov, rozložené po týždňoch. Jeden riadok na signál, trinásť stĺpcov a jeden nový riadok dole.</p>
+
+<table class="gap-table">
+<tr><th>Riadok</th><th>Čo sa doň zapisuje</th><th>Ako isté to je</th></tr>
+<tr>
+<td>Počiatočný zostatok</td>
+<td>Konečný zostatok minulého týždňa</td>
+<td>Fakt</td>
+</tr>
+<tr>
+<td>Príjmy: potvrdené</td>
+<td>Faktúry s dohodnutým dátumom platby alebo zrušenou blokáciou kreditu</td>
+<td>Vysoká</td>
+</tr>
+<tr>
+<td>Príjmy: očakávané</td>
+<td>Faktúry na splatenie, so zrážkou podľa toho, ako často tento zákazník platí neskoro (príspevok #12)</td>
+<td>Stredná</td>
+</tr>
+<tr>
+<td>Platby: záväzné</td>
+<td>Platobný beh, mzdy, dane, splátky úveru</td>
+<td>Vysoká</td>
+</tr>
+<tr>
+<td>Platby: posunuteľné</td>
+<td>Čo sa dá posunúť v rámci splatnosti (príspevok #11)</td>
+<td>Stredná</td>
+</tr>
+<tr>
+<td>Minimálna rezerva</td>
+<td>Hranica, pod ktorú nechcete klesnúť (príspevok #10)</td>
+<td>Určuje politika</td>
+</tr>
+<tr>
+<td>Konečný zostatok, prvý týždeň pod rezervou</td>
+<td>Výsledok a týždeň, v ktorom treba rozhodnúť (príspevky #13 a #14)</td>
+<td>Vyplýva z riadkov vyššie</td>
+</tr>
+</table>
+
+<h2>Čo naozaj znamená „rolling"</h2>
+
+<p>Keď týždeň skončí, vypadne zľava a vpravo pribudne nový 14. týždeň. Horizont sa nikdy neskráti. Vždy vidíte trinásť týždňov dopredu, nie dvanásť, potom jedenásť a nakoniec zhon na konci štvrťroka.</p>
+
+<table class="gap-table">
+<tr><th>Ako to vyzerá</th><th>Ako to naozaj je</th></tr>
+<tr>
+<td>Dlhší horizont znamená presnejší forecast</td>
+<td>Dlhší horizont znamená skorší signál a menej presné číslo. Cieľom je urobiť túto výmenu zámerne</td>
+</tr>
+<tr>
+<td>Forecast má byť správny</td>
+<td>Má byť čitateľný v tom, čo vie a čo predpokladá: týždne 1 až 2 vychádzajú z platobných behov a pohľadávok, týždne 3 až 6 zo vzorcov, týždne 7 až 13 prevažne z predpokladov</td>
+</tr>
+<tr>
+<td>Rolling znamená prestavať tabuľku každý týždeň</td>
+<td>Rolling znamená, že jeden týždeň vypadne a jeden pribudne. Štruktúra ostáva</td>
+</tr>
+<tr>
+<td>Forecast netrafil, takže je pokazený</td>
+<td>Forecast, ktorý sa pomýlil o dva týždne a varoval päť týždňov vopred, svoju prácu spravil. Tabuľka, ktorá sa nikdy nepomýli, je často tá, ktorú nikto neaktualizuje</td>
+</tr>
+</table>
+
+<div class="pullquote">
+<p>Forecast sa nesúdi podľa toho, či trafil číslo. Súdi sa podľa toho, o koľko skôr ukázal medzeru.</p>
+</div>
+
+<h2>Test, ktorý môžete spraviť tento týždeň</h2>
+
+<p>Zoberte posledné tri medzery, ktorých ste si všimli až v deň splatnosti platby. Pri každej sa opýtajte, čo by ukázal trinásťtýždňový pohľad postavený o štyri týždne skôr a s akou istotou. Odpoveď často leží v štruktúre tabuľky, nie v lepšej aritmetike.</p>
+
+<p>Za týmto som žiadny skript nepripravil. 13-týždňový forecast je skôr rozloženie než algoritmus a rozloženie vyššie je časť, ktorú stojí za to prekopírovať do vlastnej tabuľky.</p>
+
+<div class="followup">
+<h4>Sledujte sériu</h4>
+<p>Príspevok #16 sa pozrie na platbu, ktorá nevyzerala ako ostatné, a na to, ako musí vyzerať bežný týždeň, aby tá nezvyčajná vynikla.</p>
+</div>
+
+<div class="cta-box">
+<h3>Ak ďalšia medzera príde v šiestom týždni, v ktorom týždni by ju váš tím prvýkrát uvidel?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Odoberať zadarmo</a>
+<div class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhlásenie kedykoľvek.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Ochrana súkromia</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/sk/">Domov</a>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-15">English version</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+</div>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
