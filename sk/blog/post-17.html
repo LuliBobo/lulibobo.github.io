@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>Priemer vyzeral v poriadku. Jeden produkt nie. | CFO Unfiltered</title>
+<meta name="description" content="Príspevok #17 z 50 v sérii The CFO & AI Series: ako zdravá priemerná mesačná marža dokáže skryť produktovú líniu alebo zákazníka, ktorý je už pod nulou, a čo musí obsahovať kontrola marže.">
+<link rel="canonical" href="https://borisdracka.com/sk/blog/post-17">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-17">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-17">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-17">
+
+<meta property="og:title" content="Priemer vyzeral v poriadku. Jeden produkt nie.">
+<meta property="og:description" content="Ako zdravá priemerná mesačná marža dokáže skryť produktovú líniu alebo zákazníka, ktorý je už pod nulou, a čo musí obsahovať kontrola marže.">
+<meta property="og:image" content="https://borisdracka.com/og/post-17.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/sk/blog/post-17">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-11-08T09:00:00+01:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Marža">
+<meta property="article:tag" content="Reporting">
+<meta property="article:tag" content="Priemery">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-17.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+/* Hero */
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+/* Gap table */
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+/* GitHub / demo teaser section */
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Follow the series */
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+/* Footer */
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/sk/blog/post-17#article",
+"headline": "Priemer vyzeral v poriadku. Jeden produkt nie.",
+"description": "Ako zdravá priemerná mesačná marža dokáže skryť produktovú líniu alebo zákazníka, ktorý je už pod nulou, a čo musí obsahovať kontrola marže.",
+"image": "https://borisdracka.com/og/post-17.png",
+"url": "https://borisdracka.com/sk/blog/post-17",
+"datePublished": "2026-11-08T09:00:00+01:00",
+"dateModified": "2026-11-08T09:00:00+01:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "sk",
+"articleSection": "Finance",
+"position": 17,
+"isPartOf": { "@type": "CreativeWorkSeries", "@id": "https://borisdracka.com/sk/blog#series", "name": "The CFO & AI Series", "url": "https://borisdracka.com/sk/blog" },
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/sk/blog/post-17" }
+}
+</script>
+<link rel="stylesheet" href="/a11y-targets.css">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/sk/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+<a data-lang href="https://borisdracka.com/blog/post-17">EN</a>/<a data-lang href="https://borisdracka.com/sk/blog/post-17" class="lang-active">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Marža · Reporting · Priemery</div>
+<h1>Priemer vyzeral v poriadku. Jeden produkt nie.</h1>
+<p class="hero-subtitle">Príspevok #16 ukázal, že nezvyčajnú platbu nevidno, kým nepoznáte tú bežnú. Tento sa pýta, čo skrýva priemerná mesačná marža a ako sa produkt alebo zákazník môže dostať pod nulu bez toho, aby si to niekto všimol.</p>
+<div class="hero-meta">Boris Dračka · november 2026 · 6 min čítania</div>
+<span class="series-label">Príspevok #17 z 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">Príklady a architektúry v tejto sérii vznikajú ako moje osobné vzdelávacie a nekomerčné experimenty; nejde o ponuku IT alebo poradenských služieb.</p>
+
+<p class="lead">Mesačný priemer je veľmi slušný spôsob, ako niečo nespomenúť. Príspevok #16 tvrdil, že nezvyčajnú platbu nevidno, kým nepoznáte tú bežnú. Marža má opačný problém: priemer je taký bežný, že zakryje všetko, čo je pod ním.</p>
+
+<p>Mesiac nižšie je kompozitná ilustrácia. Produktové línie, zákazníci, tržby, marže a zľavy sú vymyslené okrúhle čísla, len ilustratívne. Nepopisujú skutočnú spoločnosť, cenník, zákazníka ani maržu.</p>
+
+<h2>Jeden mesiac, tri produktové línie</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">19&nbsp;%</div><div class="label">Ilustratívna priemerná marža za mesiac</div></div>
+<div class="stat"><div class="num">3</div><div class="label">Produktové línie v ilustrácii</div></div>
+<div class="stat"><div class="num">1</div><div class="label">Línia pod nulou (mínus 10&nbsp;%)</div></div>
+</div>
+
+<p>Report ukazuje 19&nbsp;% a toto číslo je aritmeticky správne. Odpovedá na otázku „ako sa darí firme?", nie „prerába nejaká časť?" Tu je ten istý mesiac rozdelený po líniách.</p>
+
+<table class="gap-table">
+<tr><th>Línia</th><th>Tržby</th><th>Marža</th><th>Príspevok</th></tr>
+<tr><td>A</td><td class="num-cell">500</td><td class="num-cell">30&nbsp;%</td><td class="num-cell">150</td></tr>
+<tr><td>B</td><td class="num-cell">350</td><td class="num-cell">15&nbsp;%</td><td class="num-cell">52,5</td></tr>
+<tr><td>C</td><td class="num-cell">150</td><td class="num-cell">mínus 10&nbsp;%</td><td class="num-cell">mínus 15</td></tr>
+<tr><td>Spolu</td><td class="num-cell">1&nbsp;000</td><td class="num-cell">približne 19&nbsp;%</td><td class="num-cell">187,5</td></tr>
+</table>
+
+<p>Tržby a príspevok sú vo vymyslených tisíckach. Línia A nesie priemer, línia B je tenká a línia C vracia časť toho, čo zarobili ostatné.</p>
+
+<div class="obl" role="group" aria-label="Pohyblivá grafika">
+<div class="window">
+    <div class="head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="title">marza_podla_liniek — ilustratívna kompozícia</span><button class="pause" id="obl-pause" type="button" aria-pressed="false">Pauza</button></div>
+
+    <div class="counters">
+      <div class="counter"><div class="n" id="obl-nBl">—</div><div class="l">Priemerná marža</div></div>
+      <div class="counter" id="obl-cNeg"><div class="n" id="obl-nNeg">—</div><div class="l">Línie pod nulou</div></div>
+      <div class="counter" id="obl-cC"><div class="n" id="obl-nC">—</div><div class="l">Marža línie C</div></div>
+    </div>
+
+    <div class="stage" id="obl-stage" role="img" aria-label="Marža podľa produktových liniek v ilustratívnom mesiaci. Priemerná marža je 19 percent. Línia A má 30 percent, línia B 15 percent a línia C mínus 10 percent, teda pod nulovou čiarou. Druhý pohľad ukazuje, ako sa línia C dostane z plus 10 percent na mínus 10 percent cez zľavu, vratky, dopravu, poplatky za platby a mix predaja."></div>
+
+    <div class="caption" aria-live="polite">
+      <div class="scene" id="obl-scene"></div>
+      <div class="line" id="obl-line"></div>
+    </div>
+  </div>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw ok"></i>Marža nad nulou</span>
+    <span><i class="sw gap"></i>Marža pod nulou</span>
+  </div>
+  <p class="note">Ilustratívna kompozícia k Príspevku #17. Produktové línie, marže a sumy sú vymyslené čísla a nepopisujú konkrétnu spoločnosť, produkt, zákazníka ani cenu.</p>
+</div>
+<style>
+.obl{
+    --muted: #4E483F; --line: #DCD5C7;
+  --card: #1A1714; --card-head: #111111; --card-line: #2a2a2a;
+  --ink: #dddddd; --ink-dim: #8a8a8a;
+  --accent: #C21F2F; --accent-on-dark: #ff7a7a; --good: #7fd99a;
+  --f-serif: 'IBM Plex Serif', Georgia, serif;
+  --f-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
+.obl .window{ background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-line); }
+.obl .head{ background: var(--card-head); padding: 12px 16px; display: flex; align-items: center; gap: 8px; font: 500 12px var(--f-mono); color: #888; }
+.obl .dot{ width: 9px; height: 9px; border-radius: 50%; background: #444; flex: 0 0 auto; }
+.obl .head .title{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.obl .pause{ margin-left: auto; background: none; border: 1px solid #333; color: #999; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+.obl .pause:hover{ color: #fff; border-color: #555; }
+.obl .pause:focus-visible{ outline: 2px solid var(--accent-on-dark); outline-offset: 2px; }
+.obl .counters{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--card-line); }
+.obl .counter{ padding: 14px 16px; border-right: 1px solid var(--card-line); min-width: 0; }
+.obl .counter:last-child{ border-right: 0; }
+.obl .counter .n{ font: 700 24px/1 var(--f-mono); color: #fff; font-variant-numeric: tabular-nums; transition: color .3s; white-space: nowrap; }
+.obl .counter .l{ font-size: 11.5px; color: var(--ink-dim); margin-top: 7px; line-height: 1.35; }
+.obl .counter.good .n{ color: var(--good); }
+.obl .counter.bad .n{ color: var(--accent-on-dark); }
+.obl .stage{ position: relative; height: 270px; margin: 8px 16px 6px; }
+.obl .zero{ position: absolute; left: 0; right: 0; height: 0; border-top: 1.5px dashed #8a8a8a; }
+.obl .zerolab{ position: absolute; left: 0; background: var(--card); padding: 0 4px; border-radius: 2px; z-index: 2; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-dim); }
+.obl .bar{ position: absolute; border-radius: 3px; background: rgba(127,217,154,.35); box-shadow: inset 0 0 0 1.5px rgba(127,217,154,.7); opacity: 0; transition: opacity .35s, top .4s, height .4s; }
+.obl .bar.in{ opacity: 1; }
+.obl .bar.neg{ background: rgba(194,31,47,.32); box-shadow: inset 0 0 0 1.5px rgba(255,122,122,.85); }
+.obl .bar.start{ background: rgba(160,160,160,.28); box-shadow: inset 0 0 0 1.5px rgba(200,200,200,.6); }
+.obl .blab{ position: absolute; text-align: center; font: 600 11px/1.25 var(--f-mono); color: #ddd; opacity: 0; transition: opacity .35s; white-space: nowrap; }
+.obl .blab.in{ opacity: 1; }
+.obl .blab.red{ color: var(--accent-on-dark); }
+.obl .xlab{ position: absolute; bottom: 0; text-align: center; font: 600 10px/1.2 var(--f-mono); color: var(--ink-dim); opacity: 0; transition: opacity .35s; }
+.obl .xlab.in{ opacity: 1; }
+.obl .caption{ border-top: 1px solid var(--card-line); padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; min-height: 86px; }
+.obl .scene{ font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-on-dark); }
+.obl .line{ font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.obl .legend{ display: flex; flex-wrap: wrap; gap: 6px 16px; font: 500 12px var(--f-mono); color: var(--muted); }
+.obl .legend span{ display: inline-flex; align-items: center; gap: 7px; }
+.obl .sw{ width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto; border: 1.5px solid; }
+.obl .sw.ok{ background: rgba(90,180,120,.35); border-color: #4a9a66; }
+.obl .sw.gap{ background: rgba(194,31,47,.3); border-color: #c8454f; }
+.obl .note{ font-size: 12.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; }
+@media (max-width: 560px){.obl .stage{ margin-inline: 8px; }.obl .counter{ padding: 12px 10px; }.obl .counter .n{ font-size: 17px; }.obl .counter .l{ font-size: 10.5px; }.obl .blab{ font-size: 9.5px; }.obl .xlab{ font-size: 7.5px; }}
+@media (prefers-reduced-motion: reduce){.obl .bar, .obl .blab, .obl .xlab{ transition: none !important; }}
+.obl{display:flex;flex-direction:column;gap:14px;margin:8px 0 36px;font-family:var(--f-sans)}
+</style>
+<script>
+(function () {
+  var ZERO_BOTTOM = 105, K = 4.8, STAGE_H = 270;      // zero line sits 105px above the bottom; 4.8px per margin point
+  var stage = document.getElementById('obl-stage');
+  var nBl = document.getElementById('obl-nBl'), nNeg = document.getElementById('obl-nNeg'), nC = document.getElementById('obl-nC');
+  var cNeg = document.getElementById('obl-cNeg'), cC = document.getElementById('obl-cC');
+  var sceneEl = document.getElementById('obl-scene'), lineEl = document.getElementById('obl-line'), pauseBtn = document.getElementById('obl-pause');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var T = {"zero": "0 %", "pct": " %", "xBlend": "Priemer", "sCost": "Náklad<br>produktu", "sDisc": "Zľava", "sRet": "Vratky", "sFrt": "Doprava", "sFee": "Poplatky", "sMix": "Mix", "sRes": "Línia C", "pause": "Pauza", "play": "Spustiť", "scenes": [["1 · Mesačný priemer", "Jedno číslo za celú firmu: 19 percent. Vyzerá zdravo a aritmeticky je správne."], ["2 · Ten istý mesiac po líniách", "Línia A nesie priemer. Línia B je tenká. Línia C je na mínus 10 percentách a v priemere to nikto nevidí."], ["3 · Ako sa tam línia C dostala", "Z plus 10 percent len na nákladoch produktu na mínus 10 percent. Najväčšia jednotlivá položka je šesť bodov, takže žiadny krok nevyzerá alarmujúco."]]};
+
+  var z = document.createElement('div'); z.className = 'zero'; z.style.bottom = ZERO_BOTTOM + 'px'; stage.appendChild(z);
+  var zl = document.createElement('div'); zl.className = 'zerolab'; zl.textContent = T.zero; zl.style.bottom = (ZERO_BOTTOM + 4) + 'px'; stage.appendChild(zl);
+
+  var made = [];
+  function clearAll() { made.forEach(function (e) { e.remove(); }); made = []; }
+  function y(v) { return STAGE_H - ZERO_BOTTOM - v * K; }       // top coordinate of a value
+  function bar(x, w, from, to, cls, label, labRed, xl) {         // x,w in percent of the stage; from/to in margin points
+    var hi = Math.max(from, to), lo = Math.min(from, to);
+    var b = document.createElement('div'); b.className = 'bar ' + (cls || '');
+    b.style.left = x + '%'; b.style.width = w + '%'; b.style.top = y(hi) + 'px'; b.style.height = Math.max(2, (hi - lo) * K) + 'px';
+    stage.appendChild(b); made.push(b);
+    var l = document.createElement('div'); l.className = 'blab' + (labRed ? ' red' : '');
+    l.style.left = x + '%'; l.style.width = w + '%';
+    if (to >= from) l.style.top = (y(hi) - 20) + 'px'; else l.style.top = (y(lo) + 4) + 'px';
+    l.textContent = label; stage.appendChild(l); made.push(l);
+    if (xl) { var xe = document.createElement('div'); xe.className = 'xlab'; xe.style.left = x + '%'; xe.style.width = w + '%'; xe.innerHTML = xl; stage.appendChild(xe); made.push(xe); }
+    return [b, l, xe];
+  }
+  function reveal(items, delay) { items.forEach(function (arr, i) { arr.forEach(function (e) { if (e) later(function () { e.classList.add('in'); }, delay * i + 30); }); }); }
+
+  var timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function cancel() { timers.forEach(clearTimeout); timers = []; }
+  function resetCounters() { nBl.textContent = '—'; nNeg.textContent = '—'; nC.textContent = '—'; cNeg.classList.remove('bad'); cC.classList.remove('bad'); }
+  function setScene(i) { sceneEl.textContent = T.scenes[i][0]; lineEl.textContent = T.scenes[i][1]; }
+
+  function sceneOne() {
+    cancel(); clearAll(); resetCounters(); setScene(0);
+    reveal([bar(32, 36, 0, 19, '', '19 %'.replace(' %', T.pct), false, T.xBlend)], 0);
+    later(function () { nBl.textContent = '19' + T.pct; }, 500);
+  }
+  function sceneTwo() {
+    cancel(); clearAll(); setScene(1); nBl.textContent = '19' + T.pct;
+    reveal([
+      bar(14, 20, 0, 30, '', '30' + T.pct, false, 'A'),
+      bar(43, 20, 0, 15, '', '15' + T.pct, false, 'B'),
+      bar(72, 20, 0, -10, 'neg', '−10' + T.pct, true, 'C')
+    ], 450);
+    later(function () { nNeg.textContent = '1'; cNeg.classList.add('bad'); nC.textContent = '−10' + T.pct; cC.classList.add('bad'); }, 1500);
+  }
+  function sceneThree() {
+    cancel(); clearAll(); setScene(2); nBl.textContent = '19' + T.pct; nNeg.textContent = '1'; cNeg.classList.add('bad'); nC.textContent = '−10' + T.pct; cC.classList.add('bad');
+    var steps = [[10, 10, 'start', '+10' + T.pct, false, T.sCost], [10, 4, 'neg', '−6', true, T.sDisc], [4, 0, 'neg', '−4', true, T.sRet], [0, -5, 'neg', '−5', true, T.sFrt], [-5, -7, 'neg', '−2', true, T.sFee], [-7, -10, 'neg', '−3', true, T.sMix]];
+    var items = steps.map(function (s, i) {
+      var x = 7.5 + i * 12.2, from = s[0], to = s[1];
+      if (i === 0) return bar(x, 11.4, 0, 10, 'start', s[3], false, s[5]);
+      return bar(x, 11.4, from, to, 'neg', s[3], true, s[5]);
+    });
+    items.push(bar(7.5 + 6 * 12.2, 11.4, 0, -10, 'neg', '\u221210' + T.pct, true, T.sRes));
+    reveal(items, 380);
+  }
+  function finalState() { cancel(); clearAll(); setScene(1); nBl.textContent = '19' + T.pct; nNeg.textContent = '1'; cNeg.classList.add('bad'); nC.textContent = '−10' + T.pct; cC.classList.add('bad');
+    var items = [bar(14, 20, 0, 30, '', '30' + T.pct, false, 'A'), bar(43, 20, 0, 15, '', '15' + T.pct, false, 'B'), bar(72, 20, 0, -10, 'neg', '−10' + T.pct, true, 'C')];
+    items.forEach(function (a) { a.forEach(function (e) { if (e) e.classList.add('in'); }); }); }
+
+  var idx = 0, running = true, timer = null;
+  var steps = [[sceneOne, 3200], [sceneTwo, 4600], [sceneThree, 5600]];
+  function run() { steps[idx][0](); if (!running) return; timer = setTimeout(function () { idx = (idx + 1) % steps.length; run(); }, steps[idx][1]); }
+
+  if (reduce) { finalState(); pauseBtn.hidden = true; }
+  else {
+    run();
+    pauseBtn.addEventListener('click', function () {
+      running = !running; pauseBtn.textContent = running ? T.pause : T.play; pauseBtn.setAttribute('aria-pressed', String(!running));
+      if (running) { idx = (idx + 1) % steps.length; run(); } else { clearTimeout(timer); cancel(); }
+    });
+  }
+})();
+</script>
+
+<h2>Čo sa nabalilo na líniu C</h2>
+
+<p>Za líniou C nestojí jedno zlé rozhodnutie. V mnohých tímoch sa záporné znamienko objaví ako niekoľko malých položiek, z ktorých je každá samostatne vysvetliteľná. V tejto ilustrácii je najväčšia šesť bodov.</p>
+
+<table class="gap-table">
+<tr><th>Položka</th><th>Vplyv na maržu línie C</th></tr>
+<tr><td>Marža len na náklade produktu</td><td class="num-cell">plus 10 bodov</td></tr>
+<tr><td>Zľava pre najväčšieho zákazníka</td><td class="num-cell">mínus 6 bodov</td></tr>
+<tr><td>Vratky</td><td class="num-cell">mínus 4 body</td></tr>
+<tr><td>Doprava</td><td class="num-cell">mínus 5 bodov</td></tr>
+<tr><td>Poplatky za platby</td><td class="num-cell">mínus 2 body</td></tr>
+<tr><td>Mix predaja: viac lacnejšieho balenia</td><td class="num-cell">mínus 3 body</td></tr>
+<tr><td>Marža línie C</td><td class="num-cell">mínus 10&nbsp;%</td></tr>
+</table>
+
+<p>Rovnaká aritmetika funguje po zákazníkoch. V tejto ilustrácii najväčší zákazník línie C kupuje 40&nbsp;% línie pri marži mínus 16&nbsp;%, kým ostatní zákazníci sú okolo mínus 6&nbsp;%. Súčet za líniu, mínus 10&nbsp;%, schová oboch.</p>
+
+<h2>Znamienko závisí od toho, čo započítate</h2>
+
+<p>Marža produktu je rozhodnutie o tom, ktoré náklady k nemu patria, nie fakt ležiaci v účtovníctve. Tá istá línia C má plus 10&nbsp;%, ak počítate len náklad produktu, a mínus 10&nbsp;%, keď sú v nej zľavy, vratky, doprava a poplatky za platby. Tretia verzia s alokovanou réžiou by bola ešte nižšie. Ani jedna nie je „tá pravá". Dôležité je zvoliť jeden základ a používať ho pre všetky línie, inak porovnávate rozdielne veci.</p>
+
+<table class="gap-table">
+<tr><th>Ako to vyzerá</th><th>Ako to naozaj je</th></tr>
+<tr>
+<td>Priemerná marža je 19&nbsp;%, takže je všetko v poriadku</td>
+<td>Jedna línia z troch je pod nulou a priemer ju dokáže schovať</td>
+</tr>
+<tr>
+<td>Marža je číslo</td>
+<td>Marža je číslo plus rozhodnutie o tom, ktoré náklady sa rátajú</td>
+</tr>
+<tr>
+<td>Línia pod nulou vzniká z jednej veľkej chyby</td>
+<td>Často narastá z viacerých malých položiek, z ktorých žiadna sama nie je alarmujúca</td>
+</tr>
+<tr>
+<td>Priemerná teplota v budove je príjemná</td>
+<td>Jedna miestnosť mrzne a druhá sa prehrieva. Report je výborný termostat pre budovu a slabý pre ktorúkoľvek z nich</td>
+</tr>
+</table>
+
+<h2>Tá istá otázka ako v Príspevku #16</h2>
+
+<p>Príspevok #16 sa pri platbe pýtal „v porovnaní s čím?": potrebujete vlastnú bežnú hodnotu dodávateľa. Tu je otázka rovnaká a v úlohe bežnej hodnoty je priemer. V porovnaní s priemerom 19&nbsp;% vyzerá línia C ako malá brzda. V porovnaní s nulou je to strata. Kontrola sa musí pozerať na časť, nielen na celok.</p>
+
+<p>Platí aj Príspevok #8. Kontrola, ktorá sa spustí pri každom malom poklese, naučí ľudí prestať ju čítať. Prah je rozhodnutie a dôvod pripojený ku každému upozorneniu je to, čo ho robí použiteľným.</p>
+
+<h2>Čo musí kontrola marže obsahovať</h2>
+
+<table class="gap-table">
+<tr><th>Prvok</th><th>Prečo na ňom záleží</th></tr>
+<tr><td>Marža po produktovej línii a po zákazníkovi, nielen celkom</td><td>Súčet nevie ukázať časť pod nulou</td></tr>
+<tr><td>Jeden základ nákladov pre každý riadok</td><td>Inak sa riadky nedajú porovnať</td></tr>
+<tr><td>Po mesiacoch, nie jeden snímok</td><td>Ukáže posun k nule skôr, než ju línia prekročí</td></tr>
+<tr><td>Upozornenie, keď línia prekročí nulu alebo dohodnutý prah, s pripojeným dôvodom (zľava, doprava, vratky, mix)</td><td>Upozornenie bez dôvodu sa nedá použiť</td></tr>
+<tr><td>Človek potvrdí, čo bude ďalej</td><td>Kontrola nemení cenu ani nezastaví predaj</td></tr>
+</table>
+
+<p>Pod tabuľkou je ešte jedna vec. Marža je len taká aktuálna ako najpomalší nepotvrdený doklad. Zľava, poplatok za dopravu alebo vratka často sedia na faktúre či dobropise, ktoré ešte nikto nepotvrdil, takže report vyzerá úplne a nie je.</p>
+
+<div class="pullquote">
+<p>Priemer odpovedá na otázku „ako sa nám darí?". Otázka, ktorá stojí peniaze, je „ktorá časť prerába?"</p>
+</div>
+
+<h2>Test, ktorý môžete spraviť tento týždeň</h2>
+
+<p>Vezmite minulý mesiac. Spočítajte maržu desiatich najväčších zákazníkov alebo produktov na jednom základe nákladov a pozrite sa na tri najnižšie. Poznali ste ich znamienko ešte predtým, než ste ho vypočítali?</p>
+
+<p>Ani za týmto príspevkom nie je skript. Je to tabuľka a rozhodnutie o základe nákladov a obe sa oplatí urobiť skôr, než do toho vstúpi akýkoľvek nástroj.</p>
+
+<div class="followup">
+<h4>Sledujte sériu</h4>
+<p>Príspevok #18 sa pozrie na medzeru medzi nástrojmi: faktúru, ktorá je správna v každom poli a napriek tomu čaká, lebo nikto nepovedal, kto ju potvrdí, a na to, čo ostáva nevyriešené aj vtedy, keď už máte Excel, ERP a AI asistenta.</p>
+</div>
+
+<div class="cta-box">
+<h3>Keby bola jedna produktová línia tento mesiac pod nulou, ktorý report by ju ukázal ako prvý?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Odoberať zadarmo</a>
+<div class="cta-note">Žiadny spam. Jeden príspevok týždenne. Odhlásenie kedykoľvek.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Ochrana súkromia</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/sk/">Domov</a>
+<a href="https://borisdracka.com/sk/blog/">Blog</a>
+<a href="https://borisdracka.com/blog/post-17">English version</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Odoberať</a>
+</div>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
