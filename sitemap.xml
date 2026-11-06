@@ -325,4 +325,16 @@
     <xhtml:link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/agents" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://borisdracka.com/agents" />
   </url>
+  <url>
+    <loc>https://borisdracka.com/blog/post-18</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-18" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-18" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-18" />
+  </url>
+  <url>
+    <loc>https://borisdracka.com/sk/blog/post-18</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-18" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-18" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-18" />
+  </url>
 </urlset>

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>The Invoice Was Right. It Still Waited. | CFO Unfiltered</title>
+<meta name="description" content="Post #18 of 50 in The CFO & AI Series: why an invoice that is correct in every field can still wait for weeks, what stays unsolved between a spreadsheet, an ERP and an AI assistant, and what a handoff check has to contain.">
+<link rel="canonical" href="https://borisdracka.com/blog/post-18">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-18">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-18">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-18">
+
+<meta property="og:title" content="The Invoice Was Right. It Still Waited.">
+<meta property="og:description" content="Why an invoice that is correct in every field can still wait for weeks, what stays unsolved between a spreadsheet, an ERP and an AI assistant, and what a handoff check has to contain.">
+<meta property="og:image" content="https://borisdracka.com/og/post-18.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/blog/post-18">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-11-07T09:00:00+01:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Invoices">
+<meta property="article:tag" content="Approvals">
+<meta property="article:tag" content="Handoffs">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-18.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+/* Hero */
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+/* Gap table */
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+/* GitHub / demo teaser section */
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Follow the series */
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+/* Footer */
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/blog/post-18#article",
+"headline": "The Invoice Was Right. It Still Waited.",
+"description": "Why an invoice that is correct in every field can still wait for weeks, what stays unsolved between a spreadsheet, an ERP and an AI assistant, and what a handoff check has to contain.",
+"image": "https://borisdracka.com/og/post-18.png",
+"url": "https://borisdracka.com/blog/post-18",
+"datePublished": "2026-11-07T09:00:00+01:00",
+"dateModified": "2026-11-07T09:00:00+01:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "en",
+"articleSection": "Finance",
+"position": 18,
+"isPartOf": { "@type": "CreativeWorkSeries", "@id": "https://borisdracka.com/blog#series", "name": "The CFO & AI Series", "url": "https://borisdracka.com/blog" },
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/blog/post-18" }
+}
+</script>
+<link rel="stylesheet" href="/a11y-targets.css">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+<a data-lang href="https://borisdracka.com/blog/post-18" class="lang-active">EN</a>/<a data-lang href="https://borisdracka.com/sk/blog/post-18">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Invoices · Approvals · Handoffs</div>
+<h1>The Invoice Was Right. It Still Waited.</h1>
+<p class="hero-subtitle">Post #17 ended on a document that nobody had confirmed. This one follows a single invoice through three tools without an error, and asks who owns the handoff between them.</p>
+<div class="hero-meta">Boris Dračka · November 2026 · 6 min read</div>
+<span class="series-label">Post #18 of 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">The examples and architectures in this series are my personal educational, non-commercial experiments; they are not an offer of IT or consulting services.</p>
+
+<p class="lead">An approval request is a message in a bottle, written in a very professional font. Post #17 ended on a document that nobody had confirmed. This post follows one of them.</p>
+
+<p>The invoice below is a composite. The company, the supplier, the amounts and the days are invented and illustrative only. They don't describe a real company, supplier, process or system.</p>
+
+<h2>One invoice, three tools, no owner</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">14</div><div class="label">Illustrative days the invoice waited</div></div>
+<div class="stat"><div class="num">3</div><div class="label">Tools it passed without an error</div></div>
+<div class="stat"><div class="num">0</div><div class="label">Named owners of the handoff</div></div>
+</div>
+
+<p>A supplier invoice arrives by e-mail. Every field is right: amount, VAT, bank account, order number. Nothing in it is wrong, and it still sits for two weeks. Here is where it went.</p>
+
+<table class="gap-table">
+<tr><th>Step</th><th>Tool</th><th>What happened</th><th>What was missing</th></tr>
+<tr><td>Receipt</td><td>Spreadsheet</td><td>Invoice logged</td><td>Nobody confirmed the goods arrived</td></tr>
+<tr><td>Entry</td><td>ERP</td><td>Fields and order match</td><td>Nobody knew who confirms delivery</td></tr>
+<tr><td>Reading</td><td>AI assistant</td><td>Fields read, cost centre found</td><td>It flags, it doesn't decide</td></tr>
+<tr><td>Approval</td><td>ERP</td><td>Request sent to the cost centre owner</td><td>The owner is away, no deputy named</td></tr>
+<tr><td>Payment run</td><td>ERP</td><td>Invoice not in the run</td><td>Nobody sees that it is waiting</td></tr>
+</table>
+
+<p>No step failed. The delay lives between the steps, and in this illustration it was found only when the supplier asked.</p>
+
+<div class="obl" role="group" aria-label="Motion graphic">
+<div class="window">
+    <div class="head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="title">invoice_path — illustrative composite</span><button class="pause" id="obl-pause" type="button" aria-pressed="false">Pause</button></div>
+
+    <div class="counters">
+      <div class="counter" id="obl-cD"><div class="n" id="obl-nD">—</div><div class="l">Days waiting</div></div>
+      <div class="counter"><div class="n" id="obl-nT">—</div><div class="l">Tools passed</div></div>
+      <div class="counter" id="obl-cO"><div class="n" id="obl-nO">—</div><div class="l">Named owners</div></div>
+    </div>
+
+    <div class="stage" id="obl-stage" role="img" aria-label="Path of one illustrative invoice through five stations: spreadsheet, ERP, AI assistant, approval and payment run. It passes the first three without an error, then waits at approval for 14 days because the owner is away and no deputy is named. In the last scene a named owner, a deputy and a three-day limit let it reach the payment run."></div>
+
+    <div class="caption" aria-live="polite">
+      <div class="scene" id="obl-scene"></div>
+      <div class="line" id="obl-line"></div>
+    </div>
+  </div>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw ok"></i>Passed</span>
+    <span><i class="sw gap"></i>Waiting</span>
+  </div>
+  <p class="note">Illustrative composite from Post #18. The company, supplier, invoice and days are made-up and do not describe a specific company, process or system.</p>
+</div>
+<style>
+.obl{
+    --muted: #4E483F; --line: #DCD5C7;
+  --card: #1A1714; --card-head: #111111; --card-line: #2a2a2a;
+  --ink: #dddddd; --ink-dim: #8a8a8a;
+  --accent: #C21F2F; --accent-on-dark: #ff7a7a; --good: #7fd99a;
+  --f-serif: 'IBM Plex Serif', Georgia, serif;
+  --f-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
+.obl .window{ background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-line); }
+.obl .head{ background: var(--card-head); padding: 12px 16px; display: flex; align-items: center; gap: 8px; font: 500 12px var(--f-mono); color: #888; }
+.obl .dot{ width: 9px; height: 9px; border-radius: 50%; background: #444; flex: 0 0 auto; }
+.obl .head .title{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.obl .pause{ margin-left: auto; background: none; border: 1px solid #333; color: #999; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+.obl .pause:hover{ color: #fff; border-color: #555; }
+.obl .pause:focus-visible{ outline: 2px solid var(--accent-on-dark); outline-offset: 2px; }
+.obl .counters{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--card-line); }
+.obl .counter{ padding: 14px 16px; border-right: 1px solid var(--card-line); min-width: 0; }
+.obl .counter:last-child{ border-right: 0; }
+.obl .counter .n{ font: 700 24px/1 var(--f-mono); color: #fff; font-variant-numeric: tabular-nums; transition: color .3s; white-space: nowrap; }
+.obl .counter .l{ font-size: 11.5px; color: var(--ink-dim); margin-top: 7px; line-height: 1.35; }
+.obl .counter.good .n{ color: var(--good); }
+.obl .counter.bad .n{ color: var(--accent-on-dark); }
+.obl .caption{ border-top: 1px solid var(--card-line); padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; min-height: 86px; }
+.obl .scene{ font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-on-dark); }
+.obl .line{ font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.obl .legend{ display: flex; flex-wrap: wrap; gap: 6px 16px; font: 500 12px var(--f-mono); color: var(--muted); }
+.obl .legend span{ display: inline-flex; align-items: center; gap: 7px; }
+.obl .sw{ width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto; border: 1.5px solid; }
+.obl .note{ font-size: 12.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; }
+.obl{display:flex;flex-direction:column;gap:14px;margin:8px 0 36px;font-family:var(--f-sans)}
+
+.obl .stage{ position: relative; height: 196px; margin: 8px 16px 6px; }
+.obl .st{ position: absolute; top: 58px; height: 52px; width: 16.5%; border-radius: 6px; border: 1.5px solid #444; background: rgba(255,255,255,.04); display: flex; align-items: center; justify-content: center; text-align: center; font: 600 11px/1.15 var(--f-mono); color: #bbb; transition: border-color .35s, background .35s, color .35s; }
+.obl .st.done{ border-color: rgba(127,217,154,.75); background: rgba(127,217,154,.14); color: #d7f5e0; }
+.obl .st.wait{ border-color: rgba(255,122,122,.9); background: rgba(194,31,47,.28); color: #ffd0d0; }
+.obl .st.skip{ border-style: dashed; color: #777; }
+.obl .arrow{ position: absolute; top: 84px; height: 0; border-top: 1.5px solid #444; }
+.obl .tok{ position: absolute; top: 14px; width: 34px; height: 24px; margin-left: -17px; border-radius: 4px; background: #f4efe3; color: #1A1714; font: 700 11px/24px var(--f-mono); text-align: center; transition: left .8s ease-in-out, background .3s; }
+.obl .tok.bad{ background: #ff9a9a; }
+.obl .tag{ position: absolute; font: 600 10px/1.2 var(--f-mono); color: var(--ink-dim); text-align: center; opacity: 0; transition: opacity .35s; white-space: nowrap; }
+.obl .tag.in{ opacity: 1; }
+.obl .tag.red{ color: var(--accent-on-dark); }
+.obl .chip{ position: absolute; font: 600 10px/18px var(--f-mono); color: var(--good); border: 1px solid rgba(127,217,154,.6); border-radius: 9px; padding: 0 8px; white-space: nowrap; opacity: 0; transition: opacity .35s; }
+.obl .chip.in{ opacity: 1; }
+.obl .sw.ok{ background: rgba(90,180,120,.35); border-color: #4a9a66; }
+.obl .sw.gap{ background: rgba(194,31,47,.3); border-color: #c8454f; }
+@media (max-width: 560px){.obl .stage{ margin-inline: 6px; }.obl .counter{ padding: 12px 8px; }.obl .counter .n{ font-size: 17px; }.obl .counter .l{ font-size: 10.5px; }.obl .st{ font-size: 8px; }.obl .tag, .obl .chip{ font-size: 8px; }.obl .chip{ padding: 0 5px; }.obl .tok{ width: 28px; margin-left: -14px; font-size: 9px; }}
+@media (prefers-reduced-motion: reduce){.obl .st, .obl .tag, .obl .chip, .obl .tok{ transition: none !important; }}
+</style>
+<script>
+(function () {
+  var stage = document.getElementById('obl-stage');
+  var nD = document.getElementById('obl-nD'), nT = document.getElementById('obl-nT'), nO = document.getElementById('obl-nO');
+  var cD = document.getElementById('obl-cD'), cO = document.getElementById('obl-cO');
+  var sceneEl = document.getElementById('obl-scene'), lineEl = document.getElementById('obl-line'), pauseBtn = document.getElementById('obl-pause');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var T = {"st": ["Sheet", "ERP", "AI", "Approval", "Payment<br>run"], "inv": "INV", "q": "?", "notrun": "Not in the run", "owner": "Owner named", "dep": "Deputy named", "lim": "Limit: 3 days", "scenes": [["1 · Three tools, no error", "The invoice is logged in the sheet, matched in the ERP and read by an AI assistant. Every field is correct."], ["2 · The handoff", "The request goes to the cost centre owner, who is away. Nothing is wrong and nothing moves. After 14 days the supplier asks."], ["3 · An owner, a deputy, a limit", "Same invoice, same tools. With a named owner, a deputy and a three-day limit, it reaches the payment run."]], "pause": "Pause", "play": "Play"};
+  var X = function (i) { return 3 + i * 19.4; };
+  var st = [], tok, tagNR, chips = [];
+  for (var i = 0; i < 5; i++) {
+    var s = document.createElement('div'); s.className = 'st'; s.style.left = X(i) + '%'; s.innerHTML = T.st[i]; stage.appendChild(s); st.push(s);
+    if (i < 4) { var a = document.createElement('div'); a.className = 'arrow'; a.style.left = (X(i) + 16.5) + '%'; a.style.width = '2.9%'; stage.appendChild(a); }
+  }
+  tok = document.createElement('div'); tok.className = 'tok'; tok.textContent = T.inv; stage.appendChild(tok);
+  tagNR = document.createElement('div'); tagNR.className = 'tag red'; tagNR.textContent = T.notrun; tagNR.style.left = (X(4) - 2) + '%'; tagNR.style.width = '20.5%'; tagNR.style.top = '118px'; stage.appendChild(tagNR);
+  var q = document.createElement('div'); q.className = 'tag red'; q.textContent = T.q; q.style.left = X(3) + '%'; q.style.width = '16.5%'; q.style.top = '40px'; q.style.fontSize = '14px'; stage.appendChild(q);
+  [T.owner, T.dep, T.lim].forEach(function (t, i) { var c = document.createElement('div'); c.className = 'chip'; c.textContent = t; c.style.left = (X(3) - 4) + '%'; c.style.top = (122 + i * 24) + 'px'; stage.appendChild(c); chips.push(c); });
+
+  var timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function cancel() { timers.forEach(clearTimeout); timers = []; }
+  function at(i, instant) { if (instant) tok.style.transition = 'none'; tok.style.left = (X(i) + 8.25) + '%'; if (instant) { void tok.offsetWidth; tok.style.transition = ''; } }
+  function reset() { st.forEach(function (s) { s.className = 'st'; }); tagNR.classList.remove('in'); q.classList.remove('in'); chips.forEach(function (c) { c.classList.remove('in'); }); tok.classList.remove('bad'); cD.classList.remove('bad', 'good'); cO.classList.remove('bad', 'good'); nD.textContent = '0'; nT.textContent = '0'; nO.textContent = '0'; }
+  function setScene(i) { sceneEl.textContent = T.scenes[i][0]; lineEl.textContent = T.scenes[i][1]; }
+  function stuck() { for (var i = 0; i < 3; i++) st[i].classList.add('done'); st[3].classList.add('wait'); st[4].classList.add('skip'); tagNR.classList.add('in'); q.classList.add('in'); tok.classList.add('bad'); at(3, true); nT.textContent = '3'; nD.textContent = '14'; cD.classList.add('bad'); cO.classList.add('bad'); }
+
+  function sceneOne() {
+    cancel(); reset(); setScene(0); at(0, true);
+    later(function () { st[0].classList.add('done'); nT.textContent = '1'; }, 500);
+    later(function () { at(1); }, 1100);
+    later(function () { st[1].classList.add('done'); nT.textContent = '2'; }, 2000);
+    later(function () { at(2); }, 2400);
+    later(function () { st[2].classList.add('done'); nT.textContent = '3'; }, 3300);
+    later(function () { at(3); }, 3700);
+  }
+  function sceneTwo() {
+    cancel(); reset(); setScene(1); stuck(); nD.textContent = '0'; cD.classList.remove('bad');
+    for (var k = 1; k <= 14; k++) (function (k) { later(function () { nD.textContent = String(k); if (k > 3) cD.classList.add('bad'); }, 500 + k * 220); })(k);
+  }
+  function sceneThree() {
+    cancel(); reset(); setScene(2); stuck();
+    later(function () { chips[0].classList.add('in'); nO.textContent = '1'; cO.classList.remove('bad'); cO.classList.add('good'); }, 500);
+    later(function () { chips[1].classList.add('in'); }, 1100);
+    later(function () { chips[2].classList.add('in'); }, 1700);
+    later(function () { nD.textContent = '3'; cD.classList.remove('bad'); cD.classList.add('good'); q.classList.remove('in'); st[3].className = 'st done'; tok.classList.remove('bad'); }, 2600);
+    later(function () { at(4); tagNR.classList.remove('in'); }, 3100);
+    later(function () { st[4].className = 'st done'; }, 4000);
+  }
+  function finalState() { cancel(); reset(); setScene(2); stuck(); chips.forEach(function (c) { c.classList.add('in'); }); nO.textContent = '1'; cO.classList.remove('bad'); cO.classList.add('good'); nD.textContent = '3'; cD.classList.remove('bad'); cD.classList.add('good'); q.classList.remove('in'); st[3].className = 'st done'; st[4].className = 'st done'; tagNR.classList.remove('in'); tok.classList.remove('bad'); at(4, true); }
+
+  var idx = 0, running = true, timer = null;
+  var steps = [[sceneOne, 4800], [sceneTwo, 4600], [sceneThree, 6000]];
+  function run() { steps[idx][0](); if (!running) return; timer = setTimeout(function () { idx = (idx + 1) % steps.length; run(); }, steps[idx][1]); }
+  if (reduce) { finalState(); pauseBtn.hidden = true; }
+  else {
+    run();
+    pauseBtn.addEventListener('click', function () {
+      running = !running; pauseBtn.textContent = running ? T.pause : T.play; pauseBtn.setAttribute('aria-pressed', String(!running));
+      if (running) { idx = (idx + 1) % steps.length; run(); } else { clearTimeout(timer); cancel(); }
+    });
+  }
+})();
+</script>
+
+<h2>Five places where it gets lost</h2>
+
+<p>None of these is a software defect. They are places where one person or tool is supposed to hand something to the next, and nobody has written down who does it.</p>
+
+<table class="gap-table">
+<tr><th>Place</th><th>What often happens</th><th>Question to ask</th></tr>
+<tr><td>Inputs</td><td>The invoice carries no delivery confirmation or cost centre, and nobody is asked for it</td><td>Who supplies what the invoice doesn't?</td></tr>
+<tr><td>Completeness</td><td>Every field is filled, but nobody says whether anything is still missing</td><td>Who says "this is complete"?</td></tr>
+<tr><td>Handoff</td><td>The request is sent. Sent is not read, and read is not decided</td><td>Who knows it was read?</td></tr>
+<tr><td>Exceptions</td><td>The approver is away, or doesn't realise it is theirs</td><td>Who owns the silence?</td></tr>
+<tr><td>Completion</td><td>It gets done, but the person waiting is not told</td><td>Who confirms, and to whom?</td></tr>
+</table>
+
+<h2>Why more tools don't close the gap</h2>
+
+<p>Each tool does what it is set up to do. The spreadsheet records, the ERP routes, and an AI assistant can read the fields and point out whom a request is waiting on. None of them decides for the approver, and none of them knows that the approver is on holiday unless someone has told it.</p>
+
+<p>Often the cheapest fix is a setting you already have: a named deputy, a deadline, a reminder in the system in use. It is worth checking what the ERP can already do before adding anything. What a setting cannot do is decide who owns the problem. That is a decision about responsibility, not a feature.</p>
+
+<table class="gap-table">
+<tr><th>What it looks like</th><th>What's actually true</th></tr>
+<tr>
+<td>The invoice is correct, so it will be paid</td>
+<td>Correct is not confirmed. Payment waits for the confirmation</td>
+</tr>
+<tr>
+<td>The system sent the request</td>
+<td>Sent is not read, and read is not decided</td>
+</tr>
+<tr>
+<td>We have an approval workflow</td>
+<td>A workflow routes the request. Somebody still has to own the silence</td>
+</tr>
+<tr>
+<td>Nobody made the invoice wait</td>
+<td>Nobody decided it, which is exactly why nobody sees it</td>
+</tr>
+</table>
+
+<h2>The same pattern as in the earlier posts</h2>
+
+<p>Post #17 ended on a point that belongs here: margin is only as current as the slowest unconfirmed document. The invoice above is that document. The discount or the freight charge on it is missing from the report until someone confirms it.</p>
+
+<p>Post #12 asked who should be chased first. This one asks who should have been asked in the first place. And Post #8 applies again: an alert that fires for every invoice older than two days teaches people to stop reading it. The deadline is a decision, and so is who gets the escalation.</p>
+
+<h2>What a handoff check has to contain</h2>
+
+<table class="gap-table">
+<tr><th>Element</th><th>Why it matters</th></tr>
+<tr><td>A named owner for every step, and a named deputy</td><td>Silence needs an address</td></tr>
+<tr><td>A time limit, with escalation to a named person</td><td>Waiting doesn't turn into a habit</td></tr>
+<tr><td>Visible status: waiting on whom, for how many days</td><td>What isn't visible doesn't exist</td></tr>
+<tr><td>Exceptions with a reason (no delivery, wrong cost centre, dispute)</td><td>An exception without a reason can't be resolved</td></tr>
+<tr><td>A person confirms that it is done</td><td>The check approves nothing and pays nothing</td></tr>
+</table>
+
+<div class="pullquote">
+<p>Tools pass data along. Nobody passes responsibility unless someone has written it down.</p>
+</div>
+
+<h2>A test you can run this week</h2>
+
+<p>Take the invoices that are still open ten days after receipt. For each one, write down the name of the person it is waiting on. The number of invoices where you can't name anyone is your figure.</p>
+
+<p>There is no script behind this one either. It is a list and a name next to every line, and both are worth having before any tool is involved.</p>
+
+<div class="followup">
+<h4>Follow the series</h4>
+<p>Post #19 looks at the one invoice change that can't be taken back: a supplier whose bank details changed, and why the check that matters happens before the payment, not after it.</p>
+</div>
+
+<div class="cta-box">
+<h3>Which open invoice in your company has waited longest, and whose name is on it?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Subscribe free</a>
+<div class="cta-note">No spam. One post per week. Unsubscribe any time.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Privacy</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/">Home</a>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://borisdracka.com/sk/blog/post-18">Slovenská verzia</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+</div>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
