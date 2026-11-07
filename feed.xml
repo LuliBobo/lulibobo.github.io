@@ -5,8 +5,16 @@
   <subtitle>One CFO&#x27;s honest account of testing AI in finance.</subtitle>
   <link rel="self" type="application/atom+xml" href="https://borisdracka.com/feed.xml" />
   <link rel="alternate" type="text/html" href="https://borisdracka.com/blog" />
-  <updated>2026-10-31T09:00:00+01:00</updated>
+  <updated>2026-11-06T09:00:00+01:00</updated>
   <author><name>Boris Dračka</name><uri>https://borisdracka.com/</uri></author>
+  <entry>
+    <id>https://borisdracka.com/blog/post-18</id>
+    <title>The Invoice Was Right. It Still Waited.</title>
+    <link rel="alternate" type="text/html" href="https://borisdracka.com/blog/post-18" />
+    <published>2026-11-06T09:00:00+01:00</published>
+    <updated>2026-11-06T09:00:00+01:00</updated>
+    <summary>Why an invoice that is correct in every field can still wait for weeks, what stays unsolved between a spreadsheet, an ERP and an AI assistant, and what a handoff check has to contain.</summary>
+  </entry>
   <entry>
     <id>https://borisdracka.com/blog/post-17</id>
     <title>The Average Looked Fine. One Product Didn&#x27;t.</title>
