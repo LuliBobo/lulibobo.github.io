@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://borisdracka.com/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://borisdracka.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://borisdracka.com/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://borisdracka.com/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://borisdracka.com/icon-192.png" />
+<title>One Changed Account Number. No Way Back. | CFO Unfiltered</title>
+<meta name="description" content="Post #19 of 50 in The CFO & AI Series: why a supplier's changed bank account is the one invoice change where the right result is to wait, and what a bank-details check has to contain before the payment goes out.">
+<link rel="canonical" href="https://borisdracka.com/blog/post-19">
+<link rel="alternate" hreflang="en" href="https://borisdracka.com/blog/post-19">
+<link rel="alternate" hreflang="sk" href="https://borisdracka.com/sk/blog/post-19">
+<link rel="alternate" hreflang="x-default" href="https://borisdracka.com/blog/post-19">
+
+<meta property="og:title" content="One Changed Account Number. No Way Back.">
+<meta property="og:description" content="Why a supplier's changed bank account is the one invoice change where the right result is to wait, and what a bank-details check has to contain before the payment goes out.">
+<meta property="og:image" content="https://borisdracka.com/og/post-19.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://borisdracka.com/blog/post-19">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Boris Dračka">
+<meta property="article:published_time" content="2026-11-14T09:00:00+01:00">
+<meta property="article:section" content="Finance">
+<meta property="article:tag" content="Payments">
+<meta property="article:tag" content="Bank Details">
+<meta property="article:tag" content="Verification">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BorisDracka">
+<meta name="twitter:image" content="https://borisdracka.com/og/post-19.png">
+
+<link rel="stylesheet" href="/fonts/plex.css">
+
+<style>
+:root {
+--orange: #C21F2F;
+--orange-d: #9A1824;
+--dark: #1A1714;
+--mid: #4E483F;
+--light: #F3F0E7;
+--white: #FBF9F3;
+--border: #DCD5C7;
+--gray: #999999;
+--gray-on-dark: #AAAAAA;
+--gray-light-on-dark: #BBBBBB;
+--nav-bg: rgba(255,255,255,0.96);
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+background: var(--white);
+color: var(--dark);
+font-family: 'IBM Plex Sans', sans-serif;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+}
+a { color: var(--orange); }
+
+/* Site header */
+.site-header {
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 24px;
+position: sticky;
+top: 0;
+background: var(--nav-bg);
+backdrop-filter: blur(8px);
+border-bottom: 1px solid #eee;
+z-index: 100;
+}
+.site-header .logo {
+font-size: 15px;
+font-weight: 700;
+color: #1A1714;
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+.site-header nav a {
+font-size: 13px;
+color: #666;
+text-decoration: none;
+margin-left: 20px;
+}
+.site-header nav a:hover { color: var(--dark); }
+.site-header nav a.lang-active { color: var(--orange); font-weight: 700; }
+@media (max-width: 600px) {
+.site-header nav { gap: 14px; } .site-header nav a[href*="x.com"] { display: none; } .site-header .btn-subscribe { padding: 7px 12px; font-size: 12px; } .site-header .logo { font-size: 13px; }
+}
+
+/* Hero */
+.hero {
+background: var(--dark);
+padding: 56px 24px 48px;
+}
+.hero-inner { max-width: 720px; margin: 0 auto; }
+.kicker {
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--orange);
+margin-bottom: 16px;
+}
+.hero h1 {
+color: white;
+font-size: clamp(26px, 5vw, 46px);
+font-weight: 900;
+line-height: 1.15;
+letter-spacing: -1.5px;
+margin: 0 0 14px;
+}
+.hero-subtitle {
+color: var(--gray-light-on-dark);
+font-size: 1.05rem;
+line-height: 1.6;
+margin: 0 0 22px;
+max-width: 620px;
+}
+.hero-meta {
+font-size: 13px;
+color: var(--gray-on-dark);
+margin-bottom: 16px;
+}
+.series-label {
+display: inline-block;
+background: var(--orange);
+color: white;
+font-size: 12px;
+font-weight: 700;
+border-radius: 4px;
+padding: 3px 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Article */
+.article {
+max-width: 720px;
+margin: 0 auto;
+padding: 52px 24px 80px;
+}
+.article p {
+font-size: 18px;
+line-height: 1.75;
+margin: 0 0 24px;
+color: var(--dark);
+}
+.article p.lead {
+font-size: 21px;
+font-weight: 400;
+line-height: 1.6;
+}
+.article p.disclaimer {
+font-size: 14px;
+font-style: italic;
+color: var(--mid);
+border-left: 3px solid var(--border);
+padding: 4px 0 4px 16px;
+margin: 0 0 32px;
+}
+.article h2 {
+font-size: 22px;
+font-weight: 700;
+letter-spacing: -0.5px;
+color: var(--dark);
+margin: 44px 0 18px;
+}
+
+/* Pullquote */
+.pullquote {
+border-left: 4px solid #C21F2F;
+background: #F3F0E7;
+border-radius: 0 8px 8px 0;
+padding: 20px 24px;
+margin: 32px 0;
+}
+.pullquote p {
+font-size: 20px;
+font-style: italic;
+color: #333;
+line-height: 1.6;
+margin: 0;
+}
+
+/* Stat box */
+.stat-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 28px 32px;
+margin: 32px 0 40px;
+display: flex;
+gap: 28px;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.stat-box .stat { text-align: center; flex: 1 1 160px; }
+.stat-box .num {
+font-size: 32px;
+font-weight: 900;
+color: #C21F2F;
+line-height: 1;
+}
+.stat-box .label {
+font-size: 12px;
+letter-spacing: 0.5px;
+color: #aaa;
+margin-top: 8px;
+}
+
+/* Gap table */
+.gap-table {
+width: 100%;
+border-collapse: collapse;
+margin: 8px 0 36px;
+font-size: 15px;
+}
+.gap-table th {
+text-align: left;
+padding: 10px 14px;
+background: var(--light);
+color: var(--dark);
+font-weight: 700;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+border-bottom: 2px solid var(--border);
+}
+.gap-table td {
+padding: 14px;
+border-bottom: 1px solid var(--border);
+vertical-align: top;
+color: var(--mid);
+line-height: 1.55;
+}
+.gap-table td.num-cell { color: var(--dark); font-weight: 600; white-space: nowrap; }
+
+/* GitHub / demo teaser section */
+.github-section {
+background: var(--light);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 32px 32px;
+margin: 40px 0;
+}
+.github-section h3 { font-size: 18px; font-weight: 800; color: var(--dark); margin: 0 0 10px; }
+.github-section p { font-size: 15px; color: var(--mid); margin: 0 0 20px; }
+.btn-primary {
+background: var(--orange);
+color: white;
+padding: 14px 28px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+border: none;
+text-decoration: none;
+display: inline-block;
+cursor: pointer;
+}
+.btn-primary:hover { background: var(--orange-d); }
+.btn-secondary {
+background: transparent;
+color: var(--dark);
+border: 2px solid var(--border);
+padding: 12px 26px;
+border-radius: 8px;
+font-weight: 600;
+font-size: 0.95rem;
+text-decoration: none;
+display: inline-block;
+margin-left: 10px;
+}
+.btn-secondary:hover { border-color: var(--dark); }
+.cta-note { font-size: 0.78rem; color: #999; margin-top: 14px; }
+
+/* Follow the series */
+.followup {
+margin: 48px 0 8px;
+padding-top: 24px;
+border-top: 1px solid var(--border);
+}
+.followup h4 {
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(--gray);
+margin: 0 0 10px;
+}
+.followup p { margin: 0; }
+
+/* CTA box */
+.cta-box {
+background: #1A1714;
+border-radius: 14px;
+padding: 40px 36px;
+text-align: center;
+margin-top: 40px;
+}
+.cta-box h3 { font-size: 20px; font-weight: 700; color: white; margin: 0 0 22px; line-height: 1.4; }
+.cta-box p { font-size: 16px; color: #bbb; margin: 0 0 22px; }
+
+/* Footer */
+footer {
+background: var(--dark);
+padding: 28px 48px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+border-top: 1px solid #222;
+}
+.footer-brand { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-copy { font-size: 0.8rem; color: #999; }
+.footer-nav a { font-size: 0.8rem; color: #999; text-decoration: none; margin-left: 16px; }
+.footer-nav a:first-child { margin-left: 0; }
+.footer-nav a:hover { color: white; }
+
+/* Responsive */
+@media (max-width: 900px) {
+.hero { padding: 40px 32px 48px; }
+}
+@media (max-width: 600px) {
+.site-header { padding: 16px 20px; height: auto; }
+.hero { padding: 32px 20px; }
+.article { padding: 36px 16px 60px; }
+.article p { font-size: 17px; }
+.stat-box { padding: 24px 20px; gap: 20px; }
+.github-section { padding: 24px 20px; }
+.btn-secondary { margin-left: 0; margin-top: 10px; }
+footer { padding: 24px 20px; flex-direction: column; }
+.footer-nav { display: flex; flex-direction: column; gap: 6px; }
+.footer-nav a { margin-left: 0; }
+}
+
+/* Red Pen Ledger typography accents */
+h1 { font-family: 'IBM Plex Serif', Georgia, serif; }
+.kicker, .series-label, .label, .tag, .hero-tag, .p-tag, .demo-badge, .as-name, .repo-name { font-family: 'IBM Plex Mono', 'SF Mono', monospace; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"@id": "https://borisdracka.com/blog/post-19#article",
+"headline": "One Changed Account Number. No Way Back.",
+"description": "Why a supplier's changed bank account is the one invoice change where the right result is to wait, and what a bank-details check has to contain before the payment goes out.",
+"image": "https://borisdracka.com/og/post-19.png",
+"url": "https://borisdracka.com/blog/post-19",
+"datePublished": "2026-11-14T09:00:00+01:00",
+"dateModified": "2026-11-14T09:00:00+01:00",
+"author": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"publisher": { "@type": "Person", "name": "Boris Dračka", "url": "https://borisdracka.com/" },
+"inLanguage": "en",
+"articleSection": "Finance",
+"position": 19,
+"isPartOf": { "@type": "CreativeWorkSeries", "@id": "https://borisdracka.com/blog#series", "name": "The CFO & AI Series", "url": "https://borisdracka.com/blog" },
+"mainEntityOfPage": { "@type": "WebPage", "@id": "https://borisdracka.com/blog/post-19" }
+}
+</script>
+<link rel="stylesheet" href="/a11y-targets.css">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+
+<header class="site-header">
+<a class="logo" href="https://borisdracka.com/">CFO Unfiltered</a>
+<nav>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+<a data-lang href="https://borisdracka.com/blog/post-19" class="lang-active">EN</a>/<a data-lang href="https://borisdracka.com/sk/blog/post-19">SK</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<div class="kicker">Payments · Bank Details · Verification</div>
+<h1>One Changed Account Number. No Way Back.</h1>
+<p class="hero-subtitle">Post #18 ended on an invoice that was correct and still waiting. This one is about an invoice that is correct, approved and about to be paid to an account nobody confirmed, and about the one check where slower is better.</p>
+<div class="hero-meta">Boris Dračka · November 2026 · 6 min read</div>
+<span class="series-label">Post #19 of 50 — The CFO & AI Series</span>
+</div>
+</section>
+
+<article class="article">
+
+<p class="disclaimer">The examples and architectures in this series are my personal educational, non-commercial experiments; they are not an offer of IT or consulting services.</p>
+
+<p class="lead">Almost every check in this series tries to make something faster. This one is for the day the right answer is to wait. Post #18 asked who confirms an invoice. This post asks who confirms where it is paid.</p>
+
+<p>The case below is a composite. The company, the supplier, the e-mail, the amounts and the days are invented and illustrative only. They don't describe a real company, supplier, bank or incident, and there are no real account numbers in it.</p>
+
+<h2>One changed account, every check green</h2>
+
+<div class="stat-box">
+<div class="stat"><div class="num">1</div><div class="label">Changed bank account in the illustration</div></div>
+<div class="stat"><div class="num">0</div><div class="label">Checks through another channel</div></div>
+<div class="stat"><div class="num">2</div><div class="label">Illustrative days from e-mail to payment</div></div>
+</div>
+
+<p>A regular supplier writes that its bank has changed and that the new account is on the next invoice. The invoice arrives, and everything about it is right: the amount, the order, the VAT, the delivery. It is approved, and the owner of the cost centre has confirmed it. The only new thing is the account. Here is the path.</p>
+
+<table class="gap-table">
+<tr><th>Step</th><th>What happened</th><th>What was missing</th></tr>
+<tr><td>E-mail</td><td>"Our bank has changed, the new account is on the invoice"</td><td>Nobody called a number that was already on file</td></tr>
+<tr><td>Vendor file</td><td>Account updated in the supplier record</td><td>Who is allowed to change it, and who confirms</td></tr>
+<tr><td>AI assistant</td><td>Read the invoice and the new account</td><td>It compares the invoice with itself, not with the agreement</td></tr>
+<tr><td>Approval</td><td>Invoice correct and approved (Post #18)</td><td>The document was confirmed, the account was not</td></tr>
+<tr><td>Payment</td><td>Full amount goes to the new account</td><td>In many cases there is no way back</td></tr>
+</table>
+
+<p>Every step worked. The check that was missing is a different kind of check from the ones above, and it would have taken one phone call.</p>
+
+<div class="obl" role="group" aria-label="Motion graphic">
+<div class="window">
+    <div class="head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="title">held_payment — illustrative composite</span><button class="pause" id="obl-pause" type="button" aria-pressed="false">Pause</button></div>
+
+    <div class="counters">
+      <div class="counter" id="obl-cD"><div class="n" id="obl-nD">—</div><div class="l">Changed accounts</div></div>
+      <div class="counter" id="obl-cT"><div class="n" id="obl-nT">—</div><div class="l">Other-channel checks</div></div>
+      <div class="counter"><div class="n" id="obl-nO">—</div><div class="l">Hours held</div></div>
+    </div>
+
+    <div class="stage" id="obl-stage" role="img" aria-label="Path of one illustrative invoice with a changed supplier account through five stations: e-mail, vendor file, AI assistant, approval and payment. It passes four stations with every check green, then the payment is held for 24 hours with the reason attached. In the last scene a call to the number already on file and a second person confirm the change, and only then does the payment go."></div>
+
+    <div class="caption" aria-live="polite">
+      <div class="scene" id="obl-scene"></div>
+      <div class="line" id="obl-line"></div>
+    </div>
+  </div>
+
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw ok"></i>Passed</span>
+    <span><i class="sw gap"></i>Held</span>
+  </div>
+  <p class="note">Illustrative composite from Post #19. The company, supplier, e-mail, amounts and days are made-up and do not describe a specific company, bank or incident.</p>
+</div>
+<style>
+.obl{
+    --muted: #4E483F; --line: #DCD5C7;
+  --card: #1A1714; --card-head: #111111; --card-line: #2a2a2a;
+  --ink: #dddddd; --ink-dim: #8a8a8a;
+  --accent: #C21F2F; --accent-on-dark: #ff7a7a; --good: #7fd99a;
+  --f-serif: 'IBM Plex Serif', Georgia, serif;
+  --f-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+}
+.obl .window{ background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--card-line); }
+.obl .head{ background: var(--card-head); padding: 12px 16px; display: flex; align-items: center; gap: 8px; font: 500 12px var(--f-mono); color: #888; }
+.obl .dot{ width: 9px; height: 9px; border-radius: 50%; background: #444; flex: 0 0 auto; }
+.obl .head .title{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.obl .pause{ margin-left: auto; background: none; border: 1px solid #333; color: #999; font: 600 10px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+.obl .pause:hover{ color: #fff; border-color: #555; }
+.obl .pause:focus-visible{ outline: 2px solid var(--accent-on-dark); outline-offset: 2px; }
+.obl .counters{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--card-line); }
+.obl .counter{ padding: 14px 16px; border-right: 1px solid var(--card-line); min-width: 0; }
+.obl .counter:last-child{ border-right: 0; }
+.obl .counter .n{ font: 700 24px/1 var(--f-mono); color: #fff; font-variant-numeric: tabular-nums; transition: color .3s; white-space: nowrap; }
+.obl .counter .l{ font-size: 11.5px; color: var(--ink-dim); margin-top: 7px; line-height: 1.35; }
+.obl .counter.good .n{ color: var(--good); }
+.obl .counter.bad .n{ color: var(--accent-on-dark); }
+.obl .caption{ border-top: 1px solid var(--card-line); padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; min-height: 86px; }
+.obl .scene{ font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-on-dark); }
+.obl .line{ font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.obl .legend{ display: flex; flex-wrap: wrap; gap: 6px 16px; font: 500 12px var(--f-mono); color: var(--muted); }
+.obl .legend span{ display: inline-flex; align-items: center; gap: 7px; }
+.obl .sw{ width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto; border: 1.5px solid; }
+.obl .note{ font-size: 12.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--line); padding: 2px 0 2px 12px; }
+.obl{display:flex;flex-direction:column;gap:14px;margin:8px 0 36px;font-family:var(--f-sans)}
+
+.obl .stage{ position: relative; height: 196px; margin: 8px 16px 6px; }
+.obl .st{ position: absolute; top: 58px; height: 52px; width: 16.5%; border-radius: 6px; border: 1.5px solid #444; background: rgba(255,255,255,.04); display: flex; align-items: center; justify-content: center; text-align: center; font: 600 11px/1.15 var(--f-mono); color: #bbb; transition: border-color .35s, background .35s, color .35s; }
+.obl .st.done{ border-color: rgba(127,217,154,.75); background: rgba(127,217,154,.14); color: #d7f5e0; }
+.obl .st.wait{ border-color: rgba(255,122,122,.9); background: rgba(194,31,47,.28); color: #ffd0d0; }
+.obl .st.skip{ border-style: dashed; color: #777; }
+.obl .arrow{ position: absolute; top: 84px; height: 0; border-top: 1.5px solid #444; }
+.obl .tok{ position: absolute; top: 14px; width: 34px; height: 24px; margin-left: -17px; border-radius: 4px; background: #f4efe3; color: #1A1714; font: 700 11px/24px var(--f-mono); text-align: center; transition: left .8s ease-in-out, background .3s; }
+.obl .tok.bad{ background: #ff9a9a; }
+.obl .tag{ position: absolute; font: 600 10px/1.2 var(--f-mono); color: var(--ink-dim); text-align: center; opacity: 0; transition: opacity .35s; white-space: nowrap; }
+.obl .tag.in{ opacity: 1; }
+.obl .tag.red{ color: var(--accent-on-dark); }
+.obl .chip{ position: absolute; font: 600 10px/18px var(--f-mono); color: var(--good); border: 1px solid rgba(127,217,154,.6); border-radius: 9px; padding: 0 8px; white-space: nowrap; opacity: 0; transition: opacity .35s; }
+.obl .chip.in{ opacity: 1; }
+.obl .sw.ok{ background: rgba(90,180,120,.35); border-color: #4a9a66; }
+.obl .sw.gap{ background: rgba(194,31,47,.3); border-color: #c8454f; }
+@media (max-width: 560px){.obl .stage{ margin-inline: 6px; }.obl .counter{ padding: 12px 8px; }.obl .counter .n{ font-size: 17px; }.obl .counter .l{ font-size: 10.5px; }.obl .st{ font-size: 8px; }.obl .tag, .obl .chip{ font-size: 8px; }.obl .chip{ padding: 0 5px; }.obl .tok{ width: 28px; margin-left: -14px; font-size: 9px; }}
+@media (prefers-reduced-motion: reduce){.obl .st, .obl .tag, .obl .chip, .obl .tok{ transition: none !important; }}
+</style>
+<script>
+(function () {
+  var stage = document.getElementById('obl-stage');
+  var nD = document.getElementById('obl-nD'), nT = document.getElementById('obl-nT'), nO = document.getElementById('obl-nO');
+  var cD = document.getElementById('obl-cD'), cT = document.getElementById('obl-cT');
+  var sceneEl = document.getElementById('obl-scene'), lineEl = document.getElementById('obl-line'), pauseBtn = document.getElementById('obl-pause');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var T = {"st": ["E-mail", "Vendor<br>file", "AI", "Approval", "Payment"], "inv": "INV", "hold": "Held: new account", "now": "Would pay now", "c1": "Call to saved number", "c2": "Second person confirms", "scenes": [["1 · Every check green", "An e-mail says the supplier's bank has changed. The vendor file is updated, the AI assistant reads the new account, the invoice is approved. On paper nothing is wrong."], ["2 · The hold", "The payment to an account changed a day ago is held, with the reason attached. Here, waiting is the correct result."], ["3 · Checked another way", "A call to the number already on file and a second person confirm the change. Only then does the payment go."]], "pause": "Pause", "play": "Play"};
+  var X = function (i) { return 3 + i * 19.4; };
+  var st = [], tok, tag, chips = [];
+  for (var i = 0; i < 5; i++) {
+    var s = document.createElement('div'); s.className = 'st'; s.style.left = X(i) + '%'; s.innerHTML = T.st[i]; stage.appendChild(s); st.push(s);
+    if (i < 4) { var a = document.createElement('div'); a.className = 'arrow'; a.style.left = (X(i) + 16.5) + '%'; a.style.width = '2.9%'; stage.appendChild(a); }
+  }
+  tok = document.createElement('div'); tok.className = 'tok'; tok.textContent = T.inv; stage.appendChild(tok);
+  tag = document.createElement('div'); tag.className = 'tag red'; tag.style.right = '2.9%'; tag.style.top = '118px'; stage.appendChild(tag);
+  [T.c1, T.c2].forEach(function (t, i) { var c = document.createElement('div'); c.className = 'chip'; c.textContent = t; c.style.right = '2.9%'; c.style.top = (148 + i * 24) + 'px'; stage.appendChild(c); chips.push(c); });
+
+  var timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function cancel() { timers.forEach(clearTimeout); timers = []; }
+  function at(i, instant) { if (instant) tok.style.transition = 'none'; tok.style.left = (X(i) + 8.25) + '%'; if (instant) { void tok.offsetWidth; tok.style.transition = ''; } }
+  function say(t, red) { tag.textContent = t; tag.classList.toggle('red', !!red); tag.classList.add('in'); }
+  function reset() { st.forEach(function (s) { s.className = 'st'; }); tag.classList.remove('in'); chips.forEach(function (c) { c.classList.remove('in'); }); tok.classList.remove('bad'); cD.classList.remove('bad'); cT.classList.remove('bad', 'good'); nD.textContent = '0'; nT.textContent = '0'; nO.textContent = '0'; }
+  function setScene(i) { sceneEl.textContent = T.scenes[i][0]; lineEl.textContent = T.scenes[i][1]; }
+  function stuck() { for (var i = 0; i < 4; i++) st[i].classList.add('done'); st[4].classList.add('wait'); tok.classList.add('bad'); at(4, true); nD.textContent = '1'; cD.classList.add('bad'); cT.classList.add('bad'); say(T.hold, true); }
+
+  function sceneOne() {
+    cancel(); reset(); setScene(0); at(0, true);
+    later(function () { st[0].classList.add('done'); nD.textContent = '1'; cD.classList.add('bad'); }, 500);
+    later(function () { at(1); }, 1000);
+    later(function () { st[1].classList.add('done'); }, 1800);
+    later(function () { at(2); }, 2100);
+    later(function () { st[2].classList.add('done'); }, 2900);
+    later(function () { at(3); }, 3200);
+    later(function () { st[3].classList.add('done'); }, 4000);
+    later(function () { at(4); }, 4300);
+    later(function () { st[4].classList.add('wait'); say(T.now, true); }, 5100);
+  }
+  function sceneTwo() {
+    cancel(); reset(); setScene(1); stuck(); nO.textContent = '0';
+    for (var k = 1; k <= 12; k++) (function (k) { later(function () { nO.textContent = String(k * 2); }, 500 + k * 230); })(k);
+  }
+  function sceneThree() {
+    cancel(); reset(); setScene(2); stuck(); nO.textContent = '24';
+    later(function () { chips[0].classList.add('in'); }, 500);
+    later(function () { chips[1].classList.add('in'); nT.textContent = '1'; cT.classList.remove('bad'); cT.classList.add('good'); }, 1300);
+    later(function () { st[4].className = 'st done'; tok.classList.remove('bad'); tag.classList.remove('in'); }, 2600);
+  }
+  function finalState() { cancel(); reset(); setScene(2); stuck(); chips.forEach(function (c) { c.classList.add('in'); }); nO.textContent = '24'; nT.textContent = '1'; cT.classList.remove('bad'); cT.classList.add('good'); st[4].className = 'st done'; tok.classList.remove('bad'); tag.classList.remove('in'); }
+
+  var idx = 0, running = true, timer = null;
+  var steps = [[sceneOne, 5600], [sceneTwo, 4800], [sceneThree, 5400]];
+  function run() { steps[idx][0](); if (!running) return; timer = setTimeout(function () { idx = (idx + 1) % steps.length; run(); }, steps[idx][1]); }
+  if (reduce) { finalState(); pauseBtn.hidden = true; }
+  else {
+    run();
+    pauseBtn.addEventListener('click', function () {
+      running = !running; pauseBtn.textContent = running ? T.pause : T.play; pauseBtn.setAttribute('aria-pressed', String(!running));
+      if (running) { idx = (idx + 1) % steps.length; run(); } else { clearTimeout(timer); cancel(); }
+    });
+  }
+})();
+</script>
+
+<h2>Not the same change as in Post #16</h2>
+
+<p>Post #16 asked whether a payment is normal for this supplier, and the answer came from the amount. A changed account is a different kind of deviation, and it is harder to see.</p>
+
+<table class="gap-table">
+<tr><th></th><th>The amount differs from history</th><th>The account differs from history</th></tr>
+<tr><td>How it looks</td><td>Like a possible mistake</td><td>Like a normal update</td></tr>
+<tr><td>Who tends to notice</td><td>A check against the supplier's normal</td><td>Often nobody, because it is a change in master data</td></tr>
+<tr><td>If missed</td><td>A wrong amount, which can often be corrected</td><td>A payment to the wrong party, which often can't be recovered</td></tr>
+</table>
+
+<h2>Where speed goes wrong</h2>
+
+<p>An efficient payment run pays the approved invoice on time. In this case that is exactly the problem. The check that matters here makes the payment slower, once, for one supplier, until someone has confirmed the change another way.</p>
+
+<table class="gap-table">
+<tr><th>What it looks like</th><th>What's actually true</th></tr>
+<tr>
+<td>The invoice is from our supplier</td>
+<td>The invoice says it is. Whether the new account is theirs hasn't been confirmed yet</td>
+</tr>
+<tr>
+<td>We have an approval process</td>
+<td>It approves the document. Nobody approved the account</td>
+</tr>
+<tr>
+<td>The system saved the new account</td>
+<td>Saved is not confirmed</td>
+</tr>
+<tr>
+<td>A change of bank details in an e-mail</td>
+<td>An invitation to pay, with a very trustworthy signature</td>
+</tr>
+</table>
+
+<h2>Why the tools alone don't settle it</h2>
+
+<p>The ERP stores the new account. An AI assistant reads the invoice and the new account and writes both down correctly. Both compare the invoice with itself, so both agree. What neither can know is whether the supplier actually changed its bank. That needs a different channel, such as a call to a number you already had before the e-mail arrived, and a person who is responsible for confirming it.</p>
+
+<p>I am not a lawyer or a bank. What happens after a payment to the wrong account, including recovery, liability and insurance, is a question for your bank and your lawyer, not for this post.</p>
+
+<p>Post #18 applies again: a confirmed document is not yet a confirmed account. And Post #8 applies too. A warning on every invoice teaches people to stop reading it. This one should fire only on a changed account, with the reason attached.</p>
+
+<h2>What a bank-details check has to contain</h2>
+
+<table class="gap-table">
+<tr><th>Element</th><th>Why it matters</th></tr>
+<tr><td>A change of account is its own event, not a line on an invoice</td><td>It doesn't get lost between the amounts</td></tr>
+<tr><td>Confirmation through another channel, such as a call to the number already on file</td><td>An e-mail is not proof of who sent it</td></tr>
+<tr><td>Two people: one records the change, another confirms it</td><td>One mistake doesn't turn into a payment</td></tr>
+<tr><td>The first payment to a new account is held until it is confirmed</td><td>Here, waiting is the correct result</td></tr>
+<tr><td>A warning for a payment to an account changed in the last few days, with the reason attached</td><td>A warning without a reason can't be judged</td></tr>
+<tr><td>A person decides, and the check changes and blocks nothing by itself</td><td>The responsibility stays with someone who can be asked</td></tr>
+</table>
+
+<div class="pullquote">
+<p>For a changed bank account, the right speed is slower than usual.</p>
+</div>
+
+<h2>A test you can run this week</h2>
+
+<p>Take the last three changes of a supplier's bank account. For each one, write down who recorded it, who confirmed it and how. The number of changes where you can't answer "how" is your figure.</p>
+
+<p>There is no script behind this one either. It is a short list and a rule about who confirms, and both are worth having before any tool is involved.</p>
+
+<div class="followup">
+<h4>Follow the series</h4>
+<p>Post #20 looks at the same invoice arriving twice: the second copy with a new number, a different date and a slightly different amount, and why an exact match finds only the easy ones.</p>
+</div>
+
+<div class="cta-box">
+<h3>The last time a supplier's account changed, who confirmed it, and how?</h3>
+<a class="btn-primary" href="https://borisdracka.beehiiv.com/subscribe">Subscribe free</a>
+<div class="cta-note">No spam. One post per week. Unsubscribe any time.</div>
+</div>
+
+</article>
+
+<footer>
+<div>
+<div class="footer-brand">CFO Unfiltered</div>
+<div class="footer-copy">© 2026 Boris Dračka · borisdracka.com · <a href="/privacy">Privacy</a></div>
+</div>
+<div class="footer-nav">
+<a href="https://borisdracka.com/">Home</a>
+<a href="https://borisdracka.com/blog/">Blog</a>
+<a href="https://borisdracka.com/sk/blog/post-19">Slovenská verzia</a>
+<a href="https://x.com/BorisDracka" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>@BorisDracka</a>
+<a href="https://borisdracka.beehiiv.com/subscribe">Subscribe</a>
+</div>
+</footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "706cc547dcb04dcb918e771efc65a0bb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
